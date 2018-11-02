@@ -46,11 +46,11 @@ var g_ctx = g_canvas.getContext("2d");
 // CREATE INITIAL SHIPS
 // ====================
 
-function createInitialShips() {
+function createInitialChar() {
 
-    entityManager.generateShip({
-        cx : 200,
-        cy : 200
+    entityManager.generateChar({
+        cx : 100,
+        cy : 470
     });
     
 }
@@ -86,7 +86,7 @@ function updateSimulation(du) {
     entityManager.update(du);
 
     // Prevent perpetual firing!
-    eatKey(Ship.prototype.KEY_FIRE);
+    eatKey(Char.prototype.KEY_FIRE);
 }
 
 // GAME-SPECIFIC DIAGNOSTICS
@@ -177,7 +177,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        ship   : "https://notendur.hi.is/~pk/308G/images/ship.png",
+        char   : "./images/redTop.png",
         ship2  : "https://notendur.hi.is/~pk/308G/images/ship_2.png",
         rock   : "https://notendur.hi.is/~pk/308G/images/rock.png"
     };
@@ -189,15 +189,15 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.ship  = new Sprite(g_images.ship);
+    g_sprites.char = new Sprite(g_images.char);
     g_sprites.ship2 = new Sprite(g_images.ship2);
     g_sprites.rock  = new Sprite(g_images.rock);
 
-    g_sprites.bullet = new Sprite(g_images.ship);
+    g_sprites.bullet = new Sprite(g_images.char);
     g_sprites.bullet.scale = 0.25;
 
     entityManager.init();
-    createInitialShips();
+    createInitialChar();
 
     main.init();
 }
