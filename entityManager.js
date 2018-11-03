@@ -91,11 +91,11 @@ generateChar : function(descr) {
 
 
 resetChar: function() {
-    this._forEachOf(this._chars, Char.prototype.reset);
+    this._forEachOf(this._char, Char.prototype.reset);
 },
 
 haltChar: function() {
-    this._forEachOf(this._chars, Char.prototype.halt);
+    this._forEachOf(this._char, Char.prototype.halt);
 },	
 
 toggleRocks: function() {
