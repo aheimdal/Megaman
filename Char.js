@@ -93,8 +93,8 @@ Char.prototype.computeGravity = function () {
 
 var NOMINAL_RIGHT = +6;
 var NOMINAL_LEFT  = -6;
-var NOMINAL_JUMP  = -15;
-var NOMINAL_GRAVITY = +1.5;
+var NOMINAL_JUMP  = -0.5;
+var NOMINAL_GRAVITY = +0.2;
 
 var JUMP_INIT = true;
 var JUMP_TIMER = 0;
@@ -108,12 +108,15 @@ Char.prototype.movement = function (du) {
     }
     if (keys[this.KEY_JUMP]) {
         if (JUMP_INIT && JUMP_TIMER == 0) {
-            JUMP_TIMER = 40;
-            this.velY = NOMINAL_JUMP * du;
+            JUMP_TIMER = 10;
+            this.velY = +NOMINAL_JUMP * du;
         } else if (JUMP_INIT) {
-            if (this.cy > 469) this.velY = NOMINAL_JUMP * du;
+            this.velY += NOMINAL_JUMP * du;
             if (JUMP_TIMER == 0) JUMP_INIT = false;
-        }
+        } 
+    }
+    if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
+        JUMP_TIMER = 0;
     }
 };
 
@@ -125,7 +128,9 @@ Char.prototype.calculateMovement = function (du) {
         this.cy = 470;
         this.velY = 0;
     }
-    if (this.cy <= 470) JUMP_INIT = true;
+    if (this.cy >= 470) JUMP_INIT = true;
+    console.log(JUMP_TIMER);
+    console.log(JUMP_INIT);
 };
 
 Char.prototype.maybeFireBullet = function () {
