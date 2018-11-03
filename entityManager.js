@@ -81,7 +81,7 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
 },
 
 generateRock : function(descr) {
-    this._rocks.push(new Rock(descr));
+    //this._rocks.push(new Rock(descr));
 },
 
 generateChar : function(descr) {
@@ -147,6 +147,13 @@ render: function(ctx) {
 
         }
         debugY += 10;
+    }
+
+    var img=new Image();
+    img.onload=start;
+    img.src="bak2.png";
+    function start(){
+        ctx.drawImage(img,0,0);
     }
 }
 

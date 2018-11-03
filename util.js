@@ -78,10 +78,12 @@ wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
 // ==========
 
 clearCanvas: function (ctx) {
-    var prevfillStyle = ctx.fillStyle;
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = prevfillStyle;
+    var img=new Image();
+    img.onload=start;
+    img.src="images/bak3.png";
+    function start(){
+        ctx.drawImage(img,0,0);
+    }
 },
 
 strokeCircle: function (ctx, x, y, r) {
