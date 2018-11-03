@@ -97,22 +97,27 @@ var NOMINAL_IJUMP = -10;
 var NOMINAL_JUMP  = -2;
 var NOMINAL_GRAVITY = +2;
 
+var CHAR_FACING = 1;
+
 var JUMP_INIT = true;
 var JUMP_TIMER = 0;
+var JUMP_TIMER_COUNT = 24;
 
 Char.prototype.movement = function (du) {
     if (keys[this.KEY_RIGHT]) {
         if (this.cx < 770) this.cx += NOMINAL_RIGHT * du;
+        CHAR_FACING = 1;
     }
     if (keys[this.KEY_LEFT]) {
         if (this.cx > 30)this.cx += NOMINAL_LEFT * du;
+        CHAR_FACING = -1;
     }
     if (keys[this.KEY_JUMP]) {
         if (JUMP_INIT && JUMP_TIMER == 0) {
-            JUMP_TIMER = 24;
+            JUMP_TIMER = JUMP_TIMER_COUNT;
             this.velY = +NOMINAL_IJUMP * du;
         } else if (JUMP_INIT) {
-            this.velY += (NOMINAL_JUMP*(JUMP_TIMER/20)) * du;
+            this.velY += (NOMINAL_JUMP*(JUMP_TIMER/JUMP_TIMER_COUNT)) * du;
         } 
     }
     if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
@@ -137,19 +142,13 @@ Char.prototype.calculateMovement = function (du) {
 Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
-    
-        var dX = +Math.sin(this.rotation);
-        var dY = -Math.cos(this.rotation);
-        var launchDist = this.getRadius() * 1.2;
-        
-        var relVel = this.launchVel;
-        var relVelX = dX * relVel;
-        var relVelY = dY * relVel;
+
+
 
         entityManager.fireBullet(
-           this.cx + dX * launchDist, this.cy + dY * launchDist,
-           this.velX + relVelX, this.velY + relVelY,
-           this.rotation);
+            this.cx + (16*CHAR_FACING), this.cy,
+            5*CHAR_FACING, 0, 0
+        );
            
     }
     
