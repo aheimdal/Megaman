@@ -108,15 +108,15 @@ Char.prototype.movement = function (du) {
     }
     if (keys[this.KEY_JUMP]) {
         if (JUMP_INIT && JUMP_TIMER == 0) {
-            JUMP_TIMER = 10;
+            JUMP_TIMER = 40;
             this.velY = +NOMINAL_JUMP * du;
         } else if (JUMP_INIT) {
             this.velY += NOMINAL_JUMP * du;
-            if (JUMP_TIMER == 0) JUMP_INIT = false;
         } 
     }
     if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
         JUMP_TIMER = 0;
+        JUMP_INIT = false;
     }
 };
 
@@ -128,6 +128,7 @@ Char.prototype.calculateMovement = function (du) {
         this.cy = 470;
         this.velY = 0;
     }
+    if (JUMP_TIMER <= 0) JUMP_INIT = false;
     if (this.cy >= 470) JUMP_INIT = true;
     console.log(JUMP_TIMER);
     console.log(JUMP_INIT);
