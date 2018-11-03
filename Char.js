@@ -1,5 +1,5 @@
 // ==========
-// SHIP STUFF
+// Char STUFF
 // ==========
 
 "use strict";
@@ -21,7 +21,7 @@ function Char(descr) {
     this.rememberResets();
     
     // Default sprite, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.char;
+    this.sprite = this.sprite || g_sprites.Char;
     
     // Set normal drawing scale, and warp state off
     this._scale = 3;
@@ -49,6 +49,7 @@ Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.launchVel = 2;
 
+
 // HACKED-IN AUDIO (no preloading)
 Char.prototype.shootSound = new Audio(
     "sounds/bulletFire.ogg");
@@ -57,7 +58,6 @@ Char.prototype.shootSound = new Audio(
 Char.prototype.update = function (du) {
 
     
-
     spatialManager.unregister(this);
 
 
@@ -73,7 +73,6 @@ Char.prototype.update = function (du) {
 
     // Handle firing
     this.maybeFireBullet();
-
 
     
     spatialManager.register(this);
