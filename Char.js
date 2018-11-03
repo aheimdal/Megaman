@@ -69,9 +69,8 @@ Char.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    console.log("update");
 
-    this.movement();
+    this.movement(du);
 
     this.calculateMovement(du);
 
@@ -95,25 +94,25 @@ Char.prototype.computeGravity = function () {
 var NOMINAL_RIGHT = +3;
 var NOMINAL_LEFT  = -3;
 var NOMINAL_JUMP  = -3;
-var NOMINAL_GRAVITY = +2;
+var NOMINAL_GRAVITY = +1.5;
 
 var JUMP_INIT = true;
 var JUMP_TIMER = 0;
 
-Char.prototype.movement = function () {
+Char.prototype.movement = function (du) {
     if (keys[this.KEY_RIGHT]) {
-        this.cx += NOMINAL_RIGHT;
+        this.cx += NOMINAL_RIGHT * du;
     }
     if (keys[this.KEY_LEFT]) {
-        this.cx += NOMINAL_LEFT;
+        this.cx += NOMINAL_LEFT * du;
     }
     if (keys[this.KEY_JUMP]) {
         if (JUMP_INIT && JUMP_TIMER == 0) {
             JUMP_TIMER = 40;
-            this.velY = NOMINAL_JUMP;
+            this.velY = NOMINAL_JUMP * du;
         } else if (JUMP_INIT) {
-            if (this.cx > 379) this.velY = NOMINAL_JUMP;
-            if (JUMP_TIMER == 0) JUMP_INIT = !JUMP_INIT;
+            if (this.cx > 379) this.velY = NOMINAL_JUMP * du;
+            if (JUMP_TIMER == 0) JUMP_INIT = false;
         }
     }
 };
@@ -122,8 +121,11 @@ Char.prototype.calculateMovement = function (du) {
     this.cy += this.velY * du;
     if (JUMP_TIMER > 0) JUMP_TIMER--;
     if (this.cy < 470) this.velY += NOMINAL_GRAVITY;
-    if (this.cy > 470) this.velY = 0;
-    console.log(this.cx + " " + this.cy);
+    if (this.cy > 470) {
+        this.cy = 470;
+        this.velY = 0;
+    }
+    if (this.cy <= 470) JUMP_INIT = true;
 };
 
 Char.prototype.maybeFireBullet = function () {
