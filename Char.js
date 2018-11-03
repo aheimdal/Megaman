@@ -21,7 +21,7 @@ function Char(descr) {
     this.rememberResets();
     
     // Default sprite, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.Char;
+    this.sprite = this.sprite || g_sprites.char;
     
     // Set normal drawing scale, and warp state off
     this._scale = 3;
@@ -43,11 +43,14 @@ Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
+// Char.prototype.rotation = 0;
 Char.prototype.cx = 200;
 Char.prototype.cy = 200;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.launchVel = 2;
+Char.prototype.numSubSteps = 1;
+
 
 
 // HACKED-IN AUDIO (no preloading)
@@ -56,6 +59,22 @@ Char.prototype.shootSound = new Audio(
 
     
 Char.prototype.update = function (du) {
+Char.prototype.warpSound = new Audio(
+    "sounds/CharWarp.ogg");
+
+Char.prototype.warp = function () {
+
+    this._isWarping = true;
+    this._scaleDirn = -1;
+    this.warpSound.play();
+    
+    // Unregister me from my old posistion
+    // ...so that I can't be collided with while warping
+    spatialManager.unregister(this);
+};
+
+
+Char.prototype._updateWarp = function (du) {
 
     
     spatialManager.unregister(this);
@@ -169,4 +188,5 @@ Char.prototype.render = function (ctx) {
 	ctx, this.cx, this.cy, this.rotation
     );
     this.sprite.scale = origScale;
+}
 };
