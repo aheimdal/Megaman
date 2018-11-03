@@ -75,7 +75,6 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
         cy   : cy,
         velX : velX,
         velY : velY,
-
         rotation : rotation
     }));
 },

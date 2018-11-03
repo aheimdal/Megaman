@@ -20,6 +20,8 @@ function Bullet(descr) {
 
     // Make a noise when I am created (i.e. fired)
     this.fireSound.play();
+
+
     
 /*
     // Diagnostics to check inheritance stuff
@@ -33,7 +35,7 @@ Bullet.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
 Bullet.prototype.fireSound = new Audio(
-    "sounds/bulletFire.ogg");
+    "gunsound.wav");
 Bullet.prototype.zappedSound = new Audio(
     "sounds/bulletZapped.ogg");
     
@@ -74,7 +76,7 @@ Bullet.prototype.update = function (du) {
         if (canTakeHit) canTakeHit.call(hitEntity); 
         return entityManager.KILL_ME_NOW;
     }
-    
+    console.log(this.cx + " " + this.cy);
     // TODO: YOUR STUFF HERE! --- (Re-)Register
     spatialManager.register(this);
 };

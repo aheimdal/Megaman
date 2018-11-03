@@ -115,7 +115,7 @@ Char.prototype.movement = function (du) {
     if (keys[this.KEY_JUMP]) {
         if (JUMP_INIT && JUMP_TIMER == 0) {
             JUMP_TIMER = JUMP_TIMER_COUNT;
-            this.velY = +NOMINAL_IJUMP * du;
+            this.velY = NOMINAL_IJUMP * du;
         } else if (JUMP_INIT) {
             this.velY += (NOMINAL_JUMP*(JUMP_TIMER/JUMP_TIMER_COUNT)) * du;
         } 
@@ -143,10 +143,8 @@ Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
 
-
-
         entityManager.fireBullet(
-            this.cx + (16*CHAR_FACING), this.cy,
+            this.cx + 16*CHAR_FACING, this.cy,
             5*CHAR_FACING, 0, 0
         );
            
