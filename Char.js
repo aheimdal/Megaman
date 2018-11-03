@@ -178,3 +178,4 @@ Char.prototype.render = function (ctx) {
     );
     this.sprite.scale = origScale;
 };
+
