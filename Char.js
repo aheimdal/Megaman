@@ -101,19 +101,25 @@ var JUMP_INIT = true;
 var JUMP_TIMER = 0;
 
 Char.prototype.movement = function (du) {
+
     if (keys[this.KEY_RIGHT]) {
-        if (this.cx < 770) this.cx += NOMINAL_RIGHT * du;
+        if (this.cx < 770){ 
+            this.cx += NOMINAL_RIGHT * du;
+        }
     }
     if (keys[this.KEY_LEFT]) {
         if (this.cx > 30)this.cx += NOMINAL_LEFT * du;
     }
     if (keys[this.KEY_JUMP]) {
+        canvasSpaceGame("images/bak2.png");
+
         if (JUMP_INIT && JUMP_TIMER == 0) {
             JUMP_TIMER = 24;
             this.velY = +NOMINAL_IJUMP * du;
         } else if (JUMP_INIT) {
             this.velY += (NOMINAL_JUMP*(JUMP_TIMER/20)) * du;
-        } 
+        }
+         
     }
     if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
         JUMP_TIMER = 0;
@@ -129,6 +135,8 @@ Char.prototype.calculateMovement = function (du) {
         this.cy = 470;
         this.velY = 0;
     }
+    if(this.cx >= 770)
+        canvasSpaceGame("images/bak3.png");
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
     if (this.cy >= 470) JUMP_INIT = true;
     //console.log(this.cx + " " + this.cy);

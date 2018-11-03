@@ -131,7 +131,6 @@ Ship.prototype.update = function (du) {
         this._updateWarp(du);
         return;
     }
-    canvasSpaceGame();
     spatialManager.unregister(this);
 
     if(this._isDeadNow){

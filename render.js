@@ -18,7 +18,7 @@ function render(ctx) {
     
     // Process various option toggles
     //
-    if (eatKey(TOGGLE_CLEAR)) g_doClear = !g_doClear;
+    //if (eatKey(TOGGLE_CLEAR)) g_doClear = !g_doClear;
     if (eatKey(TOGGLE_BOX)) g_doBox = !g_doBox;
     if (eatKey(TOGGLE_UNDO_BOX)) g_undoBox = !g_undoBox;
     if (eatKey(TOGGLE_FLIPFLOP)) g_doFlipFlop = !g_doFlipFlop;
@@ -28,7 +28,7 @@ function render(ctx) {
     // here, so that it becomes part of our "diagnostic" wrappers
     //
     //Tók þetta út svo að 'C' virki ekki
-     if (g_doClear) util.clearCanvas(ctx);
+     //if (g_doClear) util.clearCanvas(ctx);
     
     // The main purpose of the box is to demonstrate that it is
     // always deleted by the subsequent "undo" before you get to
