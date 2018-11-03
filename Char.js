@@ -121,7 +121,8 @@ Char.prototype.movement = function () {
 Char.prototype.calculateMovement = function (du) {
     this.cy += this.velY * du;
     if (JUMP_TIMER > 0) JUMP_TIMER--;
-    if (this.cx < 379) this.velY += NOMINAL_GRAVITY;
+    if (this.cy < 470) this.velY += NOMINAL_GRAVITY;
+    if (this.cy > 470) this.velY = 0;
     console.log(this.cx + " " + this.cy);
 };
 
@@ -176,5 +177,4 @@ Char.prototype.render = function (ctx) {
 	ctx, this.cx, this.cy, this.rotation
     );
     this.sprite.scale = origScale;
-}
 };
