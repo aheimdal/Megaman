@@ -104,6 +104,7 @@ function imagesPreload(requiredImages,
             console.log("completion callback done");
             console.log("");
         }
+        canvasSpaceGame();
     };
 
     // The "for..in" construct "iterates over the enumerable properties 
@@ -127,4 +128,5 @@ function imagesPreload(requiredImages,
             currentImage.asyncLoad(requiredImages[currentName], preloadHandler);
         }
     }
+
 }

@@ -179,7 +179,8 @@ function requestPreloads() {
     var requiredImages = {
         ship   : "https://notendur.hi.is/~pk/308G/images/ship.png",
         ship2  : "https://notendur.hi.is/~pk/308G/images/ship_2.png",
-        rock   : "https://notendur.hi.is/~pk/308G/images/rock.png"
+        rock   : "https://notendur.hi.is/~pk/308G/images/rock.png",
+        flem   : "https://notendur.hi.is/~tot4/Kall/scream.png",
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -192,6 +193,8 @@ function preloadDone() {
     g_sprites.ship  = new Sprite(g_images.ship);
     g_sprites.ship2 = new Sprite(g_images.ship2);
     g_sprites.rock  = new Sprite(g_images.rock);
+
+    g_sprites.flem  = new Sprite(g_images.flem);
 
     g_sprites.bullet = new Sprite(g_images.ship);
     g_sprites.bullet.scale = 0.25;
