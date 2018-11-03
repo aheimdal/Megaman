@@ -91,9 +91,9 @@ Char.prototype.computeGravity = function () {
     return g_useGravity ? NOMINAL_GRAVITY : 0;
 };
 
-var NOMINAL_RIGHT = +3;
-var NOMINAL_LEFT  = -3;
-var NOMINAL_JUMP  = -3;
+var NOMINAL_RIGHT = +6;
+var NOMINAL_LEFT  = -6;
+var NOMINAL_JUMP  = -15;
 var NOMINAL_GRAVITY = +1.5;
 
 var JUMP_INIT = true;
@@ -111,7 +111,7 @@ Char.prototype.movement = function (du) {
             JUMP_TIMER = 40;
             this.velY = NOMINAL_JUMP * du;
         } else if (JUMP_INIT) {
-            if (this.cx > 379) this.velY = NOMINAL_JUMP * du;
+            if (this.cy > 469) this.velY = NOMINAL_JUMP * du;
             if (JUMP_TIMER == 0) JUMP_INIT = false;
         }
     }
