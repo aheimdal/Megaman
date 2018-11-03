@@ -1,5 +1,5 @@
 // ==========
-// SHIP STUFF
+// Char STUFF
 // ==========
 
 "use strict";
@@ -13,7 +13,7 @@
 
 
 // A generic contructor which accepts an arbitrary descriptor object
-function Ship(descr) {
+function Char(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
@@ -21,43 +21,43 @@ function Ship(descr) {
     this.rememberResets();
     
     // Default sprite, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.ship;
+    this.sprite = this.sprite || g_sprites.Char;
     
     // Set normal drawing scale, and warp state off
     this._scale = 1;
     this._isWarping = false;
 };
 
-Ship.prototype = new Entity();
+Char.prototype = new Entity();
 
-Ship.prototype.rememberResets = function () {
+Char.prototype.rememberResets = function () {
     // Remember my reset positions
     this.reset_cx = this.cx;
     this.reset_cy = this.cy;
     this.reset_rotation = this.rotation;
 };
 
-Ship.prototype.KEY_THRUST = 'W'.charCodeAt(0);
-Ship.prototype.KEY_RETRO  = 'S'.charCodeAt(0);
-Ship.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
-Ship.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
+Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
+Char.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
+Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
-Ship.prototype.KEY_FIRE   = ' '.charCodeAt(0);
+Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
-Ship.prototype.rotation = 0;
-Ship.prototype.cx = 200;
-Ship.prototype.cy = 200;
-Ship.prototype.velX = 0;
-Ship.prototype.velY = 0;
-Ship.prototype.launchVel = 2;
-Ship.prototype.numSubSteps = 1;
+// Char.prototype.rotation = 0;
+Char.prototype.cx = 200;
+Char.prototype.cy = 200;
+Char.prototype.velX = 0;
+Char.prototype.velY = 0;
+Char.prototype.launchVel = 2;
+Char.prototype.numSubSteps = 1;
 
+/*
 // HACKED-IN AUDIO (no preloading)
-Ship.prototype.warpSound = new Audio(
-    "sounds/shipWarp.ogg");
+Char.prototype.warpSound = new Audio(
+    "sounds/CharWarp.ogg");
 
-Ship.prototype.warp = function () {
+Char.prototype.warp = function () {
 
     this._isWarping = true;
     this._scaleDirn = -1;
@@ -68,7 +68,8 @@ Ship.prototype.warp = function () {
     spatialManager.unregister(this);
 };
 
-Ship.prototype._updateWarp = function (du) {
+
+Char.prototype._updateWarp = function (du) {
 
     var SHRINK_RATE = 3 / SECS_TO_NOMINALS;
     this._scale += this._scaleDirn * SHRINK_RATE * du;
@@ -91,7 +92,7 @@ Ship.prototype._updateWarp = function (du) {
     }
 };
 
-Ship.prototype._moveToASafePlace = function () {
+Char.prototype._moveToASafePlace = function () {
 
     // Move to a safe place some suitable distance away
     var origX = this.cx,
@@ -123,8 +124,9 @@ Ship.prototype._moveToASafePlace = function () {
         
     }
 };
-    
-Ship.prototype.update = function (du) {
+*/
+
+Char.prototype.update = function (du) {
 
     // Handle warping
     if (this._isWarping) {
@@ -161,13 +163,13 @@ Ship.prototype.update = function (du) {
 
 };
 
-Ship.prototype.computeSubStep = function (du) {
+Char.prototype.computeSubStep = function (du) {
     
-    var thrust = this.computeThrustMag();
+    var jump = this.computeThrustMag();
 
-    // Apply thrust directionally, based on our rotation
-    var accelX = +Math.sin(this.rotation) * thrust;
-    var accelY = -Math.cos(this.rotation) * thrust;
+    // Apply jump directionally, based on our rotation
+    var accelX = +Math.sin(this.rotation) * jump;
+    var accelY = -Math.cos(this.rotation) * jump;
     
     accelY += this.computeGravity();
 
@@ -175,35 +177,35 @@ Ship.prototype.computeSubStep = function (du) {
     
     this.wrapPosition();
     
-    if (thrust === 0 || g_allowMixedActions) {
+    if (jump === 0 || g_allowMixedActions) {
         this.updateRotation(du);
     }
 };
 
 var NOMINAL_GRAVITY = 0.12;
 
-Ship.prototype.computeGravity = function () {
+Char.prototype.computeGravity = function () {
     return g_useGravity ? NOMINAL_GRAVITY : 0;
 };
 
-var NOMINAL_THRUST = +0.2;
+var NOMINAL_JUMP = +0.2;
 var NOMINAL_RETRO  = -0.1;
 
-Ship.prototype.computeThrustMag = function () {
+Char.prototype.computeThrustMag = function () {
     
-    var thrust = 0;
+    var jump = 0;
     
-    if (keys[this.KEY_THRUST]) {
-        thrust += NOMINAL_THRUST;
+    if (keys[this.KEY_JUMP]) {
+        jump += NOMINAL_JUMP;
     }
     if (keys[this.KEY_RETRO]) {
-        thrust += NOMINAL_RETRO;
+        jump += NOMINAL_RETRO;
     }
     
-    return thrust;
+    return jump;
 };
 
-Ship.prototype.applyAccel = function (accelX, accelY, du) {
+Char.prototype.applyAccel = function (accelX, accelY, du) {
     
     // u = original velocity
     var oldVelX = this.velX;
@@ -228,10 +230,10 @@ Ship.prototype.applyAccel = function (accelX, accelY, du) {
     // bounce
     if (g_useGravity) {
 
-	var minY = g_sprites.ship.height / 2;
+	var minY = g_sprites.Char.height / 2;
 	var maxY = g_canvas.height - minY;
 
-	// Ignore the bounce if the ship is already in
+	// Ignore the bounce if the Char is already in
 	// the "border zone" (to avoid trapping them there)
 	if (this.cy > maxY || this.cy < minY) {
 	    // do nothing
@@ -246,7 +248,7 @@ Ship.prototype.applyAccel = function (accelX, accelY, du) {
     this.cy += du * intervalVelY;
 };
 
-Ship.prototype.maybeFireBullet = function () {
+Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
     
@@ -267,29 +269,29 @@ Ship.prototype.maybeFireBullet = function () {
     
 };
 
-Ship.prototype.getRadius = function () {
+Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
 
-Ship.prototype.takeBulletHit = function () {
+Char.prototype.takeBulletHit = function () {
     this.warp();
 };
 
-Ship.prototype.reset = function () {
+Char.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
     this.rotation = this.reset_rotation;
     
     this.halt();
 };
 
-Ship.prototype.halt = function () {
+Char.prototype.halt = function () {
     this.velX = 0;
     this.velY = 0;
 };
 
 var NOMINAL_ROTATE_RATE = 0.1;
 
-Ship.prototype.updateRotation = function (du) {
+Char.prototype.updateRotation = function (du) {
     if (keys[this.KEY_LEFT]) {
         this.rotation -= NOMINAL_ROTATE_RATE * du;
     }
@@ -298,7 +300,7 @@ Ship.prototype.updateRotation = function (du) {
     }
 };
 
-Ship.prototype.render = function (ctx) {
+Char.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this._scale;
