@@ -33,10 +33,12 @@ Bullet.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
 Bullet.prototype.fireSound = new Audio(
-    "sounds/bulletFire.ogg");
-Bullet.prototype.zappedSound = new Audio(
-    "sounds/bulletZapped.ogg");
-    
+    "sounds/luger.wav");
+Bullet.prototype.shotgun = new Audio(
+    "sounds/shotgun.wav");
+Bullet.prototype.shotgun = new Audio(
+    "sounds/die.wav");
+
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
 Bullet.prototype.cx = 200;
@@ -86,8 +88,8 @@ Bullet.prototype.getRadius = function () {
 Bullet.prototype.takeBulletHit = function () {
     this.kill();
     
-    // Make a noise when I am zapped by another bullet
-    this.zappedSound.play();
+    // When I am killed
+    this.die.play();
 };
 
 Bullet.prototype.render = function (ctx) {
