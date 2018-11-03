@@ -58,23 +58,8 @@ Char.prototype.shootSound = new Audio(
     "sounds/bulletFire.ogg");
 
     
+
 Char.prototype.update = function (du) {
-Char.prototype.warpSound = new Audio(
-    "sounds/CharWarp.ogg");
-
-Char.prototype.warp = function () {
-
-    this._isWarping = true;
-    this._scaleDirn = -1;
-    this.warpSound.play();
-    
-    // Unregister me from my old posistion
-    // ...so that I can't be collided with while warping
-    spatialManager.unregister(this);
-};
-
-
-Char.prototype._updateWarp = function (du) {
 
     
     spatialManager.unregister(this);
@@ -83,6 +68,8 @@ Char.prototype._updateWarp = function (du) {
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
+
+    console.log("update");
 
     this.movement();
 
@@ -135,6 +122,7 @@ Char.prototype.calculateMovement = function (du) {
     this.cy += this.velY * du;
     if (JUMP_TIMER > 0) JUMP_TIMER--;
     if (this.cx < 379) this.velY += NOMINAL_GRAVITY;
+    console.log(this.cx + " " + this.cy);
 };
 
 Char.prototype.maybeFireBullet = function () {
