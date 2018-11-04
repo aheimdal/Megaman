@@ -55,7 +55,7 @@ Char.prototype.numSubSteps = 1;
 
 // HACKED-IN AUDIO (no preloading)
 Char.prototype.shootSound = new Audio(
-    "sounds/bulletFire.ogg");
+    "sounds/gunsound.wav");
 
     
 

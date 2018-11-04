@@ -36,7 +36,7 @@ Bullet.prototype.fireSound = new Audio(
     "sounds/luger.wav");
 Bullet.prototype.shotgun = new Audio(
     "sounds/shotgun.wav");
-Bullet.prototype.shotgun = new Audio(
+Bullet.prototype.die = new Audio(
     "sounds/die.wav");
 
 // Initial, inheritable, default values

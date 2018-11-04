@@ -6,7 +6,7 @@
 
 
 function canvasSpaceGame() { 
- 
+    
     // Get the canvas element. 
     g_canvas = document.getElementById("myCanvas"); 
     // Make sure you got it. 
@@ -38,8 +38,17 @@ function canvasSpaceGame() {
 
       // Draw space ship. 
       //makeShip(); 
+      
     } 
   } 
+
+/****************
+ * Trying to add Background music
+ * 
+ * B_Music.prototype = new Entity();
+ * 
+ * B_Music.prototype = new Audio("./sounds/megaLag1.ogg");
+****************/
 
   // Paint a random starfield. 
 
