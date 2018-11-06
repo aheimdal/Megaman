@@ -21,12 +21,7 @@ function canvasSpaceGame(imgSrc) {
       function start(){
           ctx.drawImage(img,0,0);
       }
-<<<<<<< HEAD
-=======
-      
-      
->>>>>>> siggi5
-    } 
+    };
 
   // Paint a random starfield. 
 
@@ -37,4 +32,4 @@ function canvasSpaceGame(imgSrc) {
  
     return;
 
-  }
+  };
