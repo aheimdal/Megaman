@@ -44,8 +44,8 @@ Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
 // Char.prototype.rotation = 0;
-Char.prototype.cx = 200;
-Char.prototype.cy = 200;
+Char.prototype.cx = 30;
+Char.prototype.cy = 555;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.launchVel = 2;
@@ -55,7 +55,7 @@ Char.prototype.numSubSteps = 1;
 
 // HACKED-IN AUDIO (no preloading)
 Char.prototype.shootSound = new Audio(
-    "sounds/bulletFire.ogg");
+    "sounds/gunsound.wav");
 
     
 
@@ -129,14 +129,15 @@ Char.prototype.movement = function (du) {
 Char.prototype.calculateMovement = function (du) {
     this.cy += this.velY * du;
     if (JUMP_TIMER > 0) JUMP_TIMER--;
-    if (this.cy < 470) this.velY += NOMINAL_GRAVITY;
-    if (this.cy > 470) {
-        this.cy = 470;
+    if (this.cy < 502) this.velY += NOMINAL_GRAVITY;
+    if (this.cy > 502) {
+        this.cy = 502;
         this.velY = 0;
     }
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
     if (this.cy >= 470) JUMP_INIT = true;
     console.log(util.randRange(100,500));
+
 };
 
 Char.prototype.maybeFireBullet = function () {
@@ -183,4 +184,3 @@ Char.prototype.render = function (ctx) {
     );
     this.sprite.scale = origScale;
 };
-
