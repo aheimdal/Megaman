@@ -6,7 +6,7 @@
 
 
 function canvasSpaceGame() { 
- 
+    
     // Get the canvas element. 
     g_canvas = document.getElementById("myCanvas"); 
     // Make sure you got it. 
@@ -35,56 +35,25 @@ function canvasSpaceGame() {
       function start(){
           ctx.drawImage(img,0,0);
       }
-
+      /*
+      *Used a helper line to find the correct cy value to place our char
+      ctx.beginPath();
+      ctx.lineWidth=10;
+      ctx.moveTo(0,555);
+      ctx.strokeStyle="#FF0000";
+      ctx.lineTo(800,555);
+      ctx.stroke();
+      */
       // Draw space ship. 
       //makeShip(); 
+      
     } 
   } 
 
-  // Paint a random starfield. 
-
-
-  function stars() { 
-    // Draw 50 stars. 
-    for (var i = 0; i <= 500; i++) { 
-      // Get random positions for stars. 
-      var x = Math.floor(Math.random() * 299) 
-      var y = Math.floor(Math.random() * 299) 
-
-      // Make the stars white 
-      ctx.fillStyle = "white"; 
-
-      // Give the ship some room. 
-      if (x < 30 || y < 30) ctx.fillStyle = "black"; 
-
-      // Draw an individual star. 
-      ctx.beginPath(); 
-      ctx.arc(x, y, 3, 0, Math.PI * 2, true); 
-      ctx.closePath(); 
-      ctx.fill(); 
-    } 
-  } 
-
-  function makeShip() { 
-    // Draw saucer bottom. 
-    ctx.beginPath(); 
-    ctx.moveTo(28.4, 16.9); 
-    ctx.bezierCurveTo(28.4, 19.7, 22.9, 22.0, 16.0, 22.0); 
-    ctx.bezierCurveTo(9.1, 22.0, 3.6, 19.7, 3.6, 16.9); 
-    ctx.bezierCurveTo(3.6, 14.1, 9.1, 11.8, 16.0, 11.8); 
-    ctx.bezierCurveTo(22.9, 11.8, 28.4, 14.1, 28.4, 16.9); 
-    ctx.closePath(); 
-    ctx.fillStyle = "rgb(222, 103, 0)"; 
-    ctx.fill(); 
-
-    // Draw saucer top. 
-    ctx.beginPath(); 
-    ctx.moveTo(22.3, 12.0); 
-    ctx.bezierCurveTo(22.3, 13.3, 19.4, 14.3, 15.9, 14.3); 
-    ctx.bezierCurveTo(12.4, 14.3, 9.6, 13.3, 9.6, 12.0); 
-    ctx.bezierCurveTo(9.6, 10.8, 12.4, 9.7, 15.9, 9.7); 
-    ctx.bezierCurveTo(19.4, 9.7, 22.3, 10.8, 22.3, 12.0); 
-    ctx.closePath(); 
-    ctx.fillStyle = "rgb(51, 190, 0)"; 
-    ctx.fill();
-  } 
+/****************
+ * Trying to add Background music
+ * 
+ * B_Music.prototype = new Entity();
+ * 
+ * B_Music.prototype = new Audio("./sounds/megaLag1.ogg");
+****************/
