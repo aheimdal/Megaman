@@ -35,19 +35,12 @@ Bullet.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
 Bullet.prototype.fireSound = new Audio(
-<<<<<<< HEAD
-    "gunsound.wav");
-Bullet.prototype.zappedSound = new Audio(
-    "sounds/bulletZapped.ogg");
-    
-=======
     "sounds/luger.wav");
 Bullet.prototype.shotgun = new Audio(
     "sounds/shotgun.wav");
 Bullet.prototype.die = new Audio(
     "sounds/die.wav");
 
->>>>>>> 665bd899a44ba5113afa5a937308f7510535798f
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
 Bullet.prototype.cx = 200;
