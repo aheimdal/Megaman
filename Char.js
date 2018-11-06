@@ -136,7 +136,7 @@ Char.prototype.calculateMovement = function (du) {
     }
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
     if (this.cy >= 470) JUMP_INIT = true;
-    //console.log(this.cx + " " + this.cy);
+    console.log(util.randRange(100,500));
 };
 
 Char.prototype.maybeFireBullet = function () {
@@ -145,7 +145,7 @@ Char.prototype.maybeFireBullet = function () {
 
         entityManager.fireBullet(
             this.cx + 16*CHAR_FACING, this.cy,
-            5*CHAR_FACING, 0, 0
+            10*CHAR_FACING, 0, 0
         );
            
     }

@@ -195,7 +195,7 @@ function preloadDone() {
     g_sprites.rock  = new Sprite(g_images.rock);
 
     g_sprites.bullet = new Sprite(g_images.gunshot);
-    g_sprites.bullet.scale = 0.25;
+    g_sprites.bullet.scale = 2;
 
     entityManager.init();
     createInitialChar();
