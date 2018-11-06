@@ -17,7 +17,7 @@ with suitable 'data' and 'methods'.
 
 
 // Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops 
+// my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
@@ -30,6 +30,7 @@ var entityManager = {
 _rocks   : [],
 _bullets : [],
 _char   : [],
+_pallar : [],
 
 _bShowRocks : true,
 
@@ -62,7 +63,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._rocks, this._bullets, this._char];
+    this._categories = [this._rocks, this._bullets, this._char,this._pallar];
 },
 
 init: function() {
@@ -88,15 +89,22 @@ generateChar : function(descr) {
     this._char.push(new Char(descr));
 },
 
+generatePallur : function(descr){
+  this._pallar.push(new Pallur(descr));
+},
 
 
 resetChar: function() {
     this._forEachOf(this._char, Char.prototype.reset);
 },
 
+
+
 haltChar: function() {
     this._forEachOf(this._char, Char.prototype.halt);
-},	
+},
+
+
 
 toggleRocks: function() {
     this._bShowRocks = !this._bShowRocks;
@@ -123,7 +131,7 @@ update: function(du) {
             }
         }
     }
-    
+
     if (this._rocks.length === 0) this._generateRocks();
 
 },
@@ -136,7 +144,7 @@ render: function(ctx) {
 
         var aCategory = this._categories[c];
 
-        if (!this._bShowRocks && 
+        if (!this._bShowRocks &&
             aCategory == this._rocks)
             continue;
 
@@ -161,4 +169,3 @@ render: function(ctx) {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
-

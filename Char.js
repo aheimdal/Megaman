@@ -19,10 +19,10 @@ function Char(descr) {
     this.setup(descr);
 
     this.rememberResets();
-    
+
     // Default sprite, if not otherwise specified
     this.sprite = this.sprite || g_sprites.char;
-    
+
     // Set normal drawing scale, and warp state off
     this._scale = 3;
 };
@@ -57,11 +57,11 @@ Char.prototype.numSubSteps = 1;
 Char.prototype.shootSound = new Audio(
     "sounds/bulletFire.ogg");
 
-    
+
 
 Char.prototype.update = function (du) {
 
-    
+
     spatialManager.unregister(this);
 
 
@@ -79,7 +79,7 @@ Char.prototype.update = function (du) {
     // Handle firing
     this.maybeFireBullet();
 
-    
+
     spatialManager.register(this);
 
 };
@@ -101,19 +101,33 @@ var JUMP_INIT = true;
 var JUMP_TIMER = 0;
 
 Char.prototype.movement = function (du) {
+  var prevX = this.cx;
+  var prevY = this.cy;
+  var nextY = prevY;
+
     if (keys[this.KEY_RIGHT]) {
-        if (this.cx < 770) this.cx += NOMINAL_RIGHT * du;
+        var nextX = prevX + (NOMINAL_RIGHT * du);
+
+        if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+          this.cx += NOMINAL_RIGHT * du;
+        }
     }
     if (keys[this.KEY_LEFT]) {
-        if (this.cx > 30)this.cx += NOMINAL_LEFT * du;
+        if (this.cx > 30){
+          var nextX = prevX + (NOMINAL_LEFT * du);
+          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+            this.cx += NOMINAL_LEFT * du;
+          }
+        }
     }
+    //console.log(entityManager._pallar[0]);
     if (keys[this.KEY_JUMP]) {
         if (JUMP_INIT && JUMP_TIMER == 0) {
             JUMP_TIMER = 24;
             this.velY = +NOMINAL_IJUMP * du;
         } else if (JUMP_INIT) {
             this.velY += (NOMINAL_JUMP*(JUMP_TIMER/20)) * du;
-        } 
+        }
     }
     if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
         JUMP_TIMER = 0;
@@ -122,9 +136,21 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    this.cy += this.velY * du;
+    var prevX = this.cx;
+    var nextX = prevX;
+    var prevY = this.cy;
+    var nextY = prevY + this.velY * du;
+    //console.log((entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2)));
+    if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+      this.cy += this.velY * du;
+    }
+    if((entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+      this.velY = 0;
+    }
     if (JUMP_TIMER > 0) JUMP_TIMER--;
-    if (this.cy < 470) this.velY += NOMINAL_GRAVITY;
+    if (this.cy < 470){
+      this.velY += NOMINAL_GRAVITY;
+    }
     if (this.cy > 470) {
         this.cy = 470;
         this.velY = 0;
@@ -137,11 +163,11 @@ Char.prototype.calculateMovement = function (du) {
 Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
-    
+
         var dX = +Math.sin(this.rotation);
         var dY = -Math.cos(this.rotation);
         var launchDist = this.getRadius() * 1.2;
-        
+
         var relVel = this.launchVel;
         var relVelX = dX * relVel;
         var relVelY = dY * relVel;
@@ -150,9 +176,9 @@ Char.prototype.maybeFireBullet = function () {
            this.cx + dX * launchDist, this.cy + dY * launchDist,
            this.velX + relVelX, this.velY + relVelY,
            this.rotation);
-           
+
     }
-    
+
 };
 
 Char.prototype.getRadius = function () {
@@ -166,7 +192,7 @@ Char.prototype.takeBulletHit = function () {
 Char.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
     this.rotation = this.reset_rotation;
-    
+
     this.halt();
 };
 
@@ -186,4 +212,3 @@ Char.prototype.render = function (ctx) {
     );
     this.sprite.scale = origScale;
 };
-

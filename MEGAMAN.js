@@ -52,7 +52,12 @@ function createInitialChar() {
         cx : 100,
         cy : 470
     });
-    
+
+    entityManager.generatePallur({
+        cx : 300,
+        cy : 480
+    });
+
 }
 
 // =============
@@ -80,9 +85,9 @@ function gatherInputs() {
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-    
+
     processDiagnostics();
-    
+
     entityManager.update(du);
 
     // Prevent perpetual firing!
@@ -131,13 +136,13 @@ function processDiagnostics() {
     if (eatKey(KEY_1)) entityManager.generateShip({
         cx : g_mouseX,
         cy : g_mouseY,
-        
+
         sprite : g_sprites.ship});
 
     if (eatKey(KEY_2)) entityManager.generateShip({
         cx : g_mouseX,
         cy : g_mouseY,
-        
+
         sprite : g_sprites.ship2
         });
 
