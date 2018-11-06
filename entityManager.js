@@ -147,13 +147,6 @@ render: function(ctx) {
         }
         debugY += 10;
     }
-
-    var img=new Image();
-    img.onload=start;
-    img.src="bak2.png";
-    function start(){
-        ctx.drawImage(img,0,0);
-    }
 }
 
 }

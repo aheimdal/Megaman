@@ -25,6 +25,11 @@ function Char(descr) {
     
     // Set normal drawing scale, and warp state off
     this._scale = 3;
+
+    this._nextMap = 0;
+    this.maps = ["images/bak1.jpg","images/bak2.png","images/bak3.png"];
+
+
 };
 
 Char.prototype = new Entity();
@@ -124,6 +129,17 @@ Char.prototype.movement = function (du) {
         JUMP_TIMER = 0;
         JUMP_INIT = false;
     }
+    canvasSpaceGame(this.getMap());
+};
+
+Char.prototype.getMap = function () {
+    
+    return this.maps[this._nextMap];
+};
+
+Char.prototype.setMap = function () {
+    
+    this._nextMap++;     
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -135,9 +151,12 @@ Char.prototype.calculateMovement = function (du) {
         this.velY = 0;
     }
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
-    if (this.cy >= 470) JUMP_INIT = true;
-    console.log(util.randRange(100,500));
+    if (this.cy >= 500) JUMP_INIT = true;
 
+    if(this.cx >= 760){
+        this.setMap();
+        this.cx = 100;}
+    //console.log(util.randRange(100,500));
 };
 
 Char.prototype.maybeFireBullet = function () {
@@ -146,7 +165,7 @@ Char.prototype.maybeFireBullet = function () {
 
         entityManager.fireBullet(
             this.cx + 16*CHAR_FACING, this.cy,
-            10*CHAR_FACING, 0, 0
+            5*CHAR_FACING, 0, 0
         );
            
     }
@@ -183,4 +202,4 @@ Char.prototype.render = function (ctx) {
 	ctx, this.cx, this.cy, this.rotation
     );
     this.sprite.scale = origScale;
-};
+};  

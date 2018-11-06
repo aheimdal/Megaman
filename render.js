@@ -28,7 +28,7 @@ function render(ctx) {
     // here, so that it becomes part of our "diagnostic" wrappers
     //
     //Tók þetta út svo að 'C' virki ekki
-     if (g_doClear) util.clearCanvas(ctx);
+      // if (g_doClear) util.clearCanvas(ctx);
     
     // The main purpose of the box is to demonstrate that it is
     // always deleted by the subsequent "undo" before you get to
