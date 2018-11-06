@@ -80,6 +80,7 @@ Bullet.prototype.update = function (du) {
 };
 
 Bullet.prototype.getRadius = function () {
+    canvasSpaceGame(util.getMap());
     return 4;
 };
 

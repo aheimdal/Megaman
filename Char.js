@@ -111,8 +111,6 @@ Char.prototype.movement = function (du) {
         if (this.cx > 30)this.cx += NOMINAL_LEFT * du;
     }
     if (keys[this.KEY_JUMP]) {
-        canvasSpaceGame("images/bak2.png");
-
         if (JUMP_INIT && JUMP_TIMER == 0) {
             JUMP_TIMER = 24;
             this.velY = +NOMINAL_IJUMP * du;
@@ -125,6 +123,9 @@ Char.prototype.movement = function (du) {
         JUMP_TIMER = 0;
         JUMP_INIT = false;
     }
+
+    
+    canvasSpaceGame("images/bak3.png");
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -136,10 +137,11 @@ Char.prototype.calculateMovement = function (du) {
         this.velY = 0;
     }
     if(this.cx >= 770)
-        canvasSpaceGame("images/bak3.png");
+    canvasSpaceGame("images/bak3.png");
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
     if (this.cy >= 470) JUMP_INIT = true;
     //console.log(this.cx + " " + this.cy);
+
 };
 
 Char.prototype.maybeFireBullet = function () {
@@ -194,4 +196,7 @@ Char.prototype.render = function (ctx) {
     );
     this.sprite.scale = origScale;
 };
+
+
+
 

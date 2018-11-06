@@ -77,6 +77,8 @@ Rock.prototype.update = function (du) {
                                    0, consts.FULL_CIRCLE);
 
     this.wrapPosition();
+
+    console.log(util._nextMap);
     
     // TODO: YOUR STUFF HERE! --- (Re-)Register
     spatialManager.register(this);

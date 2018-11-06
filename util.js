@@ -8,9 +8,17 @@
 
 var util = {
 
+    _nextMap : 1,
+    maps = ["images/bak2.png","images/bak3.png"],
 
-// RANGES
-// ======
+getMap: function(){
+return maps[this._nextMap];
+
+},
+
+setMap: function(){
+    this._nextMap++;    
+},
 
 clampRange: function(value, lowBound, highBound) {
     if (value < lowBound) {
