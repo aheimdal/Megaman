@@ -35,14 +35,15 @@ function canvasSpaceGame() {
       function start(){
           ctx.drawImage(img,0,0);
       }
-
+      /*
+      *Used a helper line to find the correct cy value to place our char
       ctx.beginPath();
       ctx.lineWidth=10;
       ctx.moveTo(0,555);
       ctx.strokeStyle="#FF0000";
       ctx.lineTo(800,555);
       ctx.stroke();
-
+      */
       // Draw space ship. 
       //makeShip(); 
       
