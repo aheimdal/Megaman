@@ -19,8 +19,8 @@ function Bullet(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
+    this.fireSound.load();
     this.fireSound.play();
-
 
     
 /*
@@ -88,6 +88,7 @@ Bullet.prototype.takeBulletHit = function () {
     this.kill();
     
     // When I am killed
+    this.die.load();
     this.die.play();
 };
 

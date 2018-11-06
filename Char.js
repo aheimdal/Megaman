@@ -145,7 +145,7 @@ Char.prototype.maybeFireBullet = function () {
 
         entityManager.fireBullet(
             this.cx + 16*CHAR_FACING, this.cy,
-            5*CHAR_FACING, 0, 0
+            7*CHAR_FACING, 0, 0
         );
            
     }
