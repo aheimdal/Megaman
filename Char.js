@@ -151,7 +151,7 @@ Char.prototype.calculateMovement = function (du) {
         this.velY = 0;
     }
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
-    if (this.cy >= 500) JUMP_INIT = true;
+    if (this.cy >= 502) JUMP_INIT = true;
 
     if(this.cx >= 760){
         this.setMap();
