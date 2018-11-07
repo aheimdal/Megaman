@@ -26,8 +26,10 @@ function Char(descr) {
     // Set normal drawing scale, and warp state off
     this._scale = 3;
 
+    this.count = 0;
+
     this._nextMap = 0;
-    this.maps = ["images/bak1.jpg","images/bak2.png","images/bak3.png"];
+    this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png"];
 
 
 };
@@ -110,7 +112,7 @@ var JUMP_TIMER_COUNT = 24;
 
 Char.prototype.movement = function (du) {
     if (keys[this.KEY_RIGHT]) {
-        if (this.cx < 770) this.cx += NOMINAL_RIGHT * du;
+        if (this.cx < 970) this.cx += NOMINAL_RIGHT * du;
         CHAR_FACING = 1;
     }
     if (keys[this.KEY_LEFT]) {
@@ -153,10 +155,16 @@ Char.prototype.calculateMovement = function (du) {
     if (JUMP_TIMER <= 0) JUMP_INIT = false;
     if (this.cy >= 502) JUMP_INIT = true;
 
-    if(this.cx >= 760){
-        this.setMap();
-        this.cx = 100;}
-    //console.log(util.randRange(100,500));
+    if(this.cx >= 965){
+        if(this.count <= 2){
+            this.setMap();
+            this.cx = 0;
+            this.count++;
+        }
+        else
+            this.cx = 965;
+        }
+
 };
 
 Char.prototype.maybeFireBullet = function () {
