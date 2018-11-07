@@ -166,7 +166,17 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        char   : "./images/redTop.png",
+        char   : "./images/pose.png",
+        charL  : "./images/posereverse.png",
+        charj  : "./images/jump.png",
+        charjg : "./images/jumpgun.png",
+        charr1 : "./images/run1.png",
+        charr2 : "./images/run2.png",
+        charr3 : "./images/run3.png",
+        charr1g: "./images/rungun1.png",
+        charr2g: "./images/rungun2.png",
+        charr3g: "./images/rungun3.png",
+        charg  : "./images/standgun",
 
         gunshot: "./images/gunshot.png"
     };
@@ -179,6 +189,16 @@ var g_sprites = {};
 function preloadDone() {
 
     g_sprites.char = new Sprite(g_images.char);
+    g_sprites.charL = new Sprite(g_images.charL);
+    g_sprites.charj = new Sprite(g_images.charj);
+    g_sprites.charjg = new Sprite(g_images.charjg);
+    g_sprites.charr1 = new Sprite(g_images.charr1);
+    g_sprites.charr2 = new Sprite(g_images.charr2);
+    g_sprites.charr3 = new Sprite(g_images.charr3);
+    g_sprites.charr1g = new Sprite(g_images.charr1g);
+    g_sprites.charr2g = new Sprite(g_images.charr2g);
+    g_sprites.charr3g = new Sprite(g_images.charr3g);
+    g_sprites.charg = new Sprite(g_images.charg);
 
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
