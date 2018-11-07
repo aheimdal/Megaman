@@ -19,10 +19,10 @@ function Char(descr) {
     this.setup(descr);
 
     this.rememberResets();
-    
+
     // Default sprite, if not otherwise specified
     this.sprite = this.sprite || g_sprites.char;
-    
+
     // Set normal drawing scale, and warp state off
     this._scale = 3;
 
@@ -63,11 +63,11 @@ Char.prototype.numSubSteps = 1;
 Char.prototype.shootSound = new Audio(
     "sounds/gunsound.wav");
 
-    
+
 
 Char.prototype.update = function (du) {
 
-    
+
     spatialManager.unregister(this);
 
 
@@ -85,7 +85,7 @@ Char.prototype.update = function (du) {
     // Handle firing
     this.maybeFireBullet();
 
-    
+
     spatialManager.register(this);
 
 };
@@ -110,12 +110,25 @@ var JUMP_TIMER = 0;
 var JUMP_TIMER_COUNT = 24;
 
 Char.prototype.movement = function (du) {
+    var prevX = this.cx;
+    var prevY = this.cy;
+    var nextY = prevY;
     if (keys[this.KEY_RIGHT]) {
-        if (this.cx < 970) this.cx += NOMINAL_RIGHT * du;
+        var nextX = prevX + (NOMINAL_RIGHT * du);
+        if (this.cx < 970){ 
+          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+            this.cx += NOMINAL_RIGHT * du;
+          }
+        }
         CHAR_FACING = 1;
     }
     if (keys[this.KEY_LEFT]) {
-        if (this.cx > 30)this.cx += NOMINAL_LEFT * du;
+        if (this.cx > 30){
+          var nextX = prevX + (NOMINAL_LEFT * du);
+          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+            this.cx += NOMINAL_LEFT * du;
+          }
+        }
         CHAR_FACING = -1;
     }
     if (keys[this.KEY_JUMP]) {
@@ -124,7 +137,7 @@ Char.prototype.movement = function (du) {
             this.velY = NOMINAL_IJUMP * du;
         } else if (JUMP_INIT) {
             this.velY += (NOMINAL_JUMP*(JUMP_TIMER/JUMP_TIMER_COUNT)) * du;
-        } 
+        }
     }
     if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
         JUMP_TIMER = 0;
@@ -134,13 +147,13 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.getMap = function () {
-    
+
     return this.maps[this._nextMap];
 };
 
 Char.prototype.setMap = function () {
-    
-    this._nextMap++;     
+
+    this._nextMap++;
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -174,9 +187,9 @@ Char.prototype.maybeFireBullet = function () {
             this.cx + 16*CHAR_FACING, this.cy,
             7*CHAR_FACING, 0, 0
         );
-           
+
     }
-    
+
 };
 
 Char.prototype.getRadius = function () {
@@ -190,7 +203,7 @@ Char.prototype.takeBulletHit = function () {
 Char.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
     this.rotation = this.reset_rotation;
-    
+
     this.halt();
 };
 
@@ -209,4 +222,4 @@ Char.prototype.render = function (ctx) {
 	ctx, this.cx, this.cy, this.rotation
     );
     this.sprite.scale = origScale;
-};  
+};

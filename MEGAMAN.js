@@ -52,7 +52,11 @@ function createInitialChar() {
         cx : 100,
         cy : 470
     });
-    
+
+    entityManager.generatePallur({
+        cx : 300,
+        cy : 500
+    });
 }
 
 // =============
@@ -80,9 +84,9 @@ function gatherInputs() {
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-    
+
     processDiagnostics();
-    
+
     entityManager.update(du);
 
     // Prevent perpetual firing!
