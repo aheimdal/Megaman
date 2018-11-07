@@ -110,13 +110,19 @@ var JUMP_TIMER = 0;
 var JUMP_TIMER_COUNT = 24;
 
 Char.prototype.movement = function (du) {
+    var rx = this.sprite.width*this._scale/2;
+    var ry = this.sprite.height*this._scale/2;
+    /*console.log(rx);
+    console.log(ry);*/
+
     var prevX = this.cx;
     var prevY = this.cy;
     var nextY = prevY;
+
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (NOMINAL_RIGHT * du);
         if (this.cx < 970){
-          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
             this.cx += NOMINAL_RIGHT * du;
           }
         }
@@ -125,7 +131,7 @@ Char.prototype.movement = function (du) {
     if (keys[this.KEY_LEFT]) {
         if (this.cx > 30){
           var nextX = prevX + (NOMINAL_LEFT * du);
-          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
             this.cx += NOMINAL_LEFT * du;
           }
         }
@@ -161,12 +167,21 @@ Char.prototype.calculateMovement = function (du) {
     var nextX = prevX;
     var prevY = this.cy;
     var nextY = prevY + this.velY * du;
+    var rx = this.sprite.width*this._scale/2;
+    var ry = this.sprite.height*this._scale/2;
 
-    if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+    if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
+      /*if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
+        this.velY = 0;
+      }*/
       this.cy += this.velY * du;
-    } else {
-      this.velY = 0;
+    }else{
+      if((nextY + this.sprite.height/2 > entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
+        this.velY = 0;
+        //this.cy = entityManager._pallar[0].cy - 5;
+      }
     }
+
     if (JUMP_TIMER > 0) JUMP_TIMER--;
     if (this.cy < 502) this.velY += NOMINAL_GRAVITY;
     if (this.cy > 502) {
