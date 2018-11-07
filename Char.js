@@ -21,7 +21,7 @@ function Char(descr) {
     this.rememberResets();
 
     // Default sprite, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.char;
+    this.sprite = g_sprites.Char[0];
 
     // Set normal drawing scale, and warp state off
     this._scale = 3;
@@ -83,7 +83,7 @@ Char.prototype.update = function (du) {
 
 
     // Handle firing
-    this.maybeFireBullet();
+    var shoot = this.maybeFireBullet();
 
 
     spatialManager.register(this);
@@ -107,19 +107,15 @@ var CHAR_FACING = 1;
 
 var JUMP_INIT = true;
 var JUMP_TIMER = 0;
-var JUMP_TIMER_COUNT = 24;
+var JUMP_TIMER_COUNT = 80;
 
 Char.prototype.movement = function (du) {
+
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
-    /*console.log(rx);
-    console.log(ry);*/
-
     var prevX = this.cx;
     var prevY = this.cy;
     var nextY = prevY;
-    //console.log("cx er: "+this.cx);
-    //console.log("cy er :"+this.cy);
 
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (NOMINAL_RIGHT * du);
@@ -130,7 +126,7 @@ Char.prototype.movement = function (du) {
         }
         CHAR_FACING = 1;
     }
-    if (keys[this.KEY_LEFT]) {
+    else if (keys[this.KEY_LEFT]) {
         if (this.cx > 30){
           var nextX = prevX + (NOMINAL_LEFT * du);
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
@@ -208,7 +204,11 @@ Char.prototype.calculateMovement = function (du) {
 
 Char.prototype.maybeFireBullet = function () {
 
+    var shoot = false;
+
     if (keys[this.KEY_FIRE]) {
+
+        var shoot = true;
 
         entityManager.fireBullet(
             this.cx + 16*CHAR_FACING, this.cy,
@@ -217,7 +217,13 @@ Char.prototype.maybeFireBullet = function () {
 
     }
 
+    return shoot;
+
 };
+
+Char.prototype.calculateSprite = function () {
+
+}
 
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
