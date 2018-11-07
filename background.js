@@ -22,14 +22,3 @@ function canvasSpaceGame(imgSrc) {
           ctx.drawImage(img,0,0);
       }
     };
-
-  // Paint a random starfield. 
-
-
-  function imagebackground(){
-
-   imgSrc="images/bak2.png";
- 
-    return;
-
-  };

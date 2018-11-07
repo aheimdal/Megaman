@@ -75,7 +75,6 @@ Bullet.prototype.update = function (du) {
         if (canTakeHit) canTakeHit.call(hitEntity); 
         return entityManager.KILL_ME_NOW;
     }
-    console.log(this.cx + " " + this.cy);
     // TODO: YOUR STUFF HERE! --- (Re-)Register
     spatialManager.register(this);
 };
