@@ -166,7 +166,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        char   : "./images/redTop.png",
+        char   : "./images/pose.png",
         ship2  : "https://notendur.hi.is/~pk/308G/images/ship_2.png",
         rock   : "https://notendur.hi.is/~pk/308G/images/rock.png",
         gunshot: "./images/gunshot.png"
