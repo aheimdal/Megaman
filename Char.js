@@ -85,13 +85,12 @@ Char.prototype.update = function (du) {
     // Handle firing
     this.maybeFireBullet();
 
+    this.computeSprite();
 
     spatialManager.register(this);
 
 };
 
-
-var NOMINAL_GRAVITY = 0.12;
 
 Char.prototype.computeGravity = function () {
     return g_useGravity ? NOMINAL_GRAVITY : 0;
@@ -201,9 +200,17 @@ Char.prototype.maybeFireBullet = function () {
 
 };
 
+Char.prototype.computeSprite = function () {
+    
+};
+
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
+
+Char.prototype.getHitbox = function () {
+    return (this.sprite.height*this._scale, this.sprite.width*this._scale);
+}
 
 Char.prototype.takeBulletHit = function () {
     //TODO
