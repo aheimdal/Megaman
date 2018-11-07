@@ -96,9 +96,9 @@ Pallur.prototype.collidesWithX = function (prevX, prevY,
     //console.log("bamm");
     if (((nextX + rx >= this.cx - 25) && ((nextX+rx<=this.cx+25)&&(nextX-rx<=this.cx+25)))||
         ((nextX - rx <= this.cx + 25)&&((nextX-rx>=this.cx-25)&&(nextX+rx>=this.cx-25)))){
-          console.log("bamm1");
+        //  console.log("bamm1");
       if(((prevY+ry>= this.cy-5)&&(prevY-ry<=this.cy+5))){
-            console.log("bamm2");
+          //  console.log("bamm2");
             return true;// a hit
 
       }
