@@ -101,10 +101,10 @@ Pallur.prototype.collidesWithX = function (prevX, prevY,
 Pallur.prototype.collidesWithY = function (prevX, prevY,
                                           nextX, nextY,
                                           r) {
-    console.log("bamm1");
+    //console.log("bamm1");
     if (((nextY + r > this.cy - 15) && (nextY+r<this.cY+15))||
         ((nextY - r < this.cy + 15)&&(nextY-r>this.cy-15))){
-          console.log("bamm2");
+          //console.log("bamm2");
       if(((prevX+r> this.cx-25)&&(prevX-r<this.cx+25))){
             return true;// a hit
       }

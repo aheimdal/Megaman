@@ -143,8 +143,7 @@ Char.prototype.calculateMovement = function (du) {
     //console.log((entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2)));
     if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2))){
       this.cy += this.velY * du;
-    }
-    if((entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+    } else {
       this.velY = 0;
     }
     if (JUMP_TIMER > 0) JUMP_TIMER--;
