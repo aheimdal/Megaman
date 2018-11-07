@@ -54,8 +54,8 @@ function createInitialChar() {
     });
 
     entityManager.generatePallur({
-        cx : 300,
-        cy : 445
+        cx : 100,
+        cy : 470
     });
 }
 

@@ -85,12 +85,13 @@ Char.prototype.update = function (du) {
     // Handle firing
     this.maybeFireBullet();
 
-    this.computeSprite();
 
     spatialManager.register(this);
 
 };
 
+
+var NOMINAL_GRAVITY = 0.12;
 
 Char.prototype.computeGravity = function () {
     return g_useGravity ? NOMINAL_GRAVITY : 0;
@@ -117,6 +118,8 @@ Char.prototype.movement = function (du) {
     var prevX = this.cx;
     var prevY = this.cy;
     var nextY = prevY;
+    console.log("cx er: "+this.cx);
+    console.log("cy er :"+this.cy);
 
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (NOMINAL_RIGHT * du);
@@ -169,6 +172,7 @@ Char.prototype.calculateMovement = function (du) {
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
 
+
     if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
       /*if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
         this.velY = 0;
@@ -215,17 +219,9 @@ Char.prototype.maybeFireBullet = function () {
 
 };
 
-Char.prototype.computeSprite = function () {
-    
-};
-
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
-
-Char.prototype.getHitbox = function () {
-    return (this.sprite.height*this._scale, this.sprite.width*this._scale);
-}
 
 Char.prototype.takeBulletHit = function () {
     //TODO
