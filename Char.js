@@ -106,7 +106,7 @@ var CHAR_FACING = 1;
 
 var JUMP_INIT = true;
 var JUMP_TIMER = 0;
-var JUMP_TIMER_COUNT = 24;
+var JUMP_TIMER_COUNT = 30;
 
 Char.prototype.movement = function (du) {
     var rx = this.sprite.width*this._scale/2;
