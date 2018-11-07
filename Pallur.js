@@ -86,12 +86,21 @@ ctx.fillRect(this.cx - 25,
 
 Pallur.prototype.collidesWithX = function (prevX, prevY,
                                           nextX, nextY,
-                                          r) {
-
-    if (((nextX + r > this.cx - 25) && (nextX+r<this.cx+25))||
-        ((nextX - r < this.cx + 25)&&(nextX-r>this.cx-25))){
-      if(((prevY+r>= this.cy-5)&&(prevY-r<=this.cy+5))){
+                                          rx,ry) {
+    /*console.log("prevX er: "+prevX);
+    console.log("prevY er: "+prevY);
+    console.log("nextX er: "+nextX);
+    console.log("nextY er: "+nextY);
+    console.log("rx er: "+rx);
+    console.log("ry er: "+ry);*/
+    //console.log("bamm");
+    if (((nextX + rx >= this.cx - 25) && ((nextX+rx<=this.cx+25)&&(nextX-rx<=this.cx+25)))||
+        ((nextX - rx <= this.cx + 25)&&((nextX-rx>=this.cx-25)&&(nextX+rx>=this.cx-25)))){
+          console.log("bamm1");
+      if(((prevY+ry>= this.cy-5)&&(prevY-ry<=this.cy+5))){
+            console.log("bamm2");
             return true;// a hit
+
       }
     }
     // It's a miss!
@@ -100,12 +109,12 @@ Pallur.prototype.collidesWithX = function (prevX, prevY,
 
 Pallur.prototype.collidesWithY = function (prevX, prevY,
                                           nextX, nextY,
-                                          r) {
+                                          rx,ry) {
     //console.log("bamm1");
-    if (((nextY + r > this.cy - 15) && (nextY+r<this.cy+15))||
-        ((nextY - r < this.cy + 15)&&(nextY-r>this.cy-15))){
+    if (((nextY + ry >= this.cy - 5) && (nextY+ry<=this.cy+5))||
+        ((nextY - ry <= this.cy + 5)&&(nextY-ry>=this.cy-5))){
           //console.log("bamm2");
-      if(((prevX+r> this.cx-25)&&(prevX-r<this.cx+25))){
+      if(((prevX+rx>= this.cx-25)&&(prevX-rx<=this.cx+25))){
             return true;// a hit
       }
     }
