@@ -118,8 +118,8 @@ Char.prototype.movement = function (du) {
     var prevX = this.cx;
     var prevY = this.cy;
     var nextY = prevY;
-    console.log("cx er: "+this.cx);
-    console.log("cy er :"+this.cy);
+    //console.log("cx er: "+this.cx);
+    //console.log("cy er :"+this.cy);
 
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (NOMINAL_RIGHT * du);
