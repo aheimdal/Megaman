@@ -55,7 +55,7 @@ function createInitialChar() {
 
     entityManager.generatePallur({
         cx : 300,
-        cy : 470
+        cy : 445
     });
 }
 
@@ -166,9 +166,8 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        char   : "./images/pose.png",
-        ship2  : "https://notendur.hi.is/~pk/308G/images/ship_2.png",
-        rock   : "https://notendur.hi.is/~pk/308G/images/rock.png",
+        char   : "./images/redTop.png",
+
         gunshot: "./images/gunshot.png"
     };
 
@@ -180,8 +179,6 @@ var g_sprites = {};
 function preloadDone() {
 
     g_sprites.char = new Sprite(g_images.char);
-    g_sprites.ship2 = new Sprite(g_images.ship2);
-    g_sprites.rock  = new Sprite(g_images.rock);
 
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
