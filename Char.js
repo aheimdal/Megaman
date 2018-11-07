@@ -115,7 +115,7 @@ Char.prototype.movement = function (du) {
     var nextY = prevY;
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (NOMINAL_RIGHT * du);
-        if (this.cx < 970){ 
+        if (this.cx < 970){
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, this.sprite.height/2))){
             this.cx += NOMINAL_RIGHT * du;
           }
@@ -157,7 +157,16 @@ Char.prototype.setMap = function () {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    this.cy += this.velY * du;
+    var prevX = this.cx;
+    var nextX = prevX;
+    var prevY = this.cy;
+    var nextY = prevY + this.velY * du;
+
+    if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, this.sprite.height/2))){
+      this.cy += this.velY * du;
+    } else {
+      this.velY = 0;
+    }
     if (JUMP_TIMER > 0) JUMP_TIMER--;
     if (this.cy < 502) this.velY += NOMINAL_GRAVITY;
     if (this.cy > 502) {
