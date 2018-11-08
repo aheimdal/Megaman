@@ -68,7 +68,7 @@ Char.prototype.update = function (du) {
     this.calculateMovement(du);
 
     // Handle firing
-    var shoot = this.maybeFireBullet();
+    this.maybeFireBullet();
 
     spatialManager.register(this);
 
@@ -204,22 +204,22 @@ Char.prototype.calculateMovement = function (du) {
 
 };
 
-Char.prototype.maybeFireBullet = function () {
+Char.prototype.CHAR_SHOOT;
 
-    var shoot = false;
+Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
 
-        var shoot = true;
+        this.CHAR_SHOOT = true;
 
         entityManager.fireBullet(
             this.cx + 16*this.CHAR_FACING, this.cy,
             7*this.CHAR_FACING, 0, 0
         );
 
+    } else {
+        this.CHAR_SHOOT = false;
     }
-
-    return shoot;
 
 };
 
@@ -247,6 +247,10 @@ Char.prototype.ground = function () {
 
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
+};
+
+Char.prototype.status = function () {
+    return this.CHAR_FACING, this.CHAR_SHOOT, this.isGrounded;
 };
 
 Char.prototype.render = function (ctx) {
