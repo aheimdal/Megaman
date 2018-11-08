@@ -88,8 +88,8 @@ Char.prototype.computeGravity = function () {
     return g_useGravity ? NOMINAL_GRAVITY : 0;
 };
 
-Char.prototype.NOMINAL_RIGHT = +6;
-Char.prototype.NOMINAL_LEFT  = -6;
+Char.prototype.NOMINAL_RIGHT = +1;
+Char.prototype.NOMINAL_LEFT  = -1;
 Char.prototype.NOMINAL_IJUMP = -10;
 Char.prototype.NOMINAL_JUMP  = -2;
 Char.prototype.NOMINAL_GRAVITY = +2;
@@ -104,8 +104,9 @@ Char.prototype.movement = function (du) {
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
     var prevX = this.cx;
+    var nextX = prevX+this.velX;
     var prevY = this.cy;
-    var nextY = prevY;
+    var nextY = prevY+this.velY;
 
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
@@ -113,49 +114,52 @@ Char.prototype.movement = function (du) {
         if (this.cx < 970){
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
             if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
-            this.velX += this.NOMINAL_RIGHT * du;
+            if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
           }
         } else {
             this.velX = 0;
         }
         this.CHAR_FACING = 1; //Says Char is facing right
-    }
+    } 
 
     //Calculates if characted should go left if he's not going right
     else if (keys[this.KEY_LEFT]) {
         if (this.cx > 30){
           var nextX = prevX + (this.NOMINAL_LEFT * du);
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
-            if (this.velX > 0) this.velX = 0; //Resets velocity if Char was going right
-            this.velX += this.NOMINAL_LEFT * du;
+            if (this.velX > 0)  this.velX = 0; //Resets velocity if Char was going right
+            if (this.velX > -6) this.velX += this.NOMINAL_LEFT * du; //Adds left velocity
           }
         }
         this.CHAR_FACING = -1; //Says Char is facing left
+    } else {
+        this.velX = 0;
     }
 
     //Calculates if Char is jumping
     if (keys[this.KEY_JUMP]) {
-        if (this.JUMP_INIT && this.JUMP_TIMER == 0) {
-            this.JUMP_TIMER = this.JUMP_TIMER_COUNT;
-            this.velY = this.NOMINAL_IJUMP * du;
+        if (this.isGrounded()) {
+            this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
+            this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increasy
         } else if (this.JUMP_INIT) {
-            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du;
+            //Dynamic y-velocity added compared to the time
+            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du; 
         }
     }
-    if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
+    if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) { //Checked if space was released early
         this.JUMP_TIMER = 0;
         this.JUMP_INIT = false;
     }
+
     canvasSpaceGame(this.getMap());
+
 };
 
 Char.prototype.getMap = function () {
-
     return this.maps[this._nextMap];
 };
 
 Char.prototype.setMap = function () {
-
     this._nextMap++;
 };
 
@@ -168,28 +172,40 @@ Char.prototype.calculateMovement = function (du) {
     var ry = this.sprite.height*this._scale/2;
 
 
+    this.cx += this.velX; //x-coordinates updated
 
-    if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
-      /*if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
-        this.velY = 0;
-      }*/
-      this.cy += this.velY * du;
-    }else{
-      if((nextY + this.sprite.height/2 > entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
-        this.velY = 0;
-        //this.cy = entityManager._pallar[0].cy - 5;
-      }
+    //Only works with y-axis if he's not "grounded"
+    if (!this.isGrounded()) {
+
+        if (!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
+            /*
+            if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (
+                nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)) {
+                this.velY = 0;
+                
+        }
+        */
+        this.cy += this.velY * du;
+        } else {
+            if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) && 
+                (nextY + this.sprite.height/ 2 < entityManager._pallar[0].cy + 5)) {
+                this.ground();
+                console.log("zero" + this.velY);
+                //this.cy = entityManager._pallar[0].cy - 5;
+            }
+        }  
+        
+
+    
+        if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
+        if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
+        if (this.cy > 502) {
+            this.cy = 502;
+            this.velY = 0;
+        }
+        if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
+        if (this.cy >= 502) this.JUMP_INIT = true;
     }
-
-    if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
-    if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
-    if (this.cy > 502) {
-        this.cy = 502;
-        this.velY = 0;
-    }
-    if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
-    if (this.cy >= 502) this.JUMP_INIT = true;
-
     if(this.cx >= 965){
         if(this.count <= 2){
             this.setMap();
@@ -198,7 +214,9 @@ Char.prototype.calculateMovement = function (du) {
         }
         else
             this.cx = 965;
-        }
+    }
+
+        
 
 };
 
@@ -211,8 +229,8 @@ Char.prototype.maybeFireBullet = function () {
         var shoot = true;
 
         entityManager.fireBullet(
-            this.cx + 16*CHAR_FACING, this.cy,
-            7*CHAR_FACING, 0, 0
+            this.cx + 16*this.CHAR_FACING, this.cy,
+            7*this.CHAR_FACING, 0, 0
         );
 
     }
@@ -221,16 +239,29 @@ Char.prototype.maybeFireBullet = function () {
 
 };
 
-Char.prototype.calculateSprite = function () {
+Char.prototype.isGrounded = function () {
+    if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
+    return false;
+};
 
-}
+Char.prototype.isFalling = function () {
+    if (this.JUMP_TIMER === 0 && this.JUMP_INIT === false) return true;
+    return false;
+};
+
+Char.prototype.isJumping = function () {
+    if (this.JUMP_TIMER > 0) return true;
+    return false;
+};
+
+Char.prototype.ground = function () {
+    this.JUMP_TIMER = 0;
+    this.JUMP_INIT = true;
+    this.velY = 0;
+};
 
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
-};
-
-Char.prototype.takeBulletHit = function () {
-    //TODO
 };
 
 Char.prototype.render = function (ctx) {
