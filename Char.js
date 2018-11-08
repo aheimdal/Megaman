@@ -199,12 +199,10 @@ Char.prototype.calculateMovement = function (du) {
         else
             this.cx = 965;
     }
-
-        
-
 };
 
 Char.prototype.CHAR_SHOOT;
+Char.prototype.CHAR_SHOOT_TIMER;
 
 Char.prototype.maybeFireBullet = function () {
 
@@ -217,7 +215,7 @@ Char.prototype.maybeFireBullet = function () {
             7*this.CHAR_FACING, 0, 0
         );
 
-    } else {
+    } else if (CHAR_SHOOT_TIMER = 0) {
         this.CHAR_SHOOT = false;
     }
 
@@ -250,7 +248,9 @@ Char.prototype.getRadius = function () {
 };
 
 Char.prototype.status = function () {
-    return this.CHAR_FACING, this.CHAR_SHOOT, this.isGrounded;
+    return  this.CHAR_FACING, 
+            this.CHAR_SHOOT, 
+            this.isGrounded;
 };
 
 Char.prototype.render = function (ctx) {
