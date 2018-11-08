@@ -209,15 +209,18 @@ Char.prototype.maybeFireBullet = function () {
     if (keys[this.KEY_FIRE]) {
 
         this.CHAR_SHOOT = true;
+        this.CHAR_SHOOT_TIMER = 80;
 
         entityManager.fireBullet(
             this.cx + 16*this.CHAR_FACING, this.cy,
             7*this.CHAR_FACING, 0, 0
         );
 
-    } else if (CHAR_SHOOT_TIMER = 0) {
+    } else if (this.CHAR_SHOOT_TIMER = 0) {
         this.CHAR_SHOOT = false;
     }
+
+    this.CHAR_SHOOT_TIMER--;
 
 };
 
