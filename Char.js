@@ -26,10 +26,8 @@ function Char(descr) {
     // Set normal drawing scale, and warp state off
     this._scale = 3;
 
+    //Counter to know how many maps have been played
     this.count = 0;
-
-    this._nextMap = 0;
-    this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png"];
 
 };
 
@@ -130,17 +128,9 @@ Char.prototype.movement = function (du) {
         JUMP_TIMER = 0;
         JUMP_INIT = false;
     }
-    canvasSpaceGame(this.getMap());
-};
+    //We go to "background.js" and get the map
+    background.canvasSpaceGame(background.getMap());
 
-Char.prototype.getMap = function () {
-    
-    return this.maps[this._nextMap];
-};
-
-Char.prototype.setMap = function () {
-    
-    this._nextMap++;     
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -156,7 +146,8 @@ Char.prototype.calculateMovement = function (du) {
 
     if(this.cx >= 965){
         if(this.count <= 2){
-            this.setMap();
+            //When player leaves the playing area, we set a New map
+            background.canvasSpaceGame(background.setMap());
             this.cx = 0;
             this.count++;
         }
