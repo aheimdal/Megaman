@@ -55,13 +55,6 @@ Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 
 
-
-// HACKED-IN AUDIO (no preloading)
-Char.prototype.shootSound = new Audio(
-    "sounds/gunsound.wav");
-
-
-
 Char.prototype.update = function (du) {
 
 

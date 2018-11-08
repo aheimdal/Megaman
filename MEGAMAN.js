@@ -166,11 +166,6 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-<<<<<<< HEAD
-        char   : "./images/rungun2.png",
-        ship2  : "https://notendur.hi.is/~pk/308G/images/ship_2.png",
-        rock   : "https://notendur.hi.is/~pk/308G/images/rock.png",
-=======
         char   : "./images/pose.png",
         charL  : "./images/posereverse.png",
         charj  : "./images/jump.png",
@@ -181,9 +176,8 @@ function requestPreloads() {
         charr1g: "./images/rungun1.png",
         charr2g: "./images/rungun2.png",
         charr3g: "./images/rungun3.png",
-        charg  : "./images/standgun",
+        charg  : "./images/standgun.png",
 
->>>>>>> siggi7
         gunshot: "./images/gunshot.png"
     };
 
