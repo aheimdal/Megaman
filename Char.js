@@ -200,8 +200,7 @@ Char.prototype.calculateMovement = function (du) {
         if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
         if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
         if (this.cy > 502) {
-            this.cy = 502;
-            this.velY = 0;
+            this.ground();
         }
         if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
         if (this.cy >= 502) this.JUMP_INIT = true;
@@ -258,6 +257,7 @@ Char.prototype.ground = function () {
     this.JUMP_TIMER = 0;
     this.JUMP_INIT = true;
     this.velY = 0;
+    if (this.cy > 502) this.cy = 502;
 };
 
 Char.prototype.getRadius = function () {
