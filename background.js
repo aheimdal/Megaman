@@ -4,21 +4,34 @@
 
 "use strict";
 
-g_canvas = document.getElementById("myCanvas"); 
-g_ctx = g_canvas.getContext("2d"); 
+this._nextMap = 0;
+//The backgrounds images
+this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png"];
 
+var background = {
 
+    //Returns the next background image
+    getMap: function() {
+        
+        return maps[_nextMap];
+    },
 
-function canvasSpaceGame(imgSrc) { 
- 
-      document.body.style.backgroundColor = "#f3f3f3";
-      document.body.style.backgroundImage = "url('images/Mega.png')";   
+    setMap: function() {
+        
+        _nextMap++;
+    },
 
+    canvasSpaceGame: function(imgSrc) { 
+        //This is our browser background
+        document.body.style.backgroundImage = "url('images/Mega.png')"; 
+    
+        //Here we load the background
+          var img=new Image();
+          img.onload=start;
+          img.src=imgSrc;
+          function start(){
+              ctx.drawImage(img,0,0);
+          }
+        }
 
-      var img=new Image();
-      img.onload=start;
-      img.src=imgSrc;
-      function start(){
-          ctx.drawImage(img,0,0);
-      }
-    };
+};
