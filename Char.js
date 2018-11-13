@@ -71,7 +71,6 @@ Char.prototype.update = function (du) {
     this.maybeFireBullet();
 
     spatialManager.register(this);
-
 };
 
 
@@ -201,26 +200,27 @@ Char.prototype.calculateMovement = function (du) {
     }
 };
 
-Char.prototype.CHAR_SHOOT;
-Char.prototype.CHAR_SHOOT_TIMER;
+Char.prototype.CHAR_SHOOT = false;
+Char.prototype.CHAR_SHOOT_TIMER = 0;
 
 Char.prototype.maybeFireBullet = function () {
 
-    if (keys[this.KEY_FIRE]) {
+    if (keys[this.KEY_FIRE] && this.CHAR_SHOOT_TIMER === 0) {
 
         this.CHAR_SHOOT = true;
-        this.CHAR_SHOOT_TIMER = 80;
+        this.CHAR_SHOOT_TIMER = 30;
 
         entityManager.fireBullet(
             this.cx + 16*this.CHAR_FACING, this.cy,
             7*this.CHAR_FACING, 0, 0
         );
 
-    } else if (this.CHAR_SHOOT_TIMER = 0) {
+    } else if (this.CHAR_SHOOT_TIMER <= 0) {
         this.CHAR_SHOOT = false;
+        this.CHAR_SHOOT_TIMER = 0;
     }
 
-    this.CHAR_SHOOT_TIMER--;
+    if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER -= 1;
 
 };
 
@@ -251,9 +251,9 @@ Char.prototype.getRadius = function () {
 };
 
 Char.prototype.status = function () {
-    return  this.CHAR_FACING, 
+    return  [this.CHAR_FACING, 
             this.CHAR_SHOOT, 
-            this.isGrounded;
+            this.isGrounded()];
 };
 
 Char.prototype.render = function (ctx) {
