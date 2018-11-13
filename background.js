@@ -23,7 +23,7 @@ var background = {
 
     canvasSpaceGame: function(imgSrc) { 
         //This is our browser background
-        document.body.style.backgroundImage = "url('images/Mega.png')"; 
+        document.body.style.backgroundImage = "url('images/back02.jpg')"; 
     
         //Here we load the background
           var img=new Image();
