@@ -70,6 +70,8 @@ Char.prototype.update = function (du) {
     // Handle firing
     this.maybeFireBullet();
 
+    console.log(this.status());
+
     spatialManager.register(this);
 };
 
