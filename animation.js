@@ -38,7 +38,13 @@ var joe_sprite = {
         var animate = new Image();
         animate.onload=start;
         animate.src=joeSrc;
-        
+        function start(){
+            if(this.velX > 0){
+                
+            }if(this.JUMP_TIMER > 0){
+                ctx.drawImage(animate.joeMove["images/joe10.png"],this.cx,this.cy);
+            }
+        }
     }
 };
 
