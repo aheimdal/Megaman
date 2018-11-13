@@ -88,6 +88,7 @@ Char.prototype.CHAR_FACING = 1;
 Char.prototype.JUMP_INIT = true;
 Char.prototype.JUMP_TIMER = 0;
 Char.prototype.JUMP_TIMER_COUNT = 80;
+Char.prototype.MOVING = false;
 
 Char.prototype.movement = function (du) {
 
@@ -101,6 +102,7 @@ Char.prototype.movement = function (du) {
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (this.NOMINAL_RIGHT * du);
+        this.MOVING = true;                 //Player is moving
         if (this.cx < 970){
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
             if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
@@ -114,6 +116,7 @@ Char.prototype.movement = function (du) {
 
     //Calculates if characted should go left if he's not going right
     else if (keys[this.KEY_LEFT]) {
+        this.MOVING = true;
         if (this.cx > 30){
           var nextX = prevX + (this.NOMINAL_LEFT * du);
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
@@ -124,6 +127,7 @@ Char.prototype.movement = function (du) {
         this.CHAR_FACING = -1; //Says Char is facing left
     } else {
         this.velX = 0;
+        this.MOVING = false;
     }
 
     //Calculates if Char is jumping
@@ -252,6 +256,7 @@ Char.prototype.getRadius = function () {
 
 Char.prototype.status = function () {
     return  [this.CHAR_FACING,    //positive number for right, negative for left
+            this.MOVING,          //True if moving, else false
             this.CHAR_SHOOT,      //True if shooting, else false
             this.isGrounded()];   //True if on grounds, else jumping/falling
 };
