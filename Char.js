@@ -251,9 +251,9 @@ Char.prototype.getRadius = function () {
 };
 
 Char.prototype.status = function () {
-    return  [this.CHAR_FACING, 
-            this.CHAR_SHOOT, 
-            this.isGrounded()];
+    return  [this.CHAR_FACING,    //positive number for right, negative for left
+            this.CHAR_SHOOT,      //True if shooting, else false
+            this.isGrounded()];   //True if on grounds, else jumping/falling
 };
 
 Char.prototype.render = function (ctx) {
