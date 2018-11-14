@@ -107,7 +107,7 @@ Char.prototype.movement = function (du) {
             this.velX = 0;
         }
         this.CHAR_FACING = 1; //Says Char is facing right
-    } 
+    }
 
     //Calculates if characted should go left if he's not going right
     else if (keys[this.KEY_LEFT]) {
@@ -132,14 +132,14 @@ Char.prototype.movement = function (du) {
             this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increasy
         } else if (this.JUMP_INIT) {
             //Dynamic y-velocity added compared to the time
-            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du; 
+            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du;
         }
     }
     if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) { //Checked if space was released early
         this.JUMP_TIMER = 0;
         this.JUMP_INIT = false;
     }
-  
+
     //We go to "background.js" and get the map
     background.canvasSpaceGame(background.getMap());
 
@@ -164,21 +164,21 @@ Char.prototype.calculateMovement = function (du) {
             if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (
                 nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)) {
                 this.velY = 0;
-                
+
         }
         */
         this.cy += this.velY * du;
         } else {
-            if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) && 
+            if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) &&
                 (nextY + this.sprite.height/ 2 < entityManager._pallar[0].cy + 5)) {
                 this.ground();
                 console.log("zero" + this.velY);
                 //this.cy = entityManager._pallar[0].cy - 5;
             }
-        }  
-        
+        }
 
-    
+
+
         if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
         if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
         if (this.cy > 502) {
@@ -214,7 +214,7 @@ Char.prototype.maybeFireBullet = function () {
         );
 
     } else if (this.CHAR_SHOOT_TIMER <= 0) {
-        this.CHAR_SHOOT = false; 
+        this.CHAR_SHOOT = false;
     }
 
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
@@ -223,7 +223,7 @@ Char.prototype.maybeFireBullet = function () {
 
 Char.prototype.isGrounded = function () {
     if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
-    return false;
+    return false; 
 };
 
 Char.prototype.isFalling = function () {
