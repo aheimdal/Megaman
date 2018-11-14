@@ -13,7 +13,7 @@ this._animateMain = 0;
 var animationHandle = {
 
 
-shootRunCounter : 0,
+//shootRunCounter : 0,
 runCounter : 0,
 
 update : function(obj) {
@@ -53,63 +53,35 @@ update : function(obj) {
     obj.changeSprite(direction[pick]);
 },
 
-cycle : function(x) {
+cycle : function(x,y,z) {
     if (x === 1) {
         if (this.runCounter === 0) {
             this.runCounter = 110;
-            return 1;
+            return x;
         }
         else if (this.runCounter > 90 && 
             this.runCounter < 111) {
-            return 1;
+            return x;
         } 
         else if (this.runCounter <= 90) {
             this.runCounter = 210;
-            return 2;
+            return y;
         }
 
         else if (this.runCounter > 190 &&
-            this.runCounter < 211) {return 2;}
+            this.runCounter < 211) {return y;}
 
         else if (this.runCounter <= 190) {
             this.runCounter = 310;
-            return 3;
+            return z;
         }
         else if (this.runCounter > 290 &&
-            this.runCounter < 311) {return 3;}
+            this.runCounter < 311) {return z;}
         else {
             this.runCounter = 0;
-            return 3;
+            return z;
         }
-    } else {
-        if (this.shootRunCounter === 0) {
-            this.shootRunCounter = 110;
-            return 5;
-        }
-        if (this.shootRunCounter > 90 && 
-            this.shootRunCounter < 111) {
-            return 5;
-        }
-        if (this.shootRunCounter <= 90) {
-            this.shootRunCounter = 210;
-            return 6;
-        }
-        if (this.shootRunCounter > 190 &&
-            this.shootRunCounter < 211) {
-            return 6;
-        }
-        if (this.shootRunCounter <= 190) {
-            this.shootRunCounter = 310;
-            return 7;
-        }
-        if (this.shootRunCounter > 290 &&
-            this.shootRunCounter < 311) {
-            return 7;
-        } else {
-            this.shootRunCounter = 0;
-            return 7;
-        }
-    }
+    } 
 }
 
 
