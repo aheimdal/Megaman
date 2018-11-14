@@ -206,10 +206,10 @@ Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
         this.CHAR_SHOOT = true;
-        this.CHAR_SHOOT_TIMER = 60;
+        this.CHAR_SHOOT_TIMER = 45;
 
         entityManager.fireBullet(
-            this.cx + 16*this.CHAR_FACING, this.cy,
+            this.cx+50 + 16*this.CHAR_FACING, this.cy-17,
             12*this.CHAR_FACING, 0, 0
         );
 
