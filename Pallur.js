@@ -111,8 +111,8 @@ Pallur.prototype.collidesWithY = function (prevX, prevY,
                                           nextX, nextY,
                                           rx,ry) {
     //console.log("bamm1");
-    if (((nextY + ry >= this.cy - 5) && (nextY+ry<=this.cy+5))||
-        ((nextY - ry <= this.cy + 5)&&(nextY-ry>=this.cy-5))){
+    if (((nextY + ry >= this.cy - 15) && (nextY+ry<=this.cy+15))||
+        ((nextY - ry <= this.cy + 15)&&(nextY-ry>=this.cy-15))){
           //console.log("bamm2");
       if(((prevX+rx>= this.cx-25)&&(prevX-rx<=this.cx+25))){
             return true;// a hit
