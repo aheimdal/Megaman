@@ -6,14 +6,8 @@
 
 "use strict";
 
-const SPRITE_SIZE = 32;
-
-this._animateMain = 0;
-
 var animationHandle = {
 
-
-//shootRunCounter : 0,
 runCounter : 0,
 
 update : function(obj) {
@@ -36,25 +30,21 @@ update : function(obj) {
             else {pick = 0};
         } else {
             if (shooting) {
-                if (this.runCounter > 0) this.runCounter = 0;
-                pick = this.cycle(5);
-                if (this.shootRunCounter > 0) {this.shootRunCounter-=2;}
-                else {this.shootRunCounter = 0;}
+                pick = this.cycle(5,6,7);
             }
             else {
-                if (this.shootRunCounter > 0) this.shootRunCounter = 0;
-                pick = this.cycle(1);
-                if (this.runCounter > 0) {this.runCounter-=2;}
-                else {this.runCounter = 0;}
+                pick = this.cycle(1,2,3);
             }
         }
     }
+
+    if (this.runCounter > 0) {this.runCounter-=2;}
+    else {this.runCounter = 0;}
 
     obj.changeSprite(direction[pick]);
 },
 
 cycle : function(x,y,z) {
-    if (x === 1) {
         if (this.runCounter === 0) {
             this.runCounter = 110;
             return x;
@@ -81,7 +71,6 @@ cycle : function(x,y,z) {
             this.runCounter = 0;
             return z;
         }
-    } 
 }
 
 
