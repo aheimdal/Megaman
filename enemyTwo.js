@@ -36,6 +36,12 @@ enemyTwo.prototype.update = function (du) {
     
     this.cx += -5 * du;
 
+    var shit = spatialManager.findEntityInRange();
+    if (shit.CHAR_FACING != null) shit.kill();
+
+    var spriteNumber = animationHandle.cycle(1,2,3);
+    this.sprite = g_sprites.CharL[spriteNumber];
+
     spatialManager.register(this);
 };
 

@@ -56,10 +56,6 @@ Char.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
-    if(this._isDeadNow){
-        return entityManager.KILL_ME_NOW;
-    }
-
     this.movement(du);
 
     this.calculateMovement(du);
@@ -258,7 +254,7 @@ Char.prototype.status = function () {
 
 Char.prototype.changeSprite = function(varImage) {
     this.sprite = varImage;
-}
+};
 
 Char.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;

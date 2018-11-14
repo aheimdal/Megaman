@@ -57,13 +57,15 @@ deferredSetup : function () {
 
 
 fireBullet: function(cx, cy, velX, velY, rotation) {
-    this._bullets.push(new Bullet({
-        cx   : cx,
-        cy   : cy,
-        velX : velX,
-        velY : velY,
-        rotation : rotation
-    }));
+    if (this._bullets[2] == null) {
+        this._bullets.push(new Bullet({
+            cx   : cx,
+            cy   : cy,
+            velX : velX,
+            velY : velY,
+            rotation : rotation
+        }));
+    }   
 },
 
 
@@ -110,7 +112,7 @@ update: function(du) {
         }
     }
 
-    animationHandle.update(this._char[0]);
+    if (this._char[0] != null) animationHandle.update(this._char[0]);
 
 },
 

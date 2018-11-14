@@ -57,8 +57,8 @@ Bullet.prototype.update = function (du) {
     spatialManager.unregister(this);
 
     this.lifeSpan -= du;
-    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
-    if (this.cx < 0 || this.cx > 1000) return entityManager.KILL_ME_NOW;
+    if (this.lifeSpan < 0 || this.cx < 0 || this.cx > 1000) return entityManager.KILL_ME_NOW;
+    
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
@@ -90,12 +90,6 @@ Bullet.prototype.takeBulletHit = function () {
 };
 
 Bullet.prototype.render = function (ctx) {
-
-    var fadeThresh = Bullet.prototype.lifeSpan / 3;
-
-    if (this.lifeSpan < fadeThresh) {
-        ctx.globalAlpha = this.lifeSpan / fadeThresh;
-    }
 
     g_sprites.bullet.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
