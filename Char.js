@@ -18,13 +18,10 @@ function Char(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    var song = new Audio("./sounds/megaLag2.ogg");
-    song.play();
-
     this.rememberResets();
 
     // Default sprite, if not otherwise specified
-    this.sprite = g_sprites.CharL[9];
+    this.sprite = g_sprites.CharR[0];
 
     // Set normal drawing scale, and warp state off
     this._scale = 3;
@@ -94,6 +91,8 @@ Char.prototype.movement = function (du) {
     var prevY = this.cy;
     var nextY = prevY+this.velY;
 
+    console.log(this.cx + "" + this.cy);
+
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (this.NOMINAL_RIGHT * du);
@@ -112,12 +111,14 @@ Char.prototype.movement = function (du) {
     //Calculates if characted should go left if he's not going right
     else if (keys[this.KEY_LEFT]) {
         this.MOVING = true;
-        if (this.cx > 30){
+        if (this.cx > 32){
           var nextX = prevX + (this.NOMINAL_LEFT * du);
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
             if (this.velX > 0)  this.velX = 0; //Resets velocity if Char was going right
             if (this.velX > -6) this.velX += this.NOMINAL_LEFT * du; //Adds left velocity
           }
+        } else {
+            this.velX = 0;
         }
         this.CHAR_FACING = -1; //Says Char is facing left
     } else {
@@ -142,7 +143,6 @@ Char.prototype.movement = function (du) {
   
     //We go to "background.js" and get the map
     background.canvasSpaceGame(background.getMap());
-
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -153,11 +153,15 @@ Char.prototype.calculateMovement = function (du) {
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
 
-
     this.cx += this.velX; //x-coordinates updated
 
     //Only works with y-axis if he's not "grounded"
     if (!this.isGrounded()) {
+
+        if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
+        if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
+        if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
+        if (this.cy >= 502) this.JUMP_INIT = true;
 
         if (!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
             /*
@@ -167,7 +171,7 @@ Char.prototype.calculateMovement = function (du) {
                 
         }
         */
-        this.cy += this.velY * du;
+            this.cy += this.velY * du;
         } else {
             if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) && 
                 (nextY + this.sprite.height/ 2 < entityManager._pallar[0].cy + 5)) {
@@ -177,15 +181,9 @@ Char.prototype.calculateMovement = function (du) {
             }
         }  
         
-
-    
-        if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
-        if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
         if (this.cy > 502) {
             this.ground();
         }
-        if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
-        if (this.cy >= 502) this.JUMP_INIT = true;
     }
     if(this.cx >= 965){
         if(this.count <= 2){
