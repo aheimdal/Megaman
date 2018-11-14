@@ -16,6 +16,7 @@ update : function(obj) {
 
     if (status[0] === 1) {var direction = g_sprites.CharR;}
     else {var direction = g_sprites.CharL;}
+    
     var moving = status[1];
     var shooting = status[2];
     var grounded = status[3];
