@@ -52,7 +52,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._char, this._pallar];
+    this._categories = [this._bullets, this._char, this._pallar, this._enemyTwo];
 },
 
 
@@ -75,12 +75,9 @@ generatePallur : function(descr){
     this._pallar.push(new Pallur(descr));
 },
 
-generateEnemyOne : function(descr){
-    this._enemyOne.push(new enemyOne(descr));
+generateEnemyTwo : function(descr){
+    this._enemyTwo.push(new enemyTwo(descr));
 },
-
-
-
 
 resetChar: function() {
     this._forEachOf(this._char, Char.prototype.reset);
