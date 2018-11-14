@@ -18,7 +18,7 @@ function Char(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    var song = new Audio("./sounds/megaLag2.ogg");
+    var song = new Audio("./sounds/megaLag1.ogg", "./sounds/megaLag2.ogg");
     song.play();
 
     this.rememberResets();
@@ -209,7 +209,7 @@ Char.prototype.maybeFireBullet = function () {
         this.CHAR_SHOOT_TIMER = 45;
 
         entityManager.fireBullet(
-            this.cx+50 + 16*this.CHAR_FACING, this.cy-17,
+            this.cx+55 + 16*this.CHAR_FACING, this.cy-17,
             12*this.CHAR_FACING, 0, 0
         );
 
