@@ -37,7 +37,9 @@ enemyTwo.prototype.update = function (du) {
     this.cx += -5 * du;
 
     var maybeChar = this.findHitEntity();
-    if (maybeChar === entityManager._char[0]) maybeChar.kill();
+    if (maybeChar === entityManager._char[0]) {
+        entityManager._char[0].kill();
+    }
 
     var spriteNumber = animationHandle.cycle(1,2,3);
     this.sprite = g_sprites.CharL[spriteNumber];

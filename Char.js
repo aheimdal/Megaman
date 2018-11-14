@@ -60,6 +60,8 @@ Char.prototype.update = function (du) {
 
     this.calculateMovement(du);
 
+    if (this._isDeadNow) return entityManager.KILL_ME_NOW;
+
     // Handle firing
     this.maybeFireBullet();
 
