@@ -62,7 +62,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._rocks, this._bullets, this._char, this._pallar];
+    this._categories = [this._bullets, this._char, this._pallar];
 },
 
 init: function() {
@@ -128,7 +128,7 @@ update: function(du) {
         }
     }
 
-    if (this._rocks.length === 0) this._generateRocks();
+    animationHandle.update(this._char[0]);
 
 },
 

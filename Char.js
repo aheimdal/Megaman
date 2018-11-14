@@ -21,7 +21,7 @@ function Char(descr) {
     this.rememberResets();
 
     // Default sprite, if not otherwise specified
-    this.sprite = g_sprites.Char[0];
+    this.sprite = g_sprites.CharL[9];
 
     // Set normal drawing scale, and warp state off
     this._scale = 3;
@@ -52,12 +52,9 @@ Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 
-
 Char.prototype.update = function (du) {
 
-
     spatialManager.unregister(this);
-
 
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
@@ -71,11 +68,6 @@ Char.prototype.update = function (du) {
     this.maybeFireBullet();
 
     spatialManager.register(this);
-};
-
-
-Char.prototype.computeGravity = function () {
-    return g_useGravity ? NOMINAL_GRAVITY : 0;
 };
 
 Char.prototype.NOMINAL_RIGHT = +1;
@@ -209,10 +201,9 @@ Char.prototype.CHAR_SHOOT_TIMER = 0;
 
 Char.prototype.maybeFireBullet = function () {
 
-    if (keys[this.KEY_FIRE] && this.CHAR_SHOOT_TIMER === 0) {
-
+    if (keys[this.KEY_FIRE]) {
         this.CHAR_SHOOT = true;
-        this.CHAR_SHOOT_TIMER = 30;
+        this.CHAR_SHOOT_TIMER = 60;
 
         entityManager.fireBullet(
             this.cx + 16*this.CHAR_FACING, this.cy,
@@ -220,11 +211,10 @@ Char.prototype.maybeFireBullet = function () {
         );
 
     } else if (this.CHAR_SHOOT_TIMER <= 0) {
-        this.CHAR_SHOOT = false;
-        this.CHAR_SHOOT_TIMER = 0;
+        this.CHAR_SHOOT = false; 
     }
 
-    if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER -= 1;
+    if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
 
 };
 
@@ -260,6 +250,10 @@ Char.prototype.status = function () {
             this.CHAR_SHOOT,      //True if shooting, else false
             this.isGrounded()];   //True if on grounds, else jumping/falling
 };
+
+Char.prototype.changeSprite = function(varImage) {
+    this.sprite = varImage;
+}
 
 Char.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;

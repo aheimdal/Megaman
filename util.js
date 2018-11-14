@@ -52,6 +52,10 @@ square: function(x) {
     return x*x;
 },
 
+roundDown: function(x) {
+    return Math.floor(x);
+},
+
 
 // DISTANCES
 // =========

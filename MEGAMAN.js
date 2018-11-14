@@ -166,17 +166,27 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        char   : "./images/joe1.png",
-        /*charj  : "./images/jump.png",
-        charjg : "./images/jumpgun.png",
-        charr1 : "./images/run1.png",
-        charr2 : "./images/run2.png",
-        charr3 : "./images/run3.png",
-        charr1g: "./images/rungun1.png",
-        charr2g: "./images/rungun2.png",
-        charr3g: "./images/rungun3.png",
-        charg  : "./images/standgun.png",
-        */
+        charR     : "./images/new/joe1.png",
+        charL     : "./images/new/joe1l.png",
+        charRr1   : "./images/new/joe2.png",
+        charLr1   : "./images/new/joe2l.png",
+        charRr2   : "./images/new/joe3.png",
+        charLr2   : "./images/new/joe3l.png",
+        charRr3   : "./images/new/joe4.png",
+        charLr3   : "./images/new/joe4l.png",
+        charRs    : "./images/new/joe5.png",
+        charLs    : "./images/new/joe5l.png",
+        charRsr1  : "./images/new/joe6.png",
+        charLsr1  : "./images/new/joe6l.png",
+        charRsr2  : "./images/new/joe7.png",
+        charLsr2  : "./images/new/joe7l.png",
+        charRsr3  : "./images/new/joe8.png",
+        charLsr3  : "./images/new/joe8l.png",
+        charRj    : "./images/new/joe9.png",
+        charLj    : "./images/new/joe9l.png",
+        charRsj   : "./images/new/joe10.png",
+        charLsj   : "./images/new/joe10l.png",
+
         gunshot: "./images/gunshot.png"
     };
 
@@ -187,18 +197,29 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.Char = [
-        g_sprites.char = new Sprite(g_images.char),
-        /*g_sprites.charL = new Sprite(g_images.charL),
-        g_sprites.charj = new Sprite(g_images.charj),
-        g_sprites.charjg = new Sprite(g_images.charjg),
-        g_sprites.charr1 = new Sprite(g_images.charr1),
-        g_sprites.charr2 = new Sprite(g_images.charr2),
-        g_sprites.charr3 = new Sprite(g_images.charr3),
-        g_sprites.charr1g = new Sprite(g_images.charr1g),
-        g_sprites.charr2g = new Sprite(g_images.charr2g),
-        g_sprites.charr3g = new Sprite(g_images.charr3g),
-        g_sprites.charg = new Sprite(g_images.charg)*/
+    g_sprites.CharR = [
+        g_sprites.stand     = new Sprite(g_images.charR),
+        g_sprites.run1      = new Sprite(g_images.charRr1),
+        g_sprites.run2      = new Sprite(g_images.charRr2),
+        g_sprites.run3      = new Sprite(g_images.charRr3),
+        g_sprites.shoot     = new Sprite(g_images.charRs),
+        g_sprites.runshoot1 = new Sprite(g_images.charRsr1),
+        g_sprites.runshoot2 = new Sprite(g_images.charRsr2),
+        g_sprites.runshoot3 = new Sprite(g_images.charRsr3),
+        g_sprites.jump      = new Sprite(g_images.charRj),
+        g_sprites.jumpshoot = new Sprite(g_images.charRsj)
+    ];
+    g_sprites.CharL = [
+        g_sprites.stand     = new Sprite(g_images.charL),
+        g_sprites.run1      = new Sprite(g_images.charLr1),
+        g_sprites.run2      = new Sprite(g_images.charLr2),
+        g_sprites.run3      = new Sprite(g_images.charLr3),
+        g_sprites.shoot     = new Sprite(g_images.charLs),
+        g_sprites.runshoot1 = new Sprite(g_images.charLsr1),
+        g_sprites.runshoot2 = new Sprite(g_images.charLsr2),
+        g_sprites.runshoot3 = new Sprite(g_images.charLsr3),
+        g_sprites.jump      = new Sprite(g_images.charLj),
+        g_sprites.jumpshoot = new Sprite(g_images.charLsj)
     ];
 
     g_sprites.bullet = new Sprite(g_images.gunshot);
