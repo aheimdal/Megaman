@@ -18,18 +18,19 @@ function Char(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
+    var song = new Audio("./sounds/megaLag2.ogg");
+    song.play();
+
     this.rememberResets();
 
     // Default sprite, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.char;
+    this.sprite = g_sprites.CharL[9];
 
     // Set normal drawing scale, and warp state off
     this._scale = 3;
 
+    //Counter to know how many maps have been played
     this.count = 0;
-
-    this._nextMap = 0;
-    this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png"];
 
 };
 
@@ -49,197 +50,213 @@ Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
-// Char.prototype.rotation = 0;
-Char.prototype.cx = 30;
-Char.prototype.cy = 555;
+Char.prototype.cx;
+Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
-Char.prototype.launchVel = 2;
-Char.prototype.numSubSteps = 1;
-
-
-
-// HACKED-IN AUDIO (no preloading)
-Char.prototype.shootSound = new Audio(
-    "sounds/gunsound.wav");
-
-
 
 Char.prototype.update = function (du) {
 
-
     spatialManager.unregister(this);
-
 
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
 
-
     this.movement(du);
 
     this.calculateMovement(du);
 
-
-
     // Handle firing
     this.maybeFireBullet();
 
-
     spatialManager.register(this);
-
 };
 
+Char.prototype.NOMINAL_RIGHT = +1;
+Char.prototype.NOMINAL_LEFT  = -1;
+Char.prototype.NOMINAL_IJUMP = -10;
+Char.prototype.NOMINAL_JUMP  = -2;
+Char.prototype.NOMINAL_GRAVITY = +2;
 
-var NOMINAL_GRAVITY = 0.12;
-
-Char.prototype.computeGravity = function () {
-    return g_useGravity ? NOMINAL_GRAVITY : 0;
-};
-
-var NOMINAL_RIGHT = +6;
-var NOMINAL_LEFT  = -6;
-var NOMINAL_IJUMP = -10;
-var NOMINAL_JUMP  = -2;
-var NOMINAL_GRAVITY = +2;
-
-var CHAR_FACING = 1;
-
-var JUMP_INIT = true;
-var JUMP_TIMER = 0;
-var JUMP_TIMER_COUNT = 24;
+Char.prototype.CHAR_FACING = 1;
+Char.prototype.JUMP_INIT = true;
+Char.prototype.JUMP_TIMER = 0;
+Char.prototype.JUMP_TIMER_COUNT = 80;
+Char.prototype.MOVING = false;
 
 Char.prototype.movement = function (du) {
+
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
-    /*console.log(rx);
-    console.log(ry);*/
-
     var prevX = this.cx;
+    var nextX = prevX+this.velX;
     var prevY = this.cy;
-    var nextY = prevY;
-    //console.log("cx er: "+this.cx);
-    //console.log("cy er :"+this.cy);
+    var nextY = prevY+this.velY;
 
+    //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
-        var nextX = prevX + (NOMINAL_RIGHT * du);
+        var nextX = prevX + (this.NOMINAL_RIGHT * du);
+        this.MOVING = true;                 //Player is moving
         if (this.cx < 970){
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
-            this.cx += NOMINAL_RIGHT * du;
+            if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
+            if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
           }
+        } else {
+            this.velX = 0;
         }
-        CHAR_FACING = 1;
-    }
-    if (keys[this.KEY_LEFT]) {
+        this.CHAR_FACING = 1; //Says Char is facing right
+    } 
+
+    //Calculates if characted should go left if he's not going right
+    else if (keys[this.KEY_LEFT]) {
+        this.MOVING = true;
         if (this.cx > 30){
-          var nextX = prevX + (NOMINAL_LEFT * du);
+          var nextX = prevX + (this.NOMINAL_LEFT * du);
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
-            this.cx += NOMINAL_LEFT * du;
+            if (this.velX > 0)  this.velX = 0; //Resets velocity if Char was going right
+            if (this.velX > -6) this.velX += this.NOMINAL_LEFT * du; //Adds left velocity
           }
         }
-        CHAR_FACING = -1;
+        this.CHAR_FACING = -1; //Says Char is facing left
+    } else {
+        this.velX = 0;
+        this.MOVING = false;
     }
+
+    //Calculates if Char is jumping
     if (keys[this.KEY_JUMP]) {
-        if (JUMP_INIT && JUMP_TIMER == 0) {
-            JUMP_TIMER = JUMP_TIMER_COUNT;
-            this.velY = NOMINAL_IJUMP * du;
-        } else if (JUMP_INIT) {
-            this.velY += (NOMINAL_JUMP*(JUMP_TIMER/JUMP_TIMER_COUNT)) * du;
+        if (this.isGrounded()) {
+            this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
+            this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increasy
+        } else if (this.JUMP_INIT) {
+            //Dynamic y-velocity added compared to the time
+            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du; 
         }
     }
-    if (JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) {
-        JUMP_TIMER = 0;
-        JUMP_INIT = false;
+    if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) { //Checked if space was released early
+        this.JUMP_TIMER = 0;
+        this.JUMP_INIT = false;
     }
-    canvasSpaceGame(this.getMap());
-};
+  
+    //We go to "background.js" and get the map
+    background.canvasSpaceGame(background.getMap());
 
-Char.prototype.getMap = function () {
-
-    return this.maps[this._nextMap];
-};
-
-Char.prototype.setMap = function () {
-
-    this._nextMap++;
 };
 
 Char.prototype.calculateMovement = function (du) {
     var prevX = this.cx;
-    var nextX = prevX;
+    var nextX = prevX + this.velX * du;
     var prevY = this.cy;
     var nextY = prevY + this.velY * du;
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
 
 
-    if(!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
-      /*if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
-        this.velY = 0;
-      }*/
-      this.cy += this.velY * du;
-    }else{
-      if((nextY + this.sprite.height/2 > entityManager._pallar[0].cy - 5) && (nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)){
-        this.velY = 0;
-        //this.cy = entityManager._pallar[0].cy - 5;
-      }
-    }
+    this.cx += this.velX; //x-coordinates updated
 
-    if (JUMP_TIMER > 0) JUMP_TIMER--;
-    if (this.cy < 502) this.velY += NOMINAL_GRAVITY;
-    if (this.cy > 502) {
-        this.cy = 502;
-        this.velY = 0;
-    }
-    if (JUMP_TIMER <= 0) JUMP_INIT = false;
-    if (this.cy >= 502) JUMP_INIT = true;
+    //Only works with y-axis if he's not "grounded"
+    if (!this.isGrounded()) {
 
+        if (!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
+            /*
+            if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (
+                nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)) {
+                this.velY = 0;
+                
+        }
+        */
+        this.cy += this.velY * du;
+        } else {
+            if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) && 
+                (nextY + this.sprite.height/ 2 < entityManager._pallar[0].cy + 5)) {
+                this.ground();
+                console.log("zero" + this.velY);
+                //this.cy = entityManager._pallar[0].cy - 5;
+            }
+        }  
+        
+
+    
+        if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
+        if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
+        if (this.cy > 502) {
+            this.ground();
+        }
+        if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
+        if (this.cy >= 502) this.JUMP_INIT = true;
+    }
     if(this.cx >= 965){
         if(this.count <= 2){
-            this.setMap();
+            //When player leaves the playing area, we set a New map
+            background.canvasSpaceGame(background.setMap());
             this.cx = 0;
             this.count++;
         }
         else
             this.cx = 965;
-        }
-
+    }
 };
+
+Char.prototype.CHAR_SHOOT = false;
+Char.prototype.CHAR_SHOOT_TIMER = 0;
 
 Char.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
+        this.CHAR_SHOOT = true;
+        this.CHAR_SHOOT_TIMER = 60;
 
         entityManager.fireBullet(
-            this.cx + 16*CHAR_FACING, this.cy,
-            7*CHAR_FACING, 0, 0
+            this.cx + 16*this.CHAR_FACING, this.cy,
+            12*this.CHAR_FACING, 0, 0
         );
 
+    } else if (this.CHAR_SHOOT_TIMER <= 0) {
+        this.CHAR_SHOOT = false; 
     }
 
+    if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
+
+};
+
+Char.prototype.isGrounded = function () {
+    if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
+    return false;
+};
+
+Char.prototype.isFalling = function () {
+    if (this.JUMP_TIMER === 0 && this.JUMP_INIT === false) return true;
+    return false;
+};
+
+Char.prototype.isJumping = function () {
+    if (this.JUMP_TIMER > 0) return true;
+    return false;
+};
+
+Char.prototype.ground = function () {
+    this.JUMP_TIMER = 0;
+    this.JUMP_INIT = true;
+    this.velY = 0;
+    if (this.cy > 502) this.cy = 502;
 };
 
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
 
-Char.prototype.takeBulletHit = function () {
-    //TODO
+Char.prototype.status = function () {
+    return  [this.CHAR_FACING,    //positive number for right, negative for left
+            this.MOVING,          //True if moving, else false
+            this.CHAR_SHOOT,      //True if shooting, else false
+            this.isGrounded()];   //True if on grounds, else jumping/falling
 };
 
-Char.prototype.reset = function () {
-    this.setPos(this.reset_cx, this.reset_cy);
-    this.rotation = this.reset_rotation;
-
-    this.halt();
-};
-
-Char.prototype.halt = function () {
-    this.velX = 0;
-    this.velY = 0;
-};
-
-
+Char.prototype.changeSprite = function(varImage) {
+    this.sprite = varImage;
+}
 
 Char.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;

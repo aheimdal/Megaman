@@ -5,7 +5,6 @@
 
 "use strict";
 
-
 var util = {
 
 
@@ -51,6 +50,10 @@ randRange: function(min, max) {
 
 square: function(x) {
     return x*x;
+},
+
+roundDown: function(x) {
+    return Math.floor(x);
 },
 
 
