@@ -30,7 +30,8 @@ enemyThree.prototype = new Entity();
 
 enemyThree.prototype.cx = 700;
 enemyThree.prototype.cy = 502;
-enemyThree.prototype.velX = -5;
+enemyThree.prototype.velX = -2.5;
+enemyThree.prototype.velY = 0;
 
 enemyThree.prototype.update = function (du) {
 
@@ -56,7 +57,19 @@ enemyThree.prototype.update = function (du) {
 };
 
 enemyThree.prototype.movement = function(du) {
+    if (this.cx < 30) {this.velX = 2.5;}
+    if (this.cx > 970) {this.velX = -2.5;}
 
+    this.cx += this.velX *du;
+
+    if (this.cy >= 502) {
+        this.cy = 502;
+        this.velY = -12;
+    }
+    if (this.cy < 502) {
+        this.velY += 1;
+    }
+    this.cy += this.velY * du;
 }
 
 enemyTwo.prototype.getRadius = function () {
