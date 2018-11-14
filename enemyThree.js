@@ -13,7 +13,7 @@
 
 
 // A generic contructor which accepts an arbitrary descriptor object
-function enemyTwo(descr) {
+function enemyThree(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
@@ -26,24 +26,22 @@ function enemyTwo(descr) {
 
 };
 
-enemyTwo.prototype = new Entity();
+enemyThree.prototype = new Entity();
 
-enemyTwo.prototype.cx = 700;
-enemyTwo.prototype.cy = 502;
-enemyTwo.prototype.velX = -5;
+enemyThree.prototype.cx = 700;
+enemyThree.prototype.cy = 502;
+enemyThree.prototype.velX = -5;
 
-enemyTwo.prototype.update = function (du) {
+enemyThree.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
-    
-    if (this.cx <= 30) this.velX = 5;
-    if (this.cx >= 970) this.velX= -5;
 
-    this.cx += this.velX * du;
+    this.movement(du);
+
 
     var maybeChar = this.findHitEntity();
     if (maybeChar === entityManager._char[0]) {
@@ -56,6 +54,10 @@ enemyTwo.prototype.update = function (du) {
 
     spatialManager.register(this);
 };
+
+enemyThree.prototype.movement = function(du) {
+
+}
 
 enemyTwo.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
