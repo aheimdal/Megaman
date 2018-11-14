@@ -199,15 +199,18 @@ Char.prototype.CHAR_SHOOT_TIMER = 0;
 
 Char.prototype.maybeFireBullet = function () {
 
+
+
     if (keys[this.KEY_FIRE]) {
+        if (this.CHAR_FACING === 1) {var constant = 55}
+        else {var constant = -55}
         this.CHAR_SHOOT = true;
         this.CHAR_SHOOT_TIMER = 45;
 
         entityManager.fireBullet(
-            this.cx+55 + 16*this.CHAR_FACING, this.cy-17,
-            12*this.CHAR_FACING, 0, 0
-        );
-
+            this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
+            12*this.CHAR_FACING, 0, 0);
+        
     } else if (this.CHAR_SHOOT_TIMER <= 0) {
         this.CHAR_SHOOT = false;
     }
@@ -237,11 +240,6 @@ Char.prototype.ground = function () {
     this.velY = 0;
     if (this.cy > 502) this.cy = 502;
 };
-
-Char.prototype.fall = function () {
-    this.JUMP_TIMER = false;
-    this.JUMP_TIMER_COUNT = 0;
-}
 
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
