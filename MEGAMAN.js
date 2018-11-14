@@ -58,10 +58,6 @@ function createInitialChar() {
         cy : 420
     });
 
-    entityManager.generateEnemyTwo({
-        cx : 500,
-        cy : 502
-    });
 }
 
 // =============
@@ -233,6 +229,8 @@ function preloadDone() {
     createInitialChar();
 
     main.init();
+
+    entityManager.generateEnemyTwo();
 }
 
 // Kick it off

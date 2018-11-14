@@ -77,8 +77,8 @@ generatePallur : function(descr){
     this._pallar.push(new Pallur(descr));
 },
 
-generateEnemyTwo : function(descr){
-    this._enemyTwo.push(new enemyTwo(descr));
+generateEnemyTwo : function(descr, cx, cy){
+    this._enemyTwo.push(new enemyTwo(descr, cx, cy));
 },
 
 resetChar: function() {

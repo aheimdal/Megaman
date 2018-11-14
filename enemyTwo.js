@@ -17,7 +17,9 @@ function enemyTwo(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
-      
+    
+
+
     // Default sprite and scale, if not otherwise specified
     this.sprite = g_sprites.CharL[0];
     this.scale  = 2;
@@ -25,6 +27,9 @@ function enemyTwo(descr) {
 };
 
 enemyTwo.prototype = new Entity();
+
+enemyTwo.prototype.cx = 700;
+enemyTwo.prototype.cy = 502;
 
 enemyTwo.prototype.update = function (du) {
 
