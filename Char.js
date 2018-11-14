@@ -242,7 +242,7 @@ Char.prototype.ground = function () {
 };
 
 Char.prototype.getRadius = function () {
-    return (this.sprite.width / 2) * 0.9;
+    return (this.sprite.width / 2) * 0.9 *this._scale;
 };
 
 Char.prototype.status = function () {
