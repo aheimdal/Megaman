@@ -18,6 +18,9 @@ function Char(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
+    var song = new Audio("./sounds/megaLag2.ogg");
+    song.play();
+
     this.rememberResets();
 
     // Default sprite, if not otherwise specified

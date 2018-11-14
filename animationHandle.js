@@ -171,8 +171,6 @@ update : function(obj) {
             }
         }
     }
-    
-    console.log(this.runCounter);
 
     obj.changeSprite(direction[pick]);
 },
