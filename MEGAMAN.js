@@ -222,9 +222,6 @@ function preloadDone() {
         g_sprites.jumpshoot = new Sprite(g_images.charLsj)
     ];
 
-    var song = new Audio("./sounds/megaLag2.ogg");
-    song.play();
-
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
 
