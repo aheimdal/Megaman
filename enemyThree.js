@@ -22,7 +22,7 @@ function enemyThree(descr) {
 
     // Default sprite and scale, if not otherwise specified
     this.sprite = g_sprites.CharL[0];
-    this.scale  = 2;
+    this.scale  = 4;
 
 };
 
