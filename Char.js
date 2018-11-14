@@ -91,8 +91,6 @@ Char.prototype.movement = function (du) {
     var prevY = this.cy;
     var nextY = prevY+this.velY;
 
-    console.log(this.cx + "" + this.cy);
-
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (this.NOMINAL_RIGHT * du);
@@ -265,8 +263,10 @@ Char.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this._scale;
-    this.sprite.drawWrappedCentredAt(
+
+    this.sprite.drawCentredAt(
 	ctx, this.cx, this.cy, this.rotation
     );
+
     this.sprite.scale = origScale;
 };

@@ -225,7 +225,6 @@ function preloadDone() {
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
 
-    entityManager.init();
     createInitialChar();
 
     main.init();

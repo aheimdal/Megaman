@@ -31,19 +31,9 @@ _rocks   : [],
 _bullets : [],
 _char   : [],
 _pallar : [],
-_bShowRocks : true,
+_enemyTwo : [],
 
 // "PRIVATE" METHODS
-
-_generateRocks : function() {
-    var i,
-        NUM_ROCKS = 4;
-
-    for (i = 0; i < NUM_ROCKS; ++i) {
-        this.generateRock();
-    }
-},
-
 
 _forEachOf: function(aCategory, fn) {
     for (var i = 0; i < aCategory.length; ++i) {
@@ -65,9 +55,6 @@ deferredSetup : function () {
     this._categories = [this._bullets, this._char, this._pallar];
 },
 
-init: function() {
-    this._generateRocks();
-},
 
 fireBullet: function(cx, cy, velX, velY, rotation) {
     this._bullets.push(new Bullet({
@@ -79,16 +66,17 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
     }));
 },
 
-generateRock : function(descr) {
-    //this._rocks.push(new Rock(descr));
-},
 
 generateChar : function(descr) {
     this._char.push(new Char(descr));
 },
 
 generatePallur : function(descr){
-  this._pallar.push(new Pallur(descr));
+    this._pallar.push(new Pallur(descr));
+},
+
+generateEnemyOne : function(descr){
+    this._enemyOne.push(new enemyOne(descr));
 },
 
 
@@ -102,9 +90,6 @@ haltChar: function() {
     this._forEachOf(this._char, Char.prototype.halt);
 },
 
-toggleRocks: function() {
-    this._bShowRocks = !this._bShowRocks;
-},
 
 update: function(du) {
 
