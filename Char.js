@@ -243,6 +243,11 @@ Char.prototype.ground = function () {
     if (this.cy > 502) this.cy = 502;
 };
 
+Char.prototype.fall = function () {
+    this.JUMP_TIMER = false;
+    this.JUMP_TIMER_COUNT = 0;
+}
+
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
