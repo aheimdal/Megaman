@@ -22,6 +22,7 @@ with suitable 'data' and 'methods'.
 //
 /*jslint nomen: true, white: true, plusplus: true*/
 
+var count = 0;
 
 var entityManager = {
 
@@ -32,6 +33,7 @@ _bullets : [],
 _char   : [],
 _pallar : [],
 _enemyTwo : [],
+
 
 // "PRIVATE" METHODS
 
@@ -113,7 +115,14 @@ update: function(du) {
     }
 
     if (this._char[0] != null) animationHandle.update(this._char[0]);
+        //We go to "background.js" and get the map
+        background.canvasSpaceGame(background.getMap());
 
+        if(this._char[0].cx >= 965 && count <= 2){
+            background.canvasSpaceGame(background.setMap());
+            this._char[0].cx = 0;
+            count++;
+        }
 },
 
 render: function(ctx) {

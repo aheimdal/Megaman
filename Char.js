@@ -26,9 +26,6 @@ function Char(descr) {
     // Set normal drawing scale, and warp state off
     this._scale = 3;
 
-    //Counter to know how many maps have been played
-    this.count = 0;
-
 };
 
 Char.prototype = new Entity();
@@ -136,9 +133,6 @@ Char.prototype.movement = function (du) {
         this.JUMP_TIMER = 0;
         this.JUMP_INIT = false;
     }
-
-    //We go to "background.js" and get the map
-    background.canvasSpaceGame(background.getMap());
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -182,16 +176,7 @@ Char.prototype.calculateMovement = function (du) {
             this.ground();
         }
     }
-    if(this.cx >= 965){
-        if(this.count <= 2){
-            //When player leaves the playing area, we set a New map
-            background.canvasSpaceGame(background.setMap());
-            this.cx = 0;
-            this.count++;
-        }
-        else
-            this.cx = 965;
-    }
+
 };
 
 Char.prototype.CHAR_SHOOT = false;
@@ -244,6 +229,7 @@ Char.prototype.ground = function () {
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9 *this._scale;
 };
+
 
 Char.prototype.status = function () {
     return  [this.CHAR_FACING,    //positive number for right, negative for left
