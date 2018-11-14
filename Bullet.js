@@ -58,6 +58,7 @@ Bullet.prototype.update = function (du) {
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
+    if (this.cx < 0 || this.cx > 1000) return entityManager.KILL_ME_NOW;
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
