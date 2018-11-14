@@ -57,6 +57,11 @@ function createInitialChar() {
         cx : 300,
         cy : 420
     });
+
+    entityManager.generateEnemyTwo({
+        cx : 500,
+        cy : 502
+    });
 }
 
 // =============
@@ -225,7 +230,6 @@ function preloadDone() {
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
 
-    entityManager.init();
     createInitialChar();
 
     main.init();
