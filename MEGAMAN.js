@@ -188,7 +188,8 @@ function requestPreloads() {
         charRsj   : "./images/new/joe10.png",
         charLsj   : "./images/new/joe10l.png",
 
-        gunshot: "./images/gunshot.png"
+        gunshot: "./images/gunshot.png",
+        rocket: "./images/joe9.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -225,6 +226,7 @@ function preloadDone() {
 
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
+    g_sprites.rocket = new Sprite(g_images.rocket);
 
     createInitialChar();
 

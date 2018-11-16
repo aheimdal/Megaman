@@ -33,6 +33,7 @@ _char   : [],
 _pallar : [],
 _enemyTwo : [],
 _enemyThree : [],
+_rockets : [],
 
 // "PRIVATE" METHODS
 
@@ -53,7 +54,8 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._char, this._pallar, this._enemyTwo, this._enemyThree];
+    this._categories = [this._bullets, this._char, this._pallar,
+        this._enemyTwo, this._enemyThree, this._rockets];
 },
 
 
@@ -67,6 +69,16 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
             rotation : rotation
         }));
     }   
+},
+
+fireRocket: function(cx, cy, velX, velY, rotation) {
+    this._rockets.push(new Rocket({
+        cx : cx,
+        cy : cy,
+        velX : velX,
+        velY : velY,
+        rotation : rotation
+    }));
 },
 
 

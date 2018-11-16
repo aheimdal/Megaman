@@ -33,7 +33,7 @@ enemyThree.prototype.cy = 502;
 enemyThree.prototype.velX = -3.5;
 enemyThree.prototype.velY = 0;
 enemyThree.prototype.health = 3;
-enemyThree.prototype.shootTimer = 30;
+enemyThree.prototype.shootTimer = 150;
 
 enemyThree.prototype.update = function (du) {
 
@@ -47,8 +47,7 @@ enemyThree.prototype.update = function (du) {
 
     this.movement(du);
 
-    if (this.shootTimer > 0) this.shootTimer--;
-
+    this.maybeShoot();
 
     var maybeChar = this.findHitEntity();
     if (maybeChar === entityManager._char[0]) {
@@ -68,24 +67,42 @@ enemyThree.prototype.movement = function(du) {
 
     this.cx += this.velX *du;
 
-    if (this.cy >= 502 && this.shootTimer <= 0) {
-        this.velY = -18;
-    }
     if (this.cy < 502) {
         this.velY += 1;
     } else {
         this.velY = 0;
+        this.cy = 502;
     }
+
+    if (this.cy >= 502 && this.shootTimer <= 0) {
+        this.velY = -20;
+        this.shootTimer = 150;
+    }
+
     this.cy += this.velY * du;
-}
+};
+
+enemyThree.prototype.maybeShoot = function () {
+    if (this.shootTimer) {
+        if (this.shootTimer == 75) {
+            entityManager.fireRocket(
+                this.cx+(this.velX*10),
+                this.cy,
+                this.velX*5, 0, 0
+            );
+        }
+    this.shootTimer--;
+    }
+};
+
 
 enemyThree.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
-enemyThree.prototype.takeBulletHit = function () {
+enemyThree.prototype.takeBulletHit = function() {
     this.kill();
-};
+}
 
 
 enemyThree.prototype.render = function (ctx) {
