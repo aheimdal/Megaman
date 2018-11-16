@@ -32,7 +32,8 @@ need to tweak it if you do something "non-obvious" in yours.
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */
-
+var s_canvas = document.getElementById("startingCanvas");
+var go_canvas = document.getElementById("gameOverCanvas");
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
@@ -58,6 +59,10 @@ function createInitialChar() {
         cy : 420
     });
 
+    entityManager.generateEnemyTwo({
+        cx : 500,
+        cy : 502
+    });
 }
 
 // =============
@@ -151,9 +156,19 @@ function processDiagnostics() {
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
+/*
+    if(startMenu){
+        mainScreen(ctx);
+    }
 
+    if(!startMenu){*/
     entityManager.render(ctx);
+  /*  }
 
+    if(game_over){
+        gameoverScreen();        
+    }
+*/
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
@@ -229,8 +244,6 @@ function preloadDone() {
     createInitialChar();
 
     main.init();
-
-    entityManager.generateEnemyTwo();
 }
 
 // Kick it off
