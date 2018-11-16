@@ -251,6 +251,8 @@ Char.prototype.status = function () {
 
 Char.prototype.changeSprite = function(varImage) {
     this.sprite = varImage;
+
+
 };
 
 Char.prototype.render = function (ctx) {

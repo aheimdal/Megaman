@@ -59,10 +59,6 @@ function createInitialChar() {
         cy : 420
     });
 
-    entityManager.generateEnemyTwo({
-        cx : 500,
-        cy : 502
-    });
 }
 
 // =============
