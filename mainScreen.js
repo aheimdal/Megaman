@@ -2,7 +2,7 @@
 "use strict";
 
 var startScreen = {
-    title : "Fuck off",
+    title : "butterfly off",
     button : "hey"
 };
 
