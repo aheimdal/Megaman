@@ -30,6 +30,7 @@ enemyTwo.prototype = new Entity();
 
 enemyTwo.prototype.cx = 700;
 enemyTwo.prototype.cy = 502;
+enemyTwo.prototype.velX = -5;
 
 enemyTwo.prototype.update = function (du) {
 
@@ -39,7 +40,10 @@ enemyTwo.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
     
-    this.cx += -5 * du;
+    if (this.cx <= 30) this.velX = 5;
+    if (this.cx >= 970) this.velX= -5;
+
+    this.cx += this.velX * du;
 
     var maybeChar = this.findHitEntity();
     if (maybeChar === entityManager._char[0]) {
@@ -47,7 +51,8 @@ enemyTwo.prototype.update = function (du) {
     }
 
     var spriteNumber = animationHandle.cycle(1,2,3);
-    this.sprite = g_sprites.CharL[spriteNumber];
+    if (this.velX < 0) {this.sprite = g_sprites.CharL[spriteNumber];}
+    else {this.sprite = g_sprites.CharR[spriteNumber];}
 
     spatialManager.register(this);
 };
