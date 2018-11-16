@@ -231,6 +231,7 @@ function preloadDone() {
     main.init();
 
     entityManager.generateEnemyTwo();
+    entityManager.generateEnemyThree();
 }
 
 // Kick it off

@@ -30,18 +30,24 @@ enemyThree.prototype = new Entity();
 
 enemyThree.prototype.cx = 700;
 enemyThree.prototype.cy = 502;
-enemyThree.prototype.velX = -2.5;
+enemyThree.prototype.velX = -3.5;
 enemyThree.prototype.velY = 0;
+enemyThree.prototype.health = 3;
+enemyThree.prototype.shootTimer = 30;
 
 enemyThree.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
-    if(this._isDeadNow){
-        return entityManager.KILL_ME_NOW;
+    if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
+    if (this._isDeadNow) {
+        this._isDeadNow = false;
+        this.health--;
     }
 
     this.movement(du);
+
+    if (this.shootTimer > 0) this.shootTimer--;
 
 
     var maybeChar = this.findHitEntity();
@@ -57,31 +63,32 @@ enemyThree.prototype.update = function (du) {
 };
 
 enemyThree.prototype.movement = function(du) {
-    if (this.cx < 30) {this.velX = 2.5;}
-    if (this.cx > 970) {this.velX = -2.5;}
+    if (this.cx < 30) {this.velX = 3.5;}
+    if (this.cx > 970) {this.velX = -3.5;}
 
     this.cx += this.velX *du;
 
-    if (this.cy >= 502) {
-        this.cy = 502;
-        this.velY = -12;
+    if (this.cy >= 502 && this.shootTimer <= 0) {
+        this.velY = -18;
     }
     if (this.cy < 502) {
         this.velY += 1;
+    } else {
+        this.velY = 0;
     }
     this.cy += this.velY * du;
 }
 
-enemyTwo.prototype.getRadius = function () {
+enemyThree.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
-enemyTwo.prototype.takeBulletHit = function () {
+enemyThree.prototype.takeBulletHit = function () {
     this.kill();
 };
 
 
-enemyTwo.prototype.render = function (ctx) {
+enemyThree.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
