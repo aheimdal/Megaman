@@ -242,10 +242,10 @@ function preloadDone() {
     createInitialChar();
 
     main.init();
-/*
+
     entityManager.generateEnemyTwo();
     entityManager.generateEnemyThree();
-    */
+    
 }
 
 // Kick it off
