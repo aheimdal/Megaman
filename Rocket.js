@@ -43,6 +43,7 @@ Rocket.prototype.cx = 200;
 Rocket.prototype.cy = 200;
 Rocket.prototype.velX = 1;
 Rocket.prototype.velY = 1;
+Rocket.prototype.health = 4;
 
 // Convert times from milliseconds to "nominal" time units.
 Rocket.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
@@ -66,6 +67,13 @@ Rocket.prototype.update = function (du) {
     //
     // Handle collisions
     //
+
+    if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
+    if (this._isDeadNow) {
+        this._isDeadNow = false;
+        this.health--;
+    }
+
     var maybeChar = this.findHitEntity();
     if (maybeChar === entityManager._char[0]) {
         entityManager._char[0].kill();
@@ -80,6 +88,7 @@ Rocket.prototype.getRadius = function () {
 };
 
 Rocket.prototype.takeBulletHit = function () {
+    console.log("this happens");
     this.kill();
 };
 

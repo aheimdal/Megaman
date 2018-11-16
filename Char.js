@@ -51,6 +51,8 @@ Char.prototype.cx;
 Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
+Char.prototype.health = 3;
+Char.prototype.invincibility = 200;
 
 Char.prototype.update = function (du) {
 
@@ -60,7 +62,16 @@ Char.prototype.update = function (du) {
 
     this.calculateMovement(du);
 
-    if (this._isDeadNow) return entityManager.KILL_ME_NOW;
+    if (this.invincibility > 0) this.invincibility--;
+
+    if (this._isDeadNow) {
+        this._isDeadNow = false;
+        if (this.invincibility <= 0) {
+            this.health--;
+            this.invincibility = 100;
+        }
+    }
+    if (this.health === 0) return entityManager.KILL_ME_NOW;
 
     // Handle firing
     this.maybeFireBullet();
