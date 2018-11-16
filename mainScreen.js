@@ -1,13 +1,14 @@
 
 "use strict";
 
-var startScreen = true;
+var startScreen = {
+    title : "Fuck off",
+    button : "hey"
+};
 
-var start_screen = (function(input)
+startScreen.render = function(ctx)
     {
-        var canvas = document.getElementById("startingCanvas");
-        var ctx = canvas.getContext("2d");
-        ctx.font = "50px Arial";
-        ctx.fillText("Starting Menu",500,300);
+
+        util.fillBox(ctx, 300, 250, 15, 15, "red");
+        
     }
-);

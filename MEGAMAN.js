@@ -32,8 +32,7 @@ need to tweak it if you do something "non-obvious" in yours.
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */
-var s_canvas = document.getElementById("startingCanvas");
-var go_canvas = document.getElementById("gameOverCanvas");
+
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
@@ -42,9 +41,10 @@ var g_ctx = g_canvas.getContext("2d");
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 
+var GameState = 0;
 
 // ====================
-// CREATE INITIAL SHIPS
+// CREATE INITIAL CHAR
 // ====================
 
 function createInitialChar() {
