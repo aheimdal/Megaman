@@ -33,6 +33,8 @@ _bullets : [],
 _char   : [],
 _pallar : [],
 _enemyTwo : [],
+_enemyThree : [],
+_rockets : [],
 
 
 // "PRIVATE" METHODS
@@ -54,7 +56,8 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._char, this._pallar, this._enemyTwo];
+    this._categories = [this._bullets, this._char, this._pallar,
+        this._enemyTwo, this._enemyThree, this._rockets];
 },
 
 
@@ -70,17 +73,31 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
     }   
 },
 
+fireRocket: function(cx, cy, velX, velY, rotation) {
+    this._rockets.push(new Rocket({
+        cx : cx,
+        cy : cy,
+        velX : velX,
+        velY : velY,
+        rotation : rotation
+    }));
+},
+
 
 generateChar : function(descr) {
     this._char.push(new Char(descr));
 },
 
-generatePallur : function(descr){
+generatePallur : function(descr) {
     this._pallar.push(new Pallur(descr));
 },
 
-generateEnemyTwo : function(descr){
+generateEnemyTwo : function(descr) {
     this._enemyTwo.push(new enemyTwo(descr));
+},
+
+generateEnemyThree : function(descr) {
+    this._enemyThree.push(new enemyThree(descr));
 },
 
 resetChar: function() {
@@ -113,6 +130,7 @@ update: function(du) {
             }
         }
     }
+
 
     if (this._char[0] != null){ animationHandle.update(this._char[0]);
         //We go to "background.js" and get the map
