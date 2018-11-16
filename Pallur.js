@@ -49,7 +49,7 @@ Pallur.prototype.numSubSteps = 1;
 
 Pallur.prototype.update = function (du) {
 
-
+    this.radius = 25;
     spatialManager.unregister(this);
 
 
@@ -76,11 +76,17 @@ Pallur.prototype.render = function (ctx) {
     /*this.sprite.drawWrappedCentredAt(
 	ctx, this.cx, this.cy, this.rotation
 );*/
-
+ctx.fillStyle="white";
 ctx.fillRect(this.cx - 25,
-             this.cy - 5,
+             this.cy - 25,
              50,
-             10);
+             50);
+ctx.fillStyle="black";
+ctx.beginPath();
+ctx.arc(this.cx,this.cy,25,0,2*Math.PI);
+ctx.stroke();
+
+
     //this.sprite.scale = origScale;
 };
 
@@ -122,10 +128,18 @@ Pallur.prototype.collidesWithY = function (prevX, prevY,
     return false;
 };
 
-// Remember my previous position
+// Remember my previous da
     //var prevX = this.cx;
     //var prevY = this.cy;
 
     // Compute my provisional new position (barring collisions)
     //var nextX = prevX + this.xVel * du;
     //var nextY = prevY + this.yVel * du;
+
+
+
+/*
+if(entityManager._char[0].isColliding()){
+  entityManager._char[0].ground();
+}
+*/

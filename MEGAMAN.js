@@ -55,7 +55,11 @@ function createInitialChar() {
 
     entityManager.generatePallur({
         cx : 300,
-        cy : 420
+        cy : 400
+    });
+    entityManager.generatePallur({
+        cx : 460,
+        cy : 480
     });
 }
 

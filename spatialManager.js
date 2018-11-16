@@ -45,9 +45,9 @@ getNewSpatialID : function() {
 register: function(entity) {
     var pos = entity.getPos();
     var spatialID = entity.getSpatialID();
-    
+
     // TODO: YOUR STUFF HERE!
-    
+
     // Call object to add radius to object
     entity.radius = entity.getRadius();
     entity.posX = pos.posX;
@@ -73,7 +73,9 @@ findEntityInRange: function(posX, posY, radius) {
     for (var ID in this._entities) {
         var myEnt = this._entities[ID];
         // If square() is within distSq space change myEnt to my_Entity
-        if(util.square(myEnt.radius+radius) > util.distSq(posX, posY, 
+        //console.log("1:"+myEnt.radius);
+        //console.log("2:"+radius);
+        if(util.square(myEnt.radius+radius) > util.distSq(posX, posY,
                                             myEnt.posX, myEnt.posY)){
             my_Entity = myEnt;
         }
@@ -85,7 +87,7 @@ findEntityInRange: function(posX, posY, radius) {
 render: function(ctx) {
     var oldStyle = ctx.strokeStyle;
     ctx.strokeStyle = "red";
-    
+
     for (var ID in this._entities) {
         var e = this._entities[ID];
         util.strokeCircle(ctx, e.posX, e.posY, e.radius);

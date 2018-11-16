@@ -56,7 +56,7 @@ Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 
 Char.prototype.update = function (du) {
-
+    //this.radius = 100;
     spatialManager.unregister(this);
 
     if(this._isDeadNow){
@@ -66,6 +66,39 @@ Char.prototype.update = function (du) {
     this.movement(du);
 
     this.calculateMovement(du);
+
+    entityManager._pallar[0].radius=25;
+    entityManager._pallar[1].radius=25;
+    entityManager._char[0].radius=45;
+    //console.log(entityManager._char[0].isColliding());
+    var glall = entityManager._char[0].isColliding();
+    //console.log("glall: "+glall);
+    //console.log(glall.cy);
+    //console.log(entityManager._char[0].isColliding() == Pallar);
+    if(glall != 0){
+      console.log(this);
+
+      if(this.cx<glall.cx-25-35){
+        this.cx = glall.cx-45-25-1;
+      }else if(this.cx>glall.cx+25+35){
+        this.cx = glall.cx+45+25+1;
+
+      }else if(this.isFalling()){
+        this.cy = glall.cy - 25-45-1;
+        this.ground();
+      }else
+      if(this.isJumping()){
+        this.cy = glall.cy + 25+45+1;
+        this.fall();//ground();
+        console.log("ójá");
+        console.log(this.isFalling());
+      }
+
+
+      //console.log(entityManager._char[0].isColliding());
+      //console.log(this.cy);
+      //console.log("jú jú");
+    }
 
     // Handle firing
     this.maybeFireBullet();
@@ -88,16 +121,64 @@ Char.prototype.MOVING = false;
 Char.prototype.movement = function (du) {
 
     var rx = this.sprite.width*this._scale/2;
+    //console.log("rx: "+rx);
     var ry = this.sprite.height*this._scale/2;
+    //console.log("ry: "+ry);
     var prevX = this.cx;
     var nextX = prevX+this.velX;
     var prevY = this.cy;
     var nextY = prevY+this.velY;
 
+    /*if (keys[this.KEY_RIGHT]) {
+        var nextX = prevX + (this.NOMINAL_RIGHT * du);
+        this.MOVING = true;                 //Player is moving
+        if(this.isGrounded()){
+          if(this.cx<960){// if not on the ground
+            if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
+            if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
+            // Láta hann detta
+            if(this.shouldFall()){
+              this.fall();
+            }
+          }else{// is on the ground
+            if (this.cx < 970){
+              if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
+                if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
+                if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
+              }
+            } else {
+                this.velX = 0;
+            }
+            this.CHAR_FACING = 1; //Says Char is facing right
+          }
+        }else{
+          if (this.cx < 970){
+            if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
+              if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
+              if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
+            }
+          } else {
+              this.velX = 0;
+          }
+          this.CHAR_FACING = 1; //Says Char is facing right
+        }
+/*
+        if (this.cx < 970){
+          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
+            if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
+            if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
+          }
+        } else {
+            this.velX = 0;
+        }
+        this.CHAR_FACING = 1; //Says Char is facing right
+*/
+/*} */
+
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
         var nextX = prevX + (this.NOMINAL_RIGHT * du);
-        this.MOVING = true;                 //Player is moving
+        this.MOVING = true;      //Player is moving
         if (this.cx < 970){
           if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
             if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
@@ -146,28 +227,44 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    var prevX = this.cx;
+    /*var prevX = this.cx;
     var nextX = prevX + this.velX * du;
-    var prevY = this.cy;
-    var nextY = prevY + this.velY * du;
+    var prevY = this.cy;*/
+    var nextY = this.cy + this.velY * du;
     var rx = this.sprite.width*this._scale/2;
     var ry = this.sprite.height*this._scale/2;
 
 
     this.cx += this.velX; //x-coordinates updated
 
+    // Steina dót
+    //if(this.isFalling()){
+      //if((entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
+      //  this.ground();
+      //}else{
+        this.cy = nextY;
+      //}
+    //}else if(this.isJumping()){
+      //if((entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
+        //this.fall();
+      //}else{
+        this.cy = nextY;
+      //}
+    //}
+
+
     //Only works with y-axis if he's not "grounded"
     if (!this.isGrounded()) {
 
-        if (!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
+        //if (!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
             /*
             if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (
                 nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)) {
                 this.velY = 0;
 
-        }
-        */
-        this.cy += this.velY * du;
+        }*/
+
+        /*this.cy += this.velY * du;
         } else {
             if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) &&
                 (nextY + this.sprite.height/ 2 < entityManager._pallar[0].cy + 5)) {
@@ -175,9 +272,7 @@ Char.prototype.calculateMovement = function (du) {
                 console.log("zero" + this.velY);
                 //this.cy = entityManager._pallar[0].cy - 5;
             }
-        }
-
-
+        }*/
 
         if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
         if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
@@ -223,7 +318,16 @@ Char.prototype.maybeFireBullet = function () {
 
 Char.prototype.isGrounded = function () {
     if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
-    return false; 
+    return false;
+};
+
+Char.prototype.shouldFall = function () {
+  var rx = this.sprite.width*this._scale/2;
+  var ry = this.sprite.height*this._scale/2;
+  if(((this.cx-rx<entityManager._pallar[0].cx+25)&&(this.cx+rx>entityManager._pallar[0].cx-25))&&((this.cy+ry>entityManager._pallar[0].cy-15)&&(this.cy+ry<entityManager._pallar[0].cy))){
+    return false;
+  }
+    return true;
 };
 
 Char.prototype.isFalling = function () {
@@ -244,9 +348,10 @@ Char.prototype.ground = function () {
 };
 
 Char.prototype.fall = function () {
-    this.JUMP_TIMER = false;
-    this.JUMP_TIMER_COUNT = 0;
-}
+    //this.JUMP_INIT = false;
+    this.JUMP_TIMER = 0;
+    this.velY = 0;
+};
 
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
@@ -261,7 +366,7 @@ Char.prototype.status = function () {
 
 Char.prototype.changeSprite = function(varImage) {
     this.sprite = varImage;
-}
+};
 
 Char.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
@@ -271,4 +376,9 @@ Char.prototype.render = function (ctx) {
 	ctx, this.cx, this.cy, this.rotation
     );
     this.sprite.scale = origScale;
+
+    ctx.fillStyle="black";
+    ctx.beginPath();
+    ctx.arc(this.cx,this.cy,45,0,2*Math.PI);
+    ctx.stroke();
 };
