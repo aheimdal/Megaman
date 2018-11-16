@@ -251,18 +251,20 @@ Char.prototype.status = function () {
 
 Char.prototype.changeSprite = function(varImage) {
     this.sprite = varImage;
-
-
 };
 
 Char.prototype.render = function (ctx) {
+    if (this.invincibility) {ctx.globalAlpha = 0.5;}
+    else {ctx.globalAlpha = 1;}
+
     var origScale = this.sprite.scale;
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this._scale;
 
     this.sprite.drawCentredAt(
-	ctx, this.cx, this.cy, this.rotation
+	    ctx, this.cx, this.cy, this.rotation
     );
 
     this.sprite.scale = origScale;
+    ctx.globalAlpha = 1;
 };
