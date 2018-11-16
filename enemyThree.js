@@ -32,7 +32,7 @@ enemyThree.prototype.cx = 700;
 enemyThree.prototype.cy = 502;
 enemyThree.prototype.velX = -3.5;
 enemyThree.prototype.velY = 0;
-enemyThree.prototype.health = 3;
+enemyThree.prototype.health = 10;
 enemyThree.prototype.shootTimer = 150;
 
 enemyThree.prototype.update = function (du) {
@@ -45,7 +45,14 @@ enemyThree.prototype.update = function (du) {
         this.health--;
     }
 
-    this.movement(du);
+    if (this.shootTimer > 75 || this.shootTimer === 0) {
+        this.movement(du);
+        var spriteNumber = animationHandle.cycle(1,2,3);
+        if (this.velX < 0) {this.sprite = g_sprites.CharL[spriteNumber];}
+        else {this.sprite = g_sprites.CharR[spriteNumber];}
+    } else {
+        this.sprite = g_sprites.CharL[4];
+    }
 
     this.maybeShoot();
 
@@ -53,10 +60,6 @@ enemyThree.prototype.update = function (du) {
     if (maybeChar === entityManager._char[0]) {
         entityManager._char[0].kill();
     }
-
-    var spriteNumber = animationHandle.cycle(1,2,3);
-    if (this.velX < 0) {this.sprite = g_sprites.CharL[spriteNumber];}
-    else {this.sprite = g_sprites.CharR[spriteNumber];}
 
     spatialManager.register(this);
 };
@@ -86,9 +89,9 @@ enemyThree.prototype.maybeShoot = function () {
     if (this.shootTimer) {
         if (this.shootTimer == 75) {
             entityManager.fireRocket(
-                this.cx+(this.velX*10),
-                this.cy,
-                this.velX*5, 0, 0
+                this.cx+this.velX*16,
+                this.cy-10,
+                this.velX*2, 0, 0
             );
         }
     this.shootTimer--;
@@ -102,7 +105,7 @@ enemyThree.prototype.getRadius = function () {
 
 enemyThree.prototype.takeBulletHit = function() {
     this.kill();
-}
+};
 
 
 enemyThree.prototype.render = function (ctx) {

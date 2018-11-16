@@ -45,7 +45,7 @@ Rocket.prototype.velX = 1;
 Rocket.prototype.velY = 1;
 
 // Convert times from milliseconds to "nominal" time units.
-Rocket.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
+Rocket.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 Rocket.prototype.update = function (du) {
 
@@ -66,10 +66,9 @@ Rocket.prototype.update = function (du) {
     //
     // Handle collisions
     //
-    var hitEntity = this.findHitEntity();
-    if (hitEntity) {
-        var canTakeHit = hitEntity.takeRocketHit;
-        if (canTakeHit) canTakeHit.call(hitEntity); 
+    var maybeChar = this.findHitEntity();
+    if (maybeChar === entityManager._char[0]) {
+        entityManager._char[0].kill();
         return entityManager.KILL_ME_NOW;
     }
     // TODO: YOUR STUFF HERE! --- (Re-)Register
@@ -77,20 +76,16 @@ Rocket.prototype.update = function (du) {
 };
 
 Rocket.prototype.getRadius = function () {
-    return 4;
+    return 12;
 };
 
-Rocket.prototype.takeRocketHit = function () {
+Rocket.prototype.takeBulletHit = function () {
     this.kill();
-    
-    // When I am killed
-    this.die.load();
-    this.die.play();
 };
 
 Rocket.prototype.render = function (ctx) {
 
-    g_sprites.Rocket.drawCentredAt(
+    g_sprites.rocket.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
 
