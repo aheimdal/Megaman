@@ -80,12 +80,14 @@ Char.prototype.update = function (du) {
 
       if(this.cx<glall.cx-25-35){
         this.cx = glall.cx-45-25-1;
+        console.log("phase1");
       }else if(this.cx>glall.cx+25+35){
         this.cx = glall.cx+45+25+1;
-
+        console.log("phase2");
       }else if(this.isFalling()){
         this.cy = glall.cy - 25-45-1;
         this.ground();
+        console.log("phase3");
       }else
       if(this.isJumping()){
         this.cy = glall.cy + 25+45+1;
@@ -348,7 +350,7 @@ Char.prototype.ground = function () {
 };
 
 Char.prototype.fall = function () {
-    //this.JUMP_INIT = false;
+    this.JUMP_INIT = false;
     this.JUMP_TIMER = 0;
     this.velY = 0;
 };
