@@ -115,8 +115,8 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-
-    var plat = this.isCollidingPlatform();
+    this.radius=45;
+    var plat = this.isColliding();
     if (plat) plat.calculateMovement(this);
     /*
     if (!plat) {
@@ -245,6 +245,4 @@ Char.prototype.render = function (ctx) {
     ctx.beginPath();
     ctx.arc(this.cx,this.cy,45,0,2*Math.PI);
     ctx.stroke();
-
-    console.log(this.isFalling());
 };

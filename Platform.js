@@ -29,7 +29,7 @@ Platform.prototype = new Entity();
 // Initial, inheritable, default values
 // Char.prototype.rotation = 0;
 Platform.prototype.cx = 400;
-Platform.prototype.cy = 500;
+Platform.prototype.cy = 400;
 Platform.prototype.radius = 25;
 Platform.prototype.isPlatform = true;
 
@@ -58,25 +58,26 @@ Platform.prototype.calculateMovement = function (entity) {
     var rightBound = this.cx + this.radius;
     var radius = 45;//entity.getRadius();
 
-    console.log(this.radius);
-    console.log(radius);
+    //console.log(this.radius);
+    //console.log(radius);
 
     /*if (leftBound <= entity.cx + radius ||
         (rightBound >= entity.cx - radius)) {
         entity.stopX();// setur velocity í 0
     }*/
-    console.log(entity.isFalling());
-    if(entity.cx<leftBound-35){
-      //entity.stopX();
-      entity.cx = leftBound - radius - 1;
-    }else if(entity.cx>rightBound+35){
-      //entity.stopX();
-      entity.cx = rightBound + radius + 1
+    console.log("hit");
+    if(entity.cx<leftBound-40){
+      entity.stopX();
+      entity.cx = leftBound-radius;//leftBound - radius - 1;
+    }else if(entity.cx>rightBound+40){
+      entity.stopX();
+      entity.cx = rightBound + radius;
     }else if (entity.isFalling()) {
         if (higherBound > entity.cy - radius) {
             entity.ground()
-            entity.cy = higherBound - radius;
+            entity.cy = higherBound - radius-1;
         }
+    }else if(entity.isJumping()){
         if (lowerBound < entity.cy + radius) {
             entity.fall();
             entity.cy = lowerBound + radius;

@@ -70,14 +70,14 @@ Entity.prototype.kill = function () {
 Entity.prototype.findHitEntity = function () {
     var pos = this.getPos();
     return spatialManager.findEntityInRange(
-        pos.posX, pos.posY, this.getRadius()
+        pos.posX, pos.posY, this.radius//getRadius()
     );
 };
 
 Entity.prototype.findHitPlatform = function () {
     var pos = this.getPos();
     return spatialManager.findPlatformInRange(
-        pos.posX, pos.posY, pos.radius//this.getRadius()
+        pos.posX, pos.posY, this.radius//this.getRadius()
     );
 }
 
