@@ -202,7 +202,7 @@ function requestPreloads() {
         golemTL   : "./images/new/golem3l.png",
 
         goblinStR   : "./images/new/goblin1.png",
-        goblinStL   : "./images/new/goblinll.png",
+        goblinStL   : "./images/new/goblin1l.png",
         goblinSR   : "./images/new/goblin2.png",
         goblinSL   : "./images/new/goblin2l.png",
         goblinJR   : "./images/new/goblin3.png",

@@ -21,7 +21,7 @@ function enemyThree(descr) {
 
 
     // Default sprite and scale, if not otherwise specified
-    this.sprite = g_sprites.CharL[0];
+    this.sprite = g_sprites.goblin[0];
     this.scale  = 4;
 
 };
@@ -30,7 +30,7 @@ enemyThree.prototype = new Entity();
 
 enemyThree.prototype.cx = 700;
 enemyThree.prototype.cy = 502;
-enemyThree.prototype.velX = -3.5;
+enemyThree.prototype.velX;
 enemyThree.prototype.velY = 0;
 enemyThree.prototype.health = 10;
 enemyThree.prototype.shootTimer = 150;
@@ -64,7 +64,8 @@ enemyThree.prototype.movement = function(du) {
     if (this.cx < 30) {this.velX = 3.5;}
     if (this.cx > 970) {this.velX = -3.5;}
 
-    //this.cx += this.velX *du;
+    if (this.goblinFacing === 1) this.velX = -3.5;
+    else this.velX = 3.5;
 
     if (this.cy < 502) {
         this.velY += 1;
@@ -95,7 +96,11 @@ enemyThree.prototype.maybeShoot = function () {
 };
 
 enemyThree.prototype.spriteChange = function () {
-    if (this.shootTimer < 75 && this.shootTimer > 0) this.sprite = g_sprites.goblin[2];
+    if (this.goblinFacing === 1) var face = 1;
+    else var face = 0;
+    if (this.shootTimer < 75 && this.shootTimer > 0) this.sprite = g_sprites.goblin[2+face];
+    else if (this.cy < 502) this.sprite = g_sprites.goblin[4+face];
+    else this.sprite = g_sprites.goblin[0+face];
 }
 
 enemyThree.prototype.getRadius = function () {
