@@ -52,6 +52,7 @@ _forEachOf: function(aCategory, fn) {
 // to request the blessed release of death!
 //
 KILL_ME_NOW : -1,
+GameState : 2,
 
 // Some things must be deferred until after initial construction
 // i.e. thing which need `this` to be defined.

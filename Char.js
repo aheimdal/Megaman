@@ -150,7 +150,9 @@ Char.prototype.healthManage = function () {
             this.invincibility = 100;
         }
     }
-    if (this.health === 0) return entityManager.KILL_ME_NOW;
+    if (this.health === 0){ 
+    return entityManager.KILL_ME_NOW;
+    }
 }
 
 Char.prototype.CHAR_SHOOT = false;
