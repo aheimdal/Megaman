@@ -50,13 +50,13 @@ var GameState = 0;
 function createInitialChar() {
 
     entityManager.generateChar({
-        cx : 100,
-        cy : 502
+        // cx : 100,
+        // cy : 502
     });
 
     entityManager.generatePallur({
-        cx : 300,
-        cy : 420
+        // cx : 300,
+        // cy : 420
     });
 
 }
