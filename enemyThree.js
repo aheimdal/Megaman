@@ -34,6 +34,7 @@ enemyThree.prototype.velX = -3.5;
 enemyThree.prototype.velY = 0;
 enemyThree.prototype.health = 10;
 enemyThree.prototype.shootTimer = 150;
+enemyThree.prototype.goblinFacing = 1;
 
 enemyThree.prototype.update = function (du) {
 
@@ -45,16 +46,11 @@ enemyThree.prototype.update = function (du) {
         this.health--;
     }
 
-    if (this.shootTimer > 75 || this.shootTimer === 0) {
-        this.movement(du);
-        var spriteNumber = animationHandle.cycle(1,2,3);
-        if (this.velX < 0) {this.sprite = g_sprites.CharL[spriteNumber];}
-        else {this.sprite = g_sprites.CharR[spriteNumber];}
-    } else {
-        this.sprite = g_sprites.CharL[4];
-    }
+    this.movement(du);
 
     this.maybeShoot();
+
+    this.spriteChange();
 
     var maybeChar = this.findHitEntity();
     if (maybeChar === entityManager._char[0]) {
@@ -68,7 +64,7 @@ enemyThree.prototype.movement = function(du) {
     if (this.cx < 30) {this.velX = 3.5;}
     if (this.cx > 970) {this.velX = -3.5;}
 
-    this.cx += this.velX *du;
+    //this.cx += this.velX *du;
 
     if (this.cy < 502) {
         this.velY += 1;
@@ -98,6 +94,9 @@ enemyThree.prototype.maybeShoot = function () {
     }
 };
 
+enemyThree.prototype.spriteChange = function () {
+    if (this.shootTimer < 75 && this.shootTimer > 0) this.sprite = g_sprites.goblin[2];
+}
 
 enemyThree.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
