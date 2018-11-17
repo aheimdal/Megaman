@@ -3,11 +3,11 @@
 
 var startScreen = {
     title : "Run Gun Renegade",
-    start : "Start",
+    start : "Start" id="startG",
     controls : "Controls"
 };
 
-startScreen.render = function(ctx)
+startScreen.render = function(g_ctx)
     {
         document.body.style.backgroundImage = "url('images/back02.jpg')";
 
@@ -38,8 +38,7 @@ startScreen.render = function(ctx)
         //console.log("Align Center");
         g_ctx.textAlign = "center";
         //console.log("Write text, apply centered location");
-        var hlutur1 = g_ctx.fillText(startScreen.start, g_canvas.width/2-300, g_canvas.height/2+50);
-        hlutur1;
+        g_ctx.fillText(startScreen.start id="startG", g_canvas.width/2-300, g_canvas.height/2+50);
         //console.log("Apply black line around letters");
         g_ctx.strokeText(startScreen.start, g_canvas.width/2-300, g_canvas.height/2+50);
 
@@ -57,9 +56,7 @@ startScreen.render = function(ctx)
         g_ctx.strokeText(startScreen.controls, g_canvas.width/2-265, g_canvas.height/2+150);
    
     }
-/*
-    hlutur1.onclick = function(){startgame};
 
-function startgame(){
+function startGame(){
     GameState = 1;
-}*/
+}

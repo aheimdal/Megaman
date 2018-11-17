@@ -68,7 +68,7 @@ main._iterCore = function (dt) {
     if(GameState === 0){
         //mainScreen();
         //update(dt);
-        startScreen.render(g_ctx);    
+        startScreen.render(g_ctx);  
     }
 
     if(GameState === 1){
