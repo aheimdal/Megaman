@@ -29,7 +29,7 @@ Platform.prototype = new Entity();
 // Initial, inheritable, default values
 // Char.prototype.rotation = 0;
 Platform.prototype.cx = 400;
-Platform.prototype.cy = 400;
+Platform.prototype.cy = 480;
 Platform.prototype.radius = 25;
 Platform.prototype.isPlatform = true;
 
@@ -75,13 +75,10 @@ Platform.prototype.calculateMovement = function (entity) {
 };
 
 Platform.prototype.render = function (ctx) {
-   
+
     ctx.fillRect(this.cx - this.radius,
                 this.cy - this.radius,
                 this.radius*2,
                 this.radius*2);
 
 };
-
-
-
