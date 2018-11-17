@@ -41,7 +41,7 @@ var g_ctx = g_canvas.getContext("2d");
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 
-var GameState = 0;
+var GameState = 1;
 
 // ====================
 // CREATE INITIAL CHAR
