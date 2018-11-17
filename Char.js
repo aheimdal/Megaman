@@ -118,7 +118,9 @@ Char.prototype.calculateMovement = function (du) {
 
     var plat = this.isCollidingPlatform();
     if (plat) plat.calculateMovement(this);
-
+    if (!plat) {
+        if (this.isGrounded()) this.fall();
+    }
     this.cx += this.velX; //x-coordinates updated
 
     //Only works with y-axis if he's not "grounded"
@@ -193,6 +195,12 @@ Char.prototype.ground = function () {
     this.velY = 0;
     if (this.cy > 502) this.cy = 502;
 };
+
+Char.prototype.fall = function () {
+    this.JUMP_TIMER = 0;
+    this.JUMP_INIT = false;
+    this.velY = 0;
+}
 
 Char.prototype.stopX = function () {
     this.velX = 0;

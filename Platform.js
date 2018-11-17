@@ -59,8 +59,18 @@ Platform.prototype.calculateMovement = function (entity) {
     var radius = entity.getRadius();
 
     if (leftBound <= entity.cx + radius ||
-        rightBound >= entity.cx - radius) {
+        (rightBound >= entity.cx - radius)) {
         entity.stopX();
+    }
+    if (entity.isFalling) {
+        if (higherBound > entity.cy - radius) {
+            entity.ground()
+            entity.cy = higherBound - radius;
+        }
+        if (lowerBound < entity.cy + radius) {
+            entity.fall();
+            entity.cy = lowerBound + radius;
+        }
     }
 };
 
