@@ -6,7 +6,7 @@
 Provides a set of common functions which can be "inherited" by all other
 game Entities.
 
-JavaScript's prototype-based inheritance system is unusual, and requires 
+JavaScript's prototype-based inheritance system is unusual, and requires
 some care in use. In particular, this "base" should only provide shared
 functions... shared data properties are potentially quite confusing.
 
@@ -38,10 +38,10 @@ Entity.prototype.setup = function (descr) {
     for (var property in descr) {
         this[property] = descr[property];
     }
-    
+
     // Get my (unique) spatial ID
     this._spatialID = spatialManager.getNewSpatialID();
-    
+
     // I am not dead yet!
     this._isDeadNow = false;
 };
@@ -77,7 +77,7 @@ Entity.prototype.findHitEntity = function () {
 Entity.prototype.findHitPlatform = function () {
     var pos = this.getPos();
     return spatialManager.findPlatformInRange(
-        pos.posX, pos.posY, this.getRadius()
+        pos.posX, pos.posY, pos.radius//this.getRadius()
     );
 }
 

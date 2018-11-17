@@ -29,7 +29,7 @@ Platform.prototype = new Entity();
 // Initial, inheritable, default values
 // Char.prototype.rotation = 0;
 Platform.prototype.cx = 400;
-Platform.prototype.cy = 480;
+Platform.prototype.cy = 500;
 Platform.prototype.radius = 25;
 Platform.prototype.isPlatform = true;
 
@@ -65,14 +65,14 @@ Platform.prototype.calculateMovement = function (entity) {
         (rightBound >= entity.cx - radius)) {
         entity.stopX();// setur velocity í 0
     }*/
+    console.log(entity.isFalling());
     if(entity.cx<leftBound-35){
-      entity.stopX();
+      //entity.stopX();
       entity.cx = leftBound - radius - 1;
     }else if(entity.cx>rightBound+35){
-      entity.stopX();
+      //entity.stopX();
       entity.cx = rightBound + radius + 1
-    }
-    if (entity.isFalling) {
+    }else if (entity.isFalling()) {
         if (higherBound > entity.cy - radius) {
             entity.ground()
             entity.cy = higherBound - radius;
@@ -86,9 +86,21 @@ Platform.prototype.calculateMovement = function (entity) {
 
 Platform.prototype.render = function (ctx) {
 
-    ctx.fillRect(this.cx - this.radius,
+  /*  ctx.fillRect(this.cx - this.radius,
                 this.cy - this.radius,
                 this.radius*2,
                 this.radius*2);
+*/
+
+
+ctx.fillStyle="white";
+ctx.fillRect(this.cx - this.radius,
+            this.cy - this.radius,
+            this.radius*2,
+            this.radius*2);
+ctx.fillStyle="black";
+ctx.beginPath();
+ctx.arc(this.cx,this.cy,25,0,2*Math.PI);
+ctx.stroke();
 
 };

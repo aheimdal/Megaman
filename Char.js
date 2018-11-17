@@ -150,7 +150,7 @@ Char.prototype.healthManage = function () {
             this.invincibility = 100;
         }
     }
-    if (this.health === 0){ 
+    if (this.health === 0){
     return entityManager.KILL_ME_NOW;
     }
 }
@@ -169,7 +169,7 @@ Char.prototype.maybeFireBullet = function () {
         entityManager.fireBullet(
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
             12*this.CHAR_FACING, 0, 0);
-        
+
     } else if (this.CHAR_SHOOT_TIMER <= 0) {
         this.CHAR_SHOOT = false;
     }
@@ -180,7 +180,7 @@ Char.prototype.maybeFireBullet = function () {
 
 Char.prototype.isGrounded = function () {
     if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
-    return false; 
+    return false;
 };
 
 Char.prototype.isFalling = function () {
@@ -240,4 +240,11 @@ Char.prototype.render = function (ctx) {
 
     this.sprite.scale = origScale;
     ctx.globalAlpha = 1;
+
+    ctx.fillStyle="black";
+    ctx.beginPath();
+    ctx.arc(this.cx,this.cy,45,0,2*Math.PI);
+    ctx.stroke();
+
+    console.log(this.isFalling());
 };
