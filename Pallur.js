@@ -29,23 +29,10 @@ function Pallur(descr) {
 
 Pallur.prototype = new Entity();
 
-Pallur.prototype.rememberResets = function () {
-    // Remember my reset positions
-    this.reset_cx = this.cx;
-    this.reset_cy = this.cy;
-    this.reset_rotation = this.rotation;
-};
-
-
 // Initial, inheritable, default values
 // Char.prototype.rotation = 0;
 Pallur.prototype.cx = 200;
 Pallur.prototype.cy = 100;
-Pallur.prototype.velX = 0;
-Pallur.prototype.velY = 0;
-Pallur.prototype.launchVel = 2;
-Pallur.prototype.numSubSteps = 1;
-
 
 Pallur.prototype.update = function (du) {
 
@@ -56,6 +43,7 @@ Pallur.prototype.update = function (du) {
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
+    
     spatialManager.register(this);
 
 };
