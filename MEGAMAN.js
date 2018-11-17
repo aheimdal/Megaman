@@ -54,11 +54,6 @@ function createInitialChar() {
         cy : 502
     });
 
-    entityManager.generatePallur({
-        cx : 300,
-        cy : 420
-    });
-
 }
 
 // =============
@@ -243,8 +238,7 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generateEnemyTwo();
-    entityManager.generateEnemyThree();
+    entityManager.generatePlatform();
     
 }
 

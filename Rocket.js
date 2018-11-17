@@ -88,7 +88,6 @@ Rocket.prototype.getRadius = function () {
 };
 
 Rocket.prototype.takeBulletHit = function () {
-    console.log("this happens");
     this.kill();
 };
 
