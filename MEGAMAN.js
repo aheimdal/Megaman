@@ -208,7 +208,6 @@ function requestPreloads() {
         goblinJR   : "./images/new/goblin3.png",
         goblinJL   : "./images/new/goblin3l.png",
 
-
         gunshot: "./images/gunshot.png",
         rocket: "./images/joe9.png"
     };

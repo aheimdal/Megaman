@@ -28,13 +28,13 @@ function enemyTwo(descr) {
 
 enemyTwo.prototype = new Entity();
 
-enemyTwo.prototype.cx = 500;
-enemyTwo.prototype.cy = 502;
+enemyTwo.prototype.leftBoundary = 300;
+enemyTwo.prototype.rightBoundary = 600;
+enemyTwo.prototype.cx = 450;
+enemyTwo.prototype.cy = 490;
 enemyTwo.prototype.velX = -2.5;
 enemyTwo.prototype.turnAroundTimer = 0;
 enemyTwo.prototype.health = 10;
-enemyTwo.prototype.leftBoundary = 300;
-enemyTwo.prototype.rightBoundary = 600;
 
 enemyTwo.prototype.update = function (du) {
 
