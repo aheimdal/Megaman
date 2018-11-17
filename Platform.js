@@ -56,11 +56,21 @@ Platform.prototype.calculateMovement = function (entity) {
     var lowerBound = this.cy + this.radius;
     var leftBound = this.cx - this.radius;
     var rightBound = this.cx + this.radius;
-    var radius = entity.getRadius();
+    var radius = 45;//entity.getRadius();
 
-    if (leftBound <= entity.cx + radius ||
+    console.log(this.radius);
+    console.log(radius);
+
+    /*if (leftBound <= entity.cx + radius ||
         (rightBound >= entity.cx - radius)) {
-        entity.stopX();
+        entity.stopX();// setur velocity í 0
+    }*/
+    if(entity.cx<leftBound-35){
+      entity.stopX();
+      entity.cx = leftBound - radius - 1;
+    }else if(entity.cx>rightBound+35){
+      entity.stopX();
+      entity.cx = rightBound + radius + 1
     }
     if (entity.isFalling) {
         if (higherBound > entity.cy - radius) {
