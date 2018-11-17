@@ -18,8 +18,6 @@ function Char(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.rememberResets();
-
     // Default sprite, if not otherwise specified
     this.sprite = g_sprites.CharR[0];
 
@@ -30,17 +28,9 @@ function Char(descr) {
 
 Char.prototype = new Entity();
 
-Char.prototype.rememberResets = function () {
-    // Remember my reset positions
-    this.reset_cx = this.cx;
-    this.reset_cy = this.cy;
-    this.reset_rotation = this.rotation;
-};
-
 Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
 Char.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
-
 Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
@@ -59,16 +49,7 @@ Char.prototype.update = function (du) {
 
     this.calculateMovement(du);
 
-    if (this.invincibility > 0) this.invincibility--;
-
-    if (this._isDeadNow) {
-        this._isDeadNow = false;
-        if (this.invincibility <= 0) {
-            this.health--;
-            this.invincibility = 100;
-        }
-    }
-    if (this.health === 0) return entityManager.KILL_ME_NOW;
+    this.healthManage();
 
     // Handle firing
     this.maybeFireBullet();
@@ -151,6 +132,19 @@ Char.prototype.calculateMovement = function (du) {
     }
 
 };
+
+Char.prototype.healthManage = function () {
+    if (this.invincibility > 0) this.invincibility--;
+
+    if (this._isDeadNow) {
+        this._isDeadNow = false;
+        if (this.invincibility <= 0) {
+            this.health--;
+            this.invincibility = 100;
+        }
+    }
+    if (this.health === 0) return entityManager.KILL_ME_NOW;
+}
 
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;

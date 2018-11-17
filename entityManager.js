@@ -32,6 +32,7 @@ _rocks   : [],
 _bullets : [],
 _char   : [],
 _pallar : [],
+_platforms : [],
 _enemyTwo : [],
 _enemyThree : [],
 _rockets : [],
@@ -57,6 +58,7 @@ KILL_ME_NOW : -1,
 //
 deferredSetup : function () {
     this._categories = [this._bullets, this._char, this._pallar,
+        this._platforms,
         this._enemyTwo, this._enemyThree, this._rockets];
 },
 
@@ -90,6 +92,10 @@ generateChar : function(descr) {
 
 generatePallur : function(descr) {
     this._pallar.push(new Pallur(descr));
+},
+
+generatePlatform : function(descr) {
+    this._platforms.push(new Platform(descr));
 },
 
 generateEnemyTwo : function(descr) {
@@ -132,7 +138,8 @@ update: function(du) {
     }
 
 
-    if (this._char[0] != null){ animationHandle.update(this._char[0]);
+    if (this._char[0] != null) { 
+        animationHandle.update(this._char[0]);
         //We go to "background.js" and get the map
         background.canvasSpaceGame(background.getMap());
 

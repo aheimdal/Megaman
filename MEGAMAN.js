@@ -240,6 +240,7 @@ function preloadDone() {
 
     entityManager.generateEnemyTwo();
     entityManager.generateEnemyThree();
+    entityManager.generatePlatform();
     
 }
 
