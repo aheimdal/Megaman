@@ -49,6 +49,11 @@ Char.prototype.update = function (du) {
 
     this.calculateMovement(du);
 
+    var plat = this.isCollidingPlatform();
+    if (plat) {
+        console.log("wow");
+    }
+
     this.healthManage();
 
     // Handle firing

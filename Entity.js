@@ -74,10 +74,21 @@ Entity.prototype.findHitEntity = function () {
     );
 };
 
+Entity.prototype.findHitPlatform = function () {
+    var pos = this.getPos();
+    return spatialManager.findPlatformInRange(
+        pos.posX, pos.posY, this.getRadius()
+    );
+}
+
 // This is just little "convenience wrapper"
 Entity.prototype.isColliding = function () {
     return this.findHitEntity();
 };
+
+Entity.prototype.isCollidingPlatform = function () {
+    return this.findHitPlatform();
+}
 
 Entity.prototype.wrapPosition = function () {
     this.cx = util.wrapRange(this.cx, 0, g_canvas.width);

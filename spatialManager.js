@@ -55,10 +55,7 @@ register: function(entity) {
     entity.posY = pos.posY;
 
     // Give our current object the added radius
-    if (entity.isPlatform) {
-        this._platforms[spatialID] = entity;
-        console.log(this._platforms)
-    }
+    if (entity.isPlatform) {this._platforms[spatialID] = entity;}
     else {this._entities[spatialID] = entity;}
 },
 
