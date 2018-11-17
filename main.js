@@ -64,8 +64,8 @@ main._iterCore = function (dt) {
         this.gameOver();
         return;
     }
-
-    /*if(GameState === 0){
+    /*
+    if(GameState === 0){
         //mainScreen();
         //update(dt);
         startScreen.render(g_ctx);    
@@ -75,7 +75,11 @@ main._iterCore = function (dt) {
     gatherInputs();
     update(dt);
     render(g_ctx);
-    /*}*/
+    /*}
+
+    if(GameState === 2){
+        gameOverScreen.render(g_ctx);
+    }*/
 };
 
 main._isGameOver = false;

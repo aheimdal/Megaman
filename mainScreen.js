@@ -2,13 +2,19 @@
 "use strict";
 
 var startScreen = {
-    title : "Fuck off",
-    button : "hey"
+    title : "Run Gun Renegade",
+    start : "Start",
+    controls : "Controls",
+    background : ".images/"
+    //about : "Story"
 };
+
 
 startScreen.render = function(ctx)
     {
-
-        util.fillBox(ctx, 300, 250, 15, 15, "red");
         
+        document.body.style.backgroundImage = "url('images/back02.jpg')";
+
+
+
     }
