@@ -51,6 +51,19 @@ Platform.prototype.getRadius = function () {
     return this.radius;
 };
 
+Platform.prototype.calculateMovement = function (entity) {
+    var higherBound = this.cy - this.radius;
+    var lowerBound = this.cy + this.radius;
+    var leftBound = this.cx - this.radius;
+    var rightBound = this.cx + this.radius;
+    var radius = entity.getRadius();
+
+    if (leftBound <= entity.cx + radius ||
+        rightBound >= entity.cx - radius) {
+        entity.stopX();
+    }
+};
+
 Platform.prototype.render = function (ctx) {
    
     ctx.fillRect(this.cx - this.radius,

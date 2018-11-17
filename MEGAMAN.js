@@ -238,8 +238,6 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generateEnemyTwo();
-    entityManager.generateEnemyThree();
     entityManager.generatePlatform();
     
 }

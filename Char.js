@@ -49,11 +49,6 @@ Char.prototype.update = function (du) {
 
     this.calculateMovement(du);
 
-    var plat = this.isCollidingPlatform();
-    if (plat) {
-        console.log("wow");
-    }
-
     this.healthManage();
 
     // Handle firing
@@ -120,6 +115,9 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
+
+    var plat = this.isCollidingPlatform();
+    if (plat) plat.calculateMovement(this);
 
     this.cx += this.velX; //x-coordinates updated
 
@@ -194,6 +192,10 @@ Char.prototype.ground = function () {
     this.JUMP_INIT = true;
     this.velY = 0;
     if (this.cy > 502) this.cy = 502;
+};
+
+Char.prototype.stopX = function () {
+    this.velX = 0;
 };
 
 Char.prototype.getRadius = function () {
