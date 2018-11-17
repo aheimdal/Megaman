@@ -90,22 +90,12 @@ Char.prototype.MOVING = false;
 
 Char.prototype.movement = function (du) {
 
-    var rx = this.sprite.width*this._scale/2;
-    var ry = this.sprite.height*this._scale/2;
-    var prevX = this.cx;
-    var nextX = prevX+this.velX;
-    var prevY = this.cy;
-    var nextY = prevY+this.velY;
-
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
-        var nextX = prevX + (this.NOMINAL_RIGHT * du);
         this.MOVING = true;                 //Player is moving
-        if (this.cx < 970){
-          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
+        if (this.cx < 970) {
             if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
             if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; //Adds right velocity
-          }
         } else {
             this.velX = 0;
         }
@@ -115,12 +105,9 @@ Char.prototype.movement = function (du) {
     //Calculates if characted should go left if he's not going right
     else if (keys[this.KEY_LEFT]) {
         this.MOVING = true;
-        if (this.cx > 32){
-          var nextX = prevX + (this.NOMINAL_LEFT * du);
-          if(!(entityManager._pallar[0].collidesWithX(prevX, prevY, nextX, prevY, rx, ry))){
+        if (this.cx > 32) {
             if (this.velX > 0)  this.velX = 0; //Resets velocity if Char was going right
             if (this.velX > -6) this.velX += this.NOMINAL_LEFT * du; //Adds left velocity
-          }
         } else {
             this.velX = 0;
         }
@@ -134,7 +121,7 @@ Char.prototype.movement = function (du) {
     if (keys[this.KEY_JUMP]) {
         if (this.isGrounded()) {
             this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
-            this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increasy
+            this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increase
         } else if (this.JUMP_INIT) {
             //Dynamic y-velocity added compared to the time
             this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du;
@@ -147,42 +134,17 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    var prevX = this.cx;
-    var nextX = prevX + this.velX * du;
-    var prevY = this.cy;
-    var nextY = prevY + this.velY * du;
-    var rx = this.sprite.width*this._scale/2;
-    var ry = this.sprite.height*this._scale/2;
 
     this.cx += this.velX; //x-coordinates updated
 
     //Only works with y-axis if he's not "grounded"
     if (!this.isGrounded()) {
+        this.cy += this.velY * du;
 
-        if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
+        if (this.JUMP_TIMER > 0) {this.JUMP_TIMER--;}
+        else this.JUMP_INIT = false;
         if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
-        if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
         if (this.cy >= 502) this.JUMP_INIT = true;
-
-        if (!(entityManager._pallar[0].collidesWithY(prevX, prevY, nextX, prevY, rx, ry))){
-            /*
-            if((nextY + this.sprite.height/2> entityManager._pallar[0].cy - 5) && (
-                nextY+this.sprite.height/2<entityManager._pallar[0].cy+5)) {
-                this.velY = 0;
-
-        }
-        */
-            this.cy += this.velY * du;
-        } else {
-            if((nextY + this.sprite.height/ 2 > entityManager._pallar[0].cy - 5) &&
-                (nextY + this.sprite.height/ 2 < entityManager._pallar[0].cy + 5)) {
-                this.ground();
-                console.log("zero" + this.velY);
-                //this.cy = entityManager._pallar[0].cy - 5;
-            }
-
-        }  
-
         if (this.cy > 502) {
             this.ground();
         }
@@ -194,8 +156,6 @@ Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
 
 Char.prototype.maybeFireBullet = function () {
-
-
 
     if (keys[this.KEY_FIRE]) {
         if (this.CHAR_FACING === 1) {var constant = 55}
