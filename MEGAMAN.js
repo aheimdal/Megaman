@@ -271,7 +271,8 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generateEnemyThree();
+    //entityManager.generateEnemyTwo();
+    //entityManager.generateEnemyThree();
 
     
 }
