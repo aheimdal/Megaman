@@ -56,8 +56,6 @@ Char.prototype.update = function (du) {
         main.GameState = 2;
         return entityManager.KILL_ME_NOW;
     }
-
-    console.log(this.isFalling());
     
     // Handle firing
     this.maybeFireBullet();
