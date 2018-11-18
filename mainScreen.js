@@ -3,7 +3,7 @@
 
 var startScreen = {
     title : "Run Gun Renegade",
-    start : "Start" id="startG",
+    start : "Start",
     controls : "Controls"
 };
 
@@ -38,7 +38,7 @@ startScreen.render = function(g_ctx)
         //console.log("Align Center");
         g_ctx.textAlign = "center";
         //console.log("Write text, apply centered location");
-        g_ctx.fillText(startScreen.start id="startG", g_canvas.width/2-300, g_canvas.height/2+50);
+        g_ctx.fillText(startScreen.start, g_canvas.width/2-300, g_canvas.height/2+50);
         //console.log("Apply black line around letters");
         g_ctx.strokeText(startScreen.start, g_canvas.width/2-300, g_canvas.height/2+50);
 
