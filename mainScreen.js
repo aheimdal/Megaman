@@ -58,5 +58,5 @@ startScreen.render = function(g_ctx)
     }
 
 function startGame(){
-    GameState = 1;
+    main.GameState = 1;
 }
