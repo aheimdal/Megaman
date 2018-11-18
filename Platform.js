@@ -77,7 +77,7 @@ Platform.prototype.calculateMovement = function (entity) {
             entity.ground()
             entity.cy = higherBound - radius-1;
         }
-    }else if(entity.isJumping()){
+    }else if(entity.isJumping()&& !entity.isFalling()){
         if (lowerBound < entity.cy + radius) {
             entity.fall();
             entity.cy = lowerBound + radius;
@@ -86,7 +86,6 @@ Platform.prototype.calculateMovement = function (entity) {
 };
 
 Platform.prototype.render = function (ctx) {
-
   /*  ctx.fillRect(this.cx - this.radius,
                 this.cy - this.radius,
                 this.radius*2,

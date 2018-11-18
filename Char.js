@@ -42,7 +42,7 @@ Char.prototype.health = 3;
 Char.prototype.invincibility = 200;
 
 Char.prototype.update = function (du) {
-
+    //console.log("isJumping gefur: "+this.isJumping());
     spatialManager.unregister(this);
 
     this.movement(du);
@@ -100,7 +100,7 @@ Char.prototype.movement = function (du) {
 
     //Calculates if Char is jumping
     if (keys[this.KEY_JUMP]) {
-        if (this.isGrounded()) {
+        if (this.isGrounded() /*&& !this.isJumping()*/) {
             this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
             this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increase
         } else if (this.JUMP_INIT) {
@@ -115,6 +115,7 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
+    console.log("isFalling gefur: "+this.isFalling());
     this.radius=45;
     var plat = this.isColliding();
     if (plat) plat.calculateMovement(this);
@@ -184,7 +185,7 @@ Char.prototype.isGrounded = function () {
 };
 
 Char.prototype.isFalling = function () {
-    if (this.JUMP_TIMER === 0 && this.JUMP_INIT === false) return true;
+    if (this.velY > 0) return true;
     return false;
 };
 
