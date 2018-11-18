@@ -56,7 +56,7 @@ Char.prototype.update = function (du) {
         main.GameState = 2;
         return entityManager.KILL_ME_NOW;
     }
-    
+
     // Handle firing
     this.maybeFireBullet();
 
@@ -215,6 +215,10 @@ Char.prototype.stopX = function () {
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9 *this._scale;
 };
+
+Char.prototype.superKill = function () {
+    this.health = 0;
+}
 
 
 Char.prototype.status = function () {
