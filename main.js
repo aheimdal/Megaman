@@ -58,27 +58,29 @@ main._updateClocks = function (frameTime) {
 };
 
 main._iterCore = function (dt) {
-    
+
     // Handle QUIT
     if (requestedQuit()) {
         this.gameOver();
         return;
     }
 
-    if(GameState === 0){
+    if(GameState == 0){
         //mainScreen();
         //update(dt);
         startScreen.render(g_ctx);  
     }
 
-    if(GameState === 1){
+    if(GameState == 1){
     gatherInputs();
     update(dt);
     render(g_ctx);
     }
 
-    if(GameState === 2){
+
+    if(GameState == 2){
         gameOverScreen.render(g_ctx);
+
     }
 };
 

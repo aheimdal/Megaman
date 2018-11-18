@@ -52,8 +52,11 @@ Char.prototype.update = function (du) {
 
     this.healthManage();
 
-    if (this.health === 0) return entityManager.KILL_ME_NOW;
-
+    if (this.health === 0){
+        GameState = 2;
+        return entityManager.KILL_ME_NOW;
+    }
+    
     // Handle firing
     this.maybeFireBullet();
 

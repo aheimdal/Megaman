@@ -28,10 +28,8 @@ function enemyTwo(descr) {
 
 enemyTwo.prototype = new Entity();
 
-enemyTwo.prototype.leftBoundary = 300;
-enemyTwo.prototype.rightBoundary = 600;
-enemyTwo.prototype.cx = 450;
-enemyTwo.prototype.cy = 490;
+enemyTwo.prototype.cx = 700;
+enemyTwo.prototype.cy = 502;
 enemyTwo.prototype.velX = -2.5;
 enemyTwo.prototype.turnAroundTimer = 0;
 enemyTwo.prototype.health = 10;
@@ -73,13 +71,13 @@ enemyTwo.prototype.takeBulletHit = function () {
 };
 
 enemyTwo.prototype.turnAround = function () {
-    if (this.cx <= this.leftBoundary) {
+    if (this.cx <= 30) {
         this.cx++;
         this.sprite = g_sprites.golem[5];
         this.turnAroundTimer = 30;
         this.velX = 2.5;
     }
-    if (this.cx >= this.rightBoundary) {
+    if (this.cx >= 970) {
         this.cx--;
         this.sprite = g_sprites.golem[4];
         this.turnAroundTimer = 30;

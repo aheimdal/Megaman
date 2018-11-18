@@ -46,9 +46,6 @@ enemyThree.prototype.update = function (du) {
         this.health--;
     }
 
-    if (entityManager._char[0].cx < this.cx) this.goblinFacing = 1;
-    else this.goblinFacing = 0;
-
     this.movement(du);
 
     this.maybeShoot();
