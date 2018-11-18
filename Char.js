@@ -117,8 +117,13 @@ Char.prototype.movement = function (du) {
 Char.prototype.calculateMovement = function (du) {
     console.log("isFalling gefur: "+this.isFalling());
     this.radius=45;
+
     var plat = this.isColliding();
     if (plat) plat.calculateMovement(this);
+    console.log("should fall: "+this.shouldFall());
+    if(this.shouldFall()){
+      this.fall();
+    }
     /*
     if (!plat) {
         if (this.isGrounded()) this.fall();
@@ -225,6 +230,22 @@ Char.prototype.status = function () {
 
 Char.prototype.changeSprite = function(varImage) {
     this.sprite = varImage;
+};
+
+Char.prototype.shouldFall = function () {
+    if(this.cy == 502) return false; // Ef á jörðinni false
+    // Ef hann er ekki 1px fyrir ofan(sem sagt grounded) kassa og fyrir ofan hann
+    for (var i = 0; i <entityManager._platforms.length; i++) {
+      // Ef 1px fyrir ofan
+      if(this.cy==(entityManager._platforms[i].cy - entityManager._platforms[i].radius -46)){
+        // Ef beint fyrir ofan, eki ská fyrir ofan
+        if((this.cx + 45>entityManager._platforms[i].cx - entityManager._platforms[i].radius)&&(this.cx-45<entityManager._platforms[i].cx + entityManager._platforms[i].radius)){
+          return false;
+        }
+      }
+    }
+    if(this.isJumping()||this.isFalling()) return false;
+    return true;
 };
 
 Char.prototype.render = function (ctx) {
