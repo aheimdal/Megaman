@@ -39,7 +39,8 @@ Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.health = 3;
-Char.prototype.invincibility = 200;
+Char.prototype.invincibility = 100;
+Char.prototype.invincibilityTimer = 50;
 
 Char.prototype.update = function (du) {
 
@@ -50,6 +51,8 @@ Char.prototype.update = function (du) {
     this.calculateMovement(du);
 
     this.healthManage();
+
+    if (this.health === 0) return entityManager.KILL_ME_NOW;
 
     // Handle firing
     this.maybeFireBullet();
@@ -118,11 +121,7 @@ Char.prototype.calculateMovement = function (du) {
 
     var plat = this.isCollidingPlatform();
     if (plat) plat.calculateMovement(this);
-    /*
-    if (!plat) {
-        if (this.isGrounded()) this.fall();
-    }
-    */
+    
     this.cx += this.velX; //x-coordinates updated
 
     //Only works with y-axis if he's not "grounded"
@@ -147,11 +146,8 @@ Char.prototype.healthManage = function () {
         this._isDeadNow = false;
         if (this.invincibility <= 0) {
             this.health--;
-            this.invincibility = 100;
+            this.invincibility = this.invincibilityTimer;
         }
-    }
-    if (this.health === 0){ 
-    return entityManager.KILL_ME_NOW;
     }
 }
 
