@@ -7,9 +7,6 @@ var gameOverScreen = {
     undertitle : "Sucks to be you!!"
 };
 
-this.gameOverTimer = 50;
-if (this.gameOverTimer > 0) this.gameOverTimer--;
-
 gameOverScreen.render = function(g_ctx)
     {
         
