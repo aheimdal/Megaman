@@ -30,7 +30,7 @@ Platform.prototype = new Entity();
 // Char.prototype.rotation = 0;
 Platform.prototype.cx = 170;
 Platform.prototype.cy = 450;
-Platform.prototype.radius = 25;
+Platform.prototype.radius = 5;
 Platform.prototype.isPlatform = true;
 Platform.prototype.oneTime = 0;
 
