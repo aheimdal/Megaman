@@ -62,8 +62,9 @@ enemyThree.prototype.update = function (du) {
 };
 
 enemyThree.prototype.movement = function(du) {
-    if (this.cx < 30) {this.velX = 3.5;}
-    if (this.cx > 970) {this.velX = -3.5;}
+    if (this.cx - entityManager._char[0].cx > 0) {
+        this.goblinFacing = 1;
+    } else this.goblinFacing = 0;
 
     if (this.goblinFacing === 1) this.velX = -3.5;
     else this.velX = 3.5;
