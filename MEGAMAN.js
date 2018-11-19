@@ -191,12 +191,15 @@ function requestPreloads() {
         golemTR   : "./images/new/golem3.png",
         golemTL   : "./images/new/golem3l.png",
 
-        goblinStR   : "./images/new/goblin1.png",
-        goblinStL   : "./images/new/goblin1l.png",
+        goblinStR  : "./images/new/goblin1.png",
+        goblinStL  : "./images/new/goblin1l.png",
         goblinSR   : "./images/new/goblin2.png",
         goblinSL   : "./images/new/goblin2l.png",
         goblinJR   : "./images/new/goblin3.png",
         goblinJL   : "./images/new/goblin3l.png",
+
+        bossStL     : "./images/new/boss1l.png",
+        bossStR     : "./images/new/boss1.png",
 
 
         gunshot: "./images/gunshot.png",
@@ -253,6 +256,11 @@ function preloadDone() {
         g_sprites.JumpL = new Sprite(g_images.goblinJL)
     ];
 
+    g_sprites.boss = [
+        g_sprites.standR = new Sprite(g_images.bossStR),
+        g_sprites.standL = new Sprite(g_images.bossStL)
+    ];
+
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
     g_sprites.rocket = new Sprite(g_images.rocket);
@@ -260,6 +268,8 @@ function preloadDone() {
     createInitialChar();
 
     main.init();
+
+    entityManager.generateBoss();
 
     //entityManager.generateEnemyTwo();
     //entityManager.generateEnemyThree();

@@ -36,6 +36,7 @@ _platforms : [],
 _enemyTwo : [],
 _enemyThree : [],
 _rockets : [],
+_boss : [],
 
 
 // "PRIVATE" METHODS
@@ -58,7 +59,7 @@ KILL_ME_NOW : -1,
 //
 deferredSetup : function () {
     this._categories = [this._bullets, this._char, this._pallar,
-        this._platforms,
+        this._platforms, this._boss,
         this._enemyTwo, this._enemyThree, this._rockets];
 },
 
@@ -104,6 +105,10 @@ generateEnemyTwo : function(descr) {
 
 generateEnemyThree : function(descr) {
     this._enemyThree.push(new enemyThree(descr));
+},
+
+generateBoss : function(descr) {
+    this._boss.push(new Boss(descr));
 },
 
 resetChar: function() {
