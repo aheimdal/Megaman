@@ -159,10 +159,12 @@ Char.prototype.healthManage = function () {
 
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
+Char.prototype.shoot = true;
 
 Char.prototype.maybeFireBullet = function () {
 
-    if (keys[this.KEY_FIRE]) {
+    if (keys[this.KEY_FIRE] && this.shoot === true) {
+        this.shoot = false;
         if (this.CHAR_FACING === 1) {var constant = 55}
         else {var constant = -55}
         this.CHAR_SHOOT = true;
@@ -172,11 +174,12 @@ Char.prototype.maybeFireBullet = function () {
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
             12*this.CHAR_FACING, 0, 0);
         
-    } else if (this.CHAR_SHOOT_TIMER <= 0) {
-        this.CHAR_SHOOT = false;
     }
 
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
+    if (this.CHAR_SHOOT_TIMER <= 0) {
+        this.CHAR_SHOOT = false;
+    }
 
 };
 
