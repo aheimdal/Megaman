@@ -36,6 +36,8 @@ _platforms : [],
 _enemyTwo : [],
 _enemyThree : [],
 _rockets : [],
+_boss : [],
+_bossshoots : [],
 
 
 // "PRIVATE" METHODS
@@ -52,14 +54,13 @@ _forEachOf: function(aCategory, fn) {
 // to request the blessed release of death!
 //
 KILL_ME_NOW : -1,
-GameState : 2,
 
 // Some things must be deferred until after initial construction
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
     this._categories = [this._bullets, this._char, this._pallar,
-        this._platforms,
+        this._platforms, this._boss, this._bossshoots,
         this._enemyTwo, this._enemyThree, this._rockets];
 },
 
@@ -86,6 +87,15 @@ fireRocket: function(cx, cy, velX, velY, rotation) {
     }));
 },
 
+fireBossShoot: function(cx, cy, velX, velY, rotation) {
+    this._bossshoots.push(new BossShoot({
+        cx   : cx,
+        cy   : cy,
+        velX : velX,
+        velY : velY,
+        rotation : rotation
+    }));  
+},
 
 generateChar : function(descr) {
     this._char.push(new Char(descr));
@@ -105,6 +115,10 @@ generateEnemyTwo : function(descr) {
 
 generateEnemyThree : function(descr) {
     this._enemyThree.push(new enemyThree(descr));
+},
+
+generateBoss : function(descr) {
+    this._boss.push(new Boss(descr));
 },
 
 resetChar: function() {

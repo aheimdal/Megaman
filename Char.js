@@ -38,8 +38,9 @@ Char.prototype.cx;
 Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
-Char.prototype.health = 3;
-Char.prototype.invincibility = 200;
+Char.prototype.health = 5;
+Char.prototype.invincibility = 100;
+Char.prototype.invincibilityTimer = 50;
 
 Char.prototype.update = function (du) {
 
@@ -51,6 +52,11 @@ Char.prototype.update = function (du) {
 
     this.healthManage();
 
+    if (this.health === 0){
+        main.GameState = 2;
+        return entityManager.KILL_ME_NOW;
+    }
+
     // Handle firing
     this.maybeFireBullet();
 
@@ -61,12 +67,12 @@ Char.prototype.NOMINAL_RIGHT = +1;
 Char.prototype.NOMINAL_LEFT  = -1;
 Char.prototype.NOMINAL_IJUMP = -10;
 Char.prototype.NOMINAL_JUMP  = -2;
-Char.prototype.NOMINAL_GRAVITY = +2;
+Char.prototype.NOMINAL_GRAVITY = +1;
 
 Char.prototype.CHAR_FACING = 1;
 Char.prototype.JUMP_INIT = true;
 Char.prototype.JUMP_TIMER = 0;
-Char.prototype.JUMP_TIMER_COUNT = 80;
+Char.prototype.JUMP_TIMER_COUNT = 15;
 Char.prototype.MOVING = false;
 
 Char.prototype.movement = function (du) {
@@ -102,10 +108,10 @@ Char.prototype.movement = function (du) {
     if (keys[this.KEY_JUMP]) {
         if (this.isGrounded()) {
             this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
-            this.velY = this.NOMINAL_IJUMP * du;  //Initial velocity increase
+            this.velY = this.NOMINAL_IJUMP * du; //Initial velocity increase
         } else if (this.JUMP_INIT) {
             //Dynamic y-velocity added compared to the time
-            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT)) * du;
+            this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/(this.JUMP_TIMER_COUNT))) * du;
         }
     }
     if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) { //Checked if space was released early
@@ -118,19 +124,18 @@ Char.prototype.calculateMovement = function (du) {
 
     var plat = this.isCollidingPlatform();
     if (plat) plat.calculateMovement(this);
-    /*
-    if (!plat) {
-        if (this.isGrounded()) this.fall();
-    }
-    */
+    
     this.cx += this.velX; //x-coordinates updated
 
     //Only works with y-axis if he's not "grounded"
     if (!this.isGrounded()) {
         this.cy += this.velY * du;
 
-        if (this.JUMP_TIMER > 0) {this.JUMP_TIMER--;}
-        else this.JUMP_INIT = false;
+        if (this.JUMP_TIMER > 1) this.JUMP_TIMER--;
+        else {
+            this.JUMP_INIT = false;
+            this.JUMP_TIMER = 0;
+        }
         if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
         if (this.cy >= 502) this.JUMP_INIT = true;
         if (this.cy > 502) {
@@ -147,11 +152,8 @@ Char.prototype.healthManage = function () {
         this._isDeadNow = false;
         if (this.invincibility <= 0) {
             this.health--;
-            this.invincibility = 100;
+            this.invincibility = this.invincibilityTimer;
         }
-    }
-    if (this.health === 0){ 
-    return entityManager.KILL_ME_NOW;
     }
 }
 
@@ -213,6 +215,10 @@ Char.prototype.stopX = function () {
 Char.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9 *this._scale;
 };
+
+Char.prototype.superKill = function () {
+    this.health = 0;
+}
 
 
 Char.prototype.status = function () {

@@ -41,7 +41,7 @@ var g_ctx = g_canvas.getContext("2d");
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 
-var GameState = 1;
+var GameState = 0;
 
 // ====================
 // CREATE INITIAL CHAR
@@ -147,19 +147,9 @@ function processDiagnostics() {
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
-/*
-    if(startMenu){
-        mainScreen(ctx);
-    }
 
-    if(!startMenu){*/
     entityManager.render(ctx);
-  /*  }
-
-    if(game_over){
-        gameoverScreen();        
-    }
-*/
+    
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
@@ -194,8 +184,26 @@ function requestPreloads() {
         charRsj   : "./images/new/joe10.png",
         charLsj   : "./images/new/joe10l.png",
 
+        golemR1   : "./images/new/golem1.png",
+        golemL1   : "./images/new/golem1l.png",
+        golemR2   : "./images/new/golem2.png",
+        golemL2   : "./images/new/golem2l.png",
+        golemTR   : "./images/new/golem3.png",
+        golemTL   : "./images/new/golem3l.png",
+
+        goblinStR  : "./images/new/goblin1.png",
+        goblinStL  : "./images/new/goblin1l.png",
+        goblinSR   : "./images/new/goblin2.png",
+        goblinSL   : "./images/new/goblin2l.png",
+        goblinJR   : "./images/new/goblin3.png",
+        goblinJL   : "./images/new/goblin3l.png",
+
+        bossStL     : "./images/new/boss1l.png",
+        bossStR     : "./images/new/boss1.png",
+
+
         gunshot: "./images/gunshot.png",
-        rocket: "./images/joe9.png"
+        rocket: "./images/new/rock.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -230,6 +238,29 @@ function preloadDone() {
         g_sprites.jumpshoot = new Sprite(g_images.charLsj)
     ];
 
+    g_sprites.golem = [
+        g_sprites.run1R = new Sprite(g_images.golemR1),
+        g_sprites.run2R = new Sprite(g_images.golemR2),
+        g_sprites.run1L = new Sprite(g_images.golemL1),
+        g_sprites.run2L = new Sprite(g_images.golemL2),
+        g_sprites.runTR = new Sprite(g_images.golemTR),
+        g_sprites.runTL = new Sprite(g_images.golemTL)
+    ];
+
+    g_sprites.goblin = [
+        g_sprites.standR = new Sprite(g_images.goblinStR),
+        g_sprites.standL = new Sprite(g_images.goblinStL),
+        g_sprites.shootR = new Sprite(g_images.goblinSR),
+        g_sprites.shootL = new Sprite(g_images.goblinSL),
+        g_sprites.jumpR = new Sprite(g_images.goblinJR),
+        g_sprites.JumpL = new Sprite(g_images.goblinJL)
+    ];
+
+    g_sprites.boss = [
+        g_sprites.standR = new Sprite(g_images.bossStR),
+        g_sprites.standL = new Sprite(g_images.bossStL)
+    ];
+
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
     g_sprites.rocket = new Sprite(g_images.rocket);
@@ -238,8 +269,11 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generatePlatform();
-    
+    //entityManager.generateBoss();
+
+    entityManager.generateEnemyTwo();
+    entityManager.generateEnemyThree();
+
 }
 
 // Kick it off
