@@ -38,7 +38,7 @@ Char.prototype.cx;
 Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
-Char.prototype.health = 99999;
+Char.prototype.health = 5;
 Char.prototype.invincibility = 100;
 Char.prototype.invincibilityTimer = 50;
 
