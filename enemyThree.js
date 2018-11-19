@@ -30,6 +30,7 @@ enemyThree.prototype = new Entity();
 
 enemyThree.prototype.cx = 700;
 enemyThree.prototype.cy = 502;
+enemyThree.prototype.floor = 502;
 enemyThree.prototype.velX;
 enemyThree.prototype.velY = 0;
 enemyThree.prototype.health = 10;
@@ -67,14 +68,14 @@ enemyThree.prototype.movement = function(du) {
     if (this.goblinFacing === 1) this.velX = -3.5;
     else this.velX = 3.5;
 
-    if (this.cy < 502) {
+    if (this.cy < this.floor) {
         this.velY += 1;
     } else {
         this.velY = 0;
-        this.cy = 502;
+        this.cy = this.floor;
     }
 
-    if (this.cy >= 502 && this.shootTimer <= 0) {
+    if (this.cy >= this.floor && this.shootTimer <= 0) {
         this.velY = -20;
         this.shootTimer = 150;
     }
@@ -99,7 +100,7 @@ enemyThree.prototype.spriteChange = function () {
     if (this.goblinFacing === 1) var face = 1;
     else var face = 0;
     if (this.shootTimer < 75 && this.shootTimer > 0) this.sprite = g_sprites.goblin[2+face];
-    else if (this.cy < 502) this.sprite = g_sprites.goblin[4+face];
+    else if (this.cy < this.floor) this.sprite = g_sprites.goblin[4+face];
     else this.sprite = g_sprites.goblin[0+face];
 }
 

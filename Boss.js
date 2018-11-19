@@ -129,7 +129,11 @@ Boss.prototype.movementPhaseThree = function (du) {
 };
 
 Boss.prototype.calculateMovement = function (du) {
-    this.cx += this.velX * du;
+    if (this.shootTimer >= 20 &&
+        this.shootTimer <= 40 * ((this.health*0.06666)+1/1)-20 ||
+        this.cy < 470) {
+        this.cx += this.velX * du;
+    }
     if (this.cy < 470) this.velY += 1; 
     this.cy += this.velY * du;
     if (this.cy > 470) {
@@ -161,6 +165,7 @@ Boss.prototype.phase = function () {
     else if (this.health > 25) {
         if (this.cx > 950 || this.cx < 50) {
             this.phaseNumber = 1;
+            this.shootTimer = 60;
         }
     } else if (this.health > 0) {
         if (this.cx > 950 || this.cx < 50) {

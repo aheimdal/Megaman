@@ -269,10 +269,10 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generateBoss();
+    //entityManager.generateBoss();
 
-    //entityManager.generateEnemyTwo();
-    //entityManager.generateEnemyThree();
+    entityManager.generateEnemyTwo();
+    entityManager.generateEnemyThree();
 
 }
 
