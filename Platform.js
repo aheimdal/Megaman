@@ -82,10 +82,10 @@ Platform.prototype.calculateMovement = function (entity) {
       entity.fall();
       entity.cy = lowerBound + radius;
         //}
-    }else if(entity.cx<leftBound){
+    }else if(entity.cx<this.cx){
       entity.stopX();
       entity.cx = leftBound-radius+8;//leftBound - radius - 1;
-    }else if(entity.cx>rightBound){
+    }else if(entity.cx>this.cx){
       entity.stopX();
       entity.cx = rightBound + radius-8;
     }
