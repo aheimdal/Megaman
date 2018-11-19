@@ -144,11 +144,12 @@ Boss.prototype.maybeFire = function () {
     if (this.shootTimer) this.shootTimer--;
     if (this.shootTimer === 0) {
         this.shootTimer = 40 * ((this.health*0.06666)+1/1);
-        entityManager.fireRocket (
+        entityManager.fireBossShoot(
             this.cx+(50*this.bossFacing),
             this.cy+17,
-            13*this.bossFacing,
-            0,0
+            14*this.bossFacing,
+            -14,
+            0
         );
     }
 };

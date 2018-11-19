@@ -37,6 +37,7 @@ _enemyTwo : [],
 _enemyThree : [],
 _rockets : [],
 _boss : [],
+_bossshoots : [],
 
 
 // "PRIVATE" METHODS
@@ -59,7 +60,7 @@ KILL_ME_NOW : -1,
 //
 deferredSetup : function () {
     this._categories = [this._bullets, this._char, this._pallar,
-        this._platforms, this._boss,
+        this._platforms, this._boss, this._bossshoots,
         this._enemyTwo, this._enemyThree, this._rockets];
 },
 
@@ -86,6 +87,15 @@ fireRocket: function(cx, cy, velX, velY, rotation) {
     }));
 },
 
+fireBossShoot: function(cx, cy, velX, velY, rotation) {
+    this._bossshoots.push(new BossShoot({
+        cx   : cx,
+        cy   : cy,
+        velX : velX,
+        velY : velY,
+        rotation : rotation
+    }));  
+},
 
 generateChar : function(descr) {
     this._char.push(new Char(descr));

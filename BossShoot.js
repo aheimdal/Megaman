@@ -1,5 +1,5 @@
 // ======
-// Rocket
+// BossShoot
 // ======
 
 "use strict";
@@ -13,7 +13,7 @@
 
 
 // A generic contructor which accepts an arbitrary descriptor object
-function Rocket(descr) {
+function BossShoot(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
@@ -25,43 +25,40 @@ function Rocket(descr) {
     
 /*
     // Diagnostics to check inheritance stuff
-    this._RocketProperty = true;
+    this._BossShootProperty = true;
     console.dir(this);
 */
 
 }
 
-Rocket.prototype = new Entity();
+BossShoot.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Rocket.prototype.fireSound = new Audio(
-    "sounds/rockEvaporate.ogg");
+BossShoot.prototype.fireSound = new Audio(
+    "sounds/rockSplit.ogg");
 
 // Initial, inheritable, default values
-Rocket.prototype.rotation = 0;
-Rocket.prototype.cx = 200;
-Rocket.prototype.cy = 200;
-Rocket.prototype.velX = 1;
-Rocket.prototype.velY = 1;
-Rocket.prototype.health = 4;
+BossShoot.prototype.rotation = 0;
+BossShoot.prototype.cx = 200;
+BossShoot.prototype.cy = 200;
+BossShoot.prototype.velX = 1;
+BossShoot.prototype.velY = 1;
+BossShoot.prototype.health = 4;
 
 // Convert times from milliseconds to "nominal" time units.
-Rocket.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
-Rocket.prototype.update = function (du) {
+BossShoot.prototype.update = function (du) {
 
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
 
     this.lifeSpan -= du;
     if (this.cx < 0 || this.cx > 1000 || this.cy > 1000) return entityManager.KILL_ME_NOW;
-    
 
+    this.velY += 1;
+    
     this.cx += this.velX * du;
-    if (this.lifeSpan < 0) {
-        this.velY += 1;
-        this.cy += this.velY * du;
-    }
+    this.cy += this.velY * du;
     
     // TODO? NO, ACTUALLY, I JUST DID THIS BIT FOR YOU! :-)
     //
@@ -83,15 +80,15 @@ Rocket.prototype.update = function (du) {
     spatialManager.register(this);
 };
 
-Rocket.prototype.getRadius = function () {
+BossShoot.prototype.getRadius = function () {
     return 12;
 };
 
-Rocket.prototype.takeBulletHit = function () {
+BossShoot.prototype.takeBulletHit = function () {
     this.kill();
 };
 
-Rocket.prototype.render = function (ctx) {
+BossShoot.prototype.render = function (ctx) {
 
     g_sprites.rocket.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
