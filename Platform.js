@@ -120,9 +120,9 @@ ctx.fillRect(this.cx - this.radius,
             this.cy - this.radius,
             this.radius*2,
             this.radius*2);
-ctx.fillStyle="black";
+/*ctx.fillStyle="black";
 ctx.beginPath();
 ctx.arc(this.cx,this.cy,25,0,2*Math.PI);
-ctx.stroke();
+ctx.stroke();*/
 
 };

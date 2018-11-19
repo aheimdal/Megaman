@@ -273,8 +273,8 @@ Char.prototype.render = function (ctx) {
     this.sprite.scale = origScale;
     ctx.globalAlpha = 1;
 
-    ctx.fillStyle="black";
+    /*ctx.fillStyle="black";
     ctx.beginPath();
     ctx.arc(this.cx,this.cy,45,0,2*Math.PI);
-    ctx.stroke();
+    ctx.stroke();*/
 };
