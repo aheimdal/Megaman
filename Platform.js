@@ -28,10 +28,11 @@ Platform.prototype = new Entity();
 
 // Initial, inheritable, default values
 // Char.prototype.rotation = 0;
-Platform.prototype.cx = 400;
-Platform.prototype.cy = 400;
+Platform.prototype.cx = 170;
+Platform.prototype.cy = 450;
 Platform.prototype.radius = 25;
 Platform.prototype.isPlatform = true;
+Platform.prototype.oneTime = 0;
 
 
 Platform.prototype.update = function (du) {
@@ -42,6 +43,21 @@ Platform.prototype.update = function (du) {
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
     }
+    var indexOfPlatform = entityManager._platforms.findIndex(i => i === this);
+    //console.log("index: " + indexOfPlatform);
+    if(this.oneTime==0){
+      if(indexOfPlatform<3){
+        this.cx += (indexOfPlatform-3)*50;
+        this.cy = 380;
+      }else if(indexOfPlatform<18){
+        this.cx += indexOfPlatform*50;
+        this.cy = 380;
+      }else if(indexOfPlatform<36){
+        this.cx += (indexOfPlatform-21)*50;
+        this.cy = 200;
+      }
+    }
+    this.oneTime++;
     spatialManager.register(this);
 
 };
@@ -56,32 +72,57 @@ Platform.prototype.calculateMovement = function (entity) {
     var lowerBound = this.cy + this.radius;
     var leftBound = this.cx - this.radius;
     var rightBound = this.cx + this.radius;
-    var radius = entity.getRadius();
+    var radius = 45;//entity.getRadius();
 
-    if (leftBound <= entity.cx + radius ||
+    //console.log(this.radius);
+    //console.log(radius);
+
+    /*if (leftBound <= entity.cx + radius ||
         (rightBound >= entity.cx - radius)) {
-        entity.stopX();
-    }
-    if (entity.isFalling) {
-        if (higherBound > entity.cy - radius) {
-            entity.ground()
-            entity.cy = higherBound - radius;
-        }
-        if (lowerBound < entity.cy + radius) {
-            entity.fall();
-            entity.cy = lowerBound + radius;
-        }
+        entity.stopX();// setur velocity í 0
+    }*/
+    console.log("hit");
+    if(entity.cx<leftBound-28){
+      entity.stopX();
+      entity.cx = leftBound-radius;//leftBound - radius - 1;
+    }else if(entity.cx>rightBound+28){
+      entity.stopX();
+      entity.cx = rightBound + radius;
+    }else if (entity.isFalling()) {
+        //if (higherBound > entity.cy - radius) {
+      entity.ground()
+      entity.cy = higherBound - radius-1;
+        //}
+    }else if(entity.isJumping()/*&& !entity.isFalling()*/){
+        //if (lowerBound < entity.cy + radius) {
+      entity.fall();
+      entity.cy = lowerBound + radius;
+        //}
+    }else if(entity.cx<this.cx){
+      entity.stopX();
+      entity.cx = leftBound-radius+8;//leftBound - radius - 1;
+    }else if(entity.cx>this.cx){
+      entity.stopX();
+      entity.cx = rightBound + radius-8;
     }
 };
 
 Platform.prototype.render = function (ctx) {
-   
-    ctx.fillRect(this.cx - this.radius,
+  /*  ctx.fillRect(this.cx - this.radius,
                 this.cy - this.radius,
                 this.radius*2,
                 this.radius*2);
+*/
+
+
+ctx.fillStyle="red";
+ctx.fillRect(this.cx - this.radius,
+            this.cy - this.radius,
+            this.radius*2,
+            this.radius*2);
+ctx.fillStyle="black";
+ctx.beginPath();
+ctx.arc(this.cx,this.cy,25,0,2*Math.PI);
+ctx.stroke();
 
 };
-
-
-
