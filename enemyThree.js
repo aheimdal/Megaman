@@ -105,6 +105,10 @@ enemyThree.prototype.spriteChange = function () {
     else this.sprite = g_sprites.goblin[0+face];
 }
 
+enemyThree.prototype.calculateMovement = function () {
+    return;
+}
+
 enemyThree.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
 };

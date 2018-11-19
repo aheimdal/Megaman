@@ -91,6 +91,10 @@ Rocket.prototype.takeBulletHit = function () {
     this.kill();
 };
 
+Rocket.prototype.calculateMovement = function () {
+    return;
+}
+
 Rocket.prototype.render = function (ctx) {
 
     g_sprites.rocket.drawCentredAt(

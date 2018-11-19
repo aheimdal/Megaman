@@ -49,7 +49,7 @@ Boss.prototype.update = function (du) {
     else if (this.phaseNumber === 1) this.movementPhaseTwo(du);
     else if (this.phaseNumber === 2)  this.movementPhaseThree(du);
 
-    this.calculateMovement(du);
+    this.calculateMovementReal(du);
 
     spatialManager.register(this);
 };
@@ -128,7 +128,7 @@ Boss.prototype.movementPhaseThree = function (du) {
     
 };
 
-Boss.prototype.calculateMovement = function (du) {
+Boss.prototype.calculateMovementReal = function (du) {
     if (this.shootTimer >= 20 &&
         this.shootTimer <= 40 * ((this.health*0.06666)+1/1)-20 ||
         this.cy < 470) {
@@ -173,6 +173,10 @@ Boss.prototype.phase = function () {
         }
     }
 };
+
+Boss.prototype.calculateMovement = function () {
+    return;
+}
 
 Boss.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;

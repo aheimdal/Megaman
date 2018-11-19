@@ -87,9 +87,9 @@ enemyTwo.prototype.turnAround = function () {
     }
 };
 
-enemyTwo.prototype.movement = function () {
-    
-};
+enemyTwo.prototype.calculateMovement = function () {
+    return;
+}
 
 enemyTwo.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
