@@ -157,7 +157,7 @@ function renderSimulation(ctx) {
   /*  }
 
     if(game_over){
-        gameoverScreen();        
+        gameoverScreen();
     }
 */
     if (g_renderSpatialDebug) spatialManager.render(ctx);
@@ -238,8 +238,12 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generatePlatform();
-    
+    var t = 18+18;
+    for(var i =0;i<t;i++){
+      entityManager.generatePlatform();
+    }
+
+
 }
 
 // Kick it off
