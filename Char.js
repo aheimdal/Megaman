@@ -43,7 +43,7 @@ Char.prototype.invincibility = 100;
 Char.prototype.invincibilityTimer = 50;
 
 Char.prototype.update = function (du) {
-
+    //console.log("isJumping gefur: "+this.isJumping());
     spatialManager.unregister(this);
 
     this.movement(du);
@@ -106,7 +106,7 @@ Char.prototype.movement = function (du) {
 
     //Calculates if Char is jumping
     if (keys[this.KEY_JUMP]) {
-        if (this.isGrounded()) {
+        if (this.isGrounded() /*&& !this.isJumping()*/) {
             this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
             this.velY = this.NOMINAL_IJUMP * du; //Initial velocity increase
         } else if (this.JUMP_INIT) {
@@ -121,10 +121,20 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
+    console.log("isFalling gefur: "+this.isFalling());
+    this.radius=45;
 
-    var plat = this.isCollidingPlatform();
+    var plat = this.isColliding();
     if (plat) plat.calculateMovement(this);
-    
+    console.log("should fall: "+this.shouldFall());
+    if(this.shouldFall()){
+      this.fall();
+    }
+    /*
+    if (!plat) {
+        if (this.isGrounded()) this.fall();
+    }
+    */
     this.cx += this.velX; //x-coordinates updated
 
     //Only works with y-axis if he's not "grounded"
@@ -171,7 +181,7 @@ Char.prototype.maybeFireBullet = function () {
         entityManager.fireBullet(
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
             12*this.CHAR_FACING, 0, 0);
-        
+
     } else if (this.CHAR_SHOOT_TIMER <= 0) {
         this.CHAR_SHOOT = false;
     }
@@ -182,11 +192,11 @@ Char.prototype.maybeFireBullet = function () {
 
 Char.prototype.isGrounded = function () {
     if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
-    return false; 
+    return false;
 };
 
 Char.prototype.isFalling = function () {
-    if (this.JUMP_TIMER === 0 && this.JUMP_INIT === false) return true;
+    if (this.velY > 0) return true;
     return false;
 };
 
@@ -232,6 +242,22 @@ Char.prototype.changeSprite = function(varImage) {
     this.sprite = varImage;
 };
 
+Char.prototype.shouldFall = function () {
+    if(this.cy == 502) return false; // Ef á jörðinni false
+    // Ef hann er ekki 1px fyrir ofan(sem sagt grounded) kassa og fyrir ofan hann
+    for (var i = 0; i <entityManager._platforms.length; i++) {
+      // Ef 1px fyrir ofan
+      if(this.cy==(entityManager._platforms[i].cy - entityManager._platforms[i].radius -46)){
+        // Ef beint fyrir ofan, eki ská fyrir ofan
+        if((this.cx + 45>entityManager._platforms[i].cx - entityManager._platforms[i].radius)&&(this.cx-45<entityManager._platforms[i].cx + entityManager._platforms[i].radius)){
+          return false;
+        }
+      }
+    }
+    if(this.isJumping()||this.isFalling()) return false;
+    return true;
+};
+
 Char.prototype.render = function (ctx) {
     if (this.invincibility) {ctx.globalAlpha = 0.5;}
     else {ctx.globalAlpha = 1;}
@@ -246,4 +272,9 @@ Char.prototype.render = function (ctx) {
 
     this.sprite.scale = origScale;
     ctx.globalAlpha = 1;
+
+    ctx.fillStyle="black";
+    ctx.beginPath();
+    ctx.arc(this.cx,this.cy,45,0,2*Math.PI);
+    ctx.stroke();
 };
