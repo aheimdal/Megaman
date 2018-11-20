@@ -19,16 +19,11 @@ function BossShoot(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
-    //this.fireSound.load();
-    //this.fireSound.play();
+    AudioBank.playSound(AudioBank.bossThrow);
 
 }
 
 BossShoot.prototype = new Entity();
-
-// HACKED-IN AUDIO (no preloading)
-//BossShoot.prototype.fireSound = new Audio(
-//   "sounds/rockSplit.ogg");
 
 // Initial, inheritable, default values
 BossShoot.prototype.rotation = 0;

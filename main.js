@@ -119,12 +119,14 @@ main._requestNextIteration = function () {
 // Mainloop-level debug-rendering
 
 var TOGGLE_TIMER_SHOW = 'T'.charCodeAt(0);
+var TOGGLE_MUTE = 'M'.charCodeAt(0);
 
 main._doTimerShow = false;
 
 main._debugRender = function (ctx) {
     
     if (eatKey(TOGGLE_TIMER_SHOW)) this._doTimerShow = !this._doTimerShow;
+    if (eatKey(TOGGLE_MUTE)) AudioBank.isMuted = !AudioBank.isMuted;
     
     if (!this._doTimerShow) return;
     

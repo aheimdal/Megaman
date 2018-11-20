@@ -8,6 +8,9 @@
 
 var AudioBank = {
 
+    //Mute variable
+    isMuted : false,
+
     //Songs
     songOne : new Audio("sounds/songs/megaLag1.ogg"),
     songTwo : new Audio("sounds/songs/megaLag2.ogg"),
@@ -31,8 +34,15 @@ var AudioBank = {
     charDeath : new Audio("sounds/die.wav"),
 
     playSound : function (choice) {
-        choice.load();
-        choice.play();
+        if (!this.isMuted) {
+            choice.load();
+            choice.play();
+        }
+    },
+
+    playSong : function () {
+        this.songTwo.load();
+        this.songTwo.play();
     }
 
 

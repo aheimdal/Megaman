@@ -19,8 +19,7 @@ function Bullet(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
-    this.fireSound.load();
-    this.fireSound.play();
+    AudioBank.playSound(AudioBank.bullet);
 
     
 /*
@@ -32,15 +31,7 @@ function Bullet(descr) {
 }
 
 Bullet.prototype = new Entity();
-/*
-// HACKED-IN AUDIO (no preloading)
-Bullet.prototype.fireSound = new Audio(
-    "sounds/gunsounds/luger.wav");
-Bullet.prototype.shotgun = new Audio(
-    "sounds/gunsounds/shotgun.wav");
-Bullet.prototype.die = new Audio(
-    "sounds/die.wav");
-*/
+
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
 Bullet.prototype.cx = 200;
@@ -83,8 +74,6 @@ Bullet.prototype.takeBulletHit = function () {
     this.kill();
     
     // When I am killed
-    //this.die.load();
-    //this.die.play();
 };
 
 Bullet.prototype.calculateMovement = function () {
