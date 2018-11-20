@@ -18,10 +18,11 @@ function Platform(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = this.sprite || g_sprites.char;
+    this.sprite = g_sprites.tiles;
+    //this.scale  = 0.1;
 
     // Set normal drawing scale, and warp state off
-    this._scale = 3;
+    //this._scale = 3;
 };
 
 Platform.prototype = new Entity();
@@ -32,6 +33,7 @@ Platform.prototype.cx = 170;
 Platform.prototype.cy = 450;
 Platform.prototype.radius = 25;
 Platform.prototype.oneTime = 0;
+Platform.prototype.scale = 0;
 
 
 Platform.prototype.update = function (du) {
@@ -94,7 +96,7 @@ Platform.prototype.calculateMovement = function (entity) {
       entity.ground()
       entity.cy = higherBound - radius-1;
         //}
-    }else if(entity.isJumping()/*&& !entity.isFalling()*/){
+    }else if(entity.isJumping()&&(entity.cy<502)){
         //if (lowerBound < entity.cy + radius) {
       entity.fall();
       entity.cy = lowerBound + radius;
@@ -108,19 +110,37 @@ Platform.prototype.calculateMovement = function (entity) {
     }
 };
 
-Platform.prototype.render = function (ctx) {
+
+/*var kubbur = new Image();
+kubbur.src = '"./images/kubbur.jpg"';
+*/Platform.prototype.render = function (ctx) {
   /*  ctx.fillRect(this.cx - this.radius,
                 this.cy - this.radius,
                 this.radius*2,
                 this.radius*2);
 */
+/*var kubbur = new Image();
+kubbur.src = '"./images/kubbur.jpg"';
+ctx.drawImage(kubbur, this.cx - this.radius,
+              this.cy - this.radius,
+              this.radius*2,
+              this.radius*2);*/
 
+              var origScale = this.sprite.scale;
+              // pass my scale into the sprite, for drawing
+              this.sprite.scale = this.scale;
+              //console.log(this.sprite.width);
 
-ctx.fillStyle="red";
+              //console.log(this.sprite.width);
+              this.sprite.drawCentredAt(
+                  ctx, this.cx, this.cy, this.rotation
+              );
+
+/*ctx.fillStyle="red";
 ctx.fillRect(this.cx - this.radius,
             this.cy - this.radius,
             this.radius*2,
-            this.radius*2);
+            this.radius*2);*/
 /*ctx.fillStyle="black";
 ctx.beginPath();
 ctx.arc(this.cx,this.cy,25,0,2*Math.PI);
