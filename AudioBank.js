@@ -39,12 +39,13 @@ var AudioBank = {
     },
 
     playSong : function (x) {
+        if (this.isMuted) return;
         if (x === 1) {
-            this.songOne.loads();
+            this.songOne.load();
             this.songOne.play();
         }
         if (x === 2) {
-            this.songTwo.loads();
+            this.songTwo.load();
             this.songTwo.play();
         }
     },

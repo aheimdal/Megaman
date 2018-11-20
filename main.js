@@ -118,17 +118,16 @@ main._requestNextIteration = function () {
 
 // Mainloop-level debug-rendering
 
-var TOGGLE_TIMER_SHOW = 'T'.charCodeAt(0);
-var TOGGLE_MUTE = 'H'.charCodeAt(0);
+var TOGGLE_MUTE = 'T'.charCodeAt(0);
 
 main._doTimerShow = false;
 
 main._checkMute = function () {
     
-    if (eatKey(TOGGLE_TIMER_SHOW)) {
+    if (eatKey(TOGGLE_MUTE)) {
         AudioBank.isMuted = !AudioBank.isMuted;
         if (AudioBank.isMuted) AudioBank.pauseSong();
-        else AudioBank.playSong();
+        else AudioBank.playSong(2);
     }
 
 };

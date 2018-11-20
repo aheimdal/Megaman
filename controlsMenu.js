@@ -172,4 +172,5 @@ function mainScreen(g_ctx){
 
 function startGame(g_ctx){
     main.GameState = 1;
+    AudioBank.playSong(2);
 }

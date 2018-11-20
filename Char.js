@@ -56,6 +56,8 @@ Char.prototype.update = function (du) {
 
     if (this.health === 0){
         main.GameState = 3;
+        AudioBank.pauseSong();
+        AudioBank.playSong(1);
         return entityManager.KILL_ME_NOW;
     }
 
