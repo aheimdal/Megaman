@@ -157,13 +157,13 @@ Char.prototype.calculateMovement = function (du) {
 };
 
 Char.prototype.healthManage = function () {
+    if (this.health > 5) this.health = 5;
     if (eatKey(this.KEY_GOD)) {
         this.godMode = !this.godMode;
         this.invincibility++;
         console.log(this.godMode);
     }
     if (!this.godMode) {
-        if (this.health > 5) this.health = 5;
         if (this.invincibility > 0) this.invincibility--;
 
         if (this._isDeadNow) {

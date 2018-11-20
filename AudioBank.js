@@ -34,15 +34,24 @@ var AudioBank = {
     charDeath : new Audio("sounds/die.wav"),
 
     playSound : function (choice) {
-        if (!this.isMuted) {
-            choice.load();
-            choice.play();
+        choice.load();
+        if (!this.isMuted) choice.play();
+    },
+
+    playSong : function (x) {
+        if (x === 1) {
+            this.songOne.loads();
+            this.songOne.play();
+        }
+        if (x === 2) {
+            this.songTwo.loads();
+            this.songTwo.play();
         }
     },
 
-    playSong : function () {
-        this.songTwo.load();
-        this.songTwo.play();
+    pauseSong : function () {
+        this.songOne.pause();
+        this.songTwo.pause();
     }
 
 

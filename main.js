@@ -42,8 +42,8 @@ main.iter = function (frameTime) {
     // Perform the iteration core to do all the "real" work
     this._iterCore(this._frameTimeDelta_ms);
     
-    // Diagnostics, such as showing current timer values etc.
-    this._debugRender(g_ctx);
+    // Check if audio should be playing
+    this._checkMute();
     
     // Request the next iteration if needed
     if (!this._isGameOver) this._requestNextIteration();
@@ -119,22 +119,18 @@ main._requestNextIteration = function () {
 // Mainloop-level debug-rendering
 
 var TOGGLE_TIMER_SHOW = 'T'.charCodeAt(0);
-var TOGGLE_MUTE = 'M'.charCodeAt(0);
+var TOGGLE_MUTE = 'H'.charCodeAt(0);
 
 main._doTimerShow = false;
 
-main._debugRender = function (ctx) {
+main._checkMute = function () {
     
-    if (eatKey(TOGGLE_TIMER_SHOW)) this._doTimerShow = !this._doTimerShow;
-    if (eatKey(TOGGLE_MUTE)) AudioBank.isMuted = !AudioBank.isMuted;
-    
-    if (!this._doTimerShow) return;
-    
-    var y = 350;
-    ctx.fillText('FT ' + this._frameTime_ms, 50, y+10);
-    ctx.fillText('FD ' + this._frameTimeDelta_ms, 50, y+20);
-    ctx.fillText('UU ' + g_prevUpdateDu, 50, y+30); 
-    ctx.fillText('FrameSync ON', 50, y+40);
+    if (eatKey(TOGGLE_TIMER_SHOW)) {
+        AudioBank.isMuted = !AudioBank.isMuted;
+        if (AudioBank.isMuted) AudioBank.pauseSong();
+        else AudioBank.playSong();
+    }
+
 };
 
 main.init = function () {
