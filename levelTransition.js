@@ -236,9 +236,14 @@ setStageThree : function() {
         health : 10
     });
 },
-setStageFour : function() {
+setStageFour : function(){
     entityManager.generateEnemyThree({
-        cx : 635,
+        cx : 465,
+        cy : 354,
+        floor : 354
+    });
+    entityManager.generateEnemyThree({
+        cx : 805,
         cy : 354,
         floor : 354
     });
@@ -259,7 +264,7 @@ setStageFour : function() {
         floor : 134
     });
 
-    for (var i = 112.5; i<1000; i+=75) {
+    for (var i = 12; i<1000; i+=75) {
         entityManager.generateSpikes({
             cx : i,
             cy : 540
@@ -280,6 +285,11 @@ setStageFour : function() {
             scale:0.1
         });
     }
+    entityManager.generatePlatform({
+        cx : 50,
+        cy : 120,
+        scale:0.1
+    });
 
     for (var i = 170; i < 1000; i+=170) {
         entityManager.generatePlatform({
