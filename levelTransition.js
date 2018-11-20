@@ -20,7 +20,9 @@ changeLevel : function() {
                 break;
         case 3: this.setStageThree();
                 break;
-        case 4: this.setStageBoss();
+        case 4: this.setStageFour();
+                break;
+        case 5: this.setStageBoss();
                 break;
     }
 },
@@ -233,6 +235,73 @@ setStageThree : function() {
         rightBound : 900,
         health : 10
     });
+},
+setStageFour : function() {
+    /*entityManager.generateEnemyTwo({
+        cx : 850,
+        leftBound : 100,
+        rightBound : 900,
+        health : 10
+    });*/
+    entityManager.generateEnemyThree({
+        cx : 620,
+        cy : 280,
+        floor : 280
+    });
+  /*  entityManager.generatePlatform({
+        cx : 620,
+        cy : 346,
+        scale:0.1
+    });*/
+
+    for (var i = 112.5; i<1000; i+=75) {
+        entityManager.generateSpikes({
+            cx : i,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+25,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+50,
+            cy : 540
+        })
+    }
+
+    /*entityManager.generateEnemyThree({
+        cx : 920,
+        cy : 180,
+        floor : 180
+    });*/
+    for (var i = 130; i < 1000; i+=170) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 346,
+            scale:0.1
+        });
+    }
+
+    /*entityManager.generatePlatform({
+        cx : 920,
+        cy : 246,
+        scale:0.1
+    });*/
+
+    /*for (var i = 250; i<1000; i+=300) {
+        entityManager.generateSpikes({
+            cx : i,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+25,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+50,
+            cy : 540
+        })
+    }*/
 },
 
 setStageBoss : function() {
