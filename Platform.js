@@ -30,8 +30,7 @@ Platform.prototype = new Entity();
 // Char.prototype.rotation = 0;
 Platform.prototype.cx = 170;
 Platform.prototype.cy = 450;
-Platform.prototype.radius = 5;
-Platform.prototype.isPlatform = true;
+Platform.prototype.radius = 25;
 Platform.prototype.oneTime = 0;
 
 
@@ -42,7 +41,8 @@ Platform.prototype.update = function (du) {
 
     if(this._isDeadNow){
         return entityManager.KILL_ME_NOW;
-    }
+    }+
+    /*
     var indexOfPlatform = entityManager._platforms.findIndex(i => i === this);
     //console.log("index: " + indexOfPlatform);
     if(this.oneTime==0){
@@ -58,6 +58,7 @@ Platform.prototype.update = function (du) {
       }
     }
     this.oneTime++;
+    */
     spatialManager.register(this);
 
 };
@@ -81,7 +82,7 @@ Platform.prototype.calculateMovement = function (entity) {
         (rightBound >= entity.cx - radius)) {
         entity.stopX();// setur velocity í 0
     }*/
-    console.log("hit");
+    //console.log("hit");
     if(entity.cx<leftBound-28){
       entity.stopX();
       entity.cx = leftBound-radius;//leftBound - radius - 1;

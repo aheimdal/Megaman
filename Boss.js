@@ -71,6 +71,12 @@ Boss.prototype.damageHandler = function () {
     if (this._isDeadNow) {
         this._isDeadNow = false;
         this.health--;
+        if (util.randRange(0,10) < 1) {
+            entityManager.generateHealthPickup({
+                cx : this.cx,
+                cy : 480
+            })
+        }
     }
 };
 

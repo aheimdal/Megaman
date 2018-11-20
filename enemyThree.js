@@ -33,7 +33,7 @@ enemyThree.prototype.cy = 502;
 enemyThree.prototype.floor = 502;
 enemyThree.prototype.velX;
 enemyThree.prototype.velY = 0;
-enemyThree.prototype.health = 10;
+enemyThree.prototype.health = 5;
 enemyThree.prototype.shootTimer = 150;
 enemyThree.prototype.goblinFacing = 1;
 
@@ -41,7 +41,15 @@ enemyThree.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
-    if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
+    if (this._isDeadNow && this.health === 0) {
+        if (util.randRange(0,10) < 5) {
+            entityManager.generateHealthPickup({
+                cx:this.cx,
+                cy:this.cy-5
+            })
+        }
+        return entityManager.KILL_ME_NOW; 
+    }
     if (this._isDeadNow) {
         this._isDeadNow = false;
         this.health--;
