@@ -29,7 +29,9 @@ function enemyTwo(descr) {
 enemyTwo.prototype = new Entity();
 
 enemyTwo.prototype.cx = 700;
-enemyTwo.prototype.cy = 502;
+enemyTwo.prototype.cy = 470;
+enemyTwo.prototype.leftBound = 200;
+enemyTwo.prototype.rightBound = 750;
 enemyTwo.prototype.velX = -2.5;
 enemyTwo.prototype.turnAroundTimer = 2;
 enemyTwo.prototype.health = 25;
@@ -71,13 +73,13 @@ enemyTwo.prototype.takeBulletHit = function () {
 };
 
 enemyTwo.prototype.turnAround = function () {
-    if (this.cx <= 200) {
+    if (this.cx <= this.leftBound) {
         this.cx++;
         this.sprite = g_sprites.golem[5];
         this.turnAroundTimer = 30;
         this.velX = 2.5;
     }
-    if (this.cx >= 750) {
+    if (this.cx >= this.rightBound) {
         this.cx--;
         this.sprite = g_sprites.golem[4];
         this.turnAroundTimer = 30;
@@ -85,9 +87,9 @@ enemyTwo.prototype.turnAround = function () {
     }
 };
 
-enemyTwo.prototype.movement = function () {
-    
-};
+enemyTwo.prototype.calculateMovement = function () {
+    return;
+}
 
 enemyTwo.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;

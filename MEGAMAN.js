@@ -149,7 +149,7 @@ function processDiagnostics() {
 function renderSimulation(ctx) {
 
     entityManager.render(ctx);
-    
+
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
@@ -269,10 +269,9 @@ function preloadDone() {
 
     main.init();
 
-    entityManager.generateBoss();
-
-    //entityManager.generateEnemyTwo();
     //entityManager.generateEnemyThree();
+    //entityManager.generateEnemyTwo();
+    //entityManager.generateBoss();
 
 }
 
