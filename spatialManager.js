@@ -23,7 +23,6 @@ var spatialManager = {
 _nextSpatialID : 1, // make all valid IDs non-falsey (i.e. don't start at 0)
 
 _entities : [],
-_platforms : [],
 
 // "PRIVATE" METHODS
 //
@@ -54,9 +53,7 @@ register: function(entity) {
     entity.posX = pos.posX;
     entity.posY = pos.posY;
 
-    // Give our current object the added radius
-  //  if (entity.isPlatform) {this._platforms[spatialID] = entity;}
-    /*else {*/this._entities[spatialID] = entity;//}
+    this._entities[spatialID] = entity;
 },
 
 unregister: function(entity) {
@@ -64,8 +61,7 @@ unregister: function(entity) {
 
     // TODO: YOUR STUFF HERE!
     // Delete radius from current object
-    if (entity.isPlatform) {delete this._platforms[spatialID];}
-    else {delete this._entities[spatialID];}
+    delete this._entities[spatialID];
 },
 
 findEntityInRange: function(posX, posY, radius) {
@@ -88,29 +84,6 @@ findEntityInRange: function(posX, posY, radius) {
     return my_Entity;
 },
 
-findPlatformInRange: function(posX, posY, radius) {
-    var my_Platform = 0;
-
-    for (var ID in this._platforms) {
-        var myPlat = this._platforms[ID];
-
-        //Checked if it centre circles collide.
-        if(util.square(myPlat.radius+radius) > util.distSq(posX,posY,
-                                            myPlat.posX, myPlat.posY)
-        ||radius > util.distSq( //upper left corner check
-            posX, posY, myPlat.posX-myPlat.radius, myPlat.posY-myPlat.radius)
-        ||radius > util.distSq( //upp right corner check
-            posX, posY, myPlat.posX-myPlat.radius, myPlat.posY+myPlat.radius)
-        ||radius > util.distSq( //lower left corner check
-            posX, posY, myPlat.posX+myPlat.radius, myPlat.posY-myPlat.radius)
-        ||radius > util.distSq( //lower right corner check
-            posX, posY, myPlat.posX+myPlat.radius, myPlat.posY+myPlat.radius)){
-                my_Platform = myPlat;
-        }
-    }
-
-    return my_Platform;
-},
 
 render: function(ctx) {
     var oldStyle = ctx.strokeStyle;
