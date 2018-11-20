@@ -43,6 +43,16 @@ setStageZero : function() {
         scale:0.1
     });
     entityManager.generatePlatform({
+        cx:555,
+        cy:400,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx:535,
+        cy:250,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
         cx:395,
         cy:400,
         scale: 0.1
@@ -54,9 +64,13 @@ setStageZero : function() {
             scale:0.1
         });
     }
-    for (var i = 600; i<700; i+=25) {
+    for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
+            cy : 520
+        })
+        entityManager.generateSpikes({
+            cx : i-270,
             cy : 520
         })
     }
