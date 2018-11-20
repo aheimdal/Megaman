@@ -61,11 +61,13 @@ enemyTwo.prototype.update = function (du) {
         else {this.sprite = g_sprites.golem[spriteNumber+2];}
     }
 
+    console.log(this.getRadius());
+
     spatialManager.register(this);
 };
 
 enemyTwo.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    return 68;
 };
 
 enemyTwo.prototype.takeBulletHit = function () {

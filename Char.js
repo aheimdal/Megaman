@@ -157,6 +157,7 @@ Char.prototype.healthManage = function () {
         this._isDeadNow = false;
         if (this.invincibility <= 0) {
             this.health--;
+            background.mapLol(this.health);
             this.invincibility = this.invincibilityTimer;
         }
     }
@@ -177,7 +178,7 @@ Char.prototype.maybeFireBullet = function () {
 
         entityManager.fireBullet(
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
-            12*this.CHAR_FACING, 0, 0); 
+            12*this.CHAR_FACING, 0, 0);
     } else this.shoot = true;
 
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
@@ -258,6 +259,7 @@ Char.prototype.shouldFall = function () {
 Char.prototype.render = function (ctx) {
     if (this.invincibility) {ctx.globalAlpha = 0.5;}
     else {ctx.globalAlpha = 1;}
+
 
     var origScale = this.sprite.scale;
     // pass my scale into the sprite, for drawing
