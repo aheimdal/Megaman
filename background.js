@@ -32,6 +32,39 @@ var background = {
           function start(){
               ctx.drawImage(img,0,0);
           }
+        },
+
+    mapLol: function(health){
+            var img=new Image();
+            img.src="images/hjarta2.png";
+            if(health == 1)
+                ctx.drawImage(img, 5, 5);
+
+                else if(health == 2){
+                ctx.drawImage(img, 5, 5);
+                ctx.drawImage(img, 60, 5);
+            }
+
+                else if(health == 3){
+                ctx.drawImage(img, 5, 5);
+                ctx.drawImage(img, 60, 5);
+                ctx.drawImage(img, 115, 5);
+            }
+
+               else if(health == 4){
+                ctx.drawImage(img, 5, 5);
+                ctx.drawImage(img, 60, 5);
+                ctx.drawImage(img, 115, 5);
+                ctx.drawImage(img, 170, 5);
+            }
+                else if(health == 5){
+                ctx.drawImage(img, 5, 5);
+                ctx.drawImage(img, 60, 5);
+                ctx.drawImage(img, 115, 5);
+                ctx.drawImage(img, 170, 5);
+                ctx.drawImage(img, 225, 5);
+            }
+       
         }
 
 };

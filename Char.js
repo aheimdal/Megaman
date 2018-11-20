@@ -121,7 +121,7 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    console.log("isFalling gefur: "+this.isFalling());
+    //console.log("isFalling gefur: "+this.isFalling());
     this.radius=45;
 
     var plat = this.isColliding();
@@ -158,6 +158,7 @@ Char.prototype.healthManage = function () {
         this._isDeadNow = false;
         if (this.invincibility <= 0) {
             this.health--;
+            background.mapLol(this.health);
             this.invincibility = this.invincibilityTimer;
         }
     }
@@ -262,6 +263,7 @@ Char.prototype.shouldFall = function () {
 Char.prototype.render = function (ctx) {
     if (this.invincibility) {ctx.globalAlpha = 0.5;}
     else {ctx.globalAlpha = 1;}
+
 
     var origScale = this.sprite.scale;
     // pass my scale into the sprite, for drawing

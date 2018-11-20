@@ -150,6 +150,7 @@ update: function(du) {
                 ++i;
             }
         }
+
     }
 
 
@@ -157,6 +158,7 @@ update: function(du) {
         animationHandle.update(this._char[0]);
         //We go to "background.js" and get the map
         background.canvasSpaceGame(background.getMap());
+        background.mapLol(this._char[0].health);
 
         if(this._char[0].cx >= 965 && count <= 2){
             background.canvasSpaceGame(background.setMap());
@@ -166,6 +168,7 @@ update: function(du) {
     }
         else
             main.gameOver();
+
 
 },
 
