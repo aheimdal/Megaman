@@ -22,8 +22,26 @@ function handleMouse(evt) {
     // If no button is being pressed, then bail
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
-    
-    entityManager.yoinkNearestShip(g_mouseX, g_mouseY);
+
+    console.log(g_mouseX);
+    console.log(g_mouseY);
+
+    if(g_mouseX >= 140 && g_mouseY >= 320 && g_mouseX <= 260 && g_mouseY <= 355){
+        startGame();
+    }
+
+    if(g_mouseX >= 140 && g_mouseY >= 420 && g_mouseX <= 350 && g_mouseY <= 455){
+        controlsMenu();
+    }
+
+    if(g_mouseX >= 585 && g_mouseY >= 490 && g_mouseX <= 820 && g_mouseY <= 530){
+       startGame(); 
+    }
+
+    if(g_mouseX >= 195 && g_mouseY >= 490 && g_mouseX <= 410 && g_mouseY <= 530){
+       mainScreen(); 
+    }
+
 }
 
 // Handle "down" and "move" events the same way.

@@ -53,7 +53,7 @@ Char.prototype.update = function (du) {
     this.healthManage();
 
     if (this.health === 0){
-        main.GameState = 2;
+        main.GameState = 3;
         return entityManager.KILL_ME_NOW;
     }
 

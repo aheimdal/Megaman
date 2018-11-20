@@ -57,6 +57,10 @@ startScreen.render = function(g_ctx)
    
     }
 
-function startGame(){
+function startGame(g_ctx){
     main.GameState = 1;
+}
+
+function controlsMenu(g_ctx){
+    main.GameState = 2;
 }
