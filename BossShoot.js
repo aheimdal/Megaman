@@ -88,6 +88,10 @@ BossShoot.prototype.takeBulletHit = function () {
     this.kill();
 };
 
+BossShoot.prototype.calculateMovement = function () {
+    return;
+}
+
 BossShoot.prototype.render = function (ctx) {
 
     g_sprites.rocket.drawCentredAt(

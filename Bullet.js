@@ -89,6 +89,10 @@ Bullet.prototype.takeBulletHit = function () {
     this.die.play();
 };
 
+Bullet.prototype.calculateMovement = function () {
+    return;
+}
+
 Bullet.prototype.render = function (ctx) {
 
     g_sprites.bullet.drawCentredAt(
