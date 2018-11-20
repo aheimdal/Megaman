@@ -31,7 +31,7 @@ var main = {
 
 };
 
-main.GameState = 1;
+main.GameState = 0;
 
 // Perform one iteration of the mainloop
 main.iter = function (frameTime) {
@@ -74,15 +74,17 @@ main._iterCore = function (dt) {
     }
 
     if(this.GameState == 1){
-    gatherInputs();
-    update(dt);
-    render(g_ctx);
+        gatherInputs();
+        update(dt);
+        render(g_ctx);
     }
 
-
     if(this.GameState == 2){
-        gameOverScreen.render(g_ctx);
+        controlScreen.render(g_ctx);
+    }
 
+    if(this.GameState == 3){
+        gameOverScreen.render(g_ctx);
     }
 };
 

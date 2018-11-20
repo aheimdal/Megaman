@@ -112,6 +112,47 @@ setStageOne : function() {
 },
 
 setStageTwo : function() {
+    entityManager.generateEnemyTwo({
+        cx : 850,
+        leftBound : 100,
+        rightBound : 900,
+        health : 10        
+    });
+    entityManager.generateEnemyThree({
+        cx : 620,
+        cy : 280,
+        floor : 280
+    });
+    entityManager.generatePlatform({
+        cx : 620,
+        cy : 346
+    });
+    entityManager.generateEnemyThree({
+        cx : 920,
+        cy : 180,
+        floor : 180
+    });
+    entityManager.generatePlatform({
+        cx : 920,
+        cy : 246
+    });
+    for (var i = 250; i<1000; i+=300) {
+        entityManager.generateSpikes({
+            cx : i,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+25,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+50,
+            cy : 540
+        })
+    }
+},
+
+setStageThree : function() {
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = 0;
     for (var i = 375; i<550; i+=50) {
@@ -166,18 +207,16 @@ setStageTwo : function() {
         cx : 100,
         cy : 500,
         leftBound : 100,
-        rightBound : 300
+        rightBound : 300,
+        health : 10
     });
     entityManager.generateEnemyTwo({
         cx : 900,
         cy : 500,
         leftBound : 700,
-        rightBound : 900
+        rightBound : 900,
+        health : 10
     });
-},
-
-setStageThree : function() {
-    entityManager.generateEnemyTwo();
 },
 
 setStageBoss : function() {

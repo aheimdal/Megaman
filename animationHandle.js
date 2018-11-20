@@ -20,7 +20,7 @@ update : function(obj) {
     var moving = status[1];
     var shooting = status[2];
     var grounded = status[3];
-
+    var hurt = status[4];
     
     if (!grounded) {
         if (shooting) {pick = 9;}
@@ -37,6 +37,12 @@ update : function(obj) {
                 pick = this.cycle(1,2,3);
             }
         }
+    }
+    if (hurt) {
+        if (grounded) {
+            pick = 11;
+        }
+        else pick = 10;
     }
 
     if (this.runCounter > 0) {this.runCounter-=2;}

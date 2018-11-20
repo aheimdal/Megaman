@@ -32,6 +32,7 @@ Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
 Char.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
+Char.prototype.KEY_GOD   = 'O'.charCodeAt(0);
 
 // Initial, inheritable, default values
 Char.prototype.cx;
@@ -39,8 +40,9 @@ Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.health = 5;
-Char.prototype.invincibility = 100;
-Char.prototype.invincibilityTimer = 50;
+Char.prototype.invincibility = 0;
+Char.prototype.invincibilityTimer = 90;
+Char.prototype.godMode = false;
 
 Char.prototype.update = function (du) {
     //console.log("isJumping gefur: "+this.isJumping());
@@ -53,7 +55,7 @@ Char.prototype.update = function (du) {
     this.healthManage();
 
     if (this.health === 0){
-        main.GameState = 2;
+        main.GameState = 3;
         return entityManager.KILL_ME_NOW;
     }
 
@@ -73,9 +75,13 @@ Char.prototype.CHAR_FACING = 1;
 Char.prototype.JUMP_INIT = true;
 Char.prototype.JUMP_TIMER = 0;
 Char.prototype.JUMP_TIMER_COUNT = 15;
-Char.prototype.MOVING = false;
+Char.prototype.MOVING = true;
 
 Char.prototype.movement = function (du) {
+
+    if (this.invincibility > this.invincibilityTimer-30) {
+        this.velX = -3.5 * this.CHAR_FACING;
+    } else {
 
     //Calculates if character should go right
     if (keys[this.KEY_RIGHT]) {
@@ -118,6 +124,7 @@ Char.prototype.movement = function (du) {
         this.JUMP_TIMER = 0;
         this.JUMP_INIT = false;
     }
+    }
 };
 
 Char.prototype.calculateMovement = function (du) {
@@ -150,15 +157,22 @@ Char.prototype.calculateMovement = function (du) {
 };
 
 Char.prototype.healthManage = function () {
-    if (this.health > 5) this.health = 5;
-    if (this.invincibility > 0) this.invincibility--;
+    if (eatKey(this.KEY_GOD)) {
+        this.godMode = !this.godMode;
+        this.invincibility++;
+        console.log(this.godMode);
+    }
+    if (!this.godMode) {
+        if (this.health > 5) this.health = 5;
+        if (this.invincibility > 0) this.invincibility--;
 
-    if (this._isDeadNow) {
-        this._isDeadNow = false;
-        if (this.invincibility <= 0) {
-            this.health--;
-            background.mapLol(this.health);
-            this.invincibility = this.invincibilityTimer;
+        if (this._isDeadNow) {
+            this._isDeadNow = false;
+            if (this.invincibility <= 0) {
+                this.health--;
+                background.mapLol(this.health);
+                this.invincibility = this.invincibilityTimer;
+            }
         }
     }
 };
@@ -168,6 +182,8 @@ Char.prototype.CHAR_SHOOT_TIMER = 0;
 Char.prototype.shoot = true;
 
 Char.prototype.maybeFireBullet = function () {
+
+    if (!(this.invincibility > this.invincibilityTimer-30)) {
 
     if (keys[this.KEY_FIRE] && this.shoot === true) {
         this.shoot = false;
@@ -184,6 +200,7 @@ Char.prototype.maybeFireBullet = function () {
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
     if (this.CHAR_SHOOT_TIMER <= 0) {
         this.CHAR_SHOOT = false;
+    }
     }
 };
 
@@ -224,7 +241,7 @@ Char.prototype.getRadius = function () {
 };
 
 Char.prototype.superKill = function () {
-    this.health = 0;
+    if (!this.godMode) this.health = 0;
 }
 
 
@@ -232,7 +249,9 @@ Char.prototype.status = function () {
     return  [this.CHAR_FACING,    //positive number for right, negative for left
             this.MOVING,          //True if moving, else false
             this.CHAR_SHOOT,      //True if shooting, else false
-            this.isGrounded()];   //True if on grounds, else jumping/falling
+            this.isGrounded(),    //True if on grounds, else jumping/falling
+            (this.invincibility > //True if hurt, else false
+                this.invincibilityTimer - 30)];  
 };
 
 Char.prototype.changeSprite = function(varImage) {
