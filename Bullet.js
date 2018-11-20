@@ -32,15 +32,15 @@ function Bullet(descr) {
 }
 
 Bullet.prototype = new Entity();
-
+/*
 // HACKED-IN AUDIO (no preloading)
 Bullet.prototype.fireSound = new Audio(
-    "sounds/luger.wav");
+    "sounds/gunsounds/luger.wav");
 Bullet.prototype.shotgun = new Audio(
-    "sounds/shotgun.wav");
+    "sounds/gunsounds/shotgun.wav");
 Bullet.prototype.die = new Audio(
     "sounds/die.wav");
-
+*/
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
 Bullet.prototype.cx = 200;
@@ -53,7 +53,6 @@ Bullet.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Bullet.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
 
     this.lifeSpan -= du;
@@ -63,10 +62,7 @@ Bullet.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     
-    // TODO? NO, ACTUALLY, I JUST DID THIS BIT FOR YOU! :-)
-    //
     // Handle collisions
-    //
     var hitEntity = this.findHitEntity();
     if (!hitEntity.isHp) {
         if (hitEntity) {
@@ -87,8 +83,8 @@ Bullet.prototype.takeBulletHit = function () {
     this.kill();
     
     // When I am killed
-    this.die.load();
-    this.die.play();
+    //this.die.load();
+    //this.die.play();
 };
 
 Bullet.prototype.calculateMovement = function () {

@@ -47,14 +47,14 @@ function render(ctx) {
         entityManager.clearLevel();
         levelTransition.setStageTwo();
         levelTransition.levelIndex = 1;
+        entityManager._char[0].cx = 50;
+        entityManager._char[0].cy = 502;
         g_lvl3 = !g_lvl3;
     }
 
     if (g_lvl4) {
         entityManager.clearLevel();
         levelTransition.setStageThree();
-        entityManager._char[0].cx = 50;
-        entityManager._char[0].cy = 502;
         levelTransition.levelIndex = 2;
         g_lvl4 = !g_lvl4;
     }

@@ -29,7 +29,6 @@ var entityManager = {
 _rocks   : [],
 _bullets : [],
 _char   : [],
-_pallar : [],
 _platforms : [],
 _enemyTwo : [],
 _enemyThree : [],
@@ -59,7 +58,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._pallar,
+    this._categories = [this._bullets, 
         this._platforms, this._boss, this._bossshoots,
         this._spikes, this._healthP,
         this._enemyTwo, this._enemyThree, this._rockets,
@@ -103,10 +102,6 @@ generateChar : function(descr) {
     this._char.push(new Char(descr));
 },
 
-generatePallur : function(descr) {
-    this._pallar.push(new Pallur(descr));
-},
-
 generatePlatform : function(descr) {
     this._platforms.push(new Platform(descr));
 },
@@ -124,7 +119,7 @@ generateSpikes : function(descr) {
 },
 
 generateHealthPickup : function(descr) {
-    this._healthP.push(new HealthPickup(descr));
+    if (!this._healthP[0]) this._healthP.push(new HealthPickup(descr));
 },
 
 generateBoss : function(descr) {
@@ -169,7 +164,7 @@ update: function(du) {
         animationHandle.update(this._char[0]);
         //We go to "background.js" and get the map
         background.canvasSpaceGame(background.getMap());
-        background.mapLol(this._char[0].health);
+        background.imgHeart(this._char[0].health);
 
     }
         else

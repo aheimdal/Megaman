@@ -167,6 +167,7 @@ setStageTwo : function() {
 setStageThree : function() {
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = 0;
+    entityManager._char[0].fall();
     for (var i = 375; i<550; i+=50) {
         entityManager.generatePlatform({
             cx : 400,

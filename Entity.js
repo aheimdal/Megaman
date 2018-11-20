@@ -79,7 +79,7 @@ Entity.prototype.findHitPlatform = function () {
     return spatialManager.findPlatformInRange(
         pos.posX, pos.posY, this.radius//this.getRadius()
     );
-}
+};
 
 // This is just little "convenience wrapper"
 Entity.prototype.isColliding = function () {
@@ -88,7 +88,7 @@ Entity.prototype.isColliding = function () {
 
 Entity.prototype.isCollidingPlatform = function () {
     return this.findHitPlatform();
-}
+};
 
 Entity.prototype.wrapPosition = function () {
     this.cx = util.wrapRange(this.cx, 0, g_canvas.width);

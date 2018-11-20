@@ -34,7 +34,7 @@ var background = {
           }
         },
 
-    mapLol: function(health){
+    imgHeart: function(health){
             var img=new Image();
             img.src="images/hjarta2.png";
             if(health == 1)

@@ -23,23 +23,20 @@ function handleMouse(evt) {
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
 
-    console.log(g_mouseX);
-    console.log(g_mouseY);
-
     if(g_mouseX >= 140 && g_mouseY >= 320 && g_mouseX <= 260 && g_mouseY <= 355){
-        startGame();
+        if (main.GameState === 0) startGame();
     }
 
     if(g_mouseX >= 140 && g_mouseY >= 420 && g_mouseX <= 350 && g_mouseY <= 455){
-        controlsMenu();
+        if (main.GameState === 0) controlsMenu();
     }
 
     if(g_mouseX >= 585 && g_mouseY >= 490 && g_mouseX <= 820 && g_mouseY <= 530){
-       startGame(); 
+       if (main.GameState === 2) startGame(); 
     }
 
     if(g_mouseX >= 195 && g_mouseY >= 490 && g_mouseX <= 410 && g_mouseY <= 530){
-       mainScreen(); 
+       if (main.GameState === 2) mainScreen(); 
     }
 
 }
