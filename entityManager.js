@@ -124,7 +124,7 @@ generateSpikes : function(descr) {
 },
 
 generateHealthPickup : function(descr) {
-    this._healthP.push(new HealthPickup(descr));
+    if (!this._healthP[0]) this._healthP.push(new HealthPickup(descr));
 },
 
 generateBoss : function(descr) {

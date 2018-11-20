@@ -52,6 +52,8 @@ Char.prototype.update = function (du) {
 
     this.calculateMovement(du);
 
+    console.log(this.getRadius());
+
     this.healthManage();
 
     if (this.health === 0){
@@ -186,7 +188,7 @@ Char.prototype.maybeFireBullet = function () {
     if (!(this.invincibility > this.invincibilityTimer-30)) {
 
     if (eatKey(this.KEY_FIRE) && this.canShoot === true) {
-        this.canShoot = false;
+        //this.canShoot = false;
         if (this.CHAR_FACING === 1) {var constant = 55}
         else {var constant = -55}
         this.CHAR_SHOOT = true;
@@ -237,7 +239,7 @@ Char.prototype.stopX = function () {
 };
 
 Char.prototype.getRadius = function () {
-    return (this.sprite.width / 2) * 0.9 *this._scale;
+    return 35;
 };
 
 Char.prototype.superKill = function () {
