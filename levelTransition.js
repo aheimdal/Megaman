@@ -3,7 +3,7 @@
 
 var levelTransition = {
 
-levelIndex : 2,
+levelIndex : -1,
 
 changeLevel : function() {
     this.levelIndex++;
