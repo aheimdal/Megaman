@@ -56,16 +56,6 @@ function createInitialChar() {
 
 }
 
-// =============
-// GATHER INPUTS
-// =============
-
-/*
-function gatherInputs() {
-    // Nothing to do here!
-    // The event handlers do everything we need for now.
-}
-*/
 
 // =================
 // UPDATE SIMULATION

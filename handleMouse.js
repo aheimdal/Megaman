@@ -23,9 +23,6 @@ function handleMouse(evt) {
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
 
-    console.log(g_mouseX);
-    console.log(g_mouseY);
-
     if(g_mouseX >= 140 && g_mouseY >= 320 && g_mouseX <= 260 && g_mouseY <= 355){
         if (main.GameState === 0) startGame();
     }

@@ -19,17 +19,17 @@ function Rocket(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
-    this.fireSound.load();
-    this.fireSound.play();
+    //this.fireSound.load();
+    //this.fireSound.play();
 
 }
 
 Rocket.prototype = new Entity();
-
+/*
 // HACKED-IN AUDIO (no preloading)
 Rocket.prototype.fireSound = new Audio(
     "sounds/rockEvaporate.ogg");
-
+*/
 // Initial, inheritable, default values
 Rocket.prototype.rotation = 0;
 Rocket.prototype.cx = 200;
