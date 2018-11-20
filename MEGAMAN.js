@@ -185,6 +185,10 @@ function requestPreloads() {
         charLj    : "./images/new/joe9l.png",
         charRsj   : "./images/new/joe10.png",
         charLsj   : "./images/new/joe10l.png",
+        charRH    : "./images/new/joe12.png",
+        charLH    : "./images/new/joe12l.png",
+        charRHJ    : "./images/new/joe11.png",
+        charLHJ    : "./images/new/joe11l.png",
 
         golemR1   : "./images/new/golem1.png",
         golemL1   : "./images/new/golem1l.png",
@@ -230,7 +234,9 @@ function preloadDone() {
         g_sprites.runshoot2 = new Sprite(g_images.charRsr2),
         g_sprites.runshoot3 = new Sprite(g_images.charRsr3),
         g_sprites.jump      = new Sprite(g_images.charRj),
-        g_sprites.jumpshoot = new Sprite(g_images.charRsj)
+        g_sprites.jumpshoot = new Sprite(g_images.charRsj),
+        g_sprites.hurt      = new Sprite(g_images.charRH),
+        g_sprites.hurtjump  = new Sprite(g_images.charRHJ)
     ];
     g_sprites.CharL = [
         g_sprites.stand     = new Sprite(g_images.charL),
@@ -242,7 +248,9 @@ function preloadDone() {
         g_sprites.runshoot2 = new Sprite(g_images.charLsr2),
         g_sprites.runshoot3 = new Sprite(g_images.charLsr3),
         g_sprites.jump      = new Sprite(g_images.charLj),
-        g_sprites.jumpshoot = new Sprite(g_images.charLsj)
+        g_sprites.jumpshoot = new Sprite(g_images.charLsj),
+        g_sprites.hurt      = new Sprite(g_images.charLH),
+        g_sprites.hurtjump  = new Sprite(g_images.charLHJ)
     ];
 
     g_sprites.golem = [

@@ -45,7 +45,15 @@ enemyTwo.prototype.update = function (du) {
         entityManager._char[0].kill();
     }
 
-    if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
+    if (this._isDeadNow && this.health === 0) {
+        if (util.randRange(0,10) < 3.5) {
+            entityManager.generateHealthPickup({
+                cx:this.cx,
+                cy:this.cy-5
+            });
+        }
+        return entityManager.KILL_ME_NOW; 
+    }
     if (this._isDeadNow) {
         this._isDeadNow = false;
         this.health--;
@@ -61,11 +69,13 @@ enemyTwo.prototype.update = function (du) {
         else {this.sprite = g_sprites.golem[spriteNumber+2];}
     }
 
+    console.log(this.getRadius());
+
     spatialManager.register(this);
 };
 
 enemyTwo.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    return 68;
 };
 
 enemyTwo.prototype.takeBulletHit = function () {
