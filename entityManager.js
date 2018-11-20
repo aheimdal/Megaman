@@ -22,8 +22,6 @@ with suitable 'data' and 'methods'.
 //
 /*jslint nomen: true, white: true, plusplus: true*/
 
-var count = 0;
-
 var entityManager = {
 
 // "PRIVATE" DATA
@@ -165,7 +163,7 @@ update: function(du) {
 
     }
 
-    //if (this.isClear) levelTransition.changeLevel();
+    if (this.isClear()) levelTransition.changeLevel();
 
     if (this._char[0] != null) { 
         animationHandle.update(this._char[0]);
@@ -173,11 +171,6 @@ update: function(du) {
         background.canvasSpaceGame(background.getMap());
         background.mapLol(this._char[0].health);
 
-        if(this._char[0].cx >= 965 && count <= 2){
-            background.canvasSpaceGame(background.setMap());
-            this._char[0].cx = 0;
-            count++;
-        }
     }
         else
             main.gameOver();

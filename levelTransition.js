@@ -3,13 +3,14 @@
 
 var levelTransition = {
 
-levelIndex : -1,
+levelIndex : 1,
 
 changeLevel : function() {
     this.levelIndex++;
     entityManager.clearLevel();
     entityManager._char[0].cx = 50;
     entityManager._char[0].cy = 502;
+    if (this.levelIndex) background.canvasSpaceGame(background.setMap());
     switch (this.levelIndex) {
         case 0: this.setStageZero();
                 break;
@@ -69,17 +70,45 @@ setStageOne : function() {
         if (i < 775 || i > 925) {
             entityManager.generatePlatform({
                 cx : i,
-                cy : 400,
-                radius : 25
+                cy : 400
             });
         }
     }
 
+    entityManager.generateEnemyThree({
+        cx : 275,
+        cy : 333,
+        floor : 333
+    })
+
     entityManager.generateEnemyTwo({
         cx : 600,
+        cy : 500,
         leftBound : 300,
         rightBound : 900
     });
+    for (var i = 340; i < 600; i+=25) {
+        entityManager.generateSpikes({
+            cx : i,
+            cy : 360
+        })
+    }
+    for (var i = 125; i<600; i +=50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 200
+        });
+    }
+    entityManager.generatePlatform({
+        cx : 350,
+        cy : 316
+    });
+    entityManager.generateEnemyTwo({
+        cx : 300,
+        cy : 100,
+        leftBound : 180,
+        rightBound : 520
+    })
 },
 
 setStageTwo : function() {
