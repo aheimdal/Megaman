@@ -43,6 +43,16 @@ setStageZero : function() {
         scale:0.1
     });
     entityManager.generatePlatform({
+        cx:555,
+        cy:400,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx:535,
+        cy:250,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
         cx:395,
         cy:400,
         scale: 0.1
