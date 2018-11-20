@@ -38,6 +38,8 @@ _enemyThree : [],
 _rockets : [],
 _boss : [],
 _bossshoots : [],
+_spikes : [],
+_healthP : [],
 
 
 // "PRIVATE" METHODS
@@ -59,9 +61,11 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, this._char, this._pallar,
+    this._categories = [this._bullets, this._pallar,
         this._platforms, this._boss, this._bossshoots,
-        this._enemyTwo, this._enemyThree, this._rockets];
+        this._spikes, this._healthP,
+        this._enemyTwo, this._enemyThree, this._rockets,
+        this._char];
 },
 
 
@@ -117,6 +121,14 @@ generateEnemyThree : function(descr) {
     this._enemyThree.push(new enemyThree(descr));
 },
 
+generateSpikes : function(descr) {
+    this._spikes.push(new Spikes(descr));
+},
+
+generateHealthPickup : function(descr) {
+    this._healthP.push(new HealthPickup(descr));
+},
+
 generateBoss : function(descr) {
     this._boss.push(new Boss(descr));
 },
@@ -153,6 +165,7 @@ update: function(du) {
 
     }
 
+    //if (this.isClear) levelTransition.changeLevel();
 
     if (this._char[0] != null) { 
         animationHandle.update(this._char[0]);
@@ -192,9 +205,31 @@ render: function(ctx) {
         }
         debugY += 10;
     }
+},
+
+
+clearLevel: function() {
+    for (var c = 0; c < this._categories.length-1; ++c) {
+
+        var aCategory = this._categories[c];
+
+        while (aCategory[0]) {
+            spatialManager.unregister(aCategory[0]);
+            aCategory.splice(0,1);
+        }
+    }
+},
+
+
+isClear: function() {
+    if (!this._boss[0] &&
+        !this._enemyThree[0] &&
+        !this._enemyTwo[0]) {
+            return true;
+    }
+    return false;
 }
 
 }
-
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();

@@ -203,9 +203,10 @@ function requestPreloads() {
         bossStL     : "./images/new/boss1l.png",
         bossStR     : "./images/new/boss1.png",
 
-
-        gunshot: "./images/gunshot.png",
-        rocket: "./images/new/rock.png"
+        healthPickup: "./images/new/healthPickup.png",
+        spikes      : "./images/new/spike.png",
+        gunshot     : "./images/gunshot.png",
+        rocket      : "./images/new/rock.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -263,6 +264,9 @@ function preloadDone() {
         g_sprites.standL = new Sprite(g_images.bossStL)
     ];
 
+    g_sprites.spikes = new Sprite(g_images.spikes);
+    g_sprites.healthPickup = new Sprite(g_images.healthPickup);
+
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
     g_sprites.rocket = new Sprite(g_images.rocket);
@@ -274,6 +278,8 @@ function preloadDone() {
     //entityManager.generateEnemyThree();
     //entityManager.generateEnemyTwo();
     //entityManager.generateBoss();
+    //entityManager.generateHealthPickup();
+    levelTransition.changeLevel();
 
 }
 

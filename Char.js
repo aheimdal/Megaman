@@ -121,14 +121,12 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    //console.log("isFalling gefur: "+this.isFalling());
     this.radius=45;
 
     var plat = this.isColliding();
     if (plat) plat.calculateMovement(this);
     if(this.shouldFall()){
       this.fall();
-      console.log("wtf");
     }
 
     this.cx += this.velX; //x-coordinates updated
@@ -152,6 +150,7 @@ Char.prototype.calculateMovement = function (du) {
 };
 
 Char.prototype.healthManage = function () {
+    if (this.health > 5) this.health = 5;
     if (this.invincibility > 0) this.invincibility--;
 
     if (this._isDeadNow) {
@@ -162,7 +161,7 @@ Char.prototype.healthManage = function () {
             this.invincibility = this.invincibilityTimer;
         }
     }
-}
+};
 
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
@@ -179,16 +178,13 @@ Char.prototype.maybeFireBullet = function () {
 
         entityManager.fireBullet(
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
-            12*this.CHAR_FACING, 0, 0); 
-    } else {
-        this.shoot= true;
-    }
+            12*this.CHAR_FACING, 0, 0);
+    } else this.shoot = true;
 
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
     if (this.CHAR_SHOOT_TIMER <= 0) {
         this.CHAR_SHOOT = false;
     }
-
 };
 
 Char.prototype.isGrounded = function () {
@@ -217,7 +213,7 @@ Char.prototype.fall = function () {
     this.JUMP_TIMER = 0;
     this.JUMP_INIT = false;
     this.velY = 0;
-}
+};
 
 Char.prototype.stopX = function () {
     this.velX = 0;
