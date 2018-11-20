@@ -179,14 +179,14 @@ Char.prototype.healthManage = function () {
 
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
-Char.prototype.shoot = true;
+Char.prototype.canShoot = true;
 
 Char.prototype.maybeFireBullet = function () {
 
     if (!(this.invincibility > this.invincibilityTimer-30)) {
 
-    if (keys[this.KEY_FIRE] && this.shoot === true) {
-        this.shoot = false;
+    if (eatKey(this.KEY_FIRE) && this.canShoot === true) {
+        this.canShoot = false;
         if (this.CHAR_FACING === 1) {var constant = 55}
         else {var constant = -55}
         this.CHAR_SHOOT = true;
@@ -195,7 +195,7 @@ Char.prototype.maybeFireBullet = function () {
         entityManager.fireBullet(
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
             12*this.CHAR_FACING, 0, 0);
-    } else this.shoot = true;
+    }
 
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
     if (this.CHAR_SHOOT_TIMER <= 0) {
