@@ -42,11 +42,11 @@ enemyThree.prototype.update = function (du) {
     spatialManager.unregister(this);
 
     if (this._isDeadNow && this.health === 0) {
-        if (util.randRange(0,10) < 5) {
+        if (util.randRange(0,10) < 3.5) {
             entityManager.generateHealthPickup({
                 cx:this.cx,
                 cy:this.cy-5
-            })
+            });
         }
         return entityManager.KILL_ME_NOW; 
     }
