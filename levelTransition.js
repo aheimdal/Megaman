@@ -3,7 +3,7 @@
 
 var levelTransition = {
 
-levelIndex : 1,
+levelIndex : -1,
 
 changeLevel : function() {
     this.levelIndex++;
@@ -112,11 +112,72 @@ setStageOne : function() {
 },
 
 setStageTwo : function() {
-    var i;
+    entityManager._char[0].cx = 500;
+    entityManager._char[0].cy = 0;
+    for (var i = 375; i<550; i+=50) {
+        entityManager.generatePlatform({
+            cx : 400,
+            cy : i
+        });
+        entityManager.generatePlatform({
+            cx : 600,
+            cy : i
+        });
+    }
+    for (var i = 150; i < 375; i+=50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 375
+        });
+        entityManager.generatePlatform({
+            cx : i+500,
+            cy : 375
+        });
+        entityManager.generatePlatform({
+            cx : i-125,
+            cy : 175
+        });
+        entityManager.generatePlatform({
+            cx : i-125+750,
+            cy : 175
+        });
+    }
+    entityManager.generateEnemyThree({
+        cx : 50,
+        cy : 108,
+        floor : 108
+    });
+    entityManager.generateEnemyThree({
+        cx : 950,
+        cy : 108,
+        floor : 108
+    });
+    entityManager.generateEnemyThree({
+        cx : 200,
+        cy : 308,
+        floor : 308
+    });
+    entityManager.generateEnemyThree({
+        cx : 800,
+        cy : 308,
+        floor : 308
+    });
+    entityManager.generateEnemyTwo({
+        cx : 100,
+        cy : 500,
+        leftBound : 100,
+        rightBound : 300
+    });
+    entityManager.generateEnemyTwo({
+        cx : 900,
+        cy : 500,
+        leftBound : 700,
+        rightBound : 900
+    });
 },
 
 setStageThree : function() {
-    var i;
+    entityManager.generateEnemyTwo();
 },
 
 setStageBoss : function() {
