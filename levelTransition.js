@@ -54,9 +54,13 @@ setStageZero : function() {
             scale:0.1
         });
     }
-    for (var i = 600; i<700; i+=25) {
+    for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
+            cy : 520
+        })
+        entityManager.generateSpikes({
+            cx : i-270,
             cy : 520
         })
     }
