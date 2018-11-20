@@ -74,7 +74,7 @@ main._iterCore = function (dt) {
     }
 
     if(this.GameState == 1){
-        gatherInputs();
+        //gatherInputs();
         update(dt);
         render(g_ctx);
     }

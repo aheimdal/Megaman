@@ -60,11 +60,12 @@ function createInitialChar() {
 // GATHER INPUTS
 // =============
 
+/*
 function gatherInputs() {
     // Nothing to do here!
     // The event handlers do everything we need for now.
 }
-
+*/
 
 // =================
 // UPDATE SIMULATION
@@ -288,10 +289,6 @@ function preloadDone() {
 
     main.init();
 
-    //entityManager.generateEnemyThree();
-    //entityManager.generateEnemyTwo();
-    //entityManager.generateBoss();
-    //entityManager.generateHealthPickup();
     levelTransition.changeLevel();
 
 }

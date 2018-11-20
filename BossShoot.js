@@ -22,13 +22,6 @@ function BossShoot(descr) {
     this.fireSound.load();
     this.fireSound.play();
 
-    
-/*
-    // Diagnostics to check inheritance stuff
-    this._BossShootProperty = true;
-    console.dir(this);
-*/
-
 }
 
 BossShoot.prototype = new Entity();
@@ -45,11 +38,8 @@ BossShoot.prototype.velX = 1;
 BossShoot.prototype.velY = 1;
 BossShoot.prototype.health = 4;
 
-// Convert times from milliseconds to "nominal" time units.
-
 BossShoot.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
 
     this.lifeSpan -= du;
@@ -60,11 +50,8 @@ BossShoot.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     
-    // TODO? NO, ACTUALLY, I JUST DID THIS BIT FOR YOU! :-)
-    //
     // Handle collisions
     //
-
     if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
     if (this._isDeadNow) {
         this._isDeadNow = false;
@@ -76,7 +63,7 @@ BossShoot.prototype.update = function (du) {
         entityManager._char[0].kill();
         return entityManager.KILL_ME_NOW;
     }
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+
     spatialManager.register(this);
 };
 
