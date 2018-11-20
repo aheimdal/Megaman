@@ -178,7 +178,7 @@ Char.prototype.maybeFireBullet = function () {
 
         entityManager.fireBullet(
             this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
-            12*this.CHAR_FACING, 0, 0);
+            12*this.CHAR_FACING, 0, 0); 
     } else this.shoot = true;
 
     if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
