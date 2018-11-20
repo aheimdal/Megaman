@@ -30,21 +30,26 @@ setStageZero : function() {
         entityManager.generatePlatform({
             cx:500,
             cy:i,
-            radius: 30
+            radius: 30,
+            scale: 0.12
+
         });
     }
     entityManager.generatePlatform({
         cx:445,
-        cy:400
+        cy:400,
+        scale:0.1
     });
     entityManager.generatePlatform({
         cx:395,
-        cy:400
+        cy:400,
+        scale: 0.1
     });
     for (var i = 25; i < 250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
-            cy : 300
+            cy : 300,
+            scale:0.1
         });
     }
     for (var i = 600; i<700; i+=25) {
@@ -70,7 +75,8 @@ setStageOne : function() {
         if (i < 775 || i > 925) {
             entityManager.generatePlatform({
                 cx : i,
-                cy : 400
+                cy : 400,
+                scale:0.1
             });
         }
     }
@@ -96,12 +102,14 @@ setStageOne : function() {
     for (var i = 125; i<600; i +=50) {
         entityManager.generatePlatform({
             cx : i,
-            cy : 200
+            cy : 200,
+            scale:0.1
         });
     }
     entityManager.generatePlatform({
         cx : 350,
-        cy : 316
+        cy : 316,
+        scale:0.1
     });
     entityManager.generateEnemyTwo({
         cx : 300,
@@ -116,7 +124,7 @@ setStageTwo : function() {
         cx : 850,
         leftBound : 100,
         rightBound : 900,
-        health : 10        
+        health : 10
     });
     entityManager.generateEnemyThree({
         cx : 620,
@@ -125,7 +133,8 @@ setStageTwo : function() {
     });
     entityManager.generatePlatform({
         cx : 620,
-        cy : 346
+        cy : 346,
+        scale:0.1
     });
     entityManager.generateEnemyThree({
         cx : 920,
@@ -134,7 +143,8 @@ setStageTwo : function() {
     });
     entityManager.generatePlatform({
         cx : 920,
-        cy : 246
+        cy : 246,
+        scale:0.1
     });
     for (var i = 250; i<1000; i+=300) {
         entityManager.generateSpikes({
@@ -158,29 +168,35 @@ setStageThree : function() {
     for (var i = 375; i<550; i+=50) {
         entityManager.generatePlatform({
             cx : 400,
-            cy : i
+            cy : i,
+            scale:0.1
         });
         entityManager.generatePlatform({
             cx : 600,
-            cy : i
+            cy : i,
+            scale:0.1
         });
     }
     for (var i = 150; i < 375; i+=50) {
         entityManager.generatePlatform({
             cx : i,
-            cy : 375
+            cy : 375,
+            scale:0.1
         });
         entityManager.generatePlatform({
             cx : i+500,
-            cy : 375
+            cy : 375,
+            scale:0.1
         });
         entityManager.generatePlatform({
             cx : i-125,
-            cy : 175
+            cy : 175,
+            scale:0.1
         });
         entityManager.generatePlatform({
             cx : i-125+750,
-            cy : 175
+            cy : 175,
+            scale:0.1
         });
     }
     entityManager.generateEnemyThree({

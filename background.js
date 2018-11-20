@@ -4,9 +4,9 @@
 
 "use strict";
 
-this._nextMap = 0;
+var _nextMap = 0;
 //The backgrounds images
-this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png"];
+this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png","images/bak8.png"];
 
 var background = {
 
@@ -34,7 +34,7 @@ var background = {
           }
         },
 
-    mapLol: function(health){
+    imgHeart: function(health){
             var img=new Image();
             img.src="images/hjarta2.png";
             if(health == 1)
@@ -65,6 +65,6 @@ var background = {
                 ctx.drawImage(img, 225, 5);
             }
        
-        }
+        },
 
 };

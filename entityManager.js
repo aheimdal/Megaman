@@ -169,7 +169,7 @@ update: function(du) {
         animationHandle.update(this._char[0]);
         //We go to "background.js" and get the map
         background.canvasSpaceGame(background.getMap());
-        background.mapLol(this._char[0].health);
+        background.imgHeart(this._char[0].health);
 
     }
         else

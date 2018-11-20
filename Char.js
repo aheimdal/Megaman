@@ -170,7 +170,7 @@ Char.prototype.healthManage = function () {
             this._isDeadNow = false;
             if (this.invincibility <= 0) {
                 this.health--;
-                background.mapLol(this.health);
+                background.imgHeart(this.health);
                 this.invincibility = this.invincibilityTimer;
             }
         }
