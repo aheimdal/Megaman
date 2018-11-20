@@ -39,6 +39,8 @@ var AudioBank = {
     },
 
     playSong : function (x) {
+        this.songOne.loop = true;
+        this.songTwo.loop = true;
         if (this.isMuted) return;
         if (x === 1) {
             this.songOne.load();
