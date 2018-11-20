@@ -206,7 +206,11 @@ function requestPreloads() {
         healthPickup: "./images/new/healthPickup.png",
         spikes      : "./images/new/spike.png",
         gunshot     : "./images/gunshot.png",
-        rocket      : "./images/new/rock.png"
+        rocket      : "./images/new/rock.png",
+
+        tiles       : "./images/kubbur.jpg"
+
+
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -270,6 +274,9 @@ function preloadDone() {
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
     g_sprites.rocket = new Sprite(g_images.rocket);
+
+    // Tiles
+    g_sprites.tiles = new Sprite(g_images.tiles);
 
     createInitialChar();
 

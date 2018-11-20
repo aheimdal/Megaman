@@ -29,21 +29,26 @@ setStageZero : function() {
         entityManager.generatePlatform({
             cx:500,
             cy:i,
-            radius: 30
+            radius: 30,
+            scale: 0.12
+
         });
     }
     entityManager.generatePlatform({
         cx:445,
-        cy:400
+        cy:400,
+        scale:0.1
     });
     entityManager.generatePlatform({
         cx:395,
-        cy:400
+        cy:400,
+        scale: 0.1
     });
     for (var i = 25; i < 250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
-            cy : 300
+            cy : 300,
+            scale:0.1
         });
     }
     for (var i = 600; i<700; i+=25) {
