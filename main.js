@@ -85,6 +85,10 @@ main._iterCore = function (dt) {
     if(this.GameState == 3){
         gameOverScreen.render(g_ctx);
     }
+
+    if(this.GameState == 4){
+        winScreen.render(g_ctx);
+    }
 };
 
 main._isGameOver = false;
