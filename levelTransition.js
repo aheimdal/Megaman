@@ -444,7 +444,7 @@ setStageFive : function(){
 },
 
 setStageSix : function(){
-    entityManager._char[0].cx = 500;
+    entityManager._char[0].cx = 75;
     entityManager._char[0].cy = -45;
     entityManager.generateEnemyFour({
         cx : 240,
