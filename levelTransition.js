@@ -30,7 +30,7 @@ changeLevel : function() {
 },
 
 setStageZero : function() {
-    for (var i = 500; i > 100; i -= 60) {
+    for (var i = 550; i > 100; i -= 60) {
         entityManager.generatePlatform({
             cx:500,
             cy:i,
@@ -39,6 +39,12 @@ setStageZero : function() {
 
         });
     }
+
+    /*entityManager.generatePlatform({
+        cx:555,
+        cy:500,
+        scale:0.1
+    });*/
 
     entityManager.generatePlatform({
         cx:555,
@@ -73,10 +79,18 @@ setStageZero : function() {
             scale:0.1
         });
     }
+
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
     for (var i = 600; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 520
+            cy : 532
         })
     }
     entityManager.generateEnemyThree({
@@ -102,6 +116,14 @@ setStageOne : function() {
         }
     }
 
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+
     entityManager.generateEnemyThree({
         cx : 275,
         cy : 333,
@@ -117,7 +139,7 @@ setStageOne : function() {
     for (var i = 340; i < 600; i+=25) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 360
+            cy : 358
         })
     }
     for (var i = 125; i<600; i +=50) {
@@ -147,6 +169,14 @@ setStageTwo : function() {
         rightBound : 900,
         health : 10
     });
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+
     entityManager.generateEnemyThree({
         cx : 620,
         cy : 280,
@@ -170,15 +200,15 @@ setStageTwo : function() {
     for (var i = 250; i<1000; i+=300) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 540
+            cy : 532
         })
         entityManager.generateSpikes({
             cx : i+25,
-            cy : 540
+            cy : 532
         })
         entityManager.generateSpikes({
             cx : i+50,
-            cy : 540
+            cy : 532
         })
     }
 },
@@ -195,6 +225,14 @@ setStageThree : function() {
         entityManager.generatePlatform({
             cx : 600,
             cy : i,
+            scale:0.1
+        });
+    }
+
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
             scale:0.1
         });
     }
@@ -261,6 +299,14 @@ setStageFour : function(){
         cy : 354,
         floor : 354
     });
+
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
     entityManager.generateEnemyThree({
         cx : 805,
         cy : 354,
@@ -286,15 +332,15 @@ setStageFour : function(){
     for (var i = 12; i<1000; i+=75) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 540
+            cy : 532
         })
         entityManager.generateSpikes({
             cx : i+25,
-            cy : 540
+            cy : 532
         })
         entityManager.generateSpikes({
             cx : i+50,
-            cy : 540
+            cy : 532
         })
     }
     for (var i = 130; i < 1000; i+=170) {
@@ -325,6 +371,14 @@ setStageFive : function(){
         cy : 500,
         floor : 500
     });
+
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
     entityManager.generatePlatform({
         cx : 75,
         cy : 450,
@@ -339,6 +393,13 @@ setStageFive : function(){
 },
 
 setStageBoss : function() {
+  for (var i = 25; i < 1000; i += 50) {
+      entityManager.generatePlatform({
+          cx : i,
+          cy : 574,
+          scale:0.1
+      });
+  }
     entityManager.generateBoss();
 },
 

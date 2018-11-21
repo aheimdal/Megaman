@@ -4,6 +4,8 @@
 var controlScreen = {
     title : "Run Gun Renegade",
     undertitle : "List of controls for \"Run Gun Joe\" ",
+    underunder : "Tip: To reach next stage you need",
+    underunder2 : "to clear current stage of all enemies.",
     run_left : "To run left press: ",
     press_a : "\"A\"",
     run_right : "To run right press: ",
@@ -50,6 +52,29 @@ controlScreen.render = function(g_ctx)
         g_ctx.fillText(controlScreen.undertitle, g_canvas.width/2, g_canvas.height/2-150);
         //console.log("Apply black line around letters");
         g_ctx.strokeText(controlScreen.undertitle, g_canvas.width/2, g_canvas.height/2-150);
+
+
+        //console.log("Apply color to letters");
+        g_ctx.fillStyle = "#EC7063";
+        //console.log("Apply font and character size");
+        g_ctx.font = "35px VT323";
+        //console.log("Align Center");
+        g_ctx.textAlign = "center";
+        //console.log("Write text, apply centered location");
+        g_ctx.fillText(controlScreen.underunder, g_canvas.width/2, g_canvas.height/2-50);
+        //console.log("Apply black line around letters");
+        g_ctx.strokeText(controlScreen.underunder, g_canvas.width/2, g_canvas.height/2-50);
+
+        //console.log("Apply color to letters");
+        g_ctx.fillStyle = "#EC7063";
+        //console.log("Apply font and character size");
+        g_ctx.font = "35px VT323";
+        //console.log("Align Center");
+        g_ctx.textAlign = "center";
+        //console.log("Write text, apply centered location");
+        g_ctx.fillText(controlScreen.underunder2, g_canvas.width/2, g_canvas.height/2-20);
+        //console.log("Apply black line around letters");
+        g_ctx.strokeText(controlScreen.underunder2, g_canvas.width/2, g_canvas.height/2-20);
 
 
         // Controls
