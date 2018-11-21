@@ -69,7 +69,7 @@ enemyTwo.prototype.update = function (du) {
         else {this.sprite = g_sprites.golem[spriteNumber+2];}
     }
 
-    console.log(this.getRadius());
+   // console.log(this.getRadius());
 
     spatialManager.register(this);
 };

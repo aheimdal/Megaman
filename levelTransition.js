@@ -10,7 +10,7 @@ changeLevel : function() {
     entityManager.clearLevel();
     entityManager._char[0].cx = 50;
     entityManager._char[0].cy = 502;
-    if (this.levelIndex) background.canvasSpaceGame(background.setMap());
+    if (this.levelIndex >= 0) background.canvasSpaceGame(background.setMap(this.levelIndex));
     switch (this.levelIndex) {
         case 0: this.setStageZero();
                 break;
@@ -39,12 +39,6 @@ setStageZero : function() {
 
         });
     }
-
-    /*entityManager.generatePlatform({
-        cx:555,
-        cy:500,
-        scale:0.1
-    });*/
 
     entityManager.generatePlatform({
         cx:555,
@@ -87,9 +81,13 @@ setStageZero : function() {
             scale:0.1
         });
     }
-    for (var i = 600; i<700; i+=25) {
+    for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
+            cy : 532
+        })
+        entityManager.generateSpikes({
+            cx : i-225,
             cy : 532
         })
     }

@@ -4,9 +4,9 @@
 
 "use strict";
 
-var _nextMap = 0;
+this._nextMap = 0;
 //The backgrounds images
-this.maps = ["images/cityscape2.png","images/cityscape3.png","images/cityscape3.png","images/cityscape.png","images/cityscape.png","images/cityscape.png","images/cityscape.png"];
+this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png","images/cityscape2.png","images/cityscape.png","images/cityscape3.png"];
 
 var background = {
 
@@ -16,9 +16,10 @@ var background = {
         return maps[_nextMap];
     },
 
-    setMap: function() {
+    setMap: function(numMap) {
 
-        _nextMap++;
+        _nextMap = numMap;
+        console.log(numMap);
     },
 
     canvasSpaceGame: function(imgSrc) {
