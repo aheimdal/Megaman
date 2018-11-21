@@ -12,7 +12,7 @@ var background = {
 
     //Returns the next background image
     getMap: function() {
-
+        console.log(_nextMap)
         return maps[_nextMap];
     },
 

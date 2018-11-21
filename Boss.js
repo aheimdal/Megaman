@@ -43,6 +43,7 @@ Boss.prototype.update = function (du) {
 
     if (this.health === 0) {
         main.GameState = 4;
+        levelTransition.levelIndex = -1;
         return entityManager.KILL_ME_NOW;
     }
 
