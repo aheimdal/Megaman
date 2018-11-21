@@ -9,6 +9,7 @@ var g_lvl4 = false;
 var g_lvl5 = false;
 var g_lvl6 = false;
 var g_lvl7 = false;
+var g_lvl8 = false;
 
 var lvl1 = '1'.charCodeAt(0);
 var lvl2 = '2'.charCodeAt(0);
@@ -17,6 +18,7 @@ var lvl4 = '4'.charCodeAt(0);
 var lvl5 = '5'.charCodeAt(0);
 var lvl6 = '6'.charCodeAt(0);
 var lvl7 = '7'.charCodeAt(0);
+var lvl8 = '8'.charCodeAt(0);
 
 function render(ctx) {
 
@@ -28,6 +30,7 @@ function render(ctx) {
     if (eatKey(lvl5)) g_lvl5 = !g_lvl5;
     if (eatKey(lvl6)) g_lvl6 = !g_lvl6;
     if (eatKey(lvl7)) g_lvl7 = !g_lvl7;
+    if (eatKey(lvl8)) g_lvl8 = !g_lvl8;
 
     if (g_lvl1) {
         levelTransition.levelIndex = -1;
@@ -69,6 +72,12 @@ function render(ctx) {
         levelTransition.levelIndex = 5;
         levelTransition.changeLevel();
         g_lvl7 = !g_lvl7;
+    }
+
+    if (g_lvl8) {
+        levelTransition.levelIndex = 6;
+        levelTransition.changeLevel();
+        g_lvl8 = !g_lvl8;
     }
 
     // The core rendering of the actual game / simulation
