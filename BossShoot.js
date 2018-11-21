@@ -76,7 +76,7 @@ BossShoot.prototype.calculateMovement = function () {
 
 BossShoot.prototype.render = function (ctx) {
 
-    g_sprites.bullet.drawCentredAt(
+    g_sprites.bottleboli.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
 

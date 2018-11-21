@@ -218,6 +218,8 @@ function requestPreloads() {
         spikes      : "./images/new/spike.png",
         gunshot     : "./images/gunshot.png",
         rocket      : "./images/new/rock.png",
+        bottleboli  : "./images/bottleboli.png",
+        coin        : "./images/goldcoin.png",
 
         tiles       : "./images/kubbur.jpg"
 
@@ -309,7 +311,9 @@ function preloadDone() {
     g_sprites.bullet = new Sprite(g_images.gunshot);
     g_sprites.bullet.scale = 2;
     g_sprites.rocket = new Sprite(g_images.rocket);
-
+    g_sprites.bottleboli = new Sprite(g_images.bottleboli);
+    g_sprites.bottleboli.scale = 4;
+    
     // Tiles
     g_sprites.tiles = new Sprite(g_images.tiles);
 
