@@ -32,6 +32,7 @@ _char   : [],
 _platforms : [],
 _enemyTwo : [],
 _enemyThree : [],
+_enemyFour : [],
 _rockets : [],
 _boss : [],
 _bossshoots : [],
@@ -58,10 +59,10 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._bullets, 
+    this._categories = [this._bullets,
         this._platforms, this._boss, this._bossshoots,
         this._spikes, this._healthP,
-        this._enemyTwo, this._enemyThree, this._rockets,
+        this._enemyTwo, this._enemyThree, this._enemyFour, this._rockets,
         this._char];
 },
 
@@ -75,7 +76,7 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
             velY : velY,
             rotation : rotation
         }));
-    }   
+    }
 },
 
 fireRocket: function(cx, cy, velX, velY, rotation) {
@@ -95,7 +96,7 @@ fireBossShoot: function(cx, cy, velX, velY, rotation) {
         velX : velX,
         velY : velY,
         rotation : rotation
-    }));  
+    }));
 },
 
 generateChar : function(descr) {
@@ -112,6 +113,10 @@ generateEnemyTwo : function(descr) {
 
 generateEnemyThree : function(descr) {
     this._enemyThree.push(new enemyThree(descr));
+},
+
+generateEnemyFour : function(descr) {
+    this._enemyFour.push(new enemyFour(descr));
 },
 
 generateSpikes : function(descr) {
@@ -160,7 +165,7 @@ update: function(du) {
 
     if (this.isClear()) levelTransition.changeLevel();
 
-    if (this._char[0] != null) { 
+    if (this._char[0] != null) {
         animationHandle.update(this._char[0]);
         //We go to "background.js" and get the map
         background.canvasSpaceGame(background.getMap());
@@ -212,7 +217,8 @@ clearLevel: function() {
 isClear: function() {
     if (!this._boss[0] &&
         !this._enemyThree[0] &&
-        !this._enemyTwo[0]) {
+        !this._enemyTwo[0] &&
+        !this._enemyFour[0]) {
             return true;
     }
     return false;
