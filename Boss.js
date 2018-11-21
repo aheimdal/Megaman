@@ -14,7 +14,6 @@
 
 // A generic contructor which accepts an arbitrary descriptor object
 function Boss(descr) {
-
     // Common inherited setup logic from Entity
     this.setup(descr);
     
@@ -43,7 +42,7 @@ Boss.prototype.update = function (du) {
     this.damageHandler();
 
     if (this.health === 0) {
-        main.GameState = 0;
+        main.GameState = 4;
         return entityManager.KILL_ME_NOW;
     }
 
