@@ -22,7 +22,9 @@ changeLevel : function() {
                 break;
         case 4: this.setStageFour();
                 break;
-        case 5: this.setStageBoss();
+        case 5: this.setStageFive();
+                break;
+        case 6: this.setStageBoss();
                 break;
     }
 },
@@ -37,11 +39,7 @@ setStageZero : function() {
 
         });
     }
-    entityManager.generatePlatform({
-        cx:445,
-        cy:400,
-        scale:0.1
-    });
+
     entityManager.generatePlatform({
         cx:555,
         cy:400,
@@ -50,6 +48,17 @@ setStageZero : function() {
     entityManager.generatePlatform({
         cx:535,
         cy:250,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx:445,
+        cy:400,
+        scale:0.1
+    });
+
+    entityManager.generatePlatform({
+        cx:445,
+        cy:400,
         scale:0.1
     });
     entityManager.generatePlatform({
@@ -64,13 +73,9 @@ setStageZero : function() {
             scale:0.1
         });
     }
-    for (var i = 550; i<700; i+=25) {
+    for (var i = 600; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 520
-        })
-        entityManager.generateSpikes({
-            cx : i-270,
             cy : 520
         })
     }
@@ -312,27 +317,25 @@ setStageFour : function(){
             scale:0.1
         });
     }
-
-    /*entityManager.generatePlatform({
-        cx : 920,
-        cy : 246,
+    entityManager._char[0].cy = -45;
+},
+setStageFive : function(){
+    entityManager.generateEnemyThree({
+        cx : 100,
+        cy : 500,
+        floor : 500
+    });
+    entityManager.generatePlatform({
+        cx : 75,
+        cy : 450,
         scale:0.1
-    });*/
+    });
+    entityManager.generatePlatform({
+        cx : 25,
+        cy : 450,
+        scale:0.1
+    });
 
-    /*for (var i = 250; i<1000; i+=300) {
-        entityManager.generateSpikes({
-            cx : i,
-            cy : 540
-        })
-        entityManager.generateSpikes({
-            cx : i+25,
-            cy : 540
-        })
-        entityManager.generateSpikes({
-            cx : i+50,
-            cy : 540
-        })
-    }*/
 },
 
 setStageBoss : function() {

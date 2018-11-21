@@ -8,6 +8,7 @@ var g_lvl3 = false;
 var g_lvl4 = false;
 var g_lvl5 = false;
 var g_lvl6 = false;
+var g_lvl7 = false;
 
 var lvl1 = '1'.charCodeAt(0);
 var lvl2 = '2'.charCodeAt(0);
@@ -15,6 +16,7 @@ var lvl3 = '3'.charCodeAt(0);
 var lvl4 = '4'.charCodeAt(0);
 var lvl5 = '5'.charCodeAt(0);
 var lvl6 = '6'.charCodeAt(0);
+var lvl7 = '7'.charCodeAt(0);
 
 function render(ctx) {
 
@@ -25,7 +27,7 @@ function render(ctx) {
     if (eatKey(lvl4)) g_lvl4 = !g_lvl4;
     if (eatKey(lvl5)) g_lvl5 = !g_lvl5;
     if (eatKey(lvl6)) g_lvl6 = !g_lvl6;
-
+    if (eatKey(lvl7)) g_lvl7 = !g_lvl7;
 
     if (g_lvl1) {
         levelTransition.levelIndex = -1;
@@ -66,11 +68,20 @@ function render(ctx) {
 
     if (g_lvl6) {
         entityManager.clearLevel();
-        levelTransition.setStageBoss();
-        entityManager._char[0].cx = 50;
+        levelTransition.setStageFive();
+        entityManager._char[0].cx = 500;
         entityManager._char[0].cy = 502;
         levelTransition.levelIndex = 4;
         g_lvl6 = !g_lvl6;
+    }
+
+    if (g_lvl7) {
+        entityManager.clearLevel();
+        levelTransition.setStageBoss();
+        entityManager._char[0].cx = 50;
+        entityManager._char[0].cy = 502;
+        levelTransition.levelIndex = 5;
+        g_lvl7 = !g_lvl7;
     }
 
     // The core rendering of the actual game / simulation

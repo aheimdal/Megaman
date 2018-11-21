@@ -6,25 +6,25 @@
 
 var _nextMap = 0;
 //The backgrounds images
-this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png","images/sun.jpg","images/bossmap.jpg"];
+this.maps = ["images/cityscape2.png","images/cityscape3.png","images/cityscape3.png","images/cityscape.png","images/cityscape.png","images/cityscape.png","images/cityscape.png"];
 
 var background = {
 
     //Returns the next background image
     getMap: function() {
-        
+
         return maps[_nextMap];
     },
 
     setMap: function() {
-        
+
         _nextMap++;
     },
 
-    canvasSpaceGame: function(imgSrc) { 
+    canvasSpaceGame: function(imgSrc) {
         //This is our browser background
-        document.body.style.backgroundImage = "url('images/back02.jpg')"; 
-    
+        document.body.style.backgroundImage = "url('images/back02.jpg')";
+
         //Here we load the background
           var img=new Image();
           img.onload=start;
@@ -64,7 +64,7 @@ var background = {
                 ctx.drawImage(img, 170, 5);
                 ctx.drawImage(img, 225, 5);
             }
-       
+
         },
 
 };
