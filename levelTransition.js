@@ -32,7 +32,27 @@ changeLevel : function() {
 },
 
 setStageZero : function() {
-    for (var i = 550; i > 100; i -= 60) {
+
+  // platforms under ground spikes
+  for (var i = 300; i < 800; i += 60) {
+    entityManager.generatePlatform({
+        cx : i,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+25,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+50,
+        cy : 590,
+        scale:0.1
+    });
+  }
+    // Here is the wall
+    for (var i = 650; i > 100; i -= 60) {
         entityManager.generatePlatform({
             cx:500,
             cy:i,
@@ -75,22 +95,31 @@ setStageZero : function() {
             scale:0.1
         });
     }
-
-    for (var i = 25; i < 1000; i += 50) {
+    // First part  of ground
+    for (var i = -17; i < 325; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
+    // Second part of ground
+    for (var i = 717; i < 1050; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Ground spikes
     for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 532
+            cy : 550
         })
         entityManager.generateSpikes({
             cx : i-225,
-            cy : 532
+            cy : 550
         })
     }
     entityManager.generateEnemyThree({
@@ -471,7 +500,7 @@ setStageSix : function(){
         rightBound : 364,
         health : 10
     });
-    // platforms under spikes
+    // platforms under ground spikes
     entityManager.generatePlatform({
         cx : 425,
         cy : 590,
