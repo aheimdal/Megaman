@@ -95,6 +95,10 @@ enemyThree.prototype.movement = function(du) {
 enemyThree.prototype.maybeShoot = function () {
     if (this.shootTimer) {
         if (this.shootTimer == 75) {
+            var rand = util.randRange(0,3);
+            if (rand < 1) AudioBank.playSound(AudioBank.gobGrunt1);
+            else if (rand < 2) AudioBank.playSound(AudioBank.gobGrunt2);
+            else AudioBank.playSound(AudioBank.gobGrunt3);
             entityManager.fireRocket(
                 this.cx+this.velX*16,
                 this.cy-10,

@@ -19,23 +19,11 @@ function Rocket(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
-    this.fireSound.load();
-    this.fireSound.play();
-
-    
-/*
-    // Diagnostics to check inheritance stuff
-    this._RocketProperty = true;
-    console.dir(this);
-*/
+    AudioBank.playSound(AudioBank.goblinThrow);
 
 }
 
 Rocket.prototype = new Entity();
-
-// HACKED-IN AUDIO (no preloading)
-Rocket.prototype.fireSound = new Audio(
-    "sounds/rockEvaporate.ogg");
 
 // Initial, inheritable, default values
 Rocket.prototype.rotation = 0;
@@ -50,7 +38,6 @@ Rocket.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 Rocket.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
 
     this.lifeSpan -= du;
@@ -63,11 +50,9 @@ Rocket.prototype.update = function (du) {
         this.cy += this.velY * du;
     }
     
-    // TODO? NO, ACTUALLY, I JUST DID THIS BIT FOR YOU! :-)
-    //
+
     // Handle collisions
     //
-
     if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
     if (this._isDeadNow) {
         this._isDeadNow = false;
@@ -79,7 +64,7 @@ Rocket.prototype.update = function (du) {
         entityManager._char[0].kill();
         return entityManager.KILL_ME_NOW;
     }
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+
     spatialManager.register(this);
 };
 

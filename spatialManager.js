@@ -24,15 +24,9 @@ _nextSpatialID : 1, // make all valid IDs non-falsey (i.e. don't start at 0)
 
 _entities : [],
 
-// "PRIVATE" METHODS
-//
-// <none yet>
-
-
 // PUBLIC METHODS
 
 getNewSpatialID : function() {
-    // TODO: YOUR STUFF HERE!
 
     // Call a copy of our _spatialID
     var nextSpId = this._nextSpatialID;
@@ -46,8 +40,6 @@ register: function(entity) {
     var pos = entity.getPos();
     var spatialID = entity.getSpatialID();
 
-    // TODO: YOUR STUFF HERE!
-
     // Call object to add radius to object
     entity.radius = entity.getRadius();
     entity.posX = pos.posX;
@@ -59,7 +51,6 @@ register: function(entity) {
 unregister: function(entity) {
     var spatialID = entity.getSpatialID();
 
-    // TODO: YOUR STUFF HERE!
     // Delete radius from current object
     delete this._entities[spatialID];
 },
@@ -68,12 +59,10 @@ findEntityInRange: function(posX, posY, radius) {
     var my_Entity = 0;
 
     // Iterate through _entities array for each object on canvas
-    //console.log("bla bla")
     for (var ID in this._entities) {
-        //console.log("bla 3")
+
         var myEnt = this._entities[ID];
-        //console.log("1:"+myEnt.radius);
-        //console.log("2:"+radius);
+
         // If square() is within distSq space change myEnt to my_Entity
         if(util.square(myEnt.radius+radius) > util.distSq(posX, posY,
                                             myEnt.posX, myEnt.posY)){

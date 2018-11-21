@@ -19,16 +19,12 @@ function Platform(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.tiles;
-    //this.scale  = 0.1;
 
-    // Set normal drawing scale, and warp state off
-    //this._scale = 3;
 };
 
 Platform.prototype = new Entity();
 
 // Initial, inheritable, default values
-// Char.prototype.rotation = 0;
 Platform.prototype.cx = 170;
 Platform.prototype.cy = 450;
 Platform.prototype.radius = 25;

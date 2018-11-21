@@ -20,7 +20,9 @@ changeLevel : function() {
                 break;
         case 3: this.setStageThree();
                 break;
-        case 4: this.setStageBoss();
+        case 4: this.setStageFour();
+                break;
+        case 5: this.setStageBoss();
                 break;
     }
 },
@@ -41,6 +43,16 @@ setStageZero : function() {
         scale:0.1
     });
     entityManager.generatePlatform({
+        cx:555,
+        cy:400,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx:535,
+        cy:250,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
         cx:395,
         cy:400,
         scale: 0.1
@@ -52,9 +64,13 @@ setStageZero : function() {
             scale:0.1
         });
     }
-    for (var i = 600; i<700; i+=25) {
+    for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
+            cy : 520
+        })
+        entityManager.generateSpikes({
+            cx : i-270,
             cy : 520
         })
     }
@@ -165,7 +181,6 @@ setStageTwo : function() {
 setStageThree : function() {
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = 0;
-    entityManager._char[0].fall();
     for (var i = 375; i<550; i+=50) {
         entityManager.generatePlatform({
             cx : 400,
@@ -234,6 +249,90 @@ setStageThree : function() {
         rightBound : 900,
         health : 10
     });
+},
+setStageFour : function(){
+    entityManager.generateEnemyThree({
+        cx : 465,
+        cy : 354,
+        floor : 354
+    });
+    entityManager.generateEnemyThree({
+        cx : 805,
+        cy : 354,
+        floor : 354
+    });
+    entityManager.generateEnemyThree({
+        cx : 979,
+        cy : 354,
+        floor : 354
+    });
+
+    entityManager.generateEnemyThree({
+        cx : 505,
+        cy : 130,
+        floor : 134
+    });
+    entityManager.generateEnemyThree({
+        cx : 845,
+        cy : 130,
+        floor : 134
+    });
+
+    for (var i = 12; i<1000; i+=75) {
+        entityManager.generateSpikes({
+            cx : i,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+25,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+50,
+            cy : 540
+        })
+    }
+    for (var i = 130; i < 1000; i+=170) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 420,
+            scale:0.1
+        });
+    }
+    entityManager.generatePlatform({
+        cx : 50,
+        cy : 120,
+        scale:0.1
+    });
+
+    for (var i = 170; i < 1000; i+=170) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 200,
+            scale:0.1
+        });
+    }
+
+    /*entityManager.generatePlatform({
+        cx : 920,
+        cy : 246,
+        scale:0.1
+    });*/
+
+    /*for (var i = 250; i<1000; i+=300) {
+        entityManager.generateSpikes({
+            cx : i,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+25,
+            cy : 540
+        })
+        entityManager.generateSpikes({
+            cx : i+50,
+            cy : 540
+        })
+    }*/
 },
 
 setStageBoss : function() {

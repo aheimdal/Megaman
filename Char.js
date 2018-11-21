@@ -45,19 +45,20 @@ Char.prototype.invincibilityTimer = 90;
 Char.prototype.godMode = false;
 
 Char.prototype.update = function (du) {
-    //console.log("isJumping gefur: "+this.isJumping());
+
     spatialManager.unregister(this);
 
     this.movement(du);
 
     this.calculateMovement(du);
 
-    console.log(this.getRadius());
-
     this.healthManage();
 
     if (this.health === 0){
         main.GameState = 3;
+        AudioBank.playSound(AudioBank.charDeath);
+        AudioBank.pauseSong();
+        AudioBank.playSong(1);
         return entityManager.KILL_ME_NOW;
     }
 
@@ -114,7 +115,7 @@ Char.prototype.movement = function (du) {
 
     //Calculates if Char is jumping
     if (keys[this.KEY_JUMP]) {
-        if (this.isGrounded() /*&& !this.isJumping()*/) {
+        if (this.isGrounded()) {
             this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
             this.velY = this.NOMINAL_IJUMP * du; //Initial velocity increase
         } else if (this.JUMP_INIT) {
@@ -159,13 +160,13 @@ Char.prototype.calculateMovement = function (du) {
 };
 
 Char.prototype.healthManage = function () {
+    if (this.health > 5) this.health = 5;
     if (eatKey(this.KEY_GOD)) {
         this.godMode = !this.godMode;
         this.invincibility++;
         console.log(this.godMode);
     }
     if (!this.godMode) {
-        if (this.health > 5) this.health = 5;
         if (this.invincibility > 0) this.invincibility--;
 
         if (this._isDeadNow) {
@@ -181,14 +182,13 @@ Char.prototype.healthManage = function () {
 
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
-Char.prototype.canShoot = true;
 
 Char.prototype.maybeFireBullet = function () {
 
     if (!(this.invincibility > this.invincibilityTimer-30)) {
 
-    if (eatKey(this.KEY_FIRE) && this.canShoot === true) {
-        //this.canShoot = false;
+    if (eatKey(this.KEY_FIRE)) {
+
         if (this.CHAR_FACING === 1) {var constant = 55}
         else {var constant = -55}
         this.CHAR_SHOOT = true;
@@ -292,9 +292,4 @@ Char.prototype.render = function (ctx) {
 
     this.sprite.scale = origScale;
     ctx.globalAlpha = 1;
-
-    /*ctx.fillStyle="black";
-    ctx.beginPath();
-    ctx.arc(this.cx,this.cy,45,0,2*Math.PI);
-    ctx.stroke();*/
 };
