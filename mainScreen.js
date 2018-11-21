@@ -59,7 +59,7 @@ startScreen.render = function(g_ctx)
 
 function startGame(g_ctx){
     main.GameState = 1;
-    AudioBank.playSong(2);
+    AudioBank.playSong(3);
 }
 
 function controlsMenu(g_ctx){

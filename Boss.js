@@ -16,7 +16,7 @@
 function Boss(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
-    
+
     // Default sprite and scale, if not otherwise specified
     this.sprite = g_sprites.BossL[1];
     this.scale  = 5;
@@ -110,7 +110,7 @@ Boss.prototype.movementPhaseTwo = function (du) {
     }
     if (this.jumpTimer) this.jumpTimer--;
     if (this.cy === 470 && this.jumpTimer === 0) {
-        this.jumpTimer = 100 * (this.health/50); 
+        this.jumpTimer = 100 * (this.health/50);
         this.velY = -19;
     }
 
@@ -137,7 +137,7 @@ Boss.prototype.movementPhaseThree = function (du) {
     this.velX = this.speed;
     if (this.velX < 0) this.bossFacing = -1;
     else this.bossFacing = 1;
-    
+
 };
 
 Boss.prototype.calculateMovementReal = function (du) {
@@ -146,7 +146,7 @@ Boss.prototype.calculateMovementReal = function (du) {
         this.cy < 470) {
         this.cx += this.velX * du;
     }
-    if (this.cy < 470) this.velY += 1; 
+    if (this.cy < 470) this.velY += 1;
     this.cy += this.velY * du;
     if (this.cy > 470) {
         this.cy = 470;
@@ -187,9 +187,9 @@ Boss.prototype.phase = function () {
 };
 
 Boss.prototype.status = function () {
-    var isShooting = 
+    var isShooting =
         this.shootTimer < 20 ||
-        this.shootTimer > 
+        this.shootTimer >
         40 * ((this.health*0.06666)+1/1) - 20;
     var isMoving =
         (this.shootTimer >= 20 &&
@@ -199,7 +199,7 @@ Boss.prototype.status = function () {
             isMoving,    //True if moving, else false
             isShooting,         //True if shooting, else false
             (this.cy === 470),    //True if on grounds, else jumping/falling
-            false];  
+            false];
 };
 
 Boss.prototype.changeSprite = function(varImage) {
