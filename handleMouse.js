@@ -42,6 +42,13 @@ function handleMouse(evt) {
        mainScreen(); 
     }
 
+    if(g_mouseX >= 550 && g_mouseY >= 450 && g_mouseX <= 860 && g_mouseY <= 530){
+        startGame(); 
+     }
+ 
+     if(g_mouseX >= 135 && g_mouseY >= 450 && g_mouseX <= 470 && g_mouseY <= 530){
+        mainScreen(); 
+     }
 }
 
 // Handle "down" and "move" events the same way.
