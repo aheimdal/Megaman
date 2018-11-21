@@ -11,6 +11,7 @@ var AudioBank = {
     //Mute variable
     isMuted : false,
     savedSong : -1,
+    savedShot : 0,
 
     //Songs
     songOne     : new Audio("sounds/songs/megaLag1.ogg"),
@@ -19,7 +20,11 @@ var AudioBank = {
     songFour    : new Audio("sounds/songs/Off Limits.ogg"),
 
     //Projectile sounds
-    bullet : new Audio("sounds/gunsounds/luger.wav"),
+    bullet :  [
+        new Audio("sounds/gunsounds/luger.wav"),
+        new Audio("sounds/gunsounds/luger.wav"),
+        new Audio("sounds/gunsounds/luger.wav")
+    ],
 
     //Goblin sounds
     gobGrunt1 : new Audio("sounds/goblins/goblin-2.wav"),
@@ -37,8 +42,14 @@ var AudioBank = {
     charDeath : new Audio("sounds/die.wav"),
 
     playSound : function (choice) {
-        //choice.load();
-        if (!this.isMuted) choice.play();
+        if (this.isMuted) return;
+        if (choice === this.bullet) {
+                this.savedShot++;
+                if (this.savedShot > 2) this.savedShot = 0;
+                choice = this.bullet[this.savedShot];
+                choice.load();
+            }
+        choice.play();
     },
 
     playSong : function (x) {

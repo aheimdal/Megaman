@@ -122,7 +122,7 @@ main._requestNextIteration = function () {
 
 // Mainloop-level debug-rendering
 
-var TOGGLE_MUTE = 'T'.charCodeAt(0);
+var TOGGLE_MUTE = 'M'.charCodeAt(0);
 
 main._doTimerShow = false;
 
