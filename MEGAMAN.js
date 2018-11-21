@@ -211,8 +211,8 @@ function requestPreloads() {
         bossStLsr3  : "./images/new/hugrun08l.png",
         bossStRj    : "./images/new/hugrun09.png",
         bossStLj    : "./images/new/hugrun09l.png",
-        bossStRsj   : "./images/new/hugrun010.png",
-        bossStLsj   : "./images/new/hugrun010l.png",
+        bossStRsj   : "./images/new/hugrun10.png",
+        bossStLsj   : "./images/new/hugrun10l.png",
 
         healthPickup: "./images/new/healthPickup.png",
         spikes      : "./images/new/spike.png",
