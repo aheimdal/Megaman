@@ -14,8 +14,13 @@ update : function(obj) {
     var status = obj.status();
     var pick = 0;
 
-    if (status[0] === 1) {var direction = g_sprites.CharR;}
-    else {var direction = g_sprites.CharL;}
+    if (obj === entityManager._char[0]) {
+        if (status[0] === 1) {var direction = g_sprites.CharR;}
+        else {var direction = g_sprites.CharL;}
+    } else {
+        if (status[0] === 1) {var direction = g_sprites.BossR;}
+        else {var direction = g_sprites.BossL;}
+    }
     
     var moving = status[1];
     var shooting = status[2];
