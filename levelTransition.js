@@ -41,12 +41,12 @@ setStageZero : function() {
         scale:0.1
     });
     entityManager.generatePlatform({
-        cx : i+25,
+        cx : i+50,
         cy : 590,
         scale:0.1
     });
     entityManager.generatePlatform({
-        cx : i+50,
+        cx : i+100,
         cy : 590,
         scale:0.1
     });
@@ -192,6 +192,24 @@ setStageOne : function() {
 },
 
 setStageTwo : function() {
+  // platforms under ground spikes
+  for (var i = 100; i < 1000; i += 150) {
+    entityManager.generatePlatform({
+        cx : i,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+50,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+100,
+        cy : 590,
+        scale:0.1
+    });
+  }
     entityManager.generateEnemyTwo({
         cx : 850,
         cy : 502,
@@ -199,7 +217,32 @@ setStageTwo : function() {
         rightBound : 900,
         health : 10
     });
-    for (var i = 25; i < 1000; i += 50) {
+    // Here is the first part of the floor
+    for (var i = 0; i < 235; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the second part of the floor
+    for (var i = 348; i < 530; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the third part of the floor
+    for (var i = 645; i < 838; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the fourth part of the floor
+    for (var i = 946; i < 1050; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -230,15 +273,15 @@ setStageTwo : function() {
     for (var i = 250; i<1000; i+=300) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 532
+            cy : 550
         })
         entityManager.generateSpikes({
             cx : i+25,
-            cy : 532
+            cy : 550
         })
         entityManager.generateSpikes({
             cx : i+50,
-            cy : 532
+            cy : 550
         })
     }
 },
