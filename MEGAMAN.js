@@ -221,7 +221,8 @@ function requestPreloads() {
         bottleboli  : "./images/bottleboli.png",
         coin        : "./images/goldcoin.png",
 
-        tiles       : "./images/kubbur.jpg"
+        tiles       : "./images/kubbur.jpg",
+        tiles2      : "./images/kubbur2.jpg"
 
 
     };
@@ -316,6 +317,7 @@ function preloadDone() {
     
     // Tiles
     g_sprites.tiles = new Sprite(g_images.tiles);
+    g_sprites.tiles2 = new Sprite(g_images.tiles2);
 
     createInitialChar();
 
