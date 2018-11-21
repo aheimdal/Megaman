@@ -290,6 +290,7 @@ setStageTwo : function() {
 },
 
 setStageThree : function() {
+    // Set where the charcter drops
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = 0;
     for (var i = 375; i<550; i+=50) {
@@ -442,6 +443,7 @@ setStageFour : function(){
     entityManager._char[0].cy = -45;
 },
 setStageFive : function(){
+    // Set where the charcter drops
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = -45;
     entityManager.generateEnemyFour({
@@ -498,6 +500,7 @@ setStageFive : function(){
             scale:0.1
         });
     }
+    //Here is the second floor on the left
     entityManager.generatePlatform({
         cx : 75,
         cy : 450,
@@ -508,6 +511,7 @@ setStageFive : function(){
         cy : 450,
         scale:0.1
     });
+    // Here is the top floor
     for (var i = 400; i < 600; i += 50) {
         entityManager.generatePlatform({
             cx : i,
@@ -519,8 +523,10 @@ setStageFive : function(){
 },
 
 setStageSix : function(){
+    // Set where the charcter drops
     entityManager._char[0].cx = 75;
     entityManager._char[0].cy = -45;
+    // Here are two goblins that don't jump
     entityManager.generateEnemyFour({
         cx : 240,
         cy : 314,
@@ -532,6 +538,7 @@ setStageSix : function(){
         cy : 314,
         floor : 314
     });
+    // Here are two golems
     entityManager.generateEnemyTwo({
         cx : 800,
         cy : 500,
@@ -656,19 +663,21 @@ setStageSix : function(){
     }
 },
 setStageSeven : function(){
+    // Set where the charcter drops
     entityManager._char[0].cx = 50;
     entityManager._char[0].cy = 503;
+    // Here are two goblins that don't jump
     entityManager.generateEnemyFour({
         cx : 75,
         cy : 100,
         floor : 100
     });
-
     entityManager.generateEnemyFour({
         cx : 950,
         cy : 100,
         floor : 100
     });
+    // Here are two golems
     entityManager.generateEnemyTwo({
         cx : 380,
         cy : 260,
@@ -683,6 +692,7 @@ setStageSeven : function(){
         rightBound : 650,
         health : 10
     });
+    // Here are two goblins that jump
     entityManager.generateEnemyThree({
         cx : 205,
         cy : 355,
@@ -759,7 +769,9 @@ setStageSeven : function(){
     }
 },
 
+// Here is the boss level
 setStageBoss : function() {
+  // Here is the ground
   for (var i = 25; i < 1000; i += 50) {
       entityManager.generatePlatform({
           cx : i,
@@ -767,6 +779,7 @@ setStageBoss : function() {
           scale:0.1
       });
   }
+    // Here is the boss generation
     entityManager.generateBoss();
 },
 

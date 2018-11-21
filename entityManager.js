@@ -174,6 +174,7 @@ update: function(du) {
     }
         else{
             createInitialChar();
+            levelTransition.levelIndex -=2;
         }
 
 },

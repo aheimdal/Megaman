@@ -338,7 +338,7 @@ function preloadDone() {
 
     main.init();
 
-    levelTransition.changeLevel();
+    //levelTransition.changeLevel();
 
 }
 

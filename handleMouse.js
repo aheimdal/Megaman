@@ -53,8 +53,9 @@ function handleMouse(evt) {
      if(g_mouseX >= 180 && g_mouseY >= 378 && g_mouseX <= 418 && g_mouseY <= 400){
         if (main.GameState === 4) mainScreen();
      }
+
      if(g_mouseX >= 637 && g_mouseY >= 378 && g_mouseX <= 765 && g_mouseY <= 400){
-        if (main.GameState === 4) mainScreen();
+        if (main.GameState === 4) startGame(); 
      }
 }
 

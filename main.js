@@ -67,6 +67,8 @@ main._iterCore = function (dt) {
         return;
     }
 
+    //console.log(this.GameState);
+
     if(this.GameState == 0){
         //mainScreen();
         //update(dt);
