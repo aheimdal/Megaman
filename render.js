@@ -74,7 +74,7 @@ function render(ctx) {
         entityManager.clearLevel();
         levelTransition.setStageFive();
         entityManager._char[0].cx = 500;
-        entityManager._char[0].cy = 502;
+        entityManager._char[0].cy = -45;
         levelTransition.levelIndex = 4;
         g_lvl6 = !g_lvl6;
     }

@@ -366,16 +366,57 @@ setStageFour : function(){
     entityManager._char[0].cy = -45;
 },
 setStageFive : function(){
-    entityManager.generateEnemyThree({
-        cx : 100,
-        cy : 500,
-        floor : 500
+    entityManager.generateEnemyFour({
+        cx : 240,
+        cy : 507,
+        floor : 507
+    });
+    entityManager.generateEnemyFour({
+        cx : 450,
+        cy : 507,
+        floor : 507
+    });
+    entityManager.generateEnemyFour({
+        cx : 890,
+        cy : 507,
+        floor : 507
+    });
+    entityManager.generateEnemyFour({
+        cx : 50,
+        cy : 383,
+        floor : 383
+    });
+    entityManager.generateEnemyFour({
+        cx : 960,
+        cy : 383,
+        floor : 383
     });
 
     for (var i = 25; i < 1000; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
+            scale:0.1
+        });
+    }
+    for (var i = 300; i < 450; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 450,
+            scale:0.1
+        });
+    }
+    for (var i = 620; i < 750; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 450,
+            scale:0.1
+        });
+    }
+    for (var i = 940; i < 1050; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 450,
             scale:0.1
         });
     }
@@ -389,6 +430,13 @@ setStageFive : function(){
         cy : 450,
         scale:0.1
     });
+    for (var i = 400; i < 600; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 300,
+            scale:0.1
+        });
+    }
 
 },
 
