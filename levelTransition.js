@@ -30,7 +30,7 @@ changeLevel : function() {
 },
 
 setStageZero : function() {
-    for (var i = 500; i > 100; i -= 60) {
+    for (var i = 550; i > 100; i -= 60) {
         entityManager.generatePlatform({
             cx:500,
             cy:i,
@@ -39,6 +39,12 @@ setStageZero : function() {
 
         });
     }
+
+    /*entityManager.generatePlatform({
+        cx:555,
+        cy:500,
+        scale:0.1
+    });*/
 
     entityManager.generatePlatform({
         cx:555,
@@ -73,10 +79,18 @@ setStageZero : function() {
             scale:0.1
         });
     }
+
+    for (var i = 25; i < 1000; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
     for (var i = 600; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 520
+            cy : 532
         })
     }
     entityManager.generateEnemyThree({
