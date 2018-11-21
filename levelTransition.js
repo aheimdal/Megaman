@@ -8,6 +8,7 @@ levelIndex : -1,
 changeLevel : function() {
     this.levelIndex++;
     entityManager.clearLevel();
+    if (!entityManager._char[0]) return;
     entityManager._char[0].cx = 50;
     entityManager._char[0].cy = 502;
     if (this.levelIndex >= 0) background.canvasSpaceGame(background.setMap(this.levelIndex));
@@ -768,7 +769,5 @@ setStageBoss : function() {
   }
     entityManager.generateBoss();
 },
-
-
 
 }
