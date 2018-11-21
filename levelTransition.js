@@ -98,8 +98,8 @@ setStageZero : function() {
     });
     entityManager.generateEnemyThree({
         cx : 930,
-        cy : 500,
-        floor : 500
+        cy : 508,
+        floor : 508
     });
 },
 
@@ -130,7 +130,7 @@ setStageOne : function() {
 
     entityManager.generateEnemyTwo({
         cx : 600,
-        cy : 500,
+        cy : 502,
         leftBound : 300,
         rightBound : 900
     });
@@ -154,7 +154,7 @@ setStageOne : function() {
     });
     entityManager.generateEnemyTwo({
         cx : 300,
-        cy : 100,
+        cy : 130,
         leftBound : 180,
         rightBound : 520
     })
@@ -163,6 +163,7 @@ setStageOne : function() {
 setStageTwo : function() {
     entityManager.generateEnemyTwo({
         cx : 850,
+        cy : 502,
         leftBound : 100,
         rightBound : 900,
         health : 10

@@ -22,7 +22,7 @@ function enemyTwo(descr) {
 
     // Default sprite and scale, if not otherwise specified
     this.sprite = g_sprites.golem[0];
-    this.scale  = 5;
+    this.scale  = 3;
 
 };
 
@@ -75,7 +75,7 @@ enemyTwo.prototype.update = function (du) {
 };
 
 enemyTwo.prototype.getRadius = function () {
-    return 68;
+    return 40.8;
 };
 
 enemyTwo.prototype.takeBulletHit = function () {

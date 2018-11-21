@@ -15,8 +15,14 @@ update : function(obj) {
     var pick = 0;
 
     if (obj === entityManager._char[0]) {
-        if (status[0] === 1) {var direction = g_sprites.CharR;}
-        else {var direction = g_sprites.CharL;}
+        if (status[0] === 1) {
+            var direction = g_sprites.CharR;
+            if (this.runCounter > 0) {this.runCounter-=2;}
+            else {this.runCounter = 0;}}
+        else {
+            var direction = g_sprites.CharL;
+            if (this.runCounter > 0) {this.runCounter-=2;}
+            else {this.runCounter = 0;}}
     } else {
         if (status[0] === 1) {var direction = g_sprites.BossR;}
         else {var direction = g_sprites.BossL;}
@@ -36,10 +42,10 @@ update : function(obj) {
             else {pick = 0};
         } else {
             if (shooting) {
-                pick = this.cycle(5,6,7);
+                pick = this.cycle(6,5,7);
             }
             else {
-                pick = this.cycle(1,2,3);
+                pick = this.cycle(2,1,3);
             }
         }
     }
@@ -49,9 +55,6 @@ update : function(obj) {
         }
         else pick = 10;
     }
-
-    if (this.runCounter > 0) {this.runCounter-=2;}
-    else {this.runCounter = 0;}
 
     obj.changeSprite(direction[pick]);
 },
@@ -79,9 +82,14 @@ cycle : function(x,y,z) {
         }
         else if (this.runCounter > 290 &&
             this.runCounter < 311) {return z;}
+        else if (this.runCounter <= 290) {
+            this.runCounter = 410;
+            return y;
+        } else if (this.runCounter > 390 &&
+            this.runCounter < 411) {return y;}
         else {
             this.runCounter = 0;
-            return z;
+            return y;
         }
 }
 

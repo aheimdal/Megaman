@@ -42,7 +42,10 @@ Boss.prototype.update = function (du) {
 
     this.damageHandler();
 
-    if (this.health === 0) return entityManager.KILL_ME_NOW;
+    if (this.health === 0) {
+        main.GameState = 0;
+        return entityManager.KILL_ME_NOW;
+    }
 
     this.phase();
     if (this.phaseNumber === 0) this.movementPhaseOne(du);
@@ -59,7 +62,7 @@ Boss.prototype.update = function (du) {
 };
 
 Boss.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    return 70;
 };
 
 Boss.prototype.takeBulletHit = function () {
