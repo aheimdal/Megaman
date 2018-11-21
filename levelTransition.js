@@ -8,6 +8,7 @@ levelIndex : -1,
 changeLevel : function() {
     this.levelIndex++;
     entityManager.clearLevel();
+    if (!entityManager._char[0]) return;
     entityManager._char[0].cx = 50;
     entityManager._char[0].cy = 502;
     if (this.levelIndex >= 0) background.canvasSpaceGame(background.setMap(this.levelIndex));
@@ -26,13 +27,35 @@ changeLevel : function() {
                 break;
         case 6: this.setStageSix();
                 break;
-        case 7: this.setStageBoss();
+        case 7: this.setStageSeven();
+                break;
+        case 8: this.setStageBoss();
                 break;
     }
 },
 
 setStageZero : function() {
-    for (var i = 550; i > 100; i -= 60) {
+
+  // platforms under ground spikes
+  for (var i = 300; i < 800; i += 60) {
+    entityManager.generatePlatform({
+        cx : i,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+50,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+100,
+        cy : 590,
+        scale:0.1
+    });
+  }
+    // Here is the wall
+    for (var i = 650; i > 100; i -= 60) {
         entityManager.generatePlatform({
             cx:500,
             cy:i,
@@ -75,22 +98,31 @@ setStageZero : function() {
             scale:0.1
         });
     }
-
-    for (var i = 25; i < 1000; i += 50) {
+    // First part  of ground
+    for (var i = -17; i < 325; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
+    // Second part of ground
+    for (var i = 717; i < 1050; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Ground spikes
     for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 532
+            cy : 550
         })
         entityManager.generateSpikes({
             cx : i-225,
-            cy : 532
+            cy : 550
         })
     }
     entityManager.generateEnemyThree({
@@ -163,6 +195,24 @@ setStageOne : function() {
 },
 
 setStageTwo : function() {
+  // platforms under ground spikes
+  for (var i = 100; i < 1000; i += 150) {
+    entityManager.generatePlatform({
+        cx : i,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+50,
+        cy : 590,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : i+100,
+        cy : 590,
+        scale:0.1
+    });
+  }
     entityManager.generateEnemyTwo({
         cx : 850,
         cy : 502,
@@ -170,7 +220,32 @@ setStageTwo : function() {
         rightBound : 900,
         health : 10
     });
-    for (var i = 25; i < 1000; i += 50) {
+    // Here is the first part of the floor
+    for (var i = 0; i < 235; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the second part of the floor
+    for (var i = 348; i < 530; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the third part of the floor
+    for (var i = 645; i < 838; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the fourth part of the floor
+    for (var i = 946; i < 1050; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -201,15 +276,15 @@ setStageTwo : function() {
     for (var i = 250; i<1000; i+=300) {
         entityManager.generateSpikes({
             cx : i,
-            cy : 532
+            cy : 550
         })
         entityManager.generateSpikes({
             cx : i+25,
-            cy : 532
+            cy : 550
         })
         entityManager.generateSpikes({
             cx : i+50,
-            cy : 532
+            cy : 550
         })
     }
 },
@@ -471,7 +546,7 @@ setStageSix : function(){
         rightBound : 364,
         health : 10
     });
-    // platforms under spikes
+    // platforms under ground spikes
     entityManager.generatePlatform({
         cx : 425,
         cy : 590,
@@ -580,6 +655,109 @@ setStageSix : function(){
         })
     }
 },
+setStageSeven : function(){
+    entityManager._char[0].cx = 50;
+    entityManager._char[0].cy = 503;
+    entityManager.generateEnemyFour({
+        cx : 75,
+        cy : 100,
+        floor : 100
+    });
+
+    entityManager.generateEnemyFour({
+        cx : 950,
+        cy : 100,
+        floor : 100
+    });
+    entityManager.generateEnemyTwo({
+        cx : 380,
+        cy : 260,
+        leftBound : 350,
+        rightBound : 650,
+        health : 10
+    });
+    entityManager.generateEnemyTwo({
+        cx : 640,
+        cy : 260,
+        leftBound : 350,
+        rightBound : 650,
+        health : 10
+    });
+    entityManager.generateEnemyThree({
+        cx : 205,
+        cy : 355,
+        floor : 358
+    });
+    entityManager.generateEnemyThree({
+        cx : 790,
+        cy : 358,
+        floor : 358
+    });
+
+    // Here is the ground
+    for (var i = 25; i < 1050; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 574,
+            scale:0.1
+        });
+    }
+    // Here is the first part of the top floor
+    for (var i = -25; i < 150; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 165,
+            scale:0.1
+        });
+    }
+    // Here is the second part of the top floor
+    for (var i = 900; i < 1050; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 165,
+            scale:0.1
+        });
+    }
+    // Here is the second floor
+    for (var i = 125; i < 925; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 525,
+            scale:0.1
+        });
+    }
+    // Here is the third floor
+    for (var i = 125; i < 925; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 475,
+            scale:0.1
+        });
+    }
+    for (var i = 200; i < 850; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 425,
+            scale:0.1
+        });
+    }
+    // Here is the fourth floor
+    for (var i = 275; i < 775; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 375,
+            scale:0.1
+        });
+    }
+    // Here is the fifth floor
+    for (var i = 350; i < 700; i += 50) {
+        entityManager.generatePlatform({
+            cx : i,
+            cy : 325,
+            scale:0.1
+        });
+    }
+},
 
 setStageBoss : function() {
   for (var i = 25; i < 1000; i += 50) {
@@ -591,7 +769,5 @@ setStageBoss : function() {
   }
     entityManager.generateBoss();
 },
-
-
 
 }

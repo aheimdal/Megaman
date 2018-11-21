@@ -20,7 +20,6 @@ function Bullet(descr) {
 
     // Make a noise when I am created (i.e. fired)
     AudioBank.playSound(AudioBank.bullet);
-
     
 /*
     // Diagnostics to check inheritance stuff

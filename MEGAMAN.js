@@ -88,8 +88,6 @@ var g_useGravity = false;
 var g_useAveVel = true;
 var g_renderSpatialDebug = false;
 
-var KEY_MIXED   = keyCode('M');;
-var KEY_GRAVITY = keyCode('G');
 var KEY_AVE_VEL = keyCode('V');
 var KEY_SPATIAL = keyCode('X');
 
@@ -104,11 +102,6 @@ var KEY_2 = keyCode('2');
 var KEY_K = keyCode('K');
 
 function processDiagnostics() {
-
-    if (eatKey(KEY_MIXED))
-        g_allowMixedActions = !g_allowMixedActions;
-
-    if (eatKey(KEY_GRAVITY)) g_useGravity = !g_useGravity;
 
     if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
 
@@ -221,7 +214,8 @@ function requestPreloads() {
         bottleboli  : "./images/bottleboli.png",
         coin        : "./images/goldcoin.png",
 
-        tiles       : "./images/kubbur.jpg"
+        tiles       : "./images/kubbur.jpg",
+        tiles2      : "./images/kubbur2.jpg"
 
 
     };
@@ -316,8 +310,16 @@ function preloadDone() {
     
     // Tiles
     g_sprites.tiles = new Sprite(g_images.tiles);
+    g_sprites.tiles2 = new Sprite(g_images.tiles2);
 
     createInitialChar();
+
+    /*
+    AudioBank.songOne.loop = true;
+    AudioBank.songTwo.loop = true;
+    AudioBank.songThree.loop = true;
+    AudioBank.songFour.loop = true;
+    */
 
     main.init();
 

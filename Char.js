@@ -32,7 +32,7 @@ Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
 Char.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
-Char.prototype.KEY_GOD   = 'O'.charCodeAt(0);
+Char.prototype.KEY_GOD   = 'G'.charCodeAt(0);
 
 // Initial, inheritable, default values
 Char.prototype.cx;
@@ -60,6 +60,7 @@ Char.prototype.update = function (du) {
         AudioBank.playSound(AudioBank.charDeath);
         AudioBank.pauseSong();
         AudioBank.playSong(1);
+        entityManager.clearLevel();
         return entityManager.KILL_ME_NOW;
     }
 
