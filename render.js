@@ -31,60 +31,43 @@ function render(ctx) {
 
     if (g_lvl1) {
         levelTransition.levelIndex = -1;
-        entityManager.clearLevel();
-        levelTransition.setStageZero();
+        levelTransition.changeLevel();
         g_lvl1 = !g_lvl1;
     }
 
     if (g_lvl2) {
-        entityManager.clearLevel();
-        levelTransition.setStageOne();
         levelTransition.levelIndex = 0;
-        entityManager._char[0].cx = 50;
-        entityManager._char[0].cy = 502;
+        levelTransition.changeLevel();
         g_lvl2 = !g_lvl2;
     }
 
     if (g_lvl3) {
-        entityManager.clearLevel();
-        levelTransition.setStageTwo();
         levelTransition.levelIndex = 1;
-        entityManager._char[0].cx = 50;
-        entityManager._char[0].cy = 502;
+        levelTransition.changeLevel();
         g_lvl3 = !g_lvl3;
     }
 
     if (g_lvl4) {
-        entityManager.clearLevel();
-        levelTransition.setStageThree();
         levelTransition.levelIndex = 2;
+        levelTransition.changeLevel();
         g_lvl4 = !g_lvl4;
     }
 
     if (g_lvl5) {
-        entityManager.clearLevel();
-        levelTransition.setStageFour();
-        entityManager._char[0].cx = 50;
-        entityManager._char[0].cy = -45;
         levelTransition.levelIndex = 3;
+        levelTransition.changeLevel();
         g_lvl5 = !g_lvl5;
     }
 
     if (g_lvl6) {
-        entityManager.clearLevel();
-        levelTransition.setStageFive();
-        entityManager._char[0].cx = 500;
-        entityManager._char[0].cy = -45;
         levelTransition.levelIndex = 4;
+        levelTransition.changeLevel();
         g_lvl6 = !g_lvl6;
     }
 
     if (g_lvl7) {
-        entityManager.clearLevel();
-        levelTransition.setStageBoss();
-        entityManager._char[0].cx = 50;
-        entityManager._char[0].cy = 502;
         levelTransition.levelIndex = 5;
+        levelTransition.changeLevel();
         g_lvl7 = !g_lvl7;
     }
 

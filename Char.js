@@ -43,6 +43,7 @@ Char.prototype.health = 5;
 Char.prototype.invincibility = 0;
 Char.prototype.invincibilityTimer = 90;
 Char.prototype.godMode = false;
+Char.prototype.radius = 45;
 
 Char.prototype.update = function (du) {
 
@@ -131,7 +132,6 @@ Char.prototype.movement = function (du) {
 };
 
 Char.prototype.calculateMovement = function (du) {
-    this.radius=45;
 
     var plat = this.isColliding();
     if (plat) plat.calculateMovement(this);
@@ -156,6 +156,9 @@ Char.prototype.calculateMovement = function (du) {
             this.ground();
         }
     }
+
+    if (this.cx < 50) this.cx = 50;
+    if (this.cx > 950) this.cx = 950;
 
 };
 
@@ -239,7 +242,7 @@ Char.prototype.stopX = function () {
 };
 
 Char.prototype.getRadius = function () {
-    return 35;
+    return this.radius;
 };
 
 Char.prototype.superKill = function () {

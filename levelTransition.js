@@ -10,7 +10,7 @@ changeLevel : function() {
     entityManager.clearLevel();
     entityManager._char[0].cx = 50;
     entityManager._char[0].cy = 502;
-    if (this.levelIndex) background.canvasSpaceGame(background.setMap());
+    if (this.levelIndex >= 0) background.canvasSpaceGame(background.setMap(this.levelIndex));
     switch (this.levelIndex) {
         case 0: this.setStageZero();
                 break;
@@ -39,12 +39,6 @@ setStageZero : function() {
 
         });
     }
-
-    /*entityManager.generatePlatform({
-        cx:555,
-        cy:500,
-        scale:0.1
-    });*/
 
     entityManager.generatePlatform({
         cx:555,
@@ -87,9 +81,13 @@ setStageZero : function() {
             scale:0.1
         });
     }
-    for (var i = 600; i<700; i+=25) {
+    for (var i = 550; i<700; i+=25) {
         entityManager.generateSpikes({
             cx : i,
+            cy : 532
+        })
+        entityManager.generateSpikes({
+            cx : i-225,
             cy : 532
         })
     }
@@ -100,8 +98,8 @@ setStageZero : function() {
     });
     entityManager.generateEnemyThree({
         cx : 930,
-        cy : 500,
-        floor : 500
+        cy : 508,
+        floor : 508
     });
 },
 
@@ -132,7 +130,7 @@ setStageOne : function() {
 
     entityManager.generateEnemyTwo({
         cx : 600,
-        cy : 500,
+        cy : 502,
         leftBound : 300,
         rightBound : 900
     });
@@ -156,7 +154,7 @@ setStageOne : function() {
     });
     entityManager.generateEnemyTwo({
         cx : 300,
-        cy : 100,
+        cy : 130,
         leftBound : 180,
         rightBound : 520
     })
@@ -165,6 +163,7 @@ setStageOne : function() {
 setStageTwo : function() {
     entityManager.generateEnemyTwo({
         cx : 850,
+        cy : 502,
         leftBound : 100,
         rightBound : 900,
         health : 10
@@ -366,6 +365,8 @@ setStageFour : function(){
     entityManager._char[0].cy = -45;
 },
 setStageFive : function(){
+    entityManager._char[0].cx = 500;
+    entityManager._char[0].cy = -45;
     entityManager.generateEnemyFour({
         cx : 240,
         cy : 507,

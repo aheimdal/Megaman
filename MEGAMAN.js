@@ -193,26 +193,26 @@ function requestPreloads() {
         goblinJR   : "./images/new/goblin3.png",
         goblinJL   : "./images/new/goblin3l.png",
 
-        bossStR     : "./images/new/hugrun01.png",
-        bossStL     : "./images/new/hugrun01l.png",
-        bossStRr1   : "./images/new/hugrun02.png",
-        bossStLr1   : "./images/new/hugrun02l.png",
-        bossStRr2   : "./images/new/hugrun03.png",
-        bossStLr2   : "./images/new/hugrun03l.png",
-        bossStRr3   : "./images/new/hugrun04.png",
-        bossStLr3   : "./images/new/hugrun04l.png",
-        bossStRs    : "./images/new/hugrun05.png",
-        bossStLs    : "./images/new/hugrun05l.png",
-        bossStRsr1  : "./images/new/hugrun06.png",
-        bossStLsr1  : "./images/new/hugrun06l.png",
-        bossStRsr2  : "./images/new/hugrun07.png",
-        bossStLsr2  : "./images/new/hugrun07l.png",
-        bossStRsr3  : "./images/new/hugrun08.png",
-        bossStLsr3  : "./images/new/hugrun08l.png",
-        bossStRj    : "./images/new/hugrun09.png",
-        bossStLj    : "./images/new/hugrun09l.png",
-        bossStRsj   : "./images/new/hugrun10.png",
-        bossStLsj   : "./images/new/hugrun10l.png",
+        bossR     : "./images/new/hugrun01.png",
+        bossL     : "./images/new/hugrun01l.png",
+        bossRr1   : "./images/new/hugrun03.png",
+        bossLr1   : "./images/new/hugrun03l.png",
+        bossRr2   : "./images/new/hugrun04.png",
+        bossLr2   : "./images/new/hugrun04l.png",
+        bossRr3   : "./images/new/hugrun05.png",
+        bossLr3   : "./images/new/hugrun05l.png",
+        bossRs    : "./images/new/hugrun02.png",
+        bossLs    : "./images/new/hugrun02l.png",
+        bossRsr1  : "./images/new/hugrun07.png",
+        bossLsr1  : "./images/new/hugrun07l.png",
+        bossRsr2  : "./images/new/hugrun08.png",
+        bossLsr2  : "./images/new/hugrun08l.png",
+        bossRsr3  : "./images/new/hugrun09.png",
+        bossLsr3  : "./images/new/hugrun09l.png",
+        bossRj    : "./images/new/hugrun06.png",
+        bossLj    : "./images/new/hugrun06l.png",
+        bossRsj   : "./images/new/hugrun10.png",
+        bossLsj   : "./images/new/hugrun10l.png",
 
         healthPickup: "./images/new/healthPickup.png",
         spikes      : "./images/new/spike.png",
@@ -260,6 +260,31 @@ function preloadDone() {
         g_sprites.hurtjump  = new Sprite(g_images.charLHJ)
     ];
 
+    g_sprites.BossR = [
+        g_sprites.stand     = new Sprite(g_images.bossR),
+        g_sprites.run1      = new Sprite(g_images.bossRr1),
+        g_sprites.run2      = new Sprite(g_images.bossRr2),
+        g_sprites.run3      = new Sprite(g_images.bossRr3),
+        g_sprites.shoot     = new Sprite(g_images.bossRs),
+        g_sprites.runshoot1 = new Sprite(g_images.bossRsr1),
+        g_sprites.runshoot2 = new Sprite(g_images.bossRsr2),
+        g_sprites.runshoot3 = new Sprite(g_images.bossRsr3),
+        g_sprites.jump      = new Sprite(g_images.bossRj),
+        g_sprites.jumpshoot = new Sprite(g_images.bossRsj)
+    ];
+    g_sprites.BossL = [
+        g_sprites.stand     = new Sprite(g_images.bossL),
+        g_sprites.run1      = new Sprite(g_images.bossLr1),
+        g_sprites.run2      = new Sprite(g_images.bossLr2),
+        g_sprites.run3      = new Sprite(g_images.bossLr3),
+        g_sprites.shoot     = new Sprite(g_images.bossLs),
+        g_sprites.runshoot1 = new Sprite(g_images.bossLsr1),
+        g_sprites.runshoot2 = new Sprite(g_images.bossLsr2),
+        g_sprites.runshoot3 = new Sprite(g_images.bossLsr3),
+        g_sprites.jump      = new Sprite(g_images.bossLj),
+        g_sprites.jumpshoot = new Sprite(g_images.bossLsj)
+    ];
+
     g_sprites.golem = [
         g_sprites.run1R = new Sprite(g_images.golemR1),
         g_sprites.run2R = new Sprite(g_images.golemR2),
@@ -276,11 +301,6 @@ function preloadDone() {
         g_sprites.shootL = new Sprite(g_images.goblinSL),
         g_sprites.jumpR = new Sprite(g_images.goblinJR),
         g_sprites.JumpL = new Sprite(g_images.goblinJL)
-    ];
-
-    g_sprites.boss = [
-        g_sprites.standR = new Sprite(g_images.bossStR),
-        g_sprites.standL = new Sprite(g_images.bossStL)
     ];
 
     g_sprites.spikes = new Sprite(g_images.spikes);

@@ -19,7 +19,7 @@ function Boss(descr) {
     this.setup(descr);
     
     // Default sprite and scale, if not otherwise specified
-    this.sprite = g_sprites.boss[1];
+    this.sprite = g_sprites.BossL[1];
     this.scale  = 5;
 
 };
@@ -42,20 +42,27 @@ Boss.prototype.update = function (du) {
 
     this.damageHandler();
 
-    if (this.health === 0) return entityManager.KILL_ME_NOW;
+    if (this.health === 0) {
+        main.GameState = 0;
+        return entityManager.KILL_ME_NOW;
+    }
 
     this.phase();
     if (this.phaseNumber === 0) this.movementPhaseOne(du);
     else if (this.phaseNumber === 1) this.movementPhaseTwo(du);
     else if (this.phaseNumber === 2)  this.movementPhaseThree(du);
 
+    console.log(this.cy);
+
     this.calculateMovementReal(du);
+
+    animationHandle.update(this);
 
     spatialManager.register(this);
 };
 
 Boss.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    return 70;
 };
 
 Boss.prototype.takeBulletHit = function () {
@@ -180,9 +187,29 @@ Boss.prototype.phase = function () {
     }
 };
 
+Boss.prototype.status = function () {
+    var isShooting = 
+        this.shootTimer < 20 ||
+        this.shootTimer > 
+        40 * ((this.health*0.06666)+1/1) - 20;
+    var isMoving =
+        (this.shootTimer >= 20 &&
+        this.shootTimer <= 40 * ((this.health*0.06666)+1/1)-20 ||
+        this.cy < 470)
+    return  [this.bossFacing,    //positive number for right, negative for left
+            isMoving,    //True if moving, else false
+            isShooting,         //True if shooting, else false
+            (this.cy === 470),    //True if on grounds, else jumping/falling
+            false];  
+};
+
+Boss.prototype.changeSprite = function(varImage) {
+    this.sprite = varImage;
+};
+
 Boss.prototype.calculateMovement = function () {
     return;
-}
+};
 
 Boss.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
