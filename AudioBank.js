@@ -10,12 +10,13 @@ var AudioBank = {
 
     //Mute variable
     isMuted : false,
+    savedSong : -1,
 
     //Songs
     songOne     : new Audio("sounds/songs/megaLag1.ogg"),
     songTwo     : new Audio("sounds/songs/megaLag2.ogg"),
-    songThree   : new Audio("sounds/songs/Superboy.mp3"),
-    songFour    : new Audio("sounds/songs/Off Limits.wav"),
+    songThree   : new Audio("sounds/songs/Superboy.ogg"),
+    songFour    : new Audio("sounds/songs/Off Limits.ogg"),
 
     //Projectile sounds
     bullet : new Audio("sounds/gunsounds/luger.wav"),
@@ -41,10 +42,8 @@ var AudioBank = {
     },
 
     playSong : function (x) {
-        this.songOne.loop = true;
-        this.songTwo.loop = true;
-        this.songThree.loop = true;
-        this.songFour.loop = true;
+        this.savedSong = x;
+        this.pauseSong();
         if (this.isMuted) {
             this.pauseSong();
             return;
@@ -53,6 +52,10 @@ var AudioBank = {
         if (x === 2) this.songTwo.play();
         if (x === 3) this.songThree.play();
         if (x === 4) this.songFour.play();
+    },
+
+    playCurrentSong : function () {
+        this.playSong(this.savedSong);
     },
 
     pauseSong : function () {
