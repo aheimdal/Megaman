@@ -319,6 +319,11 @@ function preloadDone() {
 
     createInitialChar();
 
+    AudioBank.songOne.loop = true;
+    AudioBank.songTwo.loop = true;
+    AudioBank.songThree.loop = true;
+    AudioBank.songFour.loop = true;
+
     main.init();
 
     levelTransition.changeLevel();

@@ -32,6 +32,7 @@ changeLevel : function() {
 },
 
 setStageZero : function() {
+    AudioBank.playSong(3);
     for (var i = 550; i > 100; i -= 60) {
         entityManager.generatePlatform({
             cx:500,
@@ -591,7 +592,5 @@ setStageBoss : function() {
   }
     entityManager.generateBoss();
 },
-
-
 
 }

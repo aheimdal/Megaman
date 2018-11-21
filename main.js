@@ -131,7 +131,7 @@ main._checkMute = function () {
     if (eatKey(TOGGLE_MUTE)) {
         AudioBank.isMuted = !AudioBank.isMuted;
         if (AudioBank.isMuted) AudioBank.pauseSong();
-        else AudioBank.playSong(2);
+        else AudioBank.playCurrentSong();
     }
 
 };
