@@ -15,6 +15,8 @@ startScreen.render = function(g_ctx)
         
         g_ctx.fillRect(0, 0, g_canvas.width, g_canvas.height);
         
+        g_sprites.tiles = new Sprite;
+
         // Title
 
         //console.log("Apply color to letters");
@@ -55,6 +57,8 @@ startScreen.render = function(g_ctx)
         //console.log("Apply black line around letters");
         g_ctx.strokeText(startScreen.controls, g_canvas.width/2-265, g_canvas.height/2+150);
    
+
+
     }
 
 function startGame(g_ctx){

@@ -178,6 +178,11 @@ function requestPreloads() {
         golemL2   : "./images/new/golem2l.png",
         golemTR   : "./images/new/golem3.png",
         golemTL   : "./images/new/golem3l.png",
+        // Golem hurt
+        golemHR   : "./images/new/golem4.png",
+        golemHL   : "./images/new/golem4l.png",
+        golemHRr   : "./images/new/golem5.png",
+        golemHLl   : "./images/new/golem5l.png",
 
         goblinStR  : "./images/new/goblin1.png",
         goblinStL  : "./images/new/goblin1l.png",
@@ -185,6 +190,9 @@ function requestPreloads() {
         goblinSL   : "./images/new/goblin2l.png",
         goblinJR   : "./images/new/goblin3.png",
         goblinJL   : "./images/new/goblin3l.png",
+        // Goblin hurt
+        goblinRH   : "./images/new/goblin4.png",
+        goblinLH   : "./images/new/goblin4l.png",
 
         bossR     : "./images/new/hugrun01.png",
         bossL     : "./images/new/hugrun01l.png",
@@ -214,8 +222,6 @@ function requestPreloads() {
         bottleboli  : "./images/bottleboli.png",
         coin        : "./images/goldcoin.png",
 
-        //Brown tiles
-        //tiles       : "./images/kubbur.jpg",
         //Dark tiles
         tiles      : "./images/kubbur2.png"
 
@@ -289,7 +295,12 @@ function preloadDone() {
         g_sprites.run1L = new Sprite(g_images.golemL1),
         g_sprites.run2L = new Sprite(g_images.golemL2),
         g_sprites.runTR = new Sprite(g_images.golemTR),
-        g_sprites.runTL = new Sprite(g_images.golemTL)
+        g_sprites.runTL = new Sprite(g_images.golemTL),
+        // Added hurt sprite
+        g_sprites.hurtR = new Sprite(g_images.golemHR),
+        g_sprites.hurtl = new Sprite(g_images.golemHL),
+        g_sprites.hurtRr = new Sprite(g_images.golemHRr),
+        g_sprites.hurtLl = new Sprite(g_images.golemHLl),
     ];
 
     g_sprites.goblin = [
@@ -298,7 +309,10 @@ function preloadDone() {
         g_sprites.shootR = new Sprite(g_images.goblinSR),
         g_sprites.shootL = new Sprite(g_images.goblinSL),
         g_sprites.jumpR = new Sprite(g_images.goblinJR),
-        g_sprites.JumpL = new Sprite(g_images.goblinJL)
+        g_sprites.JumpL = new Sprite(g_images.goblinJL),
+        // Added hurt sprite
+        g_sprites.hurtR = new Sprite(g_images.goblinRH),
+        g_sprites.hurtL = new Sprite(g_images.goblinLH)
     ];
 
     g_sprites.spikes = new Sprite(g_images.spikes);
@@ -312,7 +326,6 @@ function preloadDone() {
     
     // Tiles
     g_sprites.tiles = new Sprite(g_images.tiles);
-    //g_sprites.tiles2 = new Sprite(g_images.tiles2);
 
     createInitialChar();
 
