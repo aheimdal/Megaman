@@ -172,9 +172,9 @@ update: function(du) {
         background.imgHeart(this._char[0].health);
 
     }
-        else
-            main.gameOver();
-
+        else{
+            createInitialChar();
+        }
 
 },
 

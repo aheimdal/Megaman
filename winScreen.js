@@ -88,10 +88,12 @@ winScreen.render = function(g_ctx)
 
     }
 
-    function mainScreen(g_ctx){
+    function mainScreen(){
+        spatialManager.unregister(entityManager._char[0]);
+        
         main.GameState = 0;
-    }
+    };
     
-    function startGame(g_ctx){
+    function startGame(){
         main.GameState = 1;
-    }
+    };

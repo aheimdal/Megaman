@@ -19,7 +19,7 @@ var background = {
     setMap: function(numMap) {
 
         _nextMap = numMap;
-        console.log(numMap);
+       // console.log(numMap);
     },
 
     canvasSpaceGame: function(imgSrc) {

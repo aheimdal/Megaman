@@ -18,6 +18,9 @@ function handleMouse(evt) {
     
     g_mouseX = evt.clientX - g_canvas.offsetLeft;
     g_mouseY = evt.clientY - g_canvas.offsetTop;
+
+    //console.log(g_mouseX+"X")
+    //console.log(g_mouseY+"Y")
     
     // If no button is being pressed, then bail
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
@@ -40,11 +43,18 @@ function handleMouse(evt) {
     }
 
     if(g_mouseX >= 550 && g_mouseY >= 450 && g_mouseX <= 860 && g_mouseY <= 530){
-        if (main.GameState ===3 ) startGame(); 
+        if (main.GameState === 3) startGame(); 
      }
  
      if(g_mouseX >= 135 && g_mouseY >= 450 && g_mouseX <= 470 && g_mouseY <= 530){
-        if (main.GameState === 3) mainScreen(); 
+        if (main.GameState === 3) mainScreen();
+     }
+
+     if(g_mouseX >= 180 && g_mouseY >= 378 && g_mouseX <= 418 && g_mouseY <= 400){
+        if (main.GameState === 4) mainScreen();
+     }
+     if(g_mouseX >= 637 && g_mouseY >= 378 && g_mouseX <= 765 && g_mouseY <= 400){
+        if (main.GameState === 4) mainScreen();
      }
 }
 

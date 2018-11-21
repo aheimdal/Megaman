@@ -32,7 +32,7 @@ Boss.prototype.velY = 0;
 Boss.prototype.shootTimer = 50;
 Boss.prototype.jumpTimer = 30;
 Boss.prototype.speed;
-Boss.prototype.health = 75;
+Boss.prototype.health = 1;
 Boss.prototype.bossFacing;
 
 Boss.prototype.update = function (du) {
@@ -51,7 +51,7 @@ Boss.prototype.update = function (du) {
     else if (this.phaseNumber === 1) this.movementPhaseTwo(du);
     else if (this.phaseNumber === 2)  this.movementPhaseThree(du);
 
-    console.log(this.cy);
+    //console.log(this.cy);
 
     this.calculateMovementReal(du);
 
