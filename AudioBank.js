@@ -34,27 +34,30 @@ var AudioBank = {
     charDeath : new Audio("sounds/die.wav"),
 
     playSound : function (choice) {
-        choice.load();
+        //choice.load();
         if (!this.isMuted) choice.play();
     },
 
     playSong : function (x) {
         this.songOne.loop = true;
         this.songTwo.loop = true;
-        if (this.isMuted) return;
-        if (x === 1) {
-            this.songOne.load();
-            this.songOne.play();
+        this.songThree.loop = true;
+        this.songFour.loop = true;
+        if (this.isMuted) {
+            this.pauseSong();
+            return;
         }
-        if (x === 2) {
-            this.songTwo.load();
-            this.songTwo.play();
-        }
+        if (x === 1) this.songOne.play();
+        if (x === 2) this.songTwo.play();
+        if (x === 3) this.songThree.play();
+        if (x === 4) this.songFour.play();
     },
 
     pauseSong : function () {
         this.songOne.pause();
         this.songTwo.pause();
+        this.songThree.pause();
+        this.songFour.pause();
     }
 
 
