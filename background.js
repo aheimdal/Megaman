@@ -6,7 +6,7 @@
 
 var _nextMap = 0;
 //The backgrounds images
-this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png","images/bak8.png"];
+this.maps = ["images/bak6.png","images/bak7.png","images/bak9.png","images/bak8.png","images/sun.jpg","images/bossmap.jpg"];
 
 var background = {
 

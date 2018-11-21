@@ -29,17 +29,13 @@ function render(ctx) {
 
     if (g_lvl1) {
         levelTransition.levelIndex = -1;
-        entityManager.clearLevel();
-        levelTransition.setStageZero();
+        levelTransition.changeLevel();
         g_lvl1 = !g_lvl1;
     }
 
     if (g_lvl2) {
-        entityManager.clearLevel();
-        levelTransition.setStageOne();
         levelTransition.levelIndex = 0;
-        entityManager._char[0].cx = 50;
-        entityManager._char[0].cy = 502;
+        levelTransition.changeLevel();
         g_lvl2 = !g_lvl2;
     }
 
