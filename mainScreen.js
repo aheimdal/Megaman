@@ -15,7 +15,7 @@ startScreen.render = function(g_ctx)
         
         g_ctx.fillRect(0, 0, g_canvas.width, g_canvas.height);
         
-        g_sprites.tiles = new Sprite;
+    //        g_sprites.tiles = new Sprite;
 
         // Title
 
