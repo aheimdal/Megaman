@@ -2,14 +2,40 @@
 // Char STUFF
 // ==========
 
-"use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
-
-/*
-  0        1         2         3         4         5         6         7         8
-  12345678901234567890123456789012345678901234567890123456789012345678901234567890
-*/
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint object-shorthand: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+/* eslint linebreak-style: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint guard-for-in: 0 */
+/* eslint no-restricted-syntax: 0 */
+/* eslint block-scoped-var: 0 */
+/* eslint no-redeclare: 0 */
+/* eslint padded-blocks: 0 */
+/* eslint key-spacing: 0 */
+/* eslint indent: 0 */
+/* eslint new-cap: 0 */
+/* eslint no-continue: 0 */
+/* eslint no-useless-return: 0 */
+/* eslint prefer-destructuring: 0 */
+/* eslint no-unused-expressions: 0 */
+/* eslint brace-style: 0 */
+/* eslint no-multi-spaces: 0 */
+// ========================================
 
 
 // A generic contructor which accepts an arbitrary descriptor object
@@ -18,37 +44,31 @@ function Char(descr) {
   // Common inherited setup logic from Entity
   this.setup(descr);
 
-  this.rememberResets();
-
   // Default sprite, if not otherwise specified
   this.sprite = g_sprites.CharR[0];
 
   // Set normal drawing scale, and warp state off
   this._scale = 3;
-
-};
+}
 
 Char.prototype = new Entity();
 
-Char.prototype.rememberResets = function () {
-  // Gudjon fix
-  this.cx = 100;
-  this.cy = 502;
-};
-
 Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
-Char.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
-Char.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
-
-Char.prototype.KEY_FIRE   = ' '.charCodeAt(0);
+Char.prototype.KEY_LEFT = 'A'.charCodeAt(0);
+Char.prototype.KEY_RIGHT = 'D'.charCodeAt(0);
+Char.prototype.KEY_FIRE = ' '.charCodeAt(0);
+Char.prototype.KEY_GOD = 'G'.charCodeAt(0);
 
 // Initial, inheritable, default values
-Char.prototype.cx = 100;
-Char.prototype.cy = 502;
+Char.prototype.cx;
+Char.prototype.cy;
 Char.prototype.velX = 0;
 Char.prototype.velY = 0;
-Char.prototype.health = 3;
-Char.prototype.invincibility = 200;
+Char.prototype.health = 5;
+Char.prototype.invincibility = 0;
+Char.prototype.invincibilityTimer = 90;
+Char.prototype.godMode = false;
+Char.prototype.radius = 45;
 
 Char.prototype.update = function (du) {
 
@@ -58,169 +78,134 @@ Char.prototype.update = function (du) {
 
   this.calculateMovement(du);
 
-  if (this.invincibility > 0) this.invincibility--;
+  this.healthManage();
 
-  if (this._isDeadNow) {
-    this._isDeadNow = false;
-    if (this.invincibility <= 0) {
-      this.health--;
-      this.invincibility = 100;
-    }
+  if (this.health === 0) {
+    main.GameState = 3;
+    AudioBank.playSound(AudioBank.charDeath);
+    AudioBank.pauseSong();
+    AudioBank.playSong(1);
+    entityManager.clearLevel();
+    return entityManager.KILL_ME_NOW;
   }
-  if (this.health === 0) return entityManager.KILL_ME_NOW;
+
   // Handle firing
   this.maybeFireBullet();
 
-  spatialManager.register(this);
+  return spatialManager.register(this);
 };
 
 Char.prototype.NOMINAL_RIGHT = +1;
-Char.prototype.NOMINAL_LEFT  = -1;
+Char.prototype.NOMINAL_LEFT = -1;
 Char.prototype.NOMINAL_IJUMP = -10;
-Char.prototype.NOMINAL_JUMP  = -2;
-Char.prototype.NOMINAL_GRAVITY = +2;
+Char.prototype.NOMINAL_JUMP = -2;
+Char.prototype.NOMINAL_GRAVITY = +1;
 
 Char.prototype.CHAR_FACING = 1;
 Char.prototype.JUMP_INIT = true;
 Char.prototype.JUMP_TIMER = 0;
-Char.prototype.JUMP_TIMER_COUNT = 80;
-Char.prototype.MOVING = false;
+Char.prototype.JUMP_TIMER_COUNT = 15;
+Char.prototype.MOVING = true;
 
 Char.prototype.movement = function (du) {
 
-  var rx = this.sprite.width*this._scale/2;
-  var ry = this.sprite.height*this._scale/2;
-  var prevX = this.cx;
-  var nextX = prevX+this.velX;
-  var prevY = this.cy;
-  var nextY = prevY+this.velY;
-  var oldVelY = this.velY;
-
-  var booltop = entityManager._pallar[0].collidesWithTop(prevX, prevY, nextX, prevY, rx, ry);
-  // if (bool) {
-  //     this.velY *= 1;
-  //     this.JUMP_TIMER = 0;
-  // }
-  if (this.isFalling && booltop) {
-    console.log("true that character is inside paddle");
-    this.velY *= -1;
-    this.JUMP_TIMER = 0;
-  }
-  if (this.isJumping && (entityManager._pallar[0].collidesWithBottom(prevX, prevY, nextX, prevY, rx, ry))) {
-    this.velY *= -1;
-    this.JUMP_TIMER = 0;
-  }
-  // if (nextY - ry === 450) {
-  //     this.velY = 0;
-  // }
-
-  
-
-
-
-  //Calculates if character should go right
-  if (keys[this.KEY_RIGHT]) {
-    // var nextX = prevX + (this.NOMINAL_RIGHT * du);
-    nextX = prevX + this.velX;
-    this.MOVING = true;                 //Player is moving
-    if (this.cx < 970){
-      if (this.velX < 0) this.velX = 0; //Resets velocity if Char was going left
-      if (this.velX < 6) this.velX += this.NOMINAL_RIGHT; //Adds right velocity
-      if((entityManager._pallar[0].collidesWithLR(prevX, prevY, nextX, prevY, rx, ry))){
-        this.velX *= -1;
-      } 
-    } else {
-      this.velX = 0;
-    }
-    this.CHAR_FACING = 1; //Says Char is facing right
-  }
-
-
-
-
-  //Calculates if characted should go left if he's not going right
-  else if (keys[this.KEY_LEFT]) {
-    this.MOVING = true;
-    if (this.cx > 32){
-      //   var nextX = prevX + (this.NOMINAL_LEFT * du);
-      nextX = prevX + this.velX;
-      if (this.velX > 0)  this.velX = 0; //Resets velocity if Char was going right
-      if (this.velX > -6) this.velX += this.NOMINAL_LEFT * du; //Adds left velocity
-      if((entityManager._pallar[0].collidesWithLR(prevX, prevY, nextX, prevY, rx, ry))){
-        this.velX *= -1;
-      }
-    } else {
-      this.velX = 0;
-    }
-    this.CHAR_FACING = -1; //Says Char is facing left
+  if (this.invincibility > this.invincibilityTimer-30) {
+    this.velX = -3.5 * this.CHAR_FACING;
   } else {
-    this.velX = 0;
-    this.MOVING = false;
-  }
 
-
-
-
-
-  // =====================================================================================
-  // Bæta við collision hér til að láta character hoppa upp og haus snerti á bottom pallur
-  // =====================================================================================
-  //Calculates if Char is jumping
-  if (keys[this.KEY_JUMP]) {
-
-    if (this.isGrounded()) {
-      this.JUMP_TIMER = this.JUMP_TIMER_COUNT; //Sets for how long space can be pressed
-      this.velY = this.NOMINAL_IJUMP;  //Initial velocity increasy
-    } else if (this.JUMP_INIT) {
-      //Dynamic y-velocity added compared to the time
-      this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/this.JUMP_TIMER_COUNT));
-      // this.velY += this.NOMINAL_JUMP;
+    // Calculates if character should go right
+    if (keys[this.KEY_RIGHT]) {
+      this.MOVING = true; // Player is moving
+      if (this.cx < 970) {
+        if (this.velX < 0) this.velX = 0; // Resets velocity if Char was going left
+        if (this.velX < 6) this.velX += this.NOMINAL_RIGHT * du; // Adds right velocity
+      } else {
+        this.velX = 0;
+      }
+      this.CHAR_FACING = 1; // Says Char is facing right
     }
 
+    // Calculates if characted should go left if he's not going right
+    else if (keys[this.KEY_LEFT]) {
+      this.MOVING = true;
+      if (this.cx > 32) {
+        if (this.velX > 0) this.velX = 0; // Resets velocity if Char was going right
+        if (this.velX > -6) this.velX += this.NOMINAL_LEFT * du; // Adds left velocity
+      } else {
+        this.velX = 0;
+      }
+      this.CHAR_FACING = -1; // Says Char is facing left
+    } else {
+      this.velX = 0;
+      this.MOVING = false;
+    }
 
+    // Calculates if Char is jumping
+    if (keys[this.KEY_JUMP]) {
+      if (this.isGrounded()) {
+        this.JUMP_TIMER = this.JUMP_TIMER_COUNT; // Sets for how long space can be pressed
+        this.velY = this.NOMINAL_IJUMP * du; // Initial velocity increase
+      } else if (this.JUMP_INIT) {
+        // Dynamic y-velocity added compared to the time
+        this.velY += (this.NOMINAL_JUMP*(this.JUMP_TIMER/(this.JUMP_TIMER_COUNT))) * du;
+      }
+    }
+    if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) { // Checked if space was released early
+      this.JUMP_TIMER = 0;
+      this.JUMP_INIT = false;
+    }
   }
-  // if (this.JUMP_TIMER > 0 && !(keys[this.KEY_JUMP])) { //Checked if space was released early
-  //     this.JUMP_TIMER = 0;
-  //     this.JUMP_INIT = false;
-  // }
-
-
-
-
-
 };
 
-
 Char.prototype.calculateMovement = function (du) {
-  var prevX = this.cx;
-  var nextX = prevX + this.velX;
-  var prevY = this.cy;
-  var nextY = prevY + this.velY;
-  var rx = this.sprite.width*this._scale/2;
-  var ry = this.sprite.height*this._scale/2;
 
-  this.cx += this.velX; //x-coordinates updated
-  
-  //Only works with y-axis if he's not "grounded"
+  var plat = this.isColliding();
+  if (plat) plat.calculateMovement(this);
+  if (this.shouldFall()) {
+    this.fall();
+  }
+
+  this.cx += this.velX; // x-coordinates updated
+
+  // Only works with y-axis if he's not "grounded"
   if (!this.isGrounded()) {
+    this.cy += this.velY * du;
 
-    if (this.JUMP_TIMER > 0) this.JUMP_TIMER--;
+    if (this.JUMP_TIMER > 1) this.JUMP_TIMER--;
+    else {
+      this.JUMP_INIT = false;
+      this.JUMP_TIMER = 0;
+    }
     if (this.cy < 502) this.velY += this.NOMINAL_GRAVITY;
-    if (this.JUMP_TIMER <= 0) this.JUMP_INIT = false;
     if (this.cy >= 502) this.JUMP_INIT = true;
-    
-    // Ef character er fyrir ofan pallur þá tekur character cy sem cy af pallur og Y velocity er þá 0
-    // if(entityManager._pallar[0].collidesWithTop(prevX, prevY, nextX, prevY, rx, ry)) {
-    //     this.cy = entityManager._pallar[0].cy;
-    // }
-    // else this.cy += this.velY;
-
-    this.cy += this.velY;
     if (this.cy > 502) {
       this.ground();
     }
   }
 
+  if (this.cx < 50) this.cx = 50;
+  if (this.cx > 950) this.cx = 950;
+
+};
+
+Char.prototype.healthManage = function () {
+  if (this.health > 5) this.health = 5;
+  if (eatKey(this.KEY_GOD)) {
+    this.godMode = !this.godMode;
+    this.invincibility++; // This is God mode
+  }
+  if (!this.godMode) {
+    if (this.invincibility > 0) this.invincibility--;
+
+    if (this._isDeadNow) {
+      this._isDeadNow = false;
+      if (this.invincibility <= 0) {
+        this.health--;
+        background.imgHeart(this.health);
+        this.invincibility = this.invincibilityTimer;
+      }
+    }
+  }
 };
 
 Char.prototype.CHAR_SHOOT = false;
@@ -228,33 +213,36 @@ Char.prototype.CHAR_SHOOT_TIMER = 0;
 
 Char.prototype.maybeFireBullet = function () {
 
+  if (!(this.invincibility > this.invincibilityTimer-30)) {
 
+    if (eatKey(this.KEY_FIRE)) {
 
-  if (keys[this.KEY_FIRE]) {
-    if (this.CHAR_FACING === 1) {var constant = 55}
-    else {var constant = -55}
-    this.CHAR_SHOOT = true;
-    this.CHAR_SHOOT_TIMER = 45;
+      if (this.CHAR_FACING === 1) { var constant = 55; }
+      else { var constant = -55; }
+      this.CHAR_SHOOT = true;
+      this.CHAR_SHOOT_TIMER = 45;
 
-    entityManager.fireBullet(
-      this.cx+constant + 16*this.CHAR_FACING, this.cy-17,
-      12*this.CHAR_FACING, 0, 0);
-    
-  } else if (this.CHAR_SHOOT_TIMER <= 0) {
-    this.CHAR_SHOOT = false;
+      entityManager.fireBullet(this.cx+constant + 16*this.CHAR_FACING,
+                               this.cy-17,
+                               12*this.CHAR_FACING,
+                               0,
+                               0);
+    }
+
+    if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
+    if (this.CHAR_SHOOT_TIMER <= 0) {
+      this.CHAR_SHOOT = false;
+    }
   }
-
-  if (this.CHAR_SHOOT_TIMER > 0) this.CHAR_SHOOT_TIMER--;
-
 };
 
 Char.prototype.isGrounded = function () {
   if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
-  return false; 
+  return false;
 };
 
 Char.prototype.isFalling = function () {
-  if (this.JUMP_TIMER <= 0 && this.JUMP_INIT === false) return true;
+  if (this.velY > 0) return true;
   return false;
 };
 
@@ -270,23 +258,60 @@ Char.prototype.ground = function () {
   if (this.cy > 502) this.cy = 502;
 };
 
+Char.prototype.fall = function () {
+  this.JUMP_TIMER = 0;
+  this.JUMP_INIT = false;
+  this.velY = 0;
+};
+
+Char.prototype.stopX = function () {
+  this.velX = 0;
+};
+
 Char.prototype.getRadius = function () {
-  return (this.sprite.width / 2) * 0.9 *this._scale;
+  return this.radius;
+};
+
+Char.prototype.superKill = function () {
+  if (!this.godMode) this.health = 0;
 };
 
 
 Char.prototype.status = function () {
-  return  [this.CHAR_FACING,    //positive number for right, negative for left
-           this.MOVING,          //True if moving, else false
-           this.CHAR_SHOOT,      //True if shooting, else false
-           this.isGrounded()];   //True if on grounds, else jumping/falling
+  return [this.CHAR_FACING, // Positive number for right, negative for left
+          this.MOVING, // True if moving, else false
+          this.CHAR_SHOOT, // True if shooting, else false
+          this.isGrounded(), // True if on grounds, else jumping/falling
+          (this.invincibility > this.invincibilityTimer - 30)]; // True if hurt, else false
 };
 
-Char.prototype.changeSprite = function(varImage) {
+Char.prototype.changeSprite = function (varImage) {
   this.sprite = varImage;
 };
 
+Char.prototype.shouldFall = function () {
+  if (this.cy === 502) return false; // Ef á jörðinni false
+  // Ef hann er ekki 1px fyrir ofan(sem sagt grounded) kassa og fyrir ofan hann
+  for (var i = 0; i < entityManager._platforms.length; i++) {
+    // Ef 1px fyrir ofan
+    if (this.cy === (entityManager._platforms[i].cy - entityManager._platforms[i].radius - 46)) {
+      // Ef beint fyrir ofan, eki ská fyrir ofan
+      if ((this.cx + 45 > entityManager._platforms[i].cx - entityManager._platforms[i].radius)
+          && (this.cx - 45 < entityManager._platforms[i].cx + entityManager._platforms[i].radius)) {
+        return false;
+      }
+    }
+  }
+  if (this.isJumping()||this.isFalling()) return false;
+  if (!this.velY) return true;
+  return false;
+};
+
 Char.prototype.render = function (ctx) {
+  if (this.invincibility) { ctx.globalAlpha = 0.5; }
+  else { ctx.globalAlpha = 1; }
+
+
   var origScale = this.sprite.scale;
   // pass my scale into the sprite, for drawing
   this.sprite.scale = this._scale;
@@ -294,5 +319,5 @@ Char.prototype.render = function (ctx) {
   this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 
   this.sprite.scale = origScale;
+  ctx.globalAlpha = 1;
 };
-

@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <meta charset="UTF-8">
     <title>RUN GUN RENEGADE</title>
   </head>
   <body>
 
   <canvas id="myCanvas" width="1000" height="600" right = "400" margin-right = "-400"
-		style="position:absolute; left: 50%; margin-left: -500px; border: 1px solid black;">
+		style="position:absolute; font-family: 'VT323', monospace;left: 50%; margin-left: -500px; border: 1px solid black;">
 	Sorry, but your browser does not support the HTML5 canvas tag.
 	</canvas>
 
     <div id="output"></div>
 
     <script src="mainScreen.js"></script>
-    
+    <script src="controlsMenu.js"></script>
     <script src="background.js"></script>
     <script src="globals.js"></script>
     <script src="consts.js"></script>
     <script src="util.js"></script>
     <script src="keys.js"></script>
+    <script src="handleMouse.js"></script>
 
     <script src="spatialManager.js"></script>
     <script src="entityManager.js"></script>
+    <script src="levelTransition.js"></script>
+    <script src="AudioBank.js"></script>
 
     <script src="Sprite.js"></script>
 
     <script src="Entity.js"></script>
     <script src="Bullet.js"></script>
     <script src="Rocket.js"></script>
+    <script src="BossShoot.js"></script>
     <script src="Char.js"></script>
     <script src="animationHandle.js"></script>
-    <script src="Pallur.js"></script>    
+    <script src="Platform.js"></script>
     <script src="enemyTwo.js"></script>
     <script src="enemyThree.js"></script>
+    <script src="enemyFour.js"></script>
+    <script src="Boss.js"></script>
+    <script src="Spikes.js"></script>
+    <script src="HealthPickup.js"></script>
 
     <script src="update.js"></script>
     <script src="render.js"></script>
@@ -42,9 +51,9 @@
     <script src="imagesPreload.js"></script>
     <script src="main.js"></script>
 
-    <script src="MEGAMAN.js"></script>
-
     <script src="gameoverScreen.js"></script>
+    <script src="winScreen.js"></script>
+    <script src="MEGAMAN.js"></script>
 
   </body>
 </html>

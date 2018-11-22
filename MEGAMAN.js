@@ -29,17 +29,48 @@ implementation will work for the "obvious" approach, but you might
 need to tweak it if you do something "non-obvious" in yours.
 */
 
-"use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint object-shorthand: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+/* eslint linebreak-style: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint guard-for-in: 0 */
+/* eslint no-restricted-syntax: 0 */
+/* eslint block-scoped-var: 0 */
+/* eslint no-redeclare: 0 */
+/* eslint padded-blocks: 0 */
+/* eslint key-spacing: 0 */
+/* eslint indent: 0 */
+/* eslint new-cap: 0 */
+/* eslint no-continue: 0 */
+/* eslint no-useless-return: 0 */
+/* eslint prefer-destructuring: 0 */
+/* eslint no-unused-expressions: 0 */
+/* eslint brace-style: 0 */
+/* eslint no-multi-spaces: 0 */
+/* eslint no-lonely-if: 0 */
+/* eslint no-else-return: 0 */
+/* eslint no-mixed-operators: 0 */
+/* eslint one-var: 0 */
+/* eslint no-prototype-builtins: 0 */
+// ========================================
 
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
-
-/*
-0        1         2         3         4         5         6         7         8
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-*/
 
 var GameState = 0;
 
@@ -49,25 +80,11 @@ var GameState = 0;
 
 function createInitialChar() {
 
-    entityManager.generateChar({
-        // cx : 100,
-        // cy : 502
-    });
+  entityManager.generateChar({
+    cx : 100,
+    cy : 502,
+  });
 
-    entityManager.generatePallur({
-        // cx : 300,
-        // cy : 420
-    });
-
-}
-
-// =============
-// GATHER INPUTS
-// =============
-
-function gatherInputs() {
-    // Nothing to do here!
-    // The event handlers do everything we need for now.
 }
 
 
@@ -87,12 +104,12 @@ function gatherInputs() {
 
 function updateSimulation(du) {
 
-    processDiagnostics();
+  processDiagnostics();
 
-    entityManager.update(du);
+  entityManager.update(du);
 
-    // Prevent perpetual firing!
-    eatKey(Char.prototype.KEY_FIRE);
+  // Prevent perpetual firing!
+  eatKey(Char.prototype.KEY_FIRE);
 }
 
 // GAME-SPECIFIC DIAGNOSTICS
@@ -102,8 +119,6 @@ var g_useGravity = false;
 var g_useAveVel = true;
 var g_renderSpatialDebug = false;
 
-var KEY_MIXED   = keyCode('M');;
-var KEY_GRAVITY = keyCode('G');
 var KEY_AVE_VEL = keyCode('V');
 var KEY_SPATIAL = keyCode('X');
 
@@ -119,20 +134,15 @@ var KEY_K = keyCode('K');
 
 function processDiagnostics() {
 
-    if (eatKey(KEY_MIXED))
-        g_allowMixedActions = !g_allowMixedActions;
+  if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
 
-    if (eatKey(KEY_GRAVITY)) g_useGravity = !g_useGravity;
+  if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
 
-    if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
+  if (eatKey(KEY_HALT)) entityManager.haltShips();
 
-    if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
+  if (eatKey(KEY_RESET)) entityManager.resetShips();
 
-    if (eatKey(KEY_HALT)) entityManager.haltShips();
-
-    if (eatKey(KEY_RESET)) entityManager.resetShips();
-
-    if (eatKey(KEY_0)) entityManager.toggleRocks();
+  if (eatKey(KEY_0)) entityManager.toggleRocks();
 
 }
 
@@ -152,20 +162,10 @@ function processDiagnostics() {
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
-/*
-    if(startMenu){
-        mainScreen(ctx);
-    }
 
-    if(!startMenu){*/
-    entityManager.render(ctx);
-  /*  }
+  entityManager.render(ctx);
 
-    if(game_over){
-        gameoverScreen();        
-    }
-*/
-    if (g_renderSpatialDebug) spatialManager.render(ctx);
+  if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
 
@@ -177,75 +177,191 @@ var g_images = {};
 
 function requestPreloads() {
 
-    var requiredImages = {
-        charR     : "./images/new/joe1.png",
-        charL     : "./images/new/joe1l.png",
-        charRr1   : "./images/new/joe2.png",
-        charLr1   : "./images/new/joe2l.png",
-        charRr2   : "./images/new/joe3.png",
-        charLr2   : "./images/new/joe3l.png",
-        charRr3   : "./images/new/joe4.png",
-        charLr3   : "./images/new/joe4l.png",
-        charRs    : "./images/new/joe5.png",
-        charLs    : "./images/new/joe5l.png",
-        charRsr1  : "./images/new/joe6.png",
-        charLsr1  : "./images/new/joe6l.png",
-        charRsr2  : "./images/new/joe7.png",
-        charLsr2  : "./images/new/joe7l.png",
-        charRsr3  : "./images/new/joe8.png",
-        charLsr3  : "./images/new/joe8l.png",
-        charRj    : "./images/new/joe9.png",
-        charLj    : "./images/new/joe9l.png",
-        charRsj   : "./images/new/joe10.png",
-        charLsj   : "./images/new/joe10l.png",
+  var requiredImages = {
+    charR     : "./images/new/joe1.png",
+    charL     : "./images/new/joe1l.png",
+    charRr1   : "./images/new/joe2.png",
+    charLr1   : "./images/new/joe2l.png",
+    charRr2   : "./images/new/joe3.png",
+    charLr2   : "./images/new/joe3l.png",
+    charRr3   : "./images/new/joe4.png",
+    charLr3   : "./images/new/joe4l.png",
+    charRs    : "./images/new/joe5.png",
+    charLs    : "./images/new/joe5l.png",
+    charRsr1  : "./images/new/joe6.png",
+    charLsr1  : "./images/new/joe6l.png",
+    charRsr2  : "./images/new/joe7.png",
+    charLsr2  : "./images/new/joe7l.png",
+    charRsr3  : "./images/new/joe8.png",
+    charLsr3  : "./images/new/joe8l.png",
+    charRj    : "./images/new/joe9.png",
+    charLj    : "./images/new/joe9l.png",
+    charRsj   : "./images/new/joe10.png",
+    charLsj   : "./images/new/joe10l.png",
+    charRH    : "./images/new/joe12.png",
+    charLH    : "./images/new/joe12l.png",
+    charRHJ    : "./images/new/joe11.png",
+    charLHJ    : "./images/new/joe11l.png",
 
-        gunshot: "./images/gunshot.png",
-        rocket: "./images/joe9.png"
-    };
+    golemR1   : "./images/new/golem1.png",
+    golemL1   : "./images/new/golem1l.png",
+    golemR2   : "./images/new/golem2.png",
+    golemL2   : "./images/new/golem2l.png",
+    golemTR   : "./images/new/golem3.png",
+    golemTL   : "./images/new/golem3l.png",
+    // Golem hurt
+    golemHR   : "./images/new/golem4.png",
+    golemHL   : "./images/new/golem4l.png",
+    golemHRr   : "./images/new/golem5.png",
+    golemHLl   : "./images/new/golem5l.png",
 
-    imagesPreload(requiredImages, g_images, preloadDone);
+    goblinStR  : "./images/new/goblin1.png",
+    goblinStL  : "./images/new/goblin1l.png",
+    goblinSR   : "./images/new/goblin2.png",
+    goblinSL   : "./images/new/goblin2l.png",
+    goblinJR   : "./images/new/goblin3.png",
+    goblinJL   : "./images/new/goblin3l.png",
+    // Goblin hurt
+    goblinRH   : "./images/new/goblin4.png",
+    goblinLH   : "./images/new/goblin4l.png",
+
+    bossR     : "./images/new/hugrun01.png",
+    bossL     : "./images/new/hugrun01l.png",
+    bossRr1   : "./images/new/hugrun03.png",
+    bossLr1   : "./images/new/hugrun03l.png",
+    bossRr2   : "./images/new/hugrun04.png",
+    bossLr2   : "./images/new/hugrun04l.png",
+    bossRr3   : "./images/new/hugrun05.png",
+    bossLr3   : "./images/new/hugrun05l.png",
+    bossRs    : "./images/new/hugrun02.png",
+    bossLs    : "./images/new/hugrun02l.png",
+    bossRsr1  : "./images/new/hugrun07.png",
+    bossLsr1  : "./images/new/hugrun07l.png",
+    bossRsr2  : "./images/new/hugrun08.png",
+    bossLsr2  : "./images/new/hugrun08l.png",
+    bossRsr3  : "./images/new/hugrun09.png",
+    bossLsr3  : "./images/new/hugrun09l.png",
+    bossRj    : "./images/new/hugrun06.png",
+    bossLj    : "./images/new/hugrun06l.png",
+    bossRsj   : "./images/new/hugrun10.png",
+    bossLsj   : "./images/new/hugrun10l.png",
+
+    healthPickup: "./images/new/healthPickup.png",
+    spikes      : "./images/new/spike.png",
+    gunshot     : "./images/gunshot.png",
+    rocket      : "./images/new/rock.png",
+    bottleboli  : "./images/bottleboli.png",
+    coin        : "./images/goldcoin.png",
+
+    // Dark tiles
+    tiles      : "./images/kubbur2.png",
+
+
+  };
+
+  imagesPreload(requiredImages, g_images, preloadDone);
 }
 
 var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.CharR = [
-        g_sprites.stand     = new Sprite(g_images.charR),
-        g_sprites.run1      = new Sprite(g_images.charRr1),
-        g_sprites.run2      = new Sprite(g_images.charRr2),
-        g_sprites.run3      = new Sprite(g_images.charRr3),
-        g_sprites.shoot     = new Sprite(g_images.charRs),
-        g_sprites.runshoot1 = new Sprite(g_images.charRsr1),
-        g_sprites.runshoot2 = new Sprite(g_images.charRsr2),
-        g_sprites.runshoot3 = new Sprite(g_images.charRsr3),
-        g_sprites.jump      = new Sprite(g_images.charRj),
-        g_sprites.jumpshoot = new Sprite(g_images.charRsj)
-    ];
-    g_sprites.CharL = [
-        g_sprites.stand     = new Sprite(g_images.charL),
-        g_sprites.run1      = new Sprite(g_images.charLr1),
-        g_sprites.run2      = new Sprite(g_images.charLr2),
-        g_sprites.run3      = new Sprite(g_images.charLr3),
-        g_sprites.shoot     = new Sprite(g_images.charLs),
-        g_sprites.runshoot1 = new Sprite(g_images.charLsr1),
-        g_sprites.runshoot2 = new Sprite(g_images.charLsr2),
-        g_sprites.runshoot3 = new Sprite(g_images.charLsr3),
-        g_sprites.jump      = new Sprite(g_images.charLj),
-        g_sprites.jumpshoot = new Sprite(g_images.charLsj)
-    ];
+  g_sprites.CharR = [
+    g_sprites.stand     = new Sprite(g_images.charR),
+    g_sprites.run1      = new Sprite(g_images.charRr1),
+    g_sprites.run2      = new Sprite(g_images.charRr2),
+    g_sprites.run3      = new Sprite(g_images.charRr3),
+    g_sprites.shoot     = new Sprite(g_images.charRs),
+    g_sprites.runshoot1 = new Sprite(g_images.charRsr1),
+    g_sprites.runshoot2 = new Sprite(g_images.charRsr2),
+    g_sprites.runshoot3 = new Sprite(g_images.charRsr3),
+    g_sprites.jump      = new Sprite(g_images.charRj),
+    g_sprites.jumpshoot = new Sprite(g_images.charRsj),
+    g_sprites.hurt      = new Sprite(g_images.charRH),
+    g_sprites.hurtjump  = new Sprite(g_images.charRHJ),
+  ];
+  g_sprites.CharL = [
+    g_sprites.stand     = new Sprite(g_images.charL),
+    g_sprites.run1      = new Sprite(g_images.charLr1),
+    g_sprites.run2      = new Sprite(g_images.charLr2),
+    g_sprites.run3      = new Sprite(g_images.charLr3),
+    g_sprites.shoot     = new Sprite(g_images.charLs),
+    g_sprites.runshoot1 = new Sprite(g_images.charLsr1),
+    g_sprites.runshoot2 = new Sprite(g_images.charLsr2),
+    g_sprites.runshoot3 = new Sprite(g_images.charLsr3),
+    g_sprites.jump      = new Sprite(g_images.charLj),
+    g_sprites.jumpshoot = new Sprite(g_images.charLsj),
+    g_sprites.hurt      = new Sprite(g_images.charLH),
+    g_sprites.hurtjump  = new Sprite(g_images.charLHJ),
+  ];
 
-    g_sprites.bullet = new Sprite(g_images.gunshot);
-    g_sprites.bullet.scale = 2;
-    g_sprites.rocket = new Sprite(g_images.rocket);
+  g_sprites.BossR = [
+    g_sprites.stand     = new Sprite(g_images.bossR),
+    g_sprites.run1      = new Sprite(g_images.bossRr1),
+    g_sprites.run2      = new Sprite(g_images.bossRr2),
+    g_sprites.run3      = new Sprite(g_images.bossRr3),
+    g_sprites.shoot     = new Sprite(g_images.bossRs),
+    g_sprites.runshoot1 = new Sprite(g_images.bossRsr1),
+    g_sprites.runshoot2 = new Sprite(g_images.bossRsr2),
+    g_sprites.runshoot3 = new Sprite(g_images.bossRsr3),
+    g_sprites.jump      = new Sprite(g_images.bossRj),
+    g_sprites.jumpshoot = new Sprite(g_images.bossRsj),
+  ];
+  g_sprites.BossL = [
+    g_sprites.stand     = new Sprite(g_images.bossL),
+    g_sprites.run1      = new Sprite(g_images.bossLr1),
+    g_sprites.run2      = new Sprite(g_images.bossLr2),
+    g_sprites.run3      = new Sprite(g_images.bossLr3),
+    g_sprites.shoot     = new Sprite(g_images.bossLs),
+    g_sprites.runshoot1 = new Sprite(g_images.bossLsr1),
+    g_sprites.runshoot2 = new Sprite(g_images.bossLsr2),
+    g_sprites.runshoot3 = new Sprite(g_images.bossLsr3),
+    g_sprites.jump      = new Sprite(g_images.bossLj),
+    g_sprites.jumpshoot = new Sprite(g_images.bossLsj),
+  ];
 
-    createInitialChar();
+  g_sprites.golem = [
+    g_sprites.run1R = new Sprite(g_images.golemR1),
+    g_sprites.run2R = new Sprite(g_images.golemR2),
+    g_sprites.run1L = new Sprite(g_images.golemL1),
+    g_sprites.run2L = new Sprite(g_images.golemL2),
+    g_sprites.runTR = new Sprite(g_images.golemTR),
+    g_sprites.runTL = new Sprite(g_images.golemTL),
+    // Added hurt sprite
+    g_sprites.hurtR = new Sprite(g_images.golemHR),
+    g_sprites.hurtl = new Sprite(g_images.golemHL),
+    g_sprites.hurtRr = new Sprite(g_images.golemHRr),
+    g_sprites.hurtLl = new Sprite(g_images.golemHLl),
+  ];
 
-    main.init();
+  g_sprites.goblin = [
+    g_sprites.standR = new Sprite(g_images.goblinStR),
+    g_sprites.standL = new Sprite(g_images.goblinStL),
+    g_sprites.shootR = new Sprite(g_images.goblinSR),
+    g_sprites.shootL = new Sprite(g_images.goblinSL),
+    g_sprites.jumpR = new Sprite(g_images.goblinJR),
+    g_sprites.JumpL = new Sprite(g_images.goblinJL),
+    // Added hurt sprite
+    g_sprites.hurtR = new Sprite(g_images.goblinRH),
+    g_sprites.hurtL = new Sprite(g_images.goblinLH),
+  ];
 
-    entityManager.generateEnemyTwo();
-    entityManager.generateEnemyThree();
-    
+  g_sprites.spikes = new Sprite(g_images.spikes);
+  g_sprites.healthPickup = new Sprite(g_images.healthPickup);
+
+  g_sprites.bullet = new Sprite(g_images.gunshot);
+  g_sprites.bullet.scale = 2;
+  g_sprites.rocket = new Sprite(g_images.rocket);
+  g_sprites.bottleboli = new Sprite(g_images.bottleboli);
+  g_sprites.bottleboli.scale = 4;
+
+  // Tiles
+  g_sprites.tiles = new Sprite(g_images.tiles);
+
+  createInitialChar();
+
+  main.init();
+
 }
 
 // Kick it off
