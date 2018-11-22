@@ -7,16 +7,16 @@
 this._nextMap = 0;
 //The backgrounds images
 this.maps = [
-    "images/cityscape.png",
-    "images/cityscape.png",
-    "images/cityscape.png",
-    "images/cityscape.png",
-    "images/cityscape.png",
-    "images/cityscape3.png",
-    "images/cityscape3.png",
-    "images/cityscape2.png",
-    "images/cityscape2.png",
-    "images/cityscape2.png"
+    "images/Backgrounds/cityscape.png",
+    "images/Backgrounds/cityscape.png",
+    "images/Backgrounds/cityscape.png",
+    "images/Backgrounds/cityscape.png",
+    "images/Backgrounds/cityscape.png",
+    "images/Backgrounds/cityscape3.png",
+    "images/Backgrounds/cityscape3.png",
+    "images/Backgrounds/cityscape2.png",
+    "images/Backgrounds/cityscape2.png",
+    "images/Backgrounds/cityscape2.png"
 
 ];
 
@@ -49,7 +49,7 @@ var background = {
 
     imgHeart: function(health){
             var img=new Image();
-            img.src="images/hjarta2.png";
+            img.src="images/Sprites & Tiles/hjarta2.png";
             if(health == 1)
                 ctx.drawImage(img, 5, 5);
 

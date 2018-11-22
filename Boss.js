@@ -32,7 +32,7 @@ Boss.prototype.velY = 0;
 Boss.prototype.shootTimer = 50;
 Boss.prototype.jumpTimer = 30;
 Boss.prototype.speed;
-Boss.prototype.health = 1;
+Boss.prototype.health = 75;
 Boss.prototype.bossFacing;
 
 Boss.prototype.update = function (du) {
