@@ -16,9 +16,7 @@ var levelTransition = {
     if (this.levelIndex >= 0) background.canvasSpaceGame(background.setMap(this.levelIndex));
     switch (this.levelIndex) {
     case 0: this.setStageZero();
-    AudioBank.playSong(2);
-    AudioBank.playSong(4);
-    AudioBank.playSong(2)  
+    AudioBank.playSong(2);  
       break;
     case 1: this.setStageOne();
     AudioBank.playSong(2);
