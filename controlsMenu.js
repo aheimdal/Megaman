@@ -20,6 +20,7 @@ var controlScreen = {
 };
 
 controlScreen.render = function (g_ctx) {
+  
   document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
   g_ctx.fillStyle = '#17202A';
   g_ctx.fillRect(0, 0, g_canvas.width, g_canvas.height);

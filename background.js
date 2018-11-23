@@ -53,8 +53,8 @@ var background = {
   },
 
     //Returns the next background image
-    getMap: function (){
-        return maps[_nextMap];
+    getMap: function (){  
+      return maps[_nextMap];
     },
 
     setMap: function(numMap) {

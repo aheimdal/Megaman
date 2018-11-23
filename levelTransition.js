@@ -16,22 +16,34 @@ var levelTransition = {
     if (this.levelIndex >= 0) background.canvasSpaceGame(background.setMap(this.levelIndex));
     switch (this.levelIndex) {
     case 0: this.setStageZero();
+    AudioBank.playSong(2);
+    AudioBank.playSong(4);
+    AudioBank.playSong(2)  
       break;
     case 1: this.setStageOne();
+    AudioBank.playSong(2);
       break;
     case 2: this.setStageTwo();
+    AudioBank.playSong(2);
       break;
     case 3: this.setStageThree();
+    AudioBank.playSong(2);  
       break;
     case 4: this.setStageFour();
+    AudioBank.playSong(2);
       break;
     case 5: this.setStageFive();
+    AudioBank.playSong(2);
       break;
     case 6: this.setStageSix();
+    AudioBank.playSong(2);
       break;
     case 7: this.setStageSeven();
+    AudioBank.playSong(2);
       break;
     case 8: this.setStageBoss();
+    AudioBank.pauseSong();
+    AudioBank.playSong(3);
       break;
     default: break;
     }

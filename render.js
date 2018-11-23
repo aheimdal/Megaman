@@ -89,5 +89,5 @@ function render(ctx) {
   }
 
   // The core rendering of the actual game / simulation
-  if (g_doRender) renderSimulation(ctx);
+  if (g_doRender) renderSimulation(ctx); 
 }
