@@ -1,5 +1,4 @@
 
-
 // =================
 // Audio Bank
 // =================
@@ -16,8 +15,8 @@ var AudioBank = {
     //Songs
     songOne     : new Audio("sounds/songs/megaLag1.ogg"),
     songTwo     : new Audio("sounds/songs/megaLag2.ogg"),
-    songThree   : new Audio("sounds/songs/Superboy.ogg"),
-    songFour    : new Audio("sounds/songs/Off Limits.ogg"),
+    songThree   : new Audio("sounds/songs/Superboy.mp3"),
+    songFour    : new Audio("sounds/songs/Off Limits.wav"),
 
     //Projectile sounds
     bullet :  [
@@ -30,9 +29,6 @@ var AudioBank = {
     gobGrunt1 : new Audio("sounds/goblins/goblin-2.wav"),
     gobGrunt2 : new Audio("sounds/goblins/goblin-6.wav"),
     gobGrunt3 : new Audio("sounds/goblins/goblin-7.wav"),
-
-    //Orangutan sounds
-
 
     //Misc sounds
     goblinThrow : new Audio("sounds/rockEvaporate.ogg"),

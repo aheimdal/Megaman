@@ -15,11 +15,11 @@
 // A generic contructor which accepts an arbitrary descriptor object
 function BossShoot(descr) {
 
-    // Common inherited setup logic from Entity
-    this.setup(descr);
+  // Common inherited setup logic from Entity
+  this.setup(descr);
 
-    // Make a noise when I am created (i.e. fired)
-    AudioBank.playSound(AudioBank.bossThrow);
+  // Make a noise when I am created (i.e. fired)
+  AudioBank.playSound(AudioBank.bossThrow);
 
 }
 
@@ -35,50 +35,48 @@ BossShoot.prototype.health = 4;
 
 BossShoot.prototype.update = function (du) {
 
-    spatialManager.unregister(this);
+  spatialManager.unregister(this);
 
-    this.lifeSpan -= du;
-    if (this.cx < 0 || this.cx > 1000 || this.cy > 1000) return entityManager.KILL_ME_NOW;
+  //Checked if out of bounds
+  if (this.cx < 0 || this.cx > 1000 || this.cy > 1000) return entityManager.KILL_ME_NOW;
 
-    this.velY += 1;
-    
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    
-    // Handle collisions
-    //
-    if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW; 
-    if (this._isDeadNow) {
-        this._isDeadNow = false;
-        this.health--;
-    }
+  //Just some basic throw physics
+  this.velY += 1;
+  this.cx += this.velX * du;
+  this.cy += this.velY * du;
 
-    var maybeChar = this.findHitEntity();
-    if (maybeChar === entityManager._char[0]) {
-        entityManager._char[0].kill();
-        return entityManager.KILL_ME_NOW;
-    }
+  // Handle player bullet
+  if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW;
+  if (this._isDeadNow) {
+    this._isDeadNow = false;
+    this.health--;
+  }
 
-    spatialManager.register(this);
+  //Handle player
+  var maybeChar = this.findHitEntity();
+  if (maybeChar === entityManager._char[0]) {
+    entityManager._char[0].kill();
+    return entityManager.KILL_ME_NOW;
+  }
+
+  return spatialManager.register(this);
 };
 
 BossShoot.prototype.getRadius = function () {
-    return 12;
+  return 12;
 };
 
 BossShoot.prototype.takeBulletHit = function () {
-    this.kill();
+  this.kill();
 };
 
 BossShoot.prototype.calculateMovement = function () {
-    return;
-}
+  return;
+};
 
 BossShoot.prototype.render = function (ctx) {
 
-    g_sprites.bottleboli.drawCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
+  g_sprites.bottleboli.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 
-    ctx.globalAlpha = 1;
+  ctx.globalAlpha = 1;
 };

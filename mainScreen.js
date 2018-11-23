@@ -1,5 +1,14 @@
-
-"use strict";
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint func-names: 0 */
+// ========================================
 
 var startScreen = {
     title : "Run Gun Renegade",
@@ -9,7 +18,7 @@ var startScreen = {
 
 startScreen.render = function(g_ctx)
     {
-        document.body.style.backgroundImage = "url('images/back02.jpg')";
+        document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
 
         g_ctx.fillStyle = "#17202A";
         
