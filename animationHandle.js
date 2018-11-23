@@ -4,13 +4,16 @@
 
 var animationHandle = {
 
+  //a counter to allow cycling
   runCounter : 0,
 
+  //animation cycles for the protagonist and boss
   update : function (obj) {
     var status = obj.status();
     var pick = 0;
     var direction;
 
+    //picked character or boss sprites
     if (obj === entityManager._char[0]) {
       if (status[0] === 1) {
         direction = g_sprites.CharR;
@@ -36,6 +39,7 @@ var animationHandle = {
       }
     }
 
+    //checked what the object is doing and picked accordingly
     var moving = status[1];
     var shooting = status[2];
     var grounded = status[3];
@@ -66,6 +70,7 @@ var animationHandle = {
     obj.changeSprite(direction[pick]);
   },
 
+  // a cycle for running animations, crude
   cycle : function (x, y, z) {
     if (this.runCounter === 0) {
       this.runCounter = 110;

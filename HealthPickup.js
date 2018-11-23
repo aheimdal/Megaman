@@ -28,12 +28,16 @@ HealthPickup.prototype.cx = 200;
 HealthPickup.prototype.cy = 470;
 HealthPickup.prototype.isHp = true;
 
+//Not much to say, is an entity that doesn't do anything
+//except give the protagonist missing health back
 HealthPickup.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
+
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
+    //Here is the protagonist health increase
     entityManager._char[0].health++;
     return entityManager.KILL_ME_NOW;
   }

@@ -30,9 +30,6 @@ var AudioBank = {
     gobGrunt2 : new Audio("sounds/goblins/goblin-6.wav"),
     gobGrunt3 : new Audio("sounds/goblins/goblin-7.wav"),
 
-    //Orangutan sounds
-
-
     //Misc sounds
     goblinThrow : new Audio("sounds/rockEvaporate.ogg"),
     bossThrow : new Audio("sounds/rockSplit.ogg"),

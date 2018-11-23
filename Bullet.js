@@ -21,29 +21,28 @@ Bullet.prototype.cy = 200;
 Bullet.prototype.velX = 1;
 Bullet.prototype.velY = 1;
 
-// Convert times from milliseconds to "nominal" time units.
-Bullet.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Bullet.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  this.lifeSpan -= du;
-  if (this.lifeSpan < 0 || this.cx < 0 || this.cx > 1000) return entityManager.KILL_ME_NOW;
+  if (this.lifeSpan < 0 || this.cx < 0 || this.cx > 1000) 
+    return entityManager.KILL_ME_NOW;
 
   this.cx += this.velX * du;
   this.cy += this.velY * du;
 
   // Handle collisions
   var hitEntity = this.findHitEntity();
-  if (!hitEntity.isHp) {
+  //We dont want bullets destroying health pickups
+  if (!hitEntity.isHp) { 
     if (hitEntity) {
       var canTakeHit = hitEntity.takeBulletHit;
       if (canTakeHit) canTakeHit.call(hitEntity);
       return entityManager.KILL_ME_NOW;
     }
   }
-  // TODO: YOUR STUFF HERE! --- (Re-)Register
+
   return spatialManager.register(this);
 };
 
@@ -53,8 +52,6 @@ Bullet.prototype.getRadius = function () {
 
 Bullet.prototype.takeBulletHit = function () {
   this.kill();
-
-  // When I am killed
 };
 
 Bullet.prototype.calculateMovement = function () {

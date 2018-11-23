@@ -198,6 +198,7 @@ var entityManager = {
   },
 
 
+  //Function to clear all entities except Playable Character
   clearLevel: function () {
     for (var c = 0; c < this._categories.length-1; ++c) {
 
@@ -211,6 +212,7 @@ var entityManager = {
   },
 
 
+  //Function to see if all enemies are dead
   isClear: function () {
     if (!this._boss[0] && !this._enemyThree[0] && !this._enemyTwo[0] && !this._enemyFour[0]) {
       return true;

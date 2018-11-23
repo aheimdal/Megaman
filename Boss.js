@@ -24,21 +24,23 @@ function Boss(descr) {
 
 Boss.prototype = new Entity();
 
+//a lot of globals because everybody loves globals
 Boss.prototype.cx = 951;
 Boss.prototype.cy = 470;
 Boss.prototype.velX = -5;
 Boss.prototype.velY = 0;
-Boss.prototype.shootTimer = 50;
-Boss.prototype.jumpTimer = 30;
-Boss.prototype.speed;
+Boss.prototype.shootTimer = 50; //Timer inbetween shots
+Boss.prototype.jumpTimer = 30;  // Timer inbetween jumps
+Boss.prototype.speed;           //How fast the boss goes
 Boss.prototype.health = 75;
 Boss.prototype.bossFacing;
-Boss.prototype.deathTimer;
+Boss.prototype.deathTimer; //Timer for how long death should be animated
 
 Boss.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
+  //Checked for death and if so death animations
   var dead = this.deathHandler();
 
   if (dead === 1) return 1;
@@ -48,21 +50,22 @@ Boss.prototype.update = function (du) {
     return entityManager.KILL_ME_NOW;
   }
 
-
   this.damageHandler();
 
+  //Calculates what "phase" the boss should be in
   this.phase();
   if (this.phaseNumber === 0) this.movementPhaseOne(du);
   else if (this.phaseNumber === 1) this.movementPhaseTwo(du);
   else if (this.phaseNumber === 2)  this.movementPhaseThree(du);
 
-
+  //upgrades the cx and cy coordinates
   this.calculateMovementReal(du);
 
   animationHandle.update(this);
-  //    Þarf að vera return hérna??         **********************************
+  //    Þarf að vera return hérna??    já skoðaðu entityManager.update
   return spatialManager.register(this);
 };
+
 
 Boss.prototype.getRadius = function () {
   return 70;
@@ -81,6 +84,8 @@ Boss.prototype.damageHandler = function () {
   if (this._isDeadNow) {
     this._isDeadNow = false;
     this.health--;
+    //Dropped health randomly
+    //10% chance when hurt
     if (util.randRange(0, 10) < 1) {
       entityManager.generateHealthPickup({
         cx : this.cx,
@@ -90,6 +95,7 @@ Boss.prototype.damageHandler = function () {
   }
 };
 
+//Phase one, boss runs and shoots, faster if hes hurt
 Boss.prototype.movementPhaseOne = function (du) {
   if (this.cx > 950) {
     this.speed = -3;
@@ -105,6 +111,7 @@ Boss.prototype.movementPhaseOne = function (du) {
   this.maybeFire(du);
 };
 
+//Phase two, boss runs and jumps, faster if hes hurt
 Boss.prototype.movementPhaseTwo = function (du) {
   if (this.cx > 950) {
     this.speed = -4;
@@ -124,6 +131,7 @@ Boss.prototype.movementPhaseTwo = function (du) {
   else this.bossFacing = 1;
 };
 
+//Phase 3, shoot, run and jump combined, faster if hes hurt
 Boss.prototype.movementPhaseThree = function (du) {
   if (this.cx > 950) {
     this.speed = -5;
@@ -144,6 +152,7 @@ Boss.prototype.movementPhaseThree = function (du) {
 
 };
 
+//Calculated cx and cy coordinates from the phases
 Boss.prototype.calculateMovementReal = function (du) {
   if (this.shootTimer >= 20
       && this.shootTimer
@@ -160,6 +169,7 @@ Boss.prototype.calculateMovementReal = function (du) {
   if (this.shootTimer < 0) this.shootTimer = 0;
 };
 
+//Checked for phase and timer if boss should shoot
 Boss.prototype.maybeFire = function () {
   if (this.shootTimer) this.shootTimer--;
   if (this.shootTimer === 0) {
@@ -175,7 +185,7 @@ Boss.prototype.maybeFire = function () {
 };
 
 Boss.prototype.phaseNumber = 0;
-
+//Checked for state
 Boss.prototype.phase = function () {
   if (this.health > 50) this.phaseNumber = 0;
   else if (this.health > 25) {
@@ -190,6 +200,8 @@ Boss.prototype.phase = function () {
   }
 };
 
+//A status function for the animationHandler,
+//returns a matrix with information
 Boss.prototype.status = function () {
   var isShooting = this.shootTimer < 20 || this.shootTimer > 40 * ((this.health*0.06666)+1/1) - 20;
   var isMoving = (this.shootTimer >= 20 && this.shootTimer <= 40 * ((this.health*0.06666)+1/1)-20 || this.cy < 470);
@@ -197,13 +209,14 @@ Boss.prototype.status = function () {
            isMoving, // True if moving, else false
            isShooting, // True if shooting, else false
            (this.cy === 470), // True if on grounds, else jumping/falling
-           false];
+           false];  //A boss never shows weakness, ea if hurt
 };
 
 Boss.prototype.changeSprite = function (varImage) {
   this.sprite = varImage;
 };
 
+//Handles death explosion
 Boss.prototype.deathHandler = function () {
     if (this.health === 0) {
       this.deathTimer--;

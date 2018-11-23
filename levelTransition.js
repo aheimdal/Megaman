@@ -1,5 +1,8 @@
+///////////////////////
+// Level Transition
+///////////////////////
 
-
+//A very barebones level transitioner
 var levelTransition = {
 
   levelIndex : -1,

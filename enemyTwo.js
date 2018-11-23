@@ -72,8 +72,10 @@ enemyTwo.prototype.update = function (du) {
   if (dead === 1) return 1;
   if (dead === 2) return entityManager.KILL_ME_NOW;
 
+  //If a golem should turn around
   this.turnAround();
 
+  //animation handling
   this.turnAroundTimer--;
   if (this.turnAroundTimer <= 0) {
     this.cx += this.velX * du;
@@ -85,6 +87,7 @@ enemyTwo.prototype.update = function (du) {
     }
   }
 
+  //Player collision
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
     entityManager._char[0].kill();

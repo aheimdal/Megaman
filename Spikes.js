@@ -28,7 +28,8 @@ Spikes.prototype = new Entity();
 Spikes.prototype.cx = 700;
 Spikes.prototype.cy = 470;
 
-
+//Almost identical to health pickup but 
+//protagonist picks up death instead
 Spikes.prototype.update = function (du) {
 
   spatialManager.unregister(this);

@@ -37,20 +37,22 @@ BossShoot.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  this.lifeSpan -= du;
+  //Checked if out of bounds
   if (this.cx < 0 || this.cx > 1000 || this.cy > 1000) return entityManager.KILL_ME_NOW;
 
+  //Just some basic throw physics
   this.velY += 1;
   this.cx += this.velX * du;
   this.cy += this.velY * du;
 
-  // Handle collisions
+  // Handle player bullet
   if (this._isDeadNow && this.health === 0) return entityManager.KILL_ME_NOW;
   if (this._isDeadNow) {
     this._isDeadNow = false;
     this.health--;
   }
 
+  //Handle player
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
     entityManager._char[0].kill();

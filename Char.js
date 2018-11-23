@@ -1,5 +1,5 @@
 // ==========
-// Char STUFF
+// Char/Playable protagonist
 // ==========
 
 // A generic contructor which accepts an arbitrary descriptor object
@@ -21,6 +21,7 @@ Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
 Char.prototype.KEY_LEFT = 'A'.charCodeAt(0);
 Char.prototype.KEY_RIGHT = 'D'.charCodeAt(0);
 Char.prototype.KEY_FIRE = ' '.charCodeAt(0);
+//God-mode/invulnerability
 Char.prototype.KEY_GOD = 'G'.charCodeAt(0);
 
 // Initial, inheritable, default values
@@ -30,7 +31,7 @@ Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.health = 5;
 Char.prototype.invincibility = 0;
-Char.prototype.invincibilityTimer = 90;
+Char.prototype.invincibilityTimer = 90; 
 Char.prototype.godMode = false;
 Char.prototype.radius = 45;
 
@@ -44,6 +45,7 @@ Char.prototype.update = function (du) {
 
   this.healthManage();
 
+  //Handling character death
   if (this.health === 0) {
     main.GameState = 3;
     AudioBank.playSound(AudioBank.charDeath);
@@ -59,6 +61,7 @@ Char.prototype.update = function (du) {
   return spatialManager.register(this);
 };
 
+//A lot of globals to figure out a decent movement system
 Char.prototype.NOMINAL_RIGHT = +1;
 Char.prototype.NOMINAL_LEFT = -1;
 Char.prototype.NOMINAL_IJUMP = -10;
@@ -73,6 +76,7 @@ Char.prototype.MOVING = true;
 
 Char.prototype.movement = function (du) {
 
+  //Handling when character is hurt, knockback
   if (this.invincibility > this.invincibilityTimer-30) {
     this.velX = -3.5 * this.CHAR_FACING;
   } else {
@@ -89,7 +93,7 @@ Char.prototype.movement = function (du) {
       this.CHAR_FACING = 1; // Says Char is facing right
     }
 
-    // Calculates if characted should go left if he's not going right
+    // Calculates if character should go left if he's not going right
     else if (keys[this.KEY_LEFT]) {
       this.MOVING = true;
       if (this.cx > 32) {
@@ -147,11 +151,13 @@ Char.prototype.calculateMovement = function (du) {
     }
   }
 
+  //Boundaries control
   if (this.cx < 50) this.cx = 50;
   if (this.cx > 950) this.cx = 950;
 
 };
 
+//Managing godmode, health and UI health
 Char.prototype.healthManage = function () {
   if (this.health > 5) this.health = 5;
   if (eatKey(this.KEY_GOD)) {
@@ -172,6 +178,7 @@ Char.prototype.healthManage = function () {
   }
 };
 
+//Globals for shooting
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
 
@@ -200,21 +207,25 @@ Char.prototype.maybeFireBullet = function () {
   }
 };
 
+//Returns true if Character is grounded/no vertical movement
 Char.prototype.isGrounded = function () {
   if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
   return false;
 };
 
+//If a character is falling/going downwards
 Char.prototype.isFalling = function () {
   if (this.velY > 0) return true;
   return false;
 };
 
+//If a character is jumping/going upwards
 Char.prototype.isJumping = function () {
   if (this.JUMP_TIMER > 0) return true;
   return false;
 };
 
+//Ground a character
 Char.prototype.ground = function () {
   this.JUMP_TIMER = 0;
   this.JUMP_INIT = true;
@@ -222,38 +233,26 @@ Char.prototype.ground = function () {
   if (this.cy > 502) this.cy = 502;
 };
 
+//Make a character fall
 Char.prototype.fall = function () {
   this.JUMP_TIMER = 0;
   this.JUMP_INIT = false;
   this.velY = 0;
 };
 
+//No horizontal movement
 Char.prototype.stopX = function () {
   this.velX = 0;
-};
-
-Char.prototype.fall = function () {
-    this.JUMP_TIMER = 0;
-    this.JUMP_INIT = false;
-    this.velY = 0;
-};
-
-Char.prototype.stopX = function () {
-    this.velX = 0;
 };
 
 Char.prototype.getRadius = function () {
   return this.radius;
 };
 
-Char.prototype.superKill = function () {
-  if (!this.godMode) this.health = 0;
-};
-
+//Spike kills
 Char.prototype.superKill = function () {
     if (!this.godMode) this.health = 0;
-}
-
+};
 
 Char.prototype.status = function () {
   return [this.CHAR_FACING, // Positive number for right, negative for left

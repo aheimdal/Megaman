@@ -60,7 +60,7 @@ enemyThree.prototype.floor = 502;
 enemyThree.prototype.velX;
 enemyThree.prototype.velY = 0;
 enemyThree.prototype.health = 5;
-enemyThree.prototype.shootTimer = 150;
+enemyThree.prototype.shootTimer = 150; //time inbetween shots
 enemyThree.prototype.goblinFacing = 1;
 enemyThree.prototype.deathTimer;
 
@@ -79,6 +79,7 @@ enemyThree.prototype.update = function (du) {
 
   this.spriteChange();
 
+  //Player collision
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
     entityManager._char[0].kill();
@@ -87,6 +88,8 @@ enemyThree.prototype.update = function (du) {
   return spatialManager.register(this);
 };
 
+//Where he should be facing and jump parameters
+//Also updates cx and cy coordinates
 enemyThree.prototype.movement = function (du) {
   if (this.cx - entityManager._char[0].cx > 0) {
     this.goblinFacing = 1;
@@ -110,6 +113,7 @@ enemyThree.prototype.movement = function (du) {
   this.cy += this.velY * du;
 };
 
+//If a goblin should shoot and some sounds to play with
 enemyThree.prototype.maybeShoot = function () {
   if (this.shootTimer) {
     if (this.shootTimer === 75) {
@@ -127,6 +131,7 @@ enemyThree.prototype.maybeShoot = function () {
   }
 };
 
+//Animation handling
 enemyThree.prototype.spriteChange = function () {
   if (this.shootTimer < 75 && this.shootTimer > 0) 
     this.sprite = g_sprites.goblin[2+this.goblinFacing];
@@ -134,6 +139,7 @@ enemyThree.prototype.spriteChange = function () {
   else this.sprite = g_sprites.goblin[0+this.goblinFacing];
 };
 
+//Death handling
 enemyThree.prototype.deathHandler = function () {
   if (this.health === 0) {
     this.deathTimer--;
