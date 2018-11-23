@@ -2,6 +2,7 @@
 // MAIN SCREEN
 //===========================
 
+// Variables for Start Screen
 var startScreen = {
     title : "Run Gun Renegade",
     start : "Start",
@@ -10,18 +11,16 @@ var startScreen = {
 
 startScreen.render = function(g_ctx)
     {   
-        //AudioBank.pauseSong();
+        // Play title song
         AudioBank.playSong(4);
+         // Background Image for the background around the gamplay screen
         document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
-
+        // Color for main screen
         g_ctx.fillStyle = "#17202A";
-        
+        // Colored rectangle for game background
         g_ctx.fillRect(0, 0, g_canvas.width, g_canvas.height);
         
-    //        g_sprites.tiles = new Sprite;
-
         // Title
-
         //console.log("Apply color to letters");
         g_ctx.fillStyle = "#EC7063";
         //console.log("Apply font and character size");
@@ -35,7 +34,6 @@ startScreen.render = function(g_ctx)
     
     
         // Start
-    
         //console.log("Apply color to letters");
         g_ctx.fillStyle = "#EC7063";
         //console.log("Apply font and character size");
@@ -48,7 +46,7 @@ startScreen.render = function(g_ctx)
         g_ctx.strokeText(startScreen.start, g_canvas.width/2-300, g_canvas.height/2+50);
 
 
-        // Controls
+        // Controls Menu
         //console.log("Apply color to letters");
         g_ctx.fillStyle = "#EC7063";
         //console.log("Apply font and character size");
@@ -64,10 +62,12 @@ startScreen.render = function(g_ctx)
 
     }
 
+// Function to let us start a new game
 function startGame(g_ctx){
     main.GameState = 1;
 }
 
+// Function to transfer us to Control Menu from Main Menu
 function controlsMenu(g_ctx){
     main.GameState = 2;
 }
