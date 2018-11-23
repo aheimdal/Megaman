@@ -188,10 +188,10 @@ controlScreen.render = function (g_ctx) {
   g_ctx.strokeText(controlScreen.startGame, g_canvas.width/2+200, g_canvas.height/2+225);
 };
 
-function mainScreen(g_ctx) {
+function mainScreen() {
   main.GameState = 0;
 }
 
-function startGame(g_ctx) {
+function startGame() {
   main.GameState = 1;
 }

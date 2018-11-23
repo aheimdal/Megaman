@@ -161,6 +161,13 @@ var entityManager = {
       }
 
     }
+    //Make the lifes of the Boss
+    if(levelTransition.levelIndex == 8 && this._char[0] != null){
+      background.imgHeartBoss(this._boss[0].health);
+  }
+  else{
+
+  }
 
     if (this.isClear()) levelTransition.changeLevel();
 

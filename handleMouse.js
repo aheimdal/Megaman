@@ -4,7 +4,7 @@
 
 var g_mouseX = 0;
 var g_mouseY = 0;
-
+//When a menue come up, player can chose what he clicks on
 function handleMouse(evt) {
   g_mouseX = evt.clientX - g_canvas.offsetLeft;
   g_mouseY = evt.clientY - g_canvas.offsetTop;

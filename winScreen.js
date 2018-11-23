@@ -87,11 +87,13 @@ winScreen.render = function (g_ctx) {
 
 };
 
+//Player can go back to the main screen
 function mainScreen() {
-  spatialManager.unregister(entityManager._char[0]);
-  main.GameState = 0;
+    entityManager._char[0].health = 5;
+    main.GameState = 0;
 }
-
+//Player can Start the game again.
 function startGame() {
-  main.GameState = 1;
+    entityManager._char[0].health = 5;
+    main.GameState = 1;
 }

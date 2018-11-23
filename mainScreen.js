@@ -64,10 +64,12 @@ startScreen.render = function(g_ctx)
 
     }
 
-function startGame(g_ctx){
+function startGame(){
     main.GameState = 1;
+    levelTransition.levelIndex = -1;
 }
 
-function controlsMenu(g_ctx){
+function controlsMenu(){
     main.GameState = 2;
+    levelTransition.levelIndex = -1;
 }
