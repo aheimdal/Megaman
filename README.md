@@ -17,8 +17,3 @@
 -   Getum keyrt svona:
     
         npx eslint -s script.js
-
--   Eða svona
-    
-        npm run test
-
