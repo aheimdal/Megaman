@@ -1,6 +1,6 @@
-// =========
-// ENEMY Two
-// =========
+// ====
+// ENEMYONE
+// ====
 
 // ========================================
 // Eslint villutékk
@@ -37,7 +37,6 @@
 /* eslint no-multi-spaces: 0 */
 /* eslint no-lonely-if: 0 */
 /* eslint no-else-return: 0 */
-/* eslint consistent-return: 0 */
 // ========================================
 
 
@@ -73,10 +72,10 @@ enemyTwo.prototype.update = function (du) {
   if (dead === 1) return 1;
   if (dead === 2) return entityManager.KILL_ME_NOW;
 
-  // If a golem should turn around
+  //If a golem should turn around
   this.turnAround();
 
-  // Animation handling
+  //animation handling
   this.turnAroundTimer--;
   if (this.turnAroundTimer <= 0) {
     this.cx += this.velX * du;
@@ -88,7 +87,7 @@ enemyTwo.prototype.update = function (du) {
     }
   }
 
-  // Player collision
+  //Player collision
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
     entityManager._char[0].kill();
@@ -123,14 +122,12 @@ enemyTwo.prototype.turnAround = function () {
 enemyTwo.prototype.deathHandler = function () {
   if (this.health === 0) {
     this.deathTimer--;
-    if (this.deathTimer < 5) {
+    if (this.deathTimer < 5)
       this.sprite = g_sprites.golem[8];
-    } else if (this.deathTimer % 4 === 0) {
+    else if (this.deathTimer % 4 === 0) 
       this.sprite = g_sprites.golem[6];
-    } else if (this.deathTimer % 7 === 0) {
+    else if (this.deathTimer % 7 === 0)
       this.sprite = g_sprites.golem[7];
-    }
-
     if (this.deathTimer) return 1;
     if (util.randRange(0, 10) < 4.5) {
       entityManager.generateHealthPickup({
@@ -145,7 +142,7 @@ enemyTwo.prototype.deathHandler = function () {
     this.health--;
     if (this.health === 0) this.deathTimer = 30;
   }
-};
+}
 
 enemyTwo.prototype.calculateMovement = function () {
   return;

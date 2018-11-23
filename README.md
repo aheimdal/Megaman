@@ -10,11 +10,9 @@
 
 ## Keyra villutékk
 
--   Install eslint
+-   Install node modules
     
-        npm init
-        npm install eslint --save-dev
-        eslint --init
+        npm install
 
 -   Getum keyrt svona:
     

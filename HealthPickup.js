@@ -1,44 +1,15 @@
-// ============
+// ====
 // HealthPickup
-// ============
+// ====
 
-// ========================================
-// Eslint villutékk
-// ========================================
-/* eslint-env browser */
-/* eslint camelcase: [0] */
-/* eslint-disable no-param-reassign */
-/* eslint no-use-before-define: 0 */
-/* eslint no-undef: 0 */
-/* eslint no-unused-vars: 0 */
-/* eslint no-var: 0 */
-/* eslint vars-on-top: 0 */
-/* eslint no-underscore-dangle: 0 */
-/* eslint object-shorthand: 0 */
-/* eslint func-names: 0 */
-/* eslint quotes: 0 */
-/* eslint space-infix-ops: 0 */
-/* eslint linebreak-style: 0 */
-/* eslint no-shadow: 0 */
-/* eslint no-plusplus: 0 */
-/* eslint guard-for-in: 0 */
-/* eslint no-restricted-syntax: 0 */
-/* eslint block-scoped-var: 0 */
-/* eslint no-redeclare: 0 */
-/* eslint padded-blocks: 0 */
-/* eslint key-spacing: 0 */
-/* eslint indent: 0 */
-/* eslint new-cap: 0 */
-/* eslint no-continue: 0 */
-/* eslint no-useless-return: 0 */
-/* eslint prefer-destructuring: 0 */
-/* eslint no-unused-expressions: 0 */
-/* eslint brace-style: 0 */
-/* eslint no-multi-spaces: 0 */
-/* eslint no-lonely-if: 0 */
-/* eslint no-else-return: 0 */
-/* eslint no-mixed-operators: 0 */
-// ========================================
+"use strict";
+
+/* jshint browser: true, devel: true, globalstrict: true */
+
+/*
+0        1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+*/
 
 
 // A generic contructor which accepts an arbitrary descriptor object
@@ -57,8 +28,8 @@ HealthPickup.prototype.cx = 200;
 HealthPickup.prototype.cy = 470;
 HealthPickup.prototype.isHp = true;
 
-// Not much to say, is an entity that doesn't do anything
-// except give the protagonist missing health back
+//Not much to say, is an entity that doesn't do anything
+//except give the protagonist missing health back
 HealthPickup.prototype.update = function (du) {
 
   spatialManager.unregister(this);
@@ -66,7 +37,7 @@ HealthPickup.prototype.update = function (du) {
 
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
-    // Here is the protagonist health increase
+    //Here is the protagonist health increase
     entityManager._char[0].health++;
     return entityManager.KILL_ME_NOW;
   }

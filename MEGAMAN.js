@@ -161,7 +161,6 @@ var g_images = {};
 function requestPreloads() {
 
   var requiredImages = {
-    // Main Character
     charR     : "./images/Sprites & Tiles/joe1.png",
     charL     : "./images/Sprites & Tiles/joe1l.png",
     charRr1   : "./images/Sprites & Tiles/joe2.png",
@@ -187,7 +186,6 @@ function requestPreloads() {
     charRHJ    : "./images/Sprites & Tiles/joe11.png",
     charLHJ    : "./images/Sprites & Tiles/joe11l.png",
 
-    // Golem
     golemR1   : "./images/Sprites & Tiles/golem1.png",
     golemL1   : "./images/Sprites & Tiles/golem1l.png",
     golemR2   : "./images/Sprites & Tiles/golem2.png",
@@ -199,7 +197,6 @@ function requestPreloads() {
     golemHL   : "./images/Sprites & Tiles/golem4l.png",
     golemD    : "./images/Sprites & Tiles/golem5.png",
 
-    // Goblin
     goblinStR  : "./images/Sprites & Tiles/goblin1.png",
     goblinStL  : "./images/Sprites & Tiles/goblin1l.png",
     goblinSR   : "./images/Sprites & Tiles/goblin2.png",
@@ -210,7 +207,6 @@ function requestPreloads() {
     goblinRH   : "./images/Sprites & Tiles/goblin4.png",
     goblinLH   : "./images/Sprites & Tiles/goblin4l.png",
 
-    // Boss
     bossR     : "./images/Sprites & Tiles/hugrun01.png",
     bossL     : "./images/Sprites & Tiles/hugrun01l.png",
     bossRr1   : "./images/Sprites & Tiles/hugrun03.png",
@@ -232,7 +228,6 @@ function requestPreloads() {
     bossRsj   : "./images/Sprites & Tiles/hugrun10.png",
     bossLsj   : "./images/Sprites & Tiles/hugrun10l.png",
 
-    // Various sprites
     healthPickup: "./images/Sprites & Tiles/healthPickup.png",
     spikes      : "./images/Sprites & Tiles/spike.png",
     gunshot     : "./images/Sprites & Tiles/gunshot.png",
@@ -240,8 +235,9 @@ function requestPreloads() {
     bottleboli  : "./images/Sprites & Tiles/bottleboli.png",
     coin        : "./images/Sprites & Tiles/goldcoin.png",
 
-    // Dark tiles
-    tiles      : "./images/Sprites & Tiles/kubbur2.png",
+    //Dark tiles
+    tiles      : "./images/Sprites & Tiles/kubbur2.png"
+
 
   };
 
@@ -316,7 +312,7 @@ function preloadDone() {
     // Added hurt sprite
     g_sprites.hurtR = new Sprite(g_images.golemHR),
     g_sprites.hurtL = new Sprite(g_images.golemHL),
-    g_sprites.death = new Sprite(g_images.golemD),
+    g_sprites.death = new Sprite(g_images.golemD)
   ];
 
   g_sprites.goblin = [
@@ -328,7 +324,7 @@ function preloadDone() {
     g_sprites.JumpL = new Sprite(g_images.goblinJL),
     // Added hurt sprite
     g_sprites.hurtR = new Sprite(g_images.goblinRH),
-    g_sprites.hurtL = new Sprite(g_images.goblinLH),
+    g_sprites.hurtL = new Sprite(g_images.goblinLH)
   ];
 
   g_sprites.spikes = new Sprite(g_images.spikes);

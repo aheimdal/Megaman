@@ -1,18 +1,5 @@
 // GENERIC UPDATE LOGIC
 
-// ========================================
-// Eslint villutékk
-// ========================================
-/* eslint camelcase: 0 */
-/* eslint-disable no-param-reassign */
-/* eslint no-use-before-define: 0 */
-/* eslint no-undef: 0 */
-/* eslint no-unused-vars: 0 */
-/* eslint no-var: 0 */
-/* eslint vars-on-top: 0 */
-// ========================================
-
-
 // The "nominal interval" is the one that all of our time-based units are
 // calibrated to e.g. a velocity unit is "pixels per nominal interval"
 //
@@ -42,7 +29,7 @@ function update(dt) {
   // Warn about very large dt values -- they may lead to error
   //
   if (dt > 200) {
-    // Big dt =", dt, ": CLAMPING TO NOMINAL
+    // console.log("Big dt =", dt, ": CLAMPING TO NOMINAL");
     dt = NOMINAL_UPDATE_INTERVAL;
   }
   // If using variable time, divide the actual delta by the "nominal" rate,
@@ -61,7 +48,7 @@ function update(dt) {
 // Togglable Pause Mode
 //
 var KEY_PAUSE = 'P'.charCodeAt(0);
-var KEY_STEP = 'O'.charCodeAt(0);
+var KEY_STEP  = 'O'.charCodeAt(0);
 
 var g_isUpdatePaused = false;
 

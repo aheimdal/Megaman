@@ -1,6 +1,6 @@
-// ===========
-// ENEMY THREE
-// ===========
+// ====
+// ENEMYONE
+// ====
 
 // ========================================
 // Eslint villutékk
@@ -37,7 +37,6 @@
 /* eslint no-multi-spaces: 0 */
 /* eslint no-lonely-if: 0 */
 /* eslint no-else-return: 0 */
-/* eslint consistent-return: 0 */
 // ========================================
 
 
@@ -61,7 +60,7 @@ enemyThree.prototype.floor = 502;
 enemyThree.prototype.velX;
 enemyThree.prototype.velY = 0;
 enemyThree.prototype.health = 5;
-enemyThree.prototype.shootTimer = 150; // time inbetween shots
+enemyThree.prototype.shootTimer = 150; //time inbetween shots
 enemyThree.prototype.goblinFacing = 1;
 enemyThree.prototype.deathTimer;
 
@@ -80,7 +79,7 @@ enemyThree.prototype.update = function (du) {
 
   this.spriteChange();
 
-  // Player collision
+  //Player collision
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
     entityManager._char[0].kill();
@@ -89,8 +88,8 @@ enemyThree.prototype.update = function (du) {
   return spatialManager.register(this);
 };
 
-// Where he should be facing and jump parameters
-// Also updates cx and cy coordinates
+//Where he should be facing and jump parameters
+//Also updates cx and cy coordinates
 enemyThree.prototype.movement = function (du) {
   if (this.cx - entityManager._char[0].cx > 0) {
     this.goblinFacing = 1;
@@ -114,7 +113,7 @@ enemyThree.prototype.movement = function (du) {
   this.cy += this.velY * du;
 };
 
-// If a goblin should shoot and some sounds to play with
+//If a goblin should shoot and some sounds to play with
 enemyThree.prototype.maybeShoot = function () {
   if (this.shootTimer) {
     if (this.shootTimer === 75) {
@@ -132,27 +131,22 @@ enemyThree.prototype.maybeShoot = function () {
   }
 };
 
-// Animation handling
+//Animation handling
 enemyThree.prototype.spriteChange = function () {
-  if (this.shootTimer < 75 && this.shootTimer > 0) {
+  if (this.shootTimer < 75 && this.shootTimer > 0) 
     this.sprite = g_sprites.goblin[2+this.goblinFacing];
-  } else if (this.cy < this.floor) {
-    this.sprite = g_sprites.goblin[4+this.goblinFacing];
-  } else {
-    this.sprite = g_sprites.goblin[0+this.goblinFacing];
-  }
+  else if (this.cy < this.floor) this.sprite = g_sprites.goblin[4+this.goblinFacing];
+  else this.sprite = g_sprites.goblin[0+this.goblinFacing];
 };
 
-// Death handling
+//Death handling
 enemyThree.prototype.deathHandler = function () {
   if (this.health === 0) {
     this.deathTimer--;
-    if (this.deathTimer < 5) {
+    if (this.deathTimer < 5) 
       this.sprite = g_sprites.golem[8];
-    } else if (this.deathTimer < 10) {
+    else if (this.deathTimer < 10) 
       this.sprite = g_sprites.golem[6+this.goblinFacing];
-    }
-
     if (this.deathTimer > 0) return 1;
     if (util.randRange(0, 10) < 6) {
       entityManager.generateHealthPickup({

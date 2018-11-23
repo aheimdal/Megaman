@@ -1,18 +1,6 @@
 // ======
 // BULLET
 // ======
-// ========================================
-// Eslint villutékk
-// ========================================
-/* eslint padded-blocks: 0 */
-/* eslint no-undef: 0 */
-/* eslint func-names: 0 */
-/* eslint padded-blocks: 0 */
-/* eslint vars-on-top: 0 */
-/* eslint no-var: 0 */
-/* eslint no-useless-return: 0 */
-
-// ========================================
 
 // A generic contructor which accepts an arbitrary descriptor object
 function Bullet(descr) {
@@ -38,18 +26,16 @@ Bullet.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  if (this.lifeSpan < 0 || this.cx < 0 || this.cx > 1000) {
+  if (this.lifeSpan < 0 || this.cx < 0 || this.cx > 1000) 
     return entityManager.KILL_ME_NOW;
-  }
 
   this.cx += this.velX * du;
   this.cy += this.velY * du;
 
   // Handle collisions
   var hitEntity = this.findHitEntity();
-
-  // We dont want bullets destroying health pickups
-  if (!hitEntity.isHp) {
+  //We dont want bullets destroying health pickups
+  if (!hitEntity.isHp) { 
     if (hitEntity) {
       var canTakeHit = hitEntity.takeBulletHit;
       if (canTakeHit) canTakeHit.call(hitEntity);
