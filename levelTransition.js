@@ -99,7 +99,7 @@ setStageZero : function() {
         });
     }
     // First part  of ground
-    for (var i = -17; i < 325; i += 50) {
+    for (var i = -120; i < 325; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -107,7 +107,7 @@ setStageZero : function() {
         });
     }
     // Second part of ground
-    for (var i = 717; i < 1050; i += 50) {
+    for (var i = 717; i < 1150; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -138,7 +138,8 @@ setStageZero : function() {
 },
 
 setStageOne : function() {
-    for (var i = 25; i<1000; i +=50) {
+    // Here is the second floor
+    for (var i = -150; i<1200; i +=50) {
         if (i < 775 || i > 925) {
             entityManager.generatePlatform({
                 cx : i,
@@ -147,45 +148,48 @@ setStageOne : function() {
             });
         }
     }
-
-    for (var i = 25; i < 1000; i += 50) {
+    // Here are the floor platforms
+    for (var i = -150; i < 1150; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
-
+    // Generate the jumping goblin
     entityManager.generateEnemyThree({
         cx : 275,
         cy : 333,
         floor : 333
     })
-
+    // Generate the lower golem
     entityManager.generateEnemyTwo({
         cx : 600,
         cy : 502,
         leftBound : 300,
         rightBound : 900
     });
+    // Here are the spikes
     for (var i = 340; i < 600; i+=25) {
         entityManager.generateSpikes({
             cx : i,
             cy : 358
         })
     }
+    // Here are the top floor platforms
     for (var i = 125; i<600; i +=50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 200,
             scale:0.1
         });
-    }
+    }// Here is the platform in between the second and top floors
     entityManager.generatePlatform({
         cx : 350,
         cy : 316,
         scale:0.1
     });
+    // Here is the upper golem
     entityManager.generateEnemyTwo({
         cx : 300,
         cy : 130,
@@ -213,6 +217,7 @@ setStageTwo : function() {
         scale:0.1
     });
   }
+    // Generate the golemn
     entityManager.generateEnemyTwo({
         cx : 850,
         cy : 502,
@@ -221,7 +226,7 @@ setStageTwo : function() {
         health : 10
     });
     // Here is the first part of the floor
-    for (var i = 0; i < 235; i += 50) {
+    for (var i = -200; i < 235; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -245,34 +250,38 @@ setStageTwo : function() {
         });
     }
     // Here is the fourth part of the floor
-    for (var i = 946; i < 1050; i += 50) {
+    for (var i = 946; i < 1200; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
-
+    // Here is the lower jumping goblin
     entityManager.generateEnemyThree({
         cx : 620,
         cy : 280,
         floor : 280
     });
+    // Here is the platform for the lower jumping goblin
     entityManager.generatePlatform({
         cx : 620,
         cy : 346,
         scale:0.1
     });
+    // Here is the upper jumping goblin
     entityManager.generateEnemyThree({
         cx : 920,
         cy : 180,
         floor : 180
     });
+    // Here is the platform for the upper jumping goblin
     entityManager.generatePlatform({
         cx : 920,
         cy : 246,
         scale:0.1
     });
+    // Here are the spikes generated
     for (var i = 250; i<1000; i+=300) {
         entityManager.generateSpikes({
             cx : i,
@@ -293,6 +302,7 @@ setStageThree : function() {
     // Set where the charcter drops
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = 0;
+    // here are the two walls generated
     for (var i = 375; i<550; i+=50) {
         entityManager.generatePlatform({
             cx : 400,
@@ -305,14 +315,15 @@ setStageThree : function() {
             scale:0.1
         });
     }
-
-    for (var i = 25; i < 1000; i += 50) {
+    // Here are the floor platforms generated
+    for (var i = -200; i < 1200; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
+    // Here are the two floors generated
     for (var i = 150; i < 375; i+=50) {
         entityManager.generatePlatform({
             cx : i,
@@ -335,6 +346,7 @@ setStageThree : function() {
             scale:0.1
         });
     }
+    // Here are the jumping goblins made
     entityManager.generateEnemyThree({
         cx : 50,
         cy : 108,
@@ -355,6 +367,7 @@ setStageThree : function() {
         cy : 308,
         floor : 308
     });
+    // Here are the golems made
     entityManager.generateEnemyTwo({
         cx : 100,
         cy : 500,
@@ -371,19 +384,22 @@ setStageThree : function() {
     });
 },
 setStageFour : function(){
+    // The charecter set to fall on the charecter platform
+    entityManager._char[0].cy = -45;
     entityManager.generateEnemyThree({
         cx : 465,
         cy : 354,
         floor : 354
     });
-
-    for (var i = 25; i < 1000; i += 50) {
+    // Here is the floor under the spikes
+    for (var i = -200; i < 1200; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
+    // Here the jumping goblins are made
     entityManager.generateEnemyThree({
         cx : 805,
         cy : 354,
@@ -405,7 +421,7 @@ setStageFour : function(){
         cy : 130,
         floor : 134
     });
-
+    // Here the spikes are generated
     for (var i = 12; i<1000; i+=75) {
         entityManager.generateSpikes({
             cx : i,
@@ -420,6 +436,7 @@ setStageFour : function(){
             cy : 532
         })
     }
+    // Here the lower platforms are made
     for (var i = 130; i < 1000; i+=170) {
         entityManager.generatePlatform({
             cx : i,
@@ -427,12 +444,13 @@ setStageFour : function(){
             scale:0.1
         });
     }
+    // Here the platform for the charecter is generated
     entityManager.generatePlatform({
         cx : 50,
         cy : 120,
         scale:0.1
     });
-
+    // Here the upper platforms are generated
     for (var i = 170; i < 1000; i+=170) {
         entityManager.generatePlatform({
             cx : i,
@@ -440,45 +458,50 @@ setStageFour : function(){
             scale:0.1
         });
     }
-    entityManager._char[0].cy = -45;
 },
 setStageFive : function(){
     // Set where the charcter drops
     entityManager._char[0].cx = 500;
     entityManager._char[0].cy = -45;
+    // Generate a non jumping goblin
     entityManager.generateEnemyFour({
         cx : 240,
         cy : 507,
         floor : 507
     });
+    // Generate a non jumping goblin
     entityManager.generateEnemyFour({
         cx : 450,
         cy : 507,
         floor : 507
     });
+    // Generate a non jumping goblin
     entityManager.generateEnemyFour({
         cx : 890,
         cy : 507,
         floor : 507
     });
+    // Generate a non jumping goblin
     entityManager.generateEnemyFour({
         cx : 50,
         cy : 383,
         floor : 383
     });
+    // Generate a non jumping goblin
     entityManager.generateEnemyFour({
         cx : 960,
         cy : 383,
         floor : 383
     });
-
-    for (var i = 25; i < 1000; i += 50) {
+    // Here the floor platforms are generated
+    for (var i = -200; i < 1200; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
             scale:0.1
         });
     }
+    // Here is the second middle floor platform from the left
     for (var i = 300; i < 450; i += 50) {
         entityManager.generatePlatform({
             cx : i,
@@ -486,6 +509,7 @@ setStageFive : function(){
             scale:0.1
         });
     }
+    // Here is the third middle floor platform from the left
     for (var i = 620; i < 750; i += 50) {
         entityManager.generatePlatform({
             cx : i,
@@ -493,7 +517,8 @@ setStageFive : function(){
             scale:0.1
         });
     }
-    for (var i = 940; i < 1050; i += 50) {
+    // Here is the middle floor platform all the way to the right
+    for (var i = 940; i < 1250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 450,
@@ -508,6 +533,11 @@ setStageFive : function(){
     });
     entityManager.generatePlatform({
         cx : 25,
+        cy : 450,
+        scale:0.1
+    });
+    entityManager.generatePlatform({
+        cx : -25,
         cy : 450,
         scale:0.1
     });
@@ -532,7 +562,6 @@ setStageSix : function(){
         cy : 314,
         floor : 314
     });
-
     entityManager.generateEnemyFour({
         cx : 650,
         cy : 314,
@@ -570,7 +599,7 @@ setStageSix : function(){
         scale:0.1
     });
     // Here is the first part of the ground
-    for (var i = 25; i < 400; i += 50) {
+    for (var i = -225; i < 400; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -578,7 +607,7 @@ setStageSix : function(){
         });
     }
     // Here is the second part of the ground
-    for (var i = 550; i < 1050; i += 50) {
+    for (var i = 560; i < 1250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -586,13 +615,14 @@ setStageSix : function(){
         });
     }
     // Here is the top floor
-    for (var i = -25; i < 725; i += 50) {
+    for (var i = -225; i < 725; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 200,
             scale:0.1
         });
     }
+    // Here are the two middle floor platforms
     for (var i = 150; i < 340; i += 50) {
         entityManager.generatePlatform({
             cx : i,
@@ -600,7 +630,7 @@ setStageSix : function(){
             scale:0.1
         });
     }
-    for (var i = 610; i < 1050; i += 50) {
+    for (var i = 610; i < 1250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 380,
@@ -662,6 +692,7 @@ setStageSix : function(){
         })
     }
 },
+
 setStageSeven : function(){
     // Set where the charcter drops
     entityManager._char[0].cx = 50;
@@ -705,7 +736,7 @@ setStageSeven : function(){
     });
 
     // Here is the ground
-    for (var i = 25; i < 1050; i += 50) {
+    for (var i = -225; i < 1250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 574,
@@ -713,7 +744,7 @@ setStageSeven : function(){
         });
     }
     // Here is the first part of the top floor
-    for (var i = -25; i < 150; i += 50) {
+    for (var i = -225; i < 150; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 165,
@@ -721,7 +752,7 @@ setStageSeven : function(){
         });
     }
     // Here is the second part of the top floor
-    for (var i = 900; i < 1050; i += 50) {
+    for (var i = 900; i < 1250; i += 50) {
         entityManager.generatePlatform({
             cx : i,
             cy : 165,
@@ -772,7 +803,7 @@ setStageSeven : function(){
 // Here is the boss level
 setStageBoss : function() {
   // Here is the ground
-  for (var i = 25; i < 1000; i += 50) {
+  for (var i = -225; i < 1200; i += 50) {
       entityManager.generatePlatform({
           cx : i,
           cy : 574,
