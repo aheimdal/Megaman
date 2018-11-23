@@ -114,35 +114,18 @@ function updateSimulation(du) {
 
 // GAME-SPECIFIC DIAGNOSTICS
 
-var g_allowMixedActions = true;
-var g_useGravity = false;
-var g_useAveVel = true;
 var g_renderSpatialDebug = false;
 
-var KEY_AVE_VEL = keyCode('V');
 var KEY_SPATIAL = keyCode('X');
 
 var KEY_HALT  = keyCode('H');
 var KEY_RESET = keyCode('R');
 
-var KEY_0 = keyCode('0');
-
-var KEY_1 = keyCode('1');
-var KEY_2 = keyCode('2');
-
 var KEY_K = keyCode('K');
 
 function processDiagnostics() {
 
-  if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
-
   if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
-
-  if (eatKey(KEY_HALT)) entityManager.haltShips();
-
-  if (eatKey(KEY_RESET)) entityManager.resetShips();
-
-  if (eatKey(KEY_0)) entityManager.toggleRocks();
 
 }
 
@@ -178,6 +161,7 @@ var g_images = {};
 function requestPreloads() {
 
   var requiredImages = {
+    // Main Character
     charR     : "./images/Sprites & Tiles/joe1.png",
     charL     : "./images/Sprites & Tiles/joe1l.png",
     charRr1   : "./images/Sprites & Tiles/joe2.png",
@@ -203,6 +187,7 @@ function requestPreloads() {
     charRHJ    : "./images/Sprites & Tiles/joe11.png",
     charLHJ    : "./images/Sprites & Tiles/joe11l.png",
 
+    // Golem
     golemR1   : "./images/Sprites & Tiles/golem1.png",
     golemL1   : "./images/Sprites & Tiles/golem1l.png",
     golemR2   : "./images/Sprites & Tiles/golem2.png",
@@ -214,6 +199,7 @@ function requestPreloads() {
     golemHL   : "./images/Sprites & Tiles/golem4l.png",
     golemD    : "./images/Sprites & Tiles/golem5.png",
 
+    // Goblin
     goblinStR  : "./images/Sprites & Tiles/goblin1.png",
     goblinStL  : "./images/Sprites & Tiles/goblin1l.png",
     goblinSR   : "./images/Sprites & Tiles/goblin2.png",
@@ -224,6 +210,7 @@ function requestPreloads() {
     goblinRH   : "./images/Sprites & Tiles/goblin4.png",
     goblinLH   : "./images/Sprites & Tiles/goblin4l.png",
 
+    // Boss
     bossR     : "./images/Sprites & Tiles/hugrun01.png",
     bossL     : "./images/Sprites & Tiles/hugrun01l.png",
     bossRr1   : "./images/Sprites & Tiles/hugrun03.png",
@@ -245,6 +232,7 @@ function requestPreloads() {
     bossRsj   : "./images/Sprites & Tiles/hugrun10.png",
     bossLsj   : "./images/Sprites & Tiles/hugrun10l.png",
 
+    // Various sprites
     healthPickup: "./images/Sprites & Tiles/healthPickup.png",
     spikes      : "./images/Sprites & Tiles/spike.png",
     gunshot     : "./images/Sprites & Tiles/gunshot.png",

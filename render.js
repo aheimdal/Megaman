@@ -34,7 +34,7 @@ function render(ctx) {
   if (eatKey(lvl7)) g_lvl7 = !g_lvl7;
   if (eatKey(lvl8)) g_lvl8 = !g_lvl8;
   if (eatKey(lvl9)) g_lvl9 = !g_lvl9;
-
+//Changes maps, with toggles, 1,2,3,4,5,6,7,8,9
   if (g_lvl1) {
     levelTransition.levelIndex = -1;
     levelTransition.changeLevel();

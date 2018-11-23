@@ -14,7 +14,7 @@ var gameOverScreen = {
 };
 
 gameOverScreen.render = function (g_ctx) {
-  // Background Image for the background around the gamplay screen
+  // Background Image for the background around the Game Over screen
   document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
   // Color for main screen
   g_ctx.fillStyle = "#17202A";

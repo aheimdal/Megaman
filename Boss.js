@@ -84,6 +84,7 @@ Boss.prototype.damageHandler = function () {
   if (this._isDeadNow) {
     this._isDeadNow = false;
     this.health--;
+    background.imgHeartBoss(this.health);
     //Dropped health randomly
     //10% chance when hurt
     if (util.randRange(0, 10) < 1) {

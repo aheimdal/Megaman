@@ -2,6 +2,7 @@
 // Winning Screen
 // ========================================
 
+// Variables for Winning Screen
 var winScreen = {
   game        : "WINNER WINNER",
   over        : "CHICKEN DINNER!",
@@ -12,9 +13,11 @@ var winScreen = {
 };
 
 winScreen.render = function (g_ctx) {
+  // Background Image for the background around the Winning screen
   document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
-
+  // Color for Winning Screen
   g_ctx.fillStyle = "#17202A";
+  // Colored rectangle for game background
   g_ctx.fillRect(0, 0, g_canvas.width, g_canvas.height);
 
   // Apply color to letters
@@ -87,11 +90,13 @@ winScreen.render = function (g_ctx) {
 
 };
 
+//Player can go back to the main screen
 function mainScreen() {
-  spatialManager.unregister(entityManager._char[0]);
-  main.GameState = 0;
+    entityManager._char[0].health = 5;
+    main.GameState = 0;
 }
-
+//Player can Start the game again.
 function startGame() {
-  main.GameState = 1;
+    entityManager._char[0].health = 5;
+    main.GameState = 1;
 }
