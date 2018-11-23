@@ -2,6 +2,17 @@
 // GLOBALS
 // =======
 
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint no-var: 0 */
+/* eslint camelcase: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint quotes: 0 */
+/* eslint linebreak-style: 0 */
+// ========================================
+
 /*
 
   Evil, ugly (but "necessary") globals, which everyone can use.

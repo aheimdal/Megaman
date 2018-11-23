@@ -2,14 +2,45 @@
 // Boss
 // ====
 
-"use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
-
-/*
-0        1         2         3         4         5         6         7         8
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-*/
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint object-shorthand: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+/* eslint linebreak-style: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint guard-for-in: 0 */
+/* eslint no-restricted-syntax: 0 */
+/* eslint block-scoped-var: 0 */
+/* eslint no-redeclare: 0 */
+/* eslint padded-blocks: 0 */
+/* eslint key-spacing: 0 */
+/* eslint indent: 0 */
+/* eslint new-cap: 0 */
+/* eslint no-continue: 0 */
+/* eslint no-useless-return: 0 */
+/* eslint prefer-destructuring: 0 */
+/* eslint no-unused-expressions: 0 */
+/* eslint brace-style: 0 */
+/* eslint no-multi-spaces: 0 */
+/* eslint no-lonely-if: 0 */
+/* eslint no-else-return: 0 */
+/* eslint no-mixed-operators: 0 */
+/* eslint max-len: 0 */
+/* eslint consistent-return: 0 */
+// ========================================
 
 
 // A generic contructor which accepts an arbitrary descriptor object
@@ -24,23 +55,23 @@ function Boss(descr) {
 
 Boss.prototype = new Entity();
 
-//a lot of globals because everybody loves globals
+// a lot of globals because everybody loves globals
 Boss.prototype.cx = 951;
 Boss.prototype.cy = 470;
 Boss.prototype.velX = -5;
 Boss.prototype.velY = 0;
-Boss.prototype.shootTimer = 50; //Timer inbetween shots
+Boss.prototype.shootTimer = 50; // Timer inbetween shots
 Boss.prototype.jumpTimer = 30;  // Timer inbetween jumps
-Boss.prototype.speed;           //How fast the boss goes
+Boss.prototype.speed;           // How fast the boss goes
 Boss.prototype.health = 75;
 Boss.prototype.bossFacing;
-Boss.prototype.deathTimer; //Timer for how long death should be animated
+Boss.prototype.deathTimer; // Timer for how long death should be animated
 
 Boss.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  //Checked for death and if so death animations
+  // Checked for death and if so death animations
   var dead = this.deathHandler();
 
   if (dead === 1) return 1;
@@ -52,17 +83,17 @@ Boss.prototype.update = function (du) {
 
   this.damageHandler();
 
-  //Calculates what "phase" the boss should be in
+  // Calculates what "phase" the boss should be in
   this.phase();
   if (this.phaseNumber === 0) this.movementPhaseOne(du);
   else if (this.phaseNumber === 1) this.movementPhaseTwo(du);
   else if (this.phaseNumber === 2)  this.movementPhaseThree(du);
 
-  //upgrades the cx and cy coordinates
+  // Upgrades the cx and cy coordinates
   this.calculateMovementReal(du);
 
   animationHandle.update(this);
-  //    Þarf að vera return hérna??    já skoðaðu entityManager.update
+
   return spatialManager.register(this);
 };
 
@@ -85,8 +116,9 @@ Boss.prototype.damageHandler = function () {
     this._isDeadNow = false;
     this.health--;
     background.imgHeartBoss(this.health);
-    //Dropped health randomly
-    //10% chance when hurt
+
+    // Dropped health randomly
+    // 10% chance when hurt
     if (util.randRange(0, 10) < 1) {
       entityManager.generateHealthPickup({
         cx : this.cx,
@@ -96,7 +128,7 @@ Boss.prototype.damageHandler = function () {
   }
 };
 
-//Phase one, boss runs and shoots, faster if hes hurt
+// Phase one, boss runs and shoots, faster if hes hurt
 Boss.prototype.movementPhaseOne = function (du) {
   if (this.cx > 950) {
     this.speed = -3;
@@ -112,7 +144,7 @@ Boss.prototype.movementPhaseOne = function (du) {
   this.maybeFire(du);
 };
 
-//Phase two, boss runs and jumps, faster if hes hurt
+// Phase two, boss runs and jumps, faster if hes hurt
 Boss.prototype.movementPhaseTwo = function (du) {
   if (this.cx > 950) {
     this.speed = -4;
@@ -132,7 +164,7 @@ Boss.prototype.movementPhaseTwo = function (du) {
   else this.bossFacing = 1;
 };
 
-//Phase 3, shoot, run and jump combined, faster if hes hurt
+// Phase 3, shoot, run and jump combined, faster if hes hurt
 Boss.prototype.movementPhaseThree = function (du) {
   if (this.cx > 950) {
     this.speed = -5;
@@ -153,7 +185,7 @@ Boss.prototype.movementPhaseThree = function (du) {
 
 };
 
-//Calculated cx and cy coordinates from the phases
+// Calculated cx and cy coordinates from the phases
 Boss.prototype.calculateMovementReal = function (du) {
   if (this.shootTimer >= 20
       && this.shootTimer
@@ -170,7 +202,7 @@ Boss.prototype.calculateMovementReal = function (du) {
   if (this.shootTimer < 0) this.shootTimer = 0;
 };
 
-//Checked for phase and timer if boss should shoot
+// Checked for phase and timer if boss should shoot
 Boss.prototype.maybeFire = function () {
   if (this.shootTimer) this.shootTimer--;
   if (this.shootTimer === 0) {
@@ -186,7 +218,7 @@ Boss.prototype.maybeFire = function () {
 };
 
 Boss.prototype.phaseNumber = 0;
-//Checked for state
+// Checked for state
 Boss.prototype.phase = function () {
   if (this.health > 50) this.phaseNumber = 0;
   else if (this.health > 25) {
@@ -201,47 +233,50 @@ Boss.prototype.phase = function () {
   }
 };
 
-//A status function for the animationHandler,
-//returns a matrix with information
+// A status function for the animationHandler,
+// returns a matrix with information
 Boss.prototype.status = function () {
   var isShooting = this.shootTimer < 20 || this.shootTimer > 40 * ((this.health*0.06666)+1/1) - 20;
   var isMoving = (this.shootTimer >= 20 && this.shootTimer <= 40 * ((this.health*0.06666)+1/1)-20 || this.cy < 470);
-  return  [this.bossFacing, // positive number for right, negative for left
-           isMoving, // True if moving, else false
-           isShooting, // True if shooting, else false
+  return  [this.bossFacing,   // positive number for right, negative for left
+           isMoving,          // True if moving, else false
+           isShooting,        // True if shooting, else false
            (this.cy === 470), // True if on grounds, else jumping/falling
-           false];  //A boss never shows weakness, ea if hurt
+           false];            // A boss never shows weakness, ea if hurt
 };
 
 Boss.prototype.changeSprite = function (varImage) {
   this.sprite = varImage;
 };
 
-//Handles death explosion
+// Handles death explosion
 Boss.prototype.deathHandler = function () {
     if (this.health === 0) {
       this.deathTimer--;
-      if (this.deathTimer < 5)
+      if (this.deathTimer < 5) {
         this.sprite = g_sprites.golem[8];
-      else if (this.deathTimer % 4 === 0) 
+      } else if (this.deathTimer % 4 === 0) {
         this.sprite = g_sprites.golem[6];
-      else if (this.deathTimer % 7 === 0)
+      } else if (this.deathTimer % 7 === 0) {
         this.sprite = g_sprites.golem[7];
+      }
+
       if (this.deathTimer) return 1;
       return 2;
     }
     if (this._isDeadNow) {
       this._isDeadNow = false;
       this.health--;
-      if (util.randRange(0,10) < 1) {
+      if (util.randRange(0, 10) < 1) {
         entityManager.generateHealthPickup({
           cx:this.cx,
-          cy:this.cy-5
+          cy:this.cy-5,
         });
-      }    
+      }
+
       if (this.health === 0) this.deathTimer = 100;
     }
-  }
+};
 
 Boss.prototype.calculateMovement = function () {
   return;

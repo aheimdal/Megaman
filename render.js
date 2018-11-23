@@ -1,5 +1,43 @@
 // GENERIC RENDERING
 
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint object-shorthand: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+/* eslint linebreak-style: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint guard-for-in: 0 */
+/* eslint no-restricted-syntax: 0 */
+/* eslint block-scoped-var: 0 */
+/* eslint no-redeclare: 0 */
+/* eslint padded-blocks: 0 */
+/* eslint key-spacing: 0 */
+/* eslint indent: 0 */
+/* eslint new-cap: 0 */
+/* eslint no-continue: 0 */
+/* eslint no-useless-return: 0 */
+/* eslint prefer-destructuring: 0 */
+/* eslint no-unused-expressions: 0 */
+/* eslint brace-style: 0 */
+/* eslint no-multi-spaces: 0 */
+/* eslint no-lonely-if: 0 */
+/* eslint no-else-return: 0 */
+/* eslint no-mixed-operators: 0 */
+// ========================================
+
 var g_doRender = true;
 
 var g_lvl1 = false;
@@ -34,7 +72,7 @@ function render(ctx) {
   if (eatKey(lvl7)) g_lvl7 = !g_lvl7;
   if (eatKey(lvl8)) g_lvl8 = !g_lvl8;
   if (eatKey(lvl9)) g_lvl9 = !g_lvl9;
-//Changes maps, with toggles, 1,2,3,4,5,6,7,8,9
+// Changes maps, with toggles, 1,2,3,4,5,6,7,8,9
   if (g_lvl1) {
     levelTransition.levelIndex = -1;
     levelTransition.changeLevel();
@@ -89,5 +127,5 @@ function render(ctx) {
   }
 
   // The core rendering of the actual game / simulation
-  if (g_doRender) renderSimulation(ctx); 
+  if (g_doRender) renderSimulation(ctx);
 }

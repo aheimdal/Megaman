@@ -100,8 +100,8 @@ var spatialManager = {
       util.strokeBox(ctx, e.posX, e.posY, e.radius);
     }
     for (var ID in this._platforms) {
-        var e = this._platforms[ID];
-        util.strokeBox(ctx, e.posX, e.posY, e.radius);
+      var e = this._platforms[ID];
+      util.strokeBox(ctx, e.posX, e.posY, e.radius);
     }
     ctx.strokeStyle = oldStyle;
   },

@@ -1,6 +1,42 @@
-// ==========
+// ==============================
 // Char/Playable protagonist
-// ==========
+// ==============================
+
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint object-shorthand: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+/* eslint linebreak-style: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint guard-for-in: 0 */
+/* eslint no-restricted-syntax: 0 */
+/* eslint block-scoped-var: 0 */
+/* eslint no-redeclare: 0 */
+/* eslint padded-blocks: 0 */
+/* eslint key-spacing: 0 */
+/* eslint indent: 0 */
+/* eslint new-cap: 0 */
+/* eslint no-continue: 0 */
+/* eslint no-useless-return: 0 */
+/* eslint prefer-destructuring: 0 */
+/* eslint no-unused-expressions: 0 */
+/* eslint brace-style: 0 */
+/* eslint no-multi-spaces: 0 */
+/* eslint consistent-return: 0 */
+// ========================================
 
 // A generic contructor which accepts an arbitrary descriptor object
 function Char(descr) {
@@ -21,7 +57,8 @@ Char.prototype.KEY_JUMP = 'W'.charCodeAt(0);
 Char.prototype.KEY_LEFT = 'A'.charCodeAt(0);
 Char.prototype.KEY_RIGHT = 'D'.charCodeAt(0);
 Char.prototype.KEY_FIRE = ' '.charCodeAt(0);
-//God-mode/invulnerability
+
+// God-mode/invulnerability
 Char.prototype.KEY_GOD = 'G'.charCodeAt(0);
 
 // Initial, inheritable, default values
@@ -31,7 +68,7 @@ Char.prototype.velX = 0;
 Char.prototype.velY = 0;
 Char.prototype.health = 5;
 Char.prototype.invincibility = 0;
-Char.prototype.invincibilityTimer = 90; 
+Char.prototype.invincibilityTimer = 90;
 Char.prototype.godMode = false;
 Char.prototype.radius = 45;
 
@@ -45,7 +82,7 @@ Char.prototype.update = function (du) {
 
   this.healthManage();
 
-  //Handling character death
+  // Handling character death
   if (this.health === 0) {
     main.GameState = 3;
     AudioBank.playSound(AudioBank.charDeath);
@@ -61,7 +98,7 @@ Char.prototype.update = function (du) {
   return spatialManager.register(this);
 };
 
-//A lot of globals to figure out a decent movement system
+// A lot of globals to figure out a decent movement system
 Char.prototype.NOMINAL_RIGHT = +1;
 Char.prototype.NOMINAL_LEFT = -1;
 Char.prototype.NOMINAL_IJUMP = -10;
@@ -76,7 +113,7 @@ Char.prototype.MOVING = true;
 
 Char.prototype.movement = function (du) {
 
-  //Handling when character is hurt, knockback
+  // Handling when character is hurt, knockback
   if (this.invincibility > this.invincibilityTimer-30) {
     this.velX = -3.5 * this.CHAR_FACING;
   } else {
@@ -151,13 +188,13 @@ Char.prototype.calculateMovement = function (du) {
     }
   }
 
-  //Boundaries control
+  // Boundaries control
   if (this.cx < 50) this.cx = 50;
   if (this.cx > 950) this.cx = 950;
 
 };
 
-//Managing godmode, health and UI health
+// Managing godmode, health and UI health
 Char.prototype.healthManage = function () {
   if (this.health > 5) this.health = 5;
   if (eatKey(this.KEY_GOD)) {
@@ -178,7 +215,7 @@ Char.prototype.healthManage = function () {
   }
 };
 
-//Globals for shooting
+// Globals for shooting
 Char.prototype.CHAR_SHOOT = false;
 Char.prototype.CHAR_SHOOT_TIMER = 0;
 
@@ -207,25 +244,25 @@ Char.prototype.maybeFireBullet = function () {
   }
 };
 
-//Returns true if Character is grounded/no vertical movement
+// Returns true if Character is grounded/no vertical movement
 Char.prototype.isGrounded = function () {
   if (this.JUMP_TIMER === 0 && this.JUMP_INIT === true) return true;
   return false;
 };
 
-//If a character is falling/going downwards
+// If a character is falling/going downwards
 Char.prototype.isFalling = function () {
   if (this.velY > 0) return true;
   return false;
 };
 
-//If a character is jumping/going upwards
+// If a character is jumping/going upwards
 Char.prototype.isJumping = function () {
   if (this.JUMP_TIMER > 0) return true;
   return false;
 };
 
-//Ground a character
+// Ground a character
 Char.prototype.ground = function () {
   this.JUMP_TIMER = 0;
   this.JUMP_INIT = true;
@@ -233,14 +270,14 @@ Char.prototype.ground = function () {
   if (this.cy > 502) this.cy = 502;
 };
 
-//Make a character fall
+// Make a character fall
 Char.prototype.fall = function () {
   this.JUMP_TIMER = 0;
   this.JUMP_INIT = false;
   this.velY = 0;
 };
 
-//No horizontal movement
+// No horizontal movement
 Char.prototype.stopX = function () {
   this.velX = 0;
 };
@@ -249,7 +286,7 @@ Char.prototype.getRadius = function () {
   return this.radius;
 };
 
-//Spike kills
+// Spike kills
 Char.prototype.superKill = function () {
     if (!this.godMode) this.health = 0;
 };
@@ -285,19 +322,19 @@ Char.prototype.shouldFall = function () {
 };
 
 Char.prototype.shouldFall = function () {
-    if(this.cy === 502) return false; // Ef á jörðinni false
+    if (this.cy === 502) return false; // Ef á jörðinni false
     // Ef hann er ekki 1px fyrir ofan(sem sagt grounded) kassa og fyrir ofan hann
     for (var i = 0; i <entityManager._platforms.length; i++) {
       // Ef 1px fyrir ofan
-      if(this.cy==(entityManager._platforms[i].cy - entityManager._platforms[i].radius -46)){
+      if (this.cy === (entityManager._platforms[i].cy - entityManager._platforms[i].radius -46)) {
         // Ef beint fyrir ofan, eki ská fyrir ofan
-        if((this.cx + 45>entityManager._platforms[i].cx - entityManager._platforms[i].radius)&&
-        (this.cx-45<entityManager._platforms[i].cx + entityManager._platforms[i].radius)){
+        if ((this.cx + 45>entityManager._platforms[i].cx - entityManager._platforms[i].radius)
+           && (this.cx-45<entityManager._platforms[i].cx + entityManager._platforms[i].radius)) {
           return false;
         }
       }
     }
-    if(this.isJumping()||this.isFalling()) return false;
+    if (this.isJumping()||this.isFalling()) return false;
     if (!this.velY) return true;
 };
 

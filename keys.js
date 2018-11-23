@@ -2,6 +2,16 @@
 // KEYBOARD HANDLING
 // =================
 
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint no-var: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-undef: 0 */
+/* eslint quotes: 0 */
+// ========================================
+
 var keys = [];
 
 function handleKeydown(evt) {

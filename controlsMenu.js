@@ -2,6 +2,20 @@
 // Controls Menu
 // ========================================
 
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+// ========================================
+
 // Variables for Control Menu Screen
 var controlScreen = {
   title: 'Run Gun Renegade',
@@ -21,7 +35,6 @@ var controlScreen = {
 };
 
 controlScreen.render = function (g_ctx) {
-  
   // Background Image for the background around the gamplay screen
   document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
   // Color for main screen
@@ -54,7 +67,7 @@ controlScreen.render = function (g_ctx) {
   g_ctx.fillText(controlScreen.undertitle, g_canvas.width/2, g_canvas.height/2-150);
   // Apply black line around letters
   g_ctx.strokeText(controlScreen.undertitle, g_canvas.width/2, g_canvas.height/2-150);
-  
+
   // Second line
   // Apply color to letters
   g_ctx.fillStyle = '#EC7063';

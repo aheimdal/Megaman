@@ -13,14 +13,36 @@ with suitable 'data' and 'methods'.
 */
 
 
-"use strict";
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint-env browser */
+/* eslint camelcase: [0] */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint object-shorthand: 0 */
+/* eslint func-names: 0 */
+/* eslint quotes: 0 */
+/* eslint space-infix-ops: 0 */
+/* eslint linebreak-style: 0 */
+/* eslint no-shadow: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint guard-for-in: 0 */
+/* eslint no-restricted-syntax: 0 */
+/* eslint block-scoped-var: 0 */
+/* eslint no-redeclare: 0 */
+/* eslint padded-blocks: 0 */
+/* eslint key-spacing: 0 */
+/* eslint indent: 0 */
+/* eslint new-cap: 0 */
+/* eslint no-continue: 0 */
+// ========================================
 
-
-// Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops
-// (plusplus).
-//
-/*jslint nomen: true, white: true, plusplus: true*/
 
 var entityManager = {
 
@@ -161,17 +183,14 @@ var entityManager = {
       }
 
     }
-    //Make the lifes of the Boss
-    if(levelTransition.levelIndex == 8 && this._char[0] != null){
+    // Make the lifes of the Boss
+    if (levelTransition.levelIndex === 8 && this._char[0] !== null) {
       background.imgHeartBoss(this._boss[0].health);
-  }
-  else{
-
-  }
+    }
 
     if (this.isClear()) levelTransition.changeLevel();
 
-    if (this._char[0] != null) {
+    if (this._char[0] !== null) {
       animationHandle.update(this._char[0]);
 
       // We go to "background.js" and get the map
@@ -205,7 +224,7 @@ var entityManager = {
   },
 
 
-  //Function to clear all entities except Playable Character
+  // Function to clear all entities except Playable Character
   clearLevel: function () {
     for (var c = 0; c < this._categories.length-1; ++c) {
 
@@ -219,7 +238,7 @@ var entityManager = {
   },
 
 
-  //Function to see if all enemies are dead
+  // Function to see if all enemies are dead
   isClear: function () {
     if (!this._boss[0] && !this._enemyThree[0] && !this._enemyTwo[0] && !this._enemyFour[0]) {
       return true;

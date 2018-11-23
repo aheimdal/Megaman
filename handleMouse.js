@@ -2,9 +2,19 @@
 // MOUSE HANDLING
 // ==============
 
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint no-var: 0 */
+/* eslint camelcase: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-undef: 0 */
+/* eslint quotes: 0 */
+// ========================================
+
 var g_mouseX = 0;
 var g_mouseY = 0;
-//When a menu come up, player can chose what he clicks on
+// When a menu come up, player can chose what he clicks on
 function handleMouse(evt) {
   g_mouseX = evt.clientX - g_canvas.offsetLeft;
   g_mouseY = evt.clientY - g_canvas.offsetTop;

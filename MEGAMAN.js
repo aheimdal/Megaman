@@ -240,9 +240,8 @@ function requestPreloads() {
     bottleboli  : "./images/Sprites & Tiles/bottleboli.png",
     coin        : "./images/Sprites & Tiles/goldcoin.png",
 
-    //Dark tiles
-    tiles      : "./images/Sprites & Tiles/kubbur2.png"
-
+    // Dark tiles
+    tiles      : "./images/Sprites & Tiles/kubbur2.png",
 
   };
 
@@ -317,7 +316,7 @@ function preloadDone() {
     // Added hurt sprite
     g_sprites.hurtR = new Sprite(g_images.golemHR),
     g_sprites.hurtL = new Sprite(g_images.golemHL),
-    g_sprites.death = new Sprite(g_images.golemD)
+    g_sprites.death = new Sprite(g_images.golemD),
   ];
 
   g_sprites.goblin = [
@@ -329,7 +328,7 @@ function preloadDone() {
     g_sprites.JumpL = new Sprite(g_images.goblinJL),
     // Added hurt sprite
     g_sprites.hurtR = new Sprite(g_images.goblinRH),
-    g_sprites.hurtL = new Sprite(g_images.goblinLH)
+    g_sprites.hurtL = new Sprite(g_images.goblinLH),
   ];
 
   g_sprites.spikes = new Sprite(g_images.spikes);

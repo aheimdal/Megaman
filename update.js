@@ -1,5 +1,18 @@
 // GENERIC UPDATE LOGIC
 
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint camelcase: 0 */
+/* eslint-disable no-param-reassign */
+/* eslint no-use-before-define: 0 */
+/* eslint no-undef: 0 */
+/* eslint no-unused-vars: 0 */
+/* eslint no-var: 0 */
+/* eslint vars-on-top: 0 */
+// ========================================
+
+
 // The "nominal interval" is the one that all of our time-based units are
 // calibrated to e.g. a velocity unit is "pixels per nominal interval"
 //
@@ -48,7 +61,7 @@ function update(dt) {
 // Togglable Pause Mode
 //
 var KEY_PAUSE = 'P'.charCodeAt(0);
-var KEY_STEP  = 'O'.charCodeAt(0);
+var KEY_STEP = 'O'.charCodeAt(0);
 
 var g_isUpdatePaused = false;
 

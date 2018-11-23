@@ -58,7 +58,7 @@ Rocket.prototype.health = 4;
 // Convert times from milliseconds to "nominal" time units.
 Rocket.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
-//Acts identically to bullet but falls after a short while
+// Acts identically to bullet but falls after a short while
 Rocket.prototype.update = function (du) {
 
   spatialManager.unregister(this);
@@ -66,7 +66,7 @@ Rocket.prototype.update = function (du) {
   this.lifeSpan -= du;
   if (this.cx < 0 || this.cx > 1000 || this.cy > 1000) return entityManager.KILL_ME_NOW;
 
-  //Movement calculated
+  // Movement calculated
   this.cx += this.velX * du;
   if (this.lifeSpan < 0) {
     this.velY += 1;
@@ -103,7 +103,7 @@ Rocket.prototype.calculateMovement = function () {
 
 Rocket.prototype.calculateMovement = function () {
     return;
-}
+};
 
 Rocket.prototype.render = function (ctx) {
 

@@ -2,25 +2,27 @@
 // BossShoot
 // ======
 
-"use strict";
+// ========================================
+// Eslint villutékk
+// ========================================
+/* eslint no-var: 0 */
+/* eslint no-useless-return: 0 */
+/* eslint no-undef: 0 */
+/* eslint func-names: 0 */
+/* eslint no-underscore-dangle: 0 */
+/* eslint no-plusplus: 0 */
+/* eslint vars-on-top: 0 */
 
-/* jshint browser: true, devel: true, globalstrict: true */
-
-/*
-0        1         2         3         4         5         6         7         8
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-*/
+// ========================================
 
 
 // A generic contructor which accepts an arbitrary descriptor object
 function BossShoot(descr) {
-
   // Common inherited setup logic from Entity
   this.setup(descr);
 
   // Make a noise when I am created (i.e. fired)
   AudioBank.playSound(AudioBank.bossThrow);
-
 }
 
 BossShoot.prototype = new Entity();
@@ -34,13 +36,12 @@ BossShoot.prototype.velY = 1;
 BossShoot.prototype.health = 4;
 
 BossShoot.prototype.update = function (du) {
-
   spatialManager.unregister(this);
 
-  //Checked if out of bounds
+  // Checked if out of bounds
   if (this.cx < 0 || this.cx > 1000 || this.cy > 1000) return entityManager.KILL_ME_NOW;
 
-  //Just some basic throw physics
+  // Just some basic throw physics
   this.velY += 1;
   this.cx += this.velX * du;
   this.cy += this.velY * du;
@@ -52,7 +53,7 @@ BossShoot.prototype.update = function (du) {
     this.health--;
   }
 
-  //Handle player
+  // Handle player
   var maybeChar = this.findHitEntity();
   if (maybeChar === entityManager._char[0]) {
     entityManager._char[0].kill();
@@ -75,7 +76,6 @@ BossShoot.prototype.calculateMovement = function () {
 };
 
 BossShoot.prototype.render = function (ctx) {
-
   g_sprites.bottleboli.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 
   ctx.globalAlpha = 1;
