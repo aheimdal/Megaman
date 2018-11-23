@@ -93,6 +93,7 @@ main._iterCore = function (dt) {
   }
 
   if (this.GameState === 0) {
+    levelTransition.levelIndex = -1;
     startScreen.render(g_ctx);
   }
 
@@ -102,6 +103,7 @@ main._iterCore = function (dt) {
   }
 
   if (this.GameState === 2) {
+    levelTransition.levelIndex = -1;
     controlScreen.render(g_ctx);
   }
 
