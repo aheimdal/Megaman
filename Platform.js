@@ -19,8 +19,7 @@ function Platform(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.tiles;
-
-};
+}
 
 Platform.prototype = new Entity();
 
@@ -36,13 +35,11 @@ Platform.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
-
-    if(this._isDeadNow){
+    if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
 
-    spatialManager.register(this);
-
+    return spatialManager.register(this);
 };
 
 
@@ -55,75 +52,34 @@ Platform.prototype.calculateMovement = function (entity) {
     var lowerBound = this.cy + this.radius;
     var leftBound = this.cx - this.radius;
     var rightBound = this.cx + this.radius;
-    var radius = 45;//entity.getRadius();
+    var radius = 45;
 
-    //console.log(this.radius);
-    //console.log(radius);
-
-    /*if (leftBound <= entity.cx + radius ||
-        (rightBound >= entity.cx - radius)) {
-        entity.stopX();// setur velocity í 0
-    }*/
-    //console.log("hit");
-    if(entity.cx<leftBound-28){
+    // Hit
+    if (entity.cx<leftBound-28) {
       entity.stopX();
-      entity.cx = leftBound-radius;//leftBound - radius - 1;
-    }else if(entity.cx>rightBound+28){
+      entity.cx = leftBound-radius;
+    } else if (entity.cx>rightBound+28) {
       entity.stopX();
       entity.cx = rightBound + radius;
-    }else if (entity.isFalling()) {
-        //if (higherBound > entity.cy - radius) {
-      entity.ground()
+    } else if (entity.isFalling()) {
+      entity.ground();
       entity.cy = higherBound - radius-1;
-        //}
-    }else if(entity.isJumping()&&(entity.cy<502)){
-        //if (lowerBound < entity.cy + radius) {
+    } else if (entity.isJumping()&&(entity.cy<502)) {
       entity.fall();
       entity.cy = lowerBound + radius;
-        //}
-    }else if(entity.cx<this.cx){
+    } else if (entity.cx < this.cx) {
       entity.stopX();
-      entity.cx = leftBound-radius+8;//leftBound - radius - 1;
-    }else if(entity.cx>this.cx){
+      entity.cx = leftBound-radius+8;
+    } else if (entity.cx > this.cx) {
       entity.stopX();
       entity.cx = rightBound + radius-8;
     }
 };
 
 
-/*var kubbur = new Image();
-kubbur.src = '"./images/kubbur.jpg"';
-*/Platform.prototype.render = function (ctx) {
-  /*  ctx.fillRect(this.cx - this.radius,
-                this.cy - this.radius,
-                this.radius*2,
-                this.radius*2);
-*/
-/*var kubbur = new Image();
-kubbur.src = '"./images/kubbur.jpg"';
-ctx.drawImage(kubbur, this.cx - this.radius,
-              this.cy - this.radius,
-              this.radius*2,
-              this.radius*2);*/
-
+Platform.prototype.render = function (ctx) {
               var origScale = this.sprite.scale;
               // pass my scale into the sprite, for drawing
               this.sprite.scale = this.scale;
-              //console.log(this.sprite.width);
-
-              //console.log(this.sprite.width);
-              this.sprite.drawCentredAt(
-                  ctx, this.cx, this.cy, this.rotation
-              );
-
-/*ctx.fillStyle="red";
-ctx.fillRect(this.cx - this.radius,
-            this.cy - this.radius,
-            this.radius*2,
-            this.radius*2);*/
-/*ctx.fillStyle="black";
-ctx.beginPath();
-ctx.arc(this.cx,this.cy,25,0,2*Math.PI);
-ctx.stroke();*/
-
+              this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 };

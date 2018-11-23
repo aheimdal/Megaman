@@ -15,14 +15,12 @@
 // A generic contructor which accepts an arbitrary descriptor object
 function HealthPickup(descr) {
 
-    // Common inherited setup logic from Entity
-    this.setup(descr);
-    
-    // Default sprite and scale, if not otherwise specified
-    this.sprite = g_sprites.healthPickup;
-    this.scale  = 1;
-
-};
+  // Common inherited setup logic from Entity
+  this.setup(descr);
+  // Default sprite and scale, if not otherwise specified
+  this.sprite = g_sprites.healthPickup;
+  this.scale  = 1;
+}
 
 HealthPickup.prototype = new Entity();
 
@@ -32,30 +30,28 @@ HealthPickup.prototype.isHp = true;
 
 HealthPickup.prototype.update = function (du) {
 
-    spatialManager.unregister(this);
+  spatialManager.unregister(this);
 
-    var maybeChar = this.findHitEntity();
-    if (maybeChar === entityManager._char[0]) {
-        entityManager._char[0].health++;
-        return entityManager.KILL_ME_NOW;
-    }
+  var maybeChar = this.findHitEntity();
+  if (maybeChar === entityManager._char[0]) {
+    entityManager._char[0].health++;
+    return entityManager.KILL_ME_NOW;
+  }
 
-    spatialManager.register(this);
+  return spatialManager.register(this);
 };
 
 HealthPickup.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+  return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
 HealthPickup.prototype.calculateMovement = function () {
-    return;
-}
+  return;
+};
 
 HealthPickup.prototype.render = function (ctx) {
-    var origScale = this.sprite.scale;
-    // pass my scale into the sprite, for drawing
-    this.sprite.scale = this.scale;
-    this.sprite.drawCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
+  var origScale = this.sprite.scale;
+  // pass my scale into the sprite, for drawing
+  this.sprite.scale = this.scale;
+  this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 };
