@@ -9,7 +9,7 @@ var startScreen = {
 
 startScreen.render = function(g_ctx)
     {
-        document.body.style.backgroundImage = "url('images/back02.jpg')";
+        document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
 
         g_ctx.fillStyle = "#17202A";
         

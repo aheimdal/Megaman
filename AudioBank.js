@@ -16,8 +16,8 @@ var AudioBank = {
     //Songs
     songOne     : new Audio("sounds/songs/megaLag1.ogg"),
     songTwo     : new Audio("sounds/songs/megaLag2.ogg"),
-    songThree   : new Audio("sounds/songs/Superboy.ogg"),
-    songFour    : new Audio("sounds/songs/Off Limits.ogg"),
+    songThree   : new Audio("sounds/songs/Superboy.mp3"),
+    songFour    : new Audio("sounds/songs/Off Limits.wav"),
 
     //Projectile sounds
     bullet :  [

@@ -24,7 +24,6 @@ var background = {
 
     //Returns the next background image
     getMap: function() {
-        console.log(_nextMap)
         return maps[_nextMap];
     },
 
@@ -36,7 +35,7 @@ var background = {
 
     canvasSpaceGame: function(imgSrc) {
         //This is our browser background
-        document.body.style.backgroundImage = "url('images/back02.jpg')";
+        document.body.style.backgroundImage = "url('images/Backgrounds/back02.jpg')";
 
         //Here we load the background
           var img=new Image();
