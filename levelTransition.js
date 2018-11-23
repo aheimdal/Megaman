@@ -608,6 +608,7 @@ var levelTransition = {
     }
 
     // Spikes on ground
+    
     for (var i = 415; i<450; i+=75) {
       entityManager.generateSpikes({
         cx : i,
@@ -630,12 +631,9 @@ var levelTransition = {
         cy : 550,
       });
     }
+    
     // Spikes on middle floor
     for (var i = 800; i<820; i+=75) {
-      entityManager.generateSpikes({
-        cx : i,
-        cy : 337,
-      });
       entityManager.generateSpikes({
         cx : i+25,
         cy : 337,
@@ -646,11 +644,7 @@ var levelTransition = {
       });
     }
     // Spikes on the top floor
-    for (var i = 640; i<650; i+=75) {
-      entityManager.generateSpikes({
-        cx : i,
-        cy : 157,
-      });
+    for (var i = 630; i<650; i+=75) {
       entityManager.generateSpikes({
         cx : i+25,
         cy : 157,

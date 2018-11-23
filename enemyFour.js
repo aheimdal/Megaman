@@ -74,7 +74,7 @@ enemyFour.prototype.movement = function (du) {
   }
 
   if (this.cy >= this.floor && this.shootTimer <= 0) {
-    this.shootTimer = 150;
+    this.shootTimer = 200;
   }
 
   this.cy += this.velY * du;
