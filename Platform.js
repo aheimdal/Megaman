@@ -19,8 +19,7 @@ function Platform(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.tiles;
-
-};
+}
 
 Platform.prototype = new Entity();
 
@@ -33,63 +32,54 @@ Platform.prototype.scale = 0;
 
 
 Platform.prototype.update = function (du) {
+
     spatialManager.unregister(this);
-    if(this._isDeadNow){
+
+    if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-    spatialManager.register(this);
 
+    return spatialManager.register(this);
 };
 
-// function to get radius
+
 Platform.prototype.getRadius = function () {
     return this.radius;
 };
 
-// function for calculation of movement
 Platform.prototype.calculateMovement = function (entity) {
-    // set variables to work with
     var higherBound = this.cy - this.radius;
     var lowerBound = this.cy + this.radius;
     var leftBound = this.cx - this.radius;
     var rightBound = this.cx + this.radius;
     var radius = 45;
 
-    ///// Here the collision is resolved/////
-    if(entity.cx<leftBound-28){// pushes the entity to the left of the platform
-      // if it came from the left
+    // Hit
+    if (entity.cx<leftBound-28) {
       entity.stopX();
       entity.cx = leftBound-radius;
-    }else if(entity.cx>rightBound+28){// pushes the entity to the right of the
-      // platform if it came from the left
+    } else if (entity.cx>rightBound+28) {
       entity.stopX();
       entity.cx = rightBound + radius;
-    }else if (entity.isFalling()) {// pushes the entity up one pixel over the
-      // platform if the entity is jumping
-      entity.ground()
+    } else if (entity.isFalling()) {
+      entity.ground();
       entity.cy = higherBound - radius-1;
-    }else if(entity.isJumping()&&(entity.cy<502)){// pushes the entity just
-      // below the platform if it is jumping and is not on the ground
+    } else if (entity.isJumping()&&(entity.cy<502)) {
       entity.fall();
       entity.cy = lowerBound + radius;
-    }else if(entity.cx<this.cx){// if the entity is on the ground and is to the
-      // left of the center of the platform it is pushed to
-      // the left of the platform
+    } else if (entity.cx < this.cx) {
       entity.stopX();
       entity.cx = leftBound-radius+8;
-    }else if(entity.cx>this.cx){// if the entity is on the ground and is to the
-      // right of the center of the platform it is pushed to the
-      // right of the platform
+    } else if (entity.cx > this.cx) {
       entity.stopX();
       entity.cx = rightBound + radius-8;
     }
 };
 
-// function that renders platforms
-Platform.prototype.render = function (ctx) {
-              this.sprite.scale = this.scale;// set the scale of the sprite
-              this.sprite.drawCentredAt(// draw the platform
-                  ctx, this.cx, this.cy, this.rotation
-              );
 
+Platform.prototype.render = function (ctx) {
+              var origScale = this.sprite.scale;
+              // pass my scale into the sprite, for drawing
+              this.sprite.scale = this.scale;
+              this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 };

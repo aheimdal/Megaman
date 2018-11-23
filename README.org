@@ -1,0 +1,25 @@
+#+startup: overview
+#+options: num:nil toc:nil p:nil stat:nil
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+
+* Hópur Verkefni
+** Verkefnalýsing
+   ...
+
+** Keyra villutékk
+   - Install node modules
+     #+begin_src sh :exports code
+       npm install
+     #+end_src
+     
+
+   - Getum keyrt svona:
+     #+begin_src sh :exports code
+       npx eslint -s script.js
+     #+end_src
+     
+
+   - Eða svona
+     #+begin_src sh :exports code
+       npm run test
+     #+end_src
