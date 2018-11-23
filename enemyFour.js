@@ -33,24 +33,16 @@ enemyFour.prototype.velY = 0;
 enemyFour.prototype.health = 5;
 enemyFour.prototype.shootTimer = 150;
 enemyFour.prototype.goblinFacing = 1;
+enemyFour.prototype.deathTimer;
 
 enemyFour.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  if (this._isDeadNow && this.health === 0) {
-    if (util.randRange(0, 10) < 3.5) {
-      entityManager.generateHealthPickup({
-        cx:this.cx,
-        cy:this.cy-5,
-      });
-    }
-    return entityManager.KILL_ME_NOW;
-  }
-  if (this._isDeadNow) {
-    this._isDeadNow = false;
-    this.health--;
-  }
+  var dead = this.deathHandler();
+
+  if (dead === 1) return 1;
+  if (dead === 2) return entityManager.KILL_ME_NOW;
 
   this.movement(du);
 
@@ -112,6 +104,34 @@ enemyFour.prototype.spriteChange = function () {
   if (this.shootTimer < 75 && this.shootTimer > 0) this.sprite = g_sprites.goblin[2+face];
   else if (this.cy < this.floor) this.sprite = g_sprites.goblin[4+face];
   else this.sprite = g_sprites.goblin[0+face];
+};
+
+enemyFour.prototype.deathHandler = function () {
+  if (this.health === 0) {
+    this.deathTimer--;
+    if (this.deathTimer < 5) 
+      this.sprite = g_sprites.golem[8];
+    else if (this.deathTimer < 10) 
+      this.sprite = g_sprites.golem[6+this.goblinFacing];
+    if (this.deathTimer > 0) return 1;
+    if (util.randRange(0, 10) < 6) {
+      entityManager.generateHealthPickup({
+        cx:this.cx,
+        cy:this.cy-5,
+      });
+    }
+    return 2;
+  }
+  if (this._isDeadNow) {
+    this._isDeadNow = false;
+    this.health--;
+    this.shootTimer = 85;
+    if (this.health === 0) {
+      this.deathTimer = 30;
+      this.sprite = g_sprites.goblin[6+this.goblinFacing];
+      return 1;
+    }
+  }
 };
 
 enemyFour.prototype.calculateMovement = function () {

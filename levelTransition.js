@@ -155,7 +155,7 @@ var levelTransition = {
       });
     }
 
-    entityManager.generateEnemyThree({
+    entityManager.generateEnemyFour({
       cx : 275,
       cy : 333,
       floor : 333,

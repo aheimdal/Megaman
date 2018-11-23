@@ -33,18 +33,23 @@ Boss.prototype.jumpTimer = 30;
 Boss.prototype.speed;
 Boss.prototype.health = 75;
 Boss.prototype.bossFacing;
+Boss.prototype.deathTimer;
 
 Boss.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  this.damageHandler();
+  var dead = this.deathHandler();
 
-  if (this.health === 0) {
+  if (dead === 1) return 1;
+  if (dead === 2) {
     main.GameState = 4;
     levelTransition.levelIndex = -1;
     return entityManager.KILL_ME_NOW;
   }
+
+
+  this.damageHandler();
 
   this.phase();
   if (this.phaseNumber === 0) this.movementPhaseOne(du);
@@ -198,6 +203,25 @@ Boss.prototype.status = function () {
 Boss.prototype.changeSprite = function (varImage) {
   this.sprite = varImage;
 };
+
+Boss.prototype.deathHandler = function () {
+    if (this.health === 0) {
+      this.deathTimer--;
+      if (this.deathTimer < 5)
+        this.sprite = g_sprites.golem[8];
+      else if (this.deathTimer % 4 === 0) 
+        this.sprite = g_sprites.golem[6];
+      else if (this.deathTimer % 7 === 0)
+        this.sprite = g_sprites.golem[7];
+      if (this.deathTimer) return 1;
+      return 2;
+    }
+    if (this._isDeadNow) {
+      this._isDeadNow = false;
+      this.health--;
+      if (this.health === 0) this.deathTimer = 100;
+    }
+  }
 
 Boss.prototype.calculateMovement = function () {
   return;

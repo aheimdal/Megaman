@@ -61,29 +61,16 @@ enemyTwo.prototype.rightBound = 750;
 enemyTwo.prototype.velX = -2.5;
 enemyTwo.prototype.turnAroundTimer = 2;
 enemyTwo.prototype.health = 25;
+enemyTwo.prototype.deathTimer;
 
 enemyTwo.prototype.update = function (du) {
 
   spatialManager.unregister(this);
 
-  var maybeChar = this.findHitEntity();
-  if (maybeChar === entityManager._char[0]) {
-    entityManager._char[0].kill();
-  }
+  var dead = this.deathHandler();
 
-  if (this._isDeadNow && this.health === 0) {
-    if (util.randRange(0, 10) < 3.5) {
-      entityManager.generateHealthPickup({
-        cx:this.cx,
-        cy:this.cy-5,
-      });
-    }
-    return entityManager.KILL_ME_NOW;
-  }
-  if (this._isDeadNow) {
-    this._isDeadNow = false;
-    this.health--;
-  }
+  if (dead === 1) return 1;
+  if (dead === 2) return entityManager.KILL_ME_NOW;
 
   this.turnAround();
 
@@ -98,7 +85,10 @@ enemyTwo.prototype.update = function (du) {
     }
   }
 
-  // console.log(this.getRadius());
+  var maybeChar = this.findHitEntity();
+  if (maybeChar === entityManager._char[0]) {
+    entityManager._char[0].kill();
+  }
 
   return spatialManager.register(this);
 };
@@ -125,6 +115,31 @@ enemyTwo.prototype.turnAround = function () {
     this.velX = -2.5;
   }
 };
+
+enemyTwo.prototype.deathHandler = function () {
+  if (this.health === 0) {
+    this.deathTimer--;
+    if (this.deathTimer < 5)
+      this.sprite = g_sprites.golem[8];
+    else if (this.deathTimer % 4 === 0) 
+      this.sprite = g_sprites.golem[6];
+    else if (this.deathTimer % 7 === 0)
+      this.sprite = g_sprites.golem[7];
+    if (this.deathTimer) return 1;
+    if (util.randRange(0, 10) < 4.5) {
+      entityManager.generateHealthPickup({
+        cx:this.cx,
+        cy:this.cy-5,
+      });
+    }
+    return 2;
+  }
+  if (this._isDeadNow) {
+    this._isDeadNow = false;
+    this.health--;
+    if (this.health === 0) this.deathTimer = 30;
+  }
+}
 
 enemyTwo.prototype.calculateMovement = function () {
   return;
