@@ -37,8 +37,10 @@ var AudioBank = {
     //Death sounds
     charDeath : new Audio("sounds/die.wav"),
 
+    //function for other .js to call for a specific sound
     playSound : function (choice) {
         if (this.isMuted) return;
+        //added layer so bullets dont overlap too easily
         if (choice === this.bullet) {
                 this.savedShot++;
                 if (this.savedShot > 2) this.savedShot = 0;
@@ -48,6 +50,7 @@ var AudioBank = {
         choice.play();
     },
 
+    //a song function play a specific song
     playSong : function (x) {
         this.savedSong = x;
         this.pauseSong();
@@ -61,10 +64,12 @@ var AudioBank = {
         if (x === 4) this.songFour.play();
     },
 
+    //plays a song that should be playing if the player muted
     playCurrentSong : function () {
         this.playSong(this.savedSong);
     },
 
+    //pauses songs
     pauseSong : function () {
         this.songOne.pause();
         this.songTwo.pause();
